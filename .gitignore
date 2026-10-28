@@ -1,0 +1,72 @@
+# ==============================================================
+# Bí mật: KHÔNG BAO GIỜ commit (mật khẩu, token, khóa API)
+# ==============================================================
+# Biến môi trường của backend (HiveMQ, Telegram bot token, ...)
+.env
+.env.*
+!.env.example
+
+# Khóa service account của Firebase
+serviceAccountKey.json
+*firebase-adminsdk*.json
+
+# Thông tin WiFi, MQTT trong firmware (commit bản secrets.example.h thay thế)
+secrets.h
+!secrets.example.h
+
+# ==============================================================
+# LaTeX: file sinh ra khi biên dịch (giữ lại .tex và .pdf)
+# ==============================================================
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.xdv
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
+
+# ==============================================================
+# Node.js (backend, frontend)
+# ==============================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+.cache/
+
+# Firebase CLI
+.firebase/
+firebase-debug.log*
+firestore-debug.log*
+
+# ==============================================================
+# PlatformIO, Arduino (firmware ESP32)
+# ==============================================================
+.pio/
+.pioenvs/
+.piolibdeps/
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/ipch/
+
+# ==============================================================
+# Hệ điều hành, trình soạn thảo
+# ==============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
