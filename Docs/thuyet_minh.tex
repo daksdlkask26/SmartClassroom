@@ -1,0 +1,686 @@
+% !TEX program = xelatex
+% Thuyết minh dự án --- Nhóm 16
+% Biên dịch bản nộp : latexmk -xelatex -jobname=16_24127261_24127542_24127581_PROPOSAL thuyet_minh.tex
+% Biên dịch Phụ lục A (file riêng): xelatex -jobname=Phu_luc_A_MQ135 '\def\onlyappendix{1}\input{thuyet_minh.tex}'
+%
+% CÁCH ĐÁNH DẤU CHỖ CHƯA HOÀN THIỆN
+%   \hinhcho{...}  : khung đỏ nét đứt, thay bằng \includegraphics khi đã có hình.
+%   \tam{...}      : ô tô vàng, nội dung tạm tính, cần kiểm tra lại (giá, link, hình).
+%   Muốn tắt tô vàng sau khi đã kiểm tra xong: đổi định nghĩa \tam thành \newcommand{\tam}[1]{#1}.
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Font và ngôn ngữ (Times New Roman, cỡ 13, giãn dòng 1.15) ----------
+\usepackage{fontspec}
+% Ưu tiên Times New Roman thật; nếu máy chưa cài thì dùng Liberation Serif (cùng độ rộng chữ
+% với Times New Roman, nên ngắt dòng và số trang giống nhau).
+\IfFontExistsTF{Times New Roman}{%
+  \setmainfont{Times New Roman}}{%
+  \IfFontExistsTF{Liberation Serif}{%
+    \setmainfont{Liberation Serif}}{%
+    \setmainfont{texgyretermes}[
+      Extension      = .otf,
+      UprightFont    = *-regular,
+      BoldFont       = *-bold,
+      ItalicFont     = *-italic,
+      BoldItalicFont = *-bolditalic]}}
+\setmonofont{DejaVu Sans Mono}[Scale=0.85]
+\usepackage{polyglossia}
+\setmainlanguage{vietnamese}
+
+\renewcommand{\normalsize}{\fontsize{13pt}{14.95pt}\selectfont}
+\renewcommand{\small}{\fontsize{12pt}{13.8pt}\selectfont}
+\renewcommand{\footnotesize}{\fontsize{11pt}{12.65pt}\selectfont}
+\renewcommand{\scriptsize}{\fontsize{10pt}{11.5pt}\selectfont}
+\AtBeginDocument{\normalsize}
+
+\usepackage{setspace}
+\setstretch{1.15}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+% ---------- Bố cục ----------
+\usepackage[a4paper,
+  left=3cm, right=3cm, top=2.5cm, bottom=2.5cm,
+  headheight=15pt, headsep=0.8cm, footskip=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{needspace}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=*}
+
+% ---------- Bảng, màu, hình ----------
+\usepackage{array, booktabs, tabularx, longtable, multirow, makecell}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric}
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+\definecolor{primary}{HTML}{7A1E3A}
+\definecolor{accent}{HTML}{1F5FA8}
+\definecolor{gridgray}{gray}{0.7}
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\fontsize{14pt}{17pt}\bfseries\color{primary}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalfont\fontsize{13pt}{15.6pt}\bfseries\color{accent}}{\thesubsection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{14pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+\usepackage[hidelinks]{hyperref}
+
+% Bảng dữ liệu: viền ngoài đậm (I), đường kẻ bên trong nhạt (i)
+\arrayrulecolor{gridgray}
+\newcolumntype{I}{!{{\color{black}\vrule width 0.9pt}}}
+\newcolumntype{i}{!{{\color{gridgray}\vrule width 0.4pt}}}
+\newcommand{\outerline}{\Xhline{0.9pt}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\renewcommand{\arraystretch}{1.2}
+
+% Đánh dấu nội dung tạm và khung chèn hình
+\newcommand{\tam}[1]{\colorbox{yellow!55}{#1}}
+% Liên kết tới ảnh trên Google Drive (thư mục công khai của nhóm)
+% Liên kết tới trang sản phẩm Shopee (dạng rút gọn: mã cửa hàng / mã sản phẩm)
+\newcommand{\shopee}[2]{\href{https://shopee.vn/product/#1/#2}{\textcolor{blue}{\underline{Shopee}}}}
+\newcommand{\anh}[1]{\href{https://drive.google.com/file/d/#1/view}{\textcolor{blue}{\underline{Xem ảnh}}}}
+\newcommand{\hinhcho}[4]{%
+  \par\medskip
+  \noindent\begin{minipage}{\linewidth}
+  \centering
+  \begin{tikzpicture}
+    \node[draw=red!70!black, dashed, line width=0.8pt, fill=yellow!10,
+          minimum width=0.94\linewidth, minimum height=#1,
+          text width=0.86\linewidth, align=center]
+      {\textcolor{red!70!black}{\textbf{[CHÈN HÌNH: #2]}}\\[2pt] \small #3};
+  \end{tikzpicture}
+  \captionof{figure}{#4}
+  \end{minipage}\par}
+
+% ---------- Thông tin bìa ----------
+\newcommand{\tenDHQG}{ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH}
+\newcommand{\tenTruong}{TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN}
+\newcommand{\tenKhoa}{KHOA CÔNG NGHỆ THÔNG TIN}
+\newcommand{\loaiBaoCao}{THUYẾT MINH DỰ ÁN}
+\newcommand{\tenNganh}{Môn: Vật lý cho Công nghệ thông tin}
+\newcommand{\tenDeTaiChinh}{Phòng học thông minh}
+\newcommand{\tenDeTaiPhu}{Giám sát độ ẩm, chất lượng không khí và cảnh báo qua Telegram}
+\newcommand{\tenDeTaiAnh}{Smart Classroom: Humidity and Air Quality Monitoring}
+\newcommand{\tenDeTaiNgan}{Thuyết minh dự án --- Nhóm 16}
+\newcommand{\maNhom}{16}
+\newcommand{\fileLogo}{logo-hcmus.png}
+
+\newcommand{\svA}{Nguyễn Gia Quốc Uy}  \newcommand{\mssvA}{24127261}
+\newcommand{\svB}{Nguyễn Quốc Thành}   \newcommand{\mssvB}{24127542}
+\newcommand{\svC}{Ngô Quốc Tuấn}       \newcommand{\mssvC}{24127581}
+\newcommand{\khoaHoc}{2026 -- 2027}
+\newcommand{\thangNam}{Tháng 11 năm 2026}
+\newcommand{\diaDiem}{TP. Hồ Chí Minh}
+
+% ---------- Header và footer ----------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead[L]{\small\textit{Trường ĐH Khoa học Tự nhiên -- ĐHQG-HCM}}
+\fancyhead[R]{\small\textit{\tenDeTaiNgan}}
+\fancyfoot[L]{\small\textit{\MakeUppercase{\tenKhoa}}}
+\fancyfoot[R]{\small\thepage}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \fancyfoot[L]{\small\textit{\MakeUppercase{\tenKhoa}}}
+  \fancyfoot[R]{\small\thepage}
+}
+
+% ---------- Trang bìa ----------
+\newcommand{\makecover}{%
+  \begin{titlepage}
+  \thispagestyle{empty}
+  \singlespacing
+  \begin{tikzpicture}[remember picture, overlay, inner sep=0, outer sep=0]
+    \draw[blue!55!black, line width=5.5pt]
+      ([xshift=-1.5cm, yshift=-2cm]current page.north east) coordinate (A) --
+      ([xshift=1.5cm, yshift=-2cm]current page.north west) coordinate (B) --
+      ([xshift=1.5cm, yshift=2cm]current page.south west) coordinate (C) --
+      ([xshift=-1.5cm, yshift=2cm]current page.south east) coordinate (D) -- cycle;
+    \draw
+      ([yshift=0.2cm,xshift=-0.3cm]A)-- ([yshift=0.2cm,xshift=0.3cm]B)--
+      ([yshift=-0.3cm,xshift=0.3cm]B) --([yshift=-0.3cm,xshift=-0.2cm]B)--
+      ([yshift=0.3cm,xshift=-0.2cm]C)--([yshift=0.3cm,xshift=0.3cm]C)--
+      ([yshift=-0.2cm,xshift=0.3cm]C)-- ([yshift=-0.2cm,xshift=-0.3cm]D)--
+      ([yshift=0.3cm,xshift=-0.3cm]D)--([yshift=0.3cm,xshift=0.2cm]D)--
+      ([yshift=-0.3cm,xshift=0.2cm]A)--([yshift=-0.3cm,xshift=-0.3cm]A)--
+      ([yshift=0.2cm,xshift=-0.3cm]A);
+    \draw
+      ([yshift=-0.2cm,xshift=0.2cm]A)-- ([yshift=-0.2cm,xshift=-0.2cm]B)--
+      ([yshift=0.2cm,xshift=-0.2cm]B) --([yshift=0.2cm,xshift=0.2cm]B)--
+      ([yshift=-0.2cm,xshift=0.2cm]C)--([yshift=-0.2cm,xshift=-0.2cm]C)--
+      ([yshift=0.2cm,xshift=-0.2cm]C)-- ([yshift=0.2cm,xshift=0.2cm]D)--
+      ([yshift=-0.2cm,xshift=0.2cm]D)--([yshift=-0.2cm,xshift=-0.2cm]D)--
+      ([yshift=0.2cm,xshift=-0.2cm]A)--([yshift=0.2cm,xshift=0.2cm]A)--
+      ([yshift=-0.2cm,xshift=0.2cm]A);
+  \end{tikzpicture}
+  \centering
+  \vspace*{0.3cm}
+  {\fontsize{14pt}{17pt}\selectfont\bfseries \tenDHQG\par}
+  \vspace{2pt}
+  {\fontsize{14pt}{17pt}\selectfont\bfseries \tenTruong\par}
+  \vspace{2pt}
+  {\fontsize{14pt}{17pt}\selectfont\bfseries \tenKhoa\par}
+  \vspace{0.5cm}
+  \rule{4cm}{0.8pt}
+
+  \vspace{0.6cm}
+  \IfFileExists{\fileLogo}{\includegraphics[height=3.3cm]{\fileLogo}}%
+    {\fbox{\parbox[c][3.3cm][c]{3.3cm}{\centering\small [Logo HCMUS]}}}
+
+  \vspace{0.7cm}
+  {\fontsize{14pt}{18pt}\selectfont\bfseries\color{black} \loaiBaoCao\par}
+  \vspace{6pt}
+  {\fontsize{15pt}{20pt}\selectfont\color{black} \tenNganh\par}
+
+  \vspace{0.6cm}
+  \begin{minipage}{0.94\textwidth}
+    \centering
+    {\fontsize{19pt}{25pt}\selectfont\bfseries\color{black} \tenDeTaiChinh\par}
+    \vspace{3pt}
+    {\fontsize{16pt}{22pt}\selectfont\color{black} \tenDeTaiPhu\par}
+    \vspace{0.25cm}
+    {\fontsize{14pt}{19pt}\selectfont\itshape\color{black} (\tenDeTaiAnh)\par}
+  \end{minipage}\par
+  \vspace{0.3cm}
+  {\color{black}\rule{2.4cm}{0.5pt}\par}
+  \vspace{0.2cm}
+  {\fontsize{15pt}{20pt}\selectfont\bfseries\color{black} NHÓM \maNhom\par}
+
+  \vfill
+  \begin{center}
+  \begin{tabular}{@{}r@{\hspace{0.4cm}}l@{}}
+    \textbf{Giảng viên hướng dẫn:} & Bùi Thanh Lâm \\[2pt]
+                                   & Cao Xuân Nam \\[2pt]
+                                   & Đặng Hoài Thương \\[4pt]
+    \textbf{Sinh viên thực hiện:}  & \svA \ -- \mssvA \\[2pt]
+                                   & \svB \ -- \mssvB \\[2pt]
+                                   & \svC \ -- \mssvC \\[4pt]
+    \textbf{Năm học:}              & \khoaHoc \\
+  \end{tabular}
+  \end{center}
+  \vfill
+
+  {\fontsize{13pt}{16pt}\selectfont\bfseries \diaDiem, \thangNam\par}
+  \vspace{0.3cm}
+  \end{titlepage}
+  \setcounter{page}{1}
+}
+
+\begin{document}
+
+\ifdefined\onlyappendix
+% ---------- Bản riêng: chỉ có Phụ lục A ----------
+\pagenumbering{arabic}
+\section*{Phụ lục A: Phương pháp ước lượng CO\textsubscript{2} từ MQ-135}
+MQ-135 không đo trực tiếp nồng độ CO\textsubscript{2}. Nhóm ước lượng qua bốn bước nhằm cho giá trị ổn định và nhất quán, không đặt mục tiêu độ chính xác tuyệt đối.
+
+\textbf{Bước 1 --- Từ điện áp ra điện trở cảm biến.} Cảm biến (điện trở $R_S$) mắc nối tiếp với điện trở tải $R_L$ trên module, cấp nguồn $V_C = 5$ V. Điện áp ngõ ra được đưa qua cầu chia áp ($R_1$ nối tiếp, $R_2$ nối đất) để điện áp vào ADC nằm trong vùng đo tuyến tính của ESP32:
+\[
+  V_{\text{out}} = V_{\text{ADC}}\,\frac{R_1 + R_2}{R_2},
+  \qquad
+  R_S = R_L\,\frac{V_C - V_{\text{out}}}{V_{\text{out}}}.
+\]
+
+\textbf{Bước 2 --- Hiệu chuẩn $R_0$.} Sau khi làm nóng cảm biến 24--48 giờ, đặt thiết bị ở nơi thoáng, nơi nồng độ CO\textsubscript{2} xấp xỉ mức nền khí quyển $C_0$, đo $R_S$ và tính điện trở chuẩn $R_0$ theo đường đặc tuyến của nhà sản xuất. Giá trị $R_0$ được lưu vào bộ nhớ flash của ESP32.
+
+\textbf{Bước 3 --- Quy đổi theo đường đặc tuyến.} Đường đặc tuyến của nhà sản xuất cho CO\textsubscript{2} có dạng hàm lũy thừa, với $a$, $b$ là hệ số lấy từ datasheet:
+\[
+  C_{\text{CO}_2} = a\left(\frac{R_S}{R_0}\right)^{-b}.
+\]
+
+\textbf{Bước 4 --- Lọc nhiễu.} Mỗi lần đo lấy trung bình nhiều mẫu ADC liên tiếp, sau đó lấy trung bình trượt theo thời gian để loại các dao động ngắn.
+
+\textbf{Giới hạn.} Vì SnO\textsubscript{2} phản ứng với nhiều loại khí khử, hơi cồn, khói hoặc NH\textsubscript{3} sẽ làm giá trị ước lượng tăng theo. Vì vậy sản phẩm dùng giá trị này để tham khảo xu hướng chất lượng không khí, không công bố như một phép đo CO\textsubscript{2} chính xác.
+\else
+
+\makecover
+
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+% ======================================================================
+\section{Giới thiệu}
+% ======================================================================
+\subsection{Tổng quan sản phẩm và ý nghĩa ứng dụng thực tế}
+Không khí trong phòng học, phòng làm việc và nhà ở thường không được theo dõi. Độ ẩm quá cao gây nấm mốc, làm hỏng sách vở, đồ gỗ và thiết bị điện tử; độ ẩm quá thấp gây khô da và tĩnh điện. Phòng đóng kín và đông người thì không khí tù đọng, người trong phòng dễ buồn ngủ và giảm tập trung. Những thay đổi này diễn ra chậm nên khó nhận ra bằng giác quan, trong khi các thiết bị giám sát chuyên dụng thường đắt và khó cài đặt đối với người không chuyên.
+
+Nhóm đề xuất một thiết bị IoT nhỏ đặt trong phòng, gồm board ESP32 và ba thiết bị: cảm biến DHT22 đo độ ẩm và nhiệt độ, cảm biến MQ-135 đo chất lượng không khí (quy đổi nồng độ CO\textsubscript{2} ước lượng), và đèn LED RGB. Thiết bị gửi số liệu qua internet đến một website do nhóm tự xây dựng. Người dùng có thể:
+\begin{itemize}
+  \item xem độ ẩm, nhiệt độ, CO\textsubscript{2} theo thời gian thực và biểu đồ lịch sử trên điện thoại hoặc máy tính;
+  \item điều khiển đèn LED tín hiệu từ xa;
+  \item nhận thông báo Telegram khi độ ẩm vượt ngưỡng cho phép;
+  \item nhắn tin hỏi bot Telegram để biết nhanh tình trạng phòng.
+\end{itemize}
+
+Sản phẩm mang lại các lợi ích thực tế sau:
+\begin{itemize}
+  \item \textbf{Phát hiện sớm} độ ẩm bất thường, giảm nguy cơ hư hỏng đồ đạc, sách vở và thiết bị.
+  \item \textbf{Chi phí thấp}, dùng linh kiện phổ biến và các dịch vụ có gói miễn phí (xem mục~\ref{sec:linhkien}), nên có thể nhân rộng cho nhiều phòng.
+  \item \textbf{Dễ sử dụng}: người không có kiến thức công nghệ thông tin vẫn tự cài đặt qua giao diện (mục~\ref{sec:caidat}).
+  \item \textbf{Có dữ liệu lịch sử} để người quản lý quyết định việc thông gió, hút ẩm.
+\end{itemize}
+Lưu ý: MQ-135 không đo trực tiếp nồng độ CO\textsubscript{2} nên giá trị CO\textsubscript{2} của sản phẩm chỉ mang tính tham khảo.
+
+\needspace{16\baselineskip}
+\subsection{Danh sách các chức năng}
+\label{sec:chucnang}
+Bảng dưới đây liệt kê các chức năng của sản phẩm. Chức năng 1--3 là các luồng xử lý căn bản (mỗi thành viên phụ trách một luồng); chức năng 4 trở đi là các chức năng nâng cao, kèm số thứ tự yêu cầu tương ứng trong quy định đồ án cuối kỳ.
+
+\small
+\begin{tabularx}{\linewidth}{I C{0.9cm} i L{4.0cm} i Y I}
+\outerline
+\multicolumn{3}{I >{\bfseries}l I}{\cellcolor{primary!10}Thông tin chức năng căn bản} \\
+\hline
+\rowcolor{gray!15}\textbf{ID} & \textbf{Thiết bị / dịch vụ sử dụng} & \textbf{Mô tả luồng xử lý} \\
+\hline
+1 & Thiết bị input: cảm biến DHT22 (nhiệt độ, độ ẩm) &
+DHT22 đo độ ẩm và nhiệt độ $\rightarrow$ ESP32 đọc định kỳ và đóng gói bản tin $\rightarrow$ gửi qua giao thức MQTT lên broker HiveMQ Cloud $\rightarrow$ Backend (đã đăng ký topic) nhận và kiểm tra $\rightarrow$ đẩy dữ liệu qua WebSocket $\rightarrow$ Frontend hiển thị độ ẩm, nhiệt độ dạng text và gauge. \\
+\hline
+2 & Thiết bị input: cảm biến MQ-135 (chất lượng không khí) &
+MQ-135 cho ra điện áp tương tự $\rightarrow$ ESP32 đọc bằng ADC, tính điện trở cảm biến và quy đổi ra CO\textsubscript{2} ước lượng $\rightarrow$ MQTT $\rightarrow$ Backend $\rightarrow$ WebSocket $\rightarrow$ Frontend hiển thị dạng text và gauge. \\
+\hline
+3 & Thiết bị output: đèn LED RGB WS2812 &
+Người dùng chọn màu và bật/tắt đèn trên Frontend $\rightarrow$ Backend $\rightarrow$ gửi lệnh qua MQTT $\rightarrow$ ESP32 nhận lệnh $\rightarrow$ điều khiển LED hiển thị màu tương ứng. \\
+\outerline
+\end{tabularx}
+\normalsize
+
+\needspace{20\baselineskip}
+\small
+\begin{tabularx}{\linewidth}{I C{0.9cm} i L{4.0cm} i Y I}
+\outerline
+\multicolumn{3}{I >{\bfseries}l I}{\cellcolor{primary!10}Thông tin chức năng nâng cao} \\
+\hline
+\rowcolor{gray!15}\textbf{ID} & \textbf{Thiết bị / dịch vụ sử dụng} & \textbf{Mô tả luồng xử lý} \\
+\hline
+4 & Dịch vụ: Firebase (Firestore). \emph{Yêu cầu nâng cao \#4.} &
+Mỗi khi Backend nhận số liệu từ luồng 1 và luồng 2, Backend ghi giá trị kèm thời gian vào Firestore. Dữ liệu được lưu theo thời gian. \\
+\hline
+5 & Dịch vụ: Firebase (Firestore), thư viện Chart.js. \emph{Yêu cầu nâng cao \#5.} &
+Người dùng chọn khoảng thời gian trên Frontend $\rightarrow$ Backend truy vấn Firestore $\rightarrow$ trả kết quả $\rightarrow$ Frontend vẽ biểu đồ (chart) nhiệt độ, độ ẩm, CO\textsubscript{2} theo giờ hoặc theo ngày. \\
+\hline
+6 & Dịch vụ: Telegram Bot API. \emph{Yêu cầu nâng cao \#6.} &
+Người dùng nhắn \texttt{/start} cho bot để bot ghi nhận người nhận. Khi độ ẩm từ luồng 1 \textbf{trên 85\% hoặc dưới 30\%}, Backend gọi Telegram Bot API $\rightarrow$ điện thoại người dùng nhận thông báo ngay. Có khoảng nghỉ giữa hai lần báo để tránh gửi liên tục. \\
+\hline
+7 & Dịch vụ: Telegram Bot, lệnh điều kiện đơn giản. \emph{Yêu cầu nâng cao \#8.} &
+Người dùng nhắn lệnh \texttt{/doam} hoặc \texttt{/trangthai} cho bot $\rightarrow$ Backend nhận lệnh, lấy giá trị độ ẩm mới nhất $\rightarrow$ bot trả lời độ ẩm hiện tại và cho biết đang bình thường hay bất thường. \\
+\hline
+8 & Cơ sở dữ liệu: SQLite. \emph{Yêu cầu nâng cao \#9.} &
+Đăng ký: Frontend $\rightarrow$ Backend băm mật khẩu và lưu tài khoản vào SQLite. Đăng nhập: Backend đối chiếu tài khoản trong SQLite rồi cấp phiên đăng nhập. Chỉ người đã đăng nhập mới xem được số liệu và điều khiển LED. \\
+\hline
+9 & Tự xây dựng (Node.js, Express; HTML, CSS, JavaScript), không dùng NodeRED. \emph{Yêu cầu nâng cao \#10.} &
+Nhóm tự viết cả Backend (kết nối MQTT, xử lý dữ liệu, WebSocket, API) và Frontend (đăng nhập, bảng số liệu, biểu đồ, điều khiển) của website quản lý sản phẩm. \\
+\hline
+10 & Dịch vụ có sẵn: thư viện WiFiManager. \emph{Yêu cầu nâng cao \#12.} &
+Lần đầu cắm điện, ESP32 tự phát một mạng WiFi riêng $\rightarrow$ người dùng kết nối bằng điện thoại, trang cấu hình tự hiện ra $\rightarrow$ chọn WiFi nhà và nhập mật khẩu $\rightarrow$ ESP32 lưu vào bộ nhớ flash và tự khởi động lại. Muốn đổi WiFi, giữ nút BOOT khoảng 5 giây để xóa cấu hình. \\
+\outerline
+\end{tabularx}
+\normalsize
+
+\needspace{14\baselineskip}
+\subsection{Công nghệ sử dụng}
+\label{sec:congnghe}
+\textbf{Thiết bị phần cứng và nguyên lý vật lý}
+
+\small
+\begin{tabularx}{\linewidth}{I L{2.3cm} i L{4.0cm} i Y I}
+\outerline
+\rowcolor{gray!15}\textbf{Thiết bị} & \textbf{Vai trò và cách kết nối} & \textbf{Nguyên lý vật lý} \\
+\hline
+ESP32 DevKit & Vi điều khiển trung tâm, có WiFi 2,4 GHz và ADC 12-bit; chạy firmware, kết nối WiFi và MQTT & Truyền dữ liệu bằng sóng điện từ 2,4 GHz; ADC lấy mẫu điện áp tương tự và chuyển thành số \\
+\hline
+DHT22 & Đo độ ẩm và nhiệt độ; giao tiếp số một dây & Độ ẩm làm thay đổi hằng số điện môi của lớp polymer trong tụ điện nên điện dung thay đổi; nhiệt độ làm thay đổi điện trở của nhiệt điện trở \\
+\hline
+MQ-135 & Đo chất lượng không khí, quy đổi ước lượng sang CO\textsubscript{2}; ngõ ra tương tự qua cầu chia áp vào ADC & Lớp bán dẫn SnO\textsubscript{2} được nung nóng hấp phụ oxy; khí khử (NH\textsubscript{3}, hơi cồn, benzen, khói) phản ứng với oxy này, trả electron về lớp bán dẫn làm điện trở giảm. Cảm biến không chọn lọc riêng CO\textsubscript{2} \\
+\hline
+LED RGB WS2812 & Báo hiệu bằng màu sắc; giao tiếp số một dây & Ba LED đỏ, lục, lam phát quang khi electron tái hợp với lỗ trống ở tiếp giáp p-n; màu cuối là tổng hợp cộng màu, độ sáng từng kênh điều chỉnh bằng PWM \\
+\outerline
+\end{tabularx}
+\normalsize
+
+\needspace{12\baselineskip}
+\medskip
+\textbf{Công nghệ phần mềm và dịch vụ}
+
+\small
+\begin{tabularx}{\linewidth}{I L{2.6cm} i L{4.6cm} i Y I}
+\outerline
+\rowcolor{gray!15}\textbf{Thành phần} & \textbf{Công nghệ} & \textbf{Vai trò} \\
+\hline
+Firmware & C++ trên Arduino framework (PlatformIO); thư viện DHT, Adafruit NeoPixel, PubSubClient, ArduinoJson & Đọc cảm biến, điều khiển LED, gửi và nhận bản tin MQTT \\
+\hline
+Cấu hình WiFi & Thư viện WiFiManager & Trang cấu hình WiFi lần đầu \\
+\hline
+Giao thức & MQTT (publish/subscribe) & Truyền dữ liệu giữa ESP32 và Backend \\
+\hline
+MQTT broker & HiveMQ Cloud & Trung chuyển bản tin; thiết bị và Backend đều kết nối ra internet nên không cần cấu hình router \\
+\hline
+Backend & Node.js, Express, mqtt.js, WebSocket & Nhận dữ liệu, xử lý, cung cấp API, đẩy dữ liệu thời gian thực \\
+\hline
+Frontend & HTML, CSS, JavaScript; Chart.js & Giao diện đăng nhập, số liệu, biểu đồ, điều khiển \\
+\hline
+Cloud & Firebase (Firestore) & Lưu dữ liệu cảm biến theo thời gian \\
+\hline
+Cơ sở dữ liệu tài khoản & SQLite & Lưu tài khoản người dùng \\
+\hline
+Thông báo, chatbot & Telegram Bot API & Gửi cảnh báo và trả lời truy vấn \\
+\hline
+Máy chủ & Laptop của nhóm khi demo & Chạy Backend; khi triển khai thực tế chuyển lên máy chủ chạy liên tục (VPS) \\
+\hline
+Quản lý mã nguồn & Git, GitHub & Tích hợp mã nguồn của cả nhóm trong một repository \\
+\outerline
+\end{tabularx}
+\normalsize
+
+\needspace{8\baselineskip}
+\subsection{Cài đặt dành cho người dùng không chuyên}
+\label{sec:caidat}
+Các cấu hình kỹ thuật (cloud, MQTT broker, Telegram bot) do nhóm thiết lập sẵn. Người dùng chỉ thao tác trên giao diện:
+\begin{enumerate}
+  \item \textbf{Kết nối WiFi (chức năng 10):} cắm điện, kết nối điện thoại vào WiFi của thiết bị, chọn WiFi nhà trên trang tự hiện ra.
+  \item \textbf{Tạo tài khoản (chức năng 8):} đăng ký và đăng nhập trên website.
+  \item \textbf{Kết nối Telegram (chức năng 6, 7):} nhắn \texttt{/start} cho bot để nhận thông báo và hỏi nhanh tình trạng phòng.
+\end{enumerate}
+
+\clearpage
+% ======================================================================
+\section{Thiết kế}
+% ======================================================================
+\subsection{Hình ảnh thiết kế hình dáng 3D của sản phẩm}
+Hình dáng bên ngoài và bên trong của hộp sản phẩm; mỗi linh kiện được đánh dấu vị trí kèm ID chức năng liên quan.
+
+\hinhcho{4.2cm}{Hình 3D bên ngoài}{Mặt trước (cửa sổ LED), các mặt bên (lỗ thông khí, cổng nguồn). Đánh dấu nhãn A--F theo bảng chú thích bên dưới.}{Hình dáng bên ngoài của hộp sản phẩm.}
+\hinhcho{4.2cm}{Hình 3D bên trong}{Vị trí ESP32, DHT22, MQ-135, LED và board mạch trong hộp. Đánh dấu nhãn A--F theo bảng chú thích bên dưới.}{Bố trí linh kiện bên trong hộp sản phẩm.}
+
+\needspace{10\baselineskip}
+\textbf{Bảng chú thích vị trí linh kiện} \tam{(chỉnh lại theo thiết kế 3D)}
+
+\small
+\begin{tabularx}{\linewidth}{I C{1.0cm} i L{3.5cm} i C{2.4cm} i Y I}
+\outerline
+\rowcolor{gray!15}\textbf{Nhãn} & \textbf{Linh kiện} & \textbf{ID chức năng} & \textbf{Vị trí dự kiến} \\
+\hline
+A & ESP32 DevKit & 1--10 (dùng chung) & Trung tâm hộp; cổng USB hướng ra mặt bên \\
+\hline
+B & Cảm biến DHT22 & 1 & Gần lỗ thông khí, cách xa MQ-135 \\
+\hline
+C & Cảm biến MQ-135 & 2 & Gần lỗ thông khí, chừa khe hở với vách hộp vì cảm biến tỏa nhiệt \\
+\hline
+D & Đèn LED WS2812 & 3 & Mặt trước, sau cửa sổ trên mặt hộp \\
+\hline
+E & Nút BOOT (có sẵn trên ESP32) & 10 & Có thể tiếp cận qua lỗ nhỏ khi cần xóa cấu hình WiFi \\
+\hline
+F & Cổng nguồn 5 V & Tất cả & Mặt bên \\
+\outerline
+\end{tabularx}
+\normalsize
+
+\needspace{14\baselineskip}
+\subsection{Hình ảnh wireframe cho website quản lý sản phẩm}
+Các vùng trên wireframe được đánh dấu ID chức năng tương ứng.
+
+\hinhcho{4.5cm}{Wireframe trang đăng nhập và đăng ký}{Biểu mẫu đăng nhập, đăng ký. Chú thích ID 8, ID 9.}{Wireframe trang đăng nhập và đăng ký.}
+\hinhcho{6.0cm}{Wireframe trang giám sát chính}{Ô độ ẩm (ID 1), ô CO\textsubscript{2} (ID 2), điều khiển LED (ID 3), biểu đồ lịch sử (ID 5). Chú thích ID 9 cho toàn bộ website.}{Wireframe trang giám sát chính.}
+\hinhcho{4.0cm}{Wireframe trang cấu hình WiFi của thiết bị}{Trang tự hiện ra khi kết nối vào WiFi của ESP32. Chú thích ID 10.}{Wireframe trang cấu hình WiFi lần đầu.}
+
+\needspace{10\baselineskip}
+\textbf{Bảng chú thích vùng trên wireframe} \tam{(chỉnh lại theo hình)}
+
+\small
+\begin{tabularx}{\linewidth}{I L{3.2cm} i C{1.8cm} i Y I}
+\outerline
+\rowcolor{gray!15}\textbf{Trang, vùng} & \textbf{ID chức năng} & \textbf{Nội dung} \\
+\hline
+Đăng nhập, đăng ký & 8, 9 & Biểu mẫu tạo tài khoản và đăng nhập \\
+\hline
+Giám sát: ô độ ẩm, nhiệt độ & 1, 9 & Giá trị thời gian thực dạng text và gauge \\
+\hline
+Giám sát: ô CO\textsubscript{2} & 2, 9 & Giá trị CO\textsubscript{2} ước lượng dạng text và gauge \\
+\hline
+Giám sát: điều khiển LED & 3, 9 & Chọn màu, bật/tắt đèn \\
+\hline
+Giám sát: biểu đồ & 4, 5, 9 & Biểu đồ lịch sử theo giờ hoặc theo ngày \\
+\hline
+Cấu hình WiFi & 10 & Chọn WiFi nhà, nhập mật khẩu \\
+\outerline
+\end{tabularx}
+\normalsize
+
+\needspace{16\baselineskip}
+\subsection{Sơ đồ truyền và nhận dữ liệu giữa các thành phần trong hệ thống}
+Một sơ đồ duy nhất gộp tất cả luồng xử lý ở mục~\ref{sec:chucnang}; mỗi luồng dùng một màu hoặc kiểu mũi tên riêng, trên mỗi mũi tên ghi rõ dữ liệu được truyền.
+
+\hinhcho{9.5cm}{Sơ đồ truyền nhận dữ liệu}{Thiết bị (DHT22, MQ-135, LED, ESP32) --- HiveMQ Cloud --- Backend --- Frontend --- Firestore --- SQLite --- Telegram --- điện thoại. Mỗi luồng một màu/kiểu mũi tên, ghi dữ liệu trên mũi tên.}{Sơ đồ truyền và nhận dữ liệu giữa các thành phần trong hệ thống.}
+
+\needspace{12\baselineskip}
+\textbf{Bảng chú thích luồng} \tam{(chỉnh lại màu theo hình)}
+
+\small
+\begin{tabularx}{\linewidth}{I L{3.6cm} i C{1.2cm} i L{2.9cm} i Y I}
+\outerline
+\rowcolor{gray!15}\textbf{Luồng} & \textbf{ID} & \textbf{Màu / kiểu mũi tên} & \textbf{Dữ liệu truyền} \\
+\hline
+DHT22 $\rightarrow$ web & 1 & \tam{màu, nét} & Độ ẩm, nhiệt độ \\
+\hline
+MQ-135 $\rightarrow$ web & 2 & \tam{màu, nét} & Giá trị CO\textsubscript{2} ước lượng (ppm) \\
+\hline
+Web $\rightarrow$ LED & 3 & \tam{màu, nét} & Màu và trạng thái bật/tắt \\
+\hline
+Backend $\leftrightarrow$ Firestore & 4, 5 & \tam{màu, nét} & Giá trị cảm biến và thời gian; yêu cầu và kết quả truy vấn lịch sử \\
+\hline
+Backend $\leftrightarrow$ Telegram & 6, 7 & \tam{màu, nét} & Cảnh báo độ ẩm; lệnh \texttt{/doam}, \texttt{/trangthai} và câu trả lời \\
+\hline
+Frontend $\leftrightarrow$ Backend $\leftrightarrow$ SQLite & 8 & \tam{màu, nét} & Tài khoản, mật khẩu đã băm, phiên đăng nhập \\
+\hline
+Điện thoại $\leftrightarrow$ ESP32 & 10 & \tam{màu, nét} & Tên WiFi và mật khẩu \\
+\outerline
+\end{tabularx}
+\normalsize
+
+\clearpage
+% ======================================================================
+\section{Triển khai}
+% ======================================================================
+\subsection{Danh sách linh kiện điện tử sử dụng trong sản phẩm}
+\label{sec:linhkien}
+Giá là giá tham khảo trên các trang Shopee tại thời điểm viết thuyết minh (tháng 11/2026) và có thể thay đổi khi mua.
+
+\small
+\begin{tabularx}{\linewidth}{I C{0.8cm} i L{2.4cm} i C{1.0cm} i C{1.6cm} i C{1.5cm} i C{1.6cm} i Y I}
+\outerline
+\rowcolor{gray!15}\textbf{STT} & \textbf{Tên} & \textbf{Số lượng} & \textbf{Giá (đồng)} & \textbf{Hình ảnh*} & \textbf{Link tham khảo giá} & \textbf{ID chức năng liên quan} \\
+\hline
+1 & ESP32 DevKitC & 1 & 146.520 & \anh{1n4HDwpzNj3BcS-nQcMcjomGBWVHo_2Sq} & \shopee{480243677}{52907492598} & 1--10 \\
+\hline
+2 & Cảm biến DHT22 & 1 & 50.000 & \anh{1O0SmH7uxWdc1fm6R0m2xqn0D7iAA5GZs} & \shopee{494330825}{8682001781} & 1 \\
+\hline
+3 & Cảm biến MQ-135 & 1 & 33.458 & \anh{14sLCrocOp7KPTZLdN4ehmi-2On9jGcHl} & \shopee{1641708754}{44135248768} & 2 \\
+\hline
+4 & LED RGB WS2812 (8 bóng) & 1 & 25.200 & \anh{1CTG5yTQKL_TElJmCkjV5GRHQf98vevVo} & \shopee{310609561}{5471462816} & 3 \\
+\hline
+5 & Board đồng lỗ, dây nối, điện trở & 1 bộ & 40.000 & \anh{13zAd58Zgde7bqI4P5-B8x1ylb44hYGFn} & \shopee{16504852}{7050771926} & 1--3 \\
+\hline
+\multicolumn{3}{I l i}{\textbf{Tổng chi phí linh kiện điện tử}} & \textbf{295.178} & & & \\
+\outerline
+\end{tabularx}
+\normalsize
+
+\needspace{14\baselineskip}
+\medskip
+\textbf{Vật liệu làm hộp sản phẩm}
+
+\small
+\begin{tabularx}{\linewidth}{I C{0.8cm} i L{3.2cm} i C{1.0cm} i C{1.6cm} i C{1.5cm} i C{1.6cm} i Y I}
+\outerline
+\rowcolor{gray!15}\textbf{STT} & \textbf{Tên} & \textbf{Số lượng} & \textbf{Giá (đồng)} & \textbf{Hình ảnh*} & \textbf{Link tham khảo giá} & \textbf{ID chức năng liên quan} \\
+\hline
+1 & Bìa mô hình Formex (foam board) 40x60 cm, dày 2 mm & 3 tấm & 39.500 & \anh{1i6C7RYvtENqa3PcfuC7DHXS6z63El1L4} & \shopee{1100346301}{25032156059} & Đóng hộp \\
+\hline
+2 & Súng bắn keo nến 20 W (kèm 10 cây keo nến) & 1 & 39.000 & \anh{1ItpUIUD2j_NpJ8KXw0z4oeAOo7Bisc5Q} & \shopee{10072974}{23970729259} & Đóng hộp \\
+\hline
+3 & Băng keo hai mặt Nano Acrylic & 1 cuộn & 10.000 & \anh{1JhzEYlSpIwFIX_ClvKsfWGotcCeiwCsI} & \shopee{1595048394}{44214323006} & Đóng hộp \\
+\hline
+\multicolumn{3}{I l i}{\textbf{Tổng chi phí vật liệu hộp}} & \textbf{88.500} & & & \\
+\hline
+\multicolumn{3}{I l i}{\textbf{TỔNG CHI PHÍ}} & \textbf{383.678} & \multicolumn{3}{l I}{\small(linh kiện điện tử và vật liệu hộp)} \\
+\outerline
+\end{tabularx}
+\normalsize
+
+{\small\textit{* Hình ảnh linh kiện đặt riêng trên Google Drive ở chế độ công khai; bấm ``Xem ảnh'' trong bảng để mở từng ảnh, hoặc xem cả thư mục tại \href{https://drive.google.com/drive/folders/1DEdrkEqPuPWwYqI82GZheDMker8lTOZY}{\textcolor{blue}{\underline{liên kết thư mục ảnh}}}.}\\
+\textit{Phần mềm và hạ tầng (HiveMQ Cloud, Firebase, Telegram Bot API, SQLite) dùng gói miễn phí nên không tính chi phí.}}
+
+\needspace{18\baselineskip}
+\subsection{Kế hoạch thực hiện}
+\label{sec:kehoach}
+Linh kiện được đặt mua sau khi giảng viên xem xét thuyết minh (4/11/2026), dự kiến hàng về trước ngày 9/11/2026. Sản phẩm hoàn thành trước ngày 15/12/2026.
+
+Bảng 1 gồm cả việc chuẩn bị bản thuyết minh này (1/11 -- 4/11) và việc làm sản phẩm. Nhóm có thể gặp nhau nhiều buổi để làm chung. Vì cả nhóm \textbf{dùng chung một board ESP32}, các việc cần phần cứng được gom vào các buổi làm chung và thực hiện lần lượt; các việc phần mềm không cần phần cứng thì mỗi người làm song song ở nhà, dùng dữ liệu giả lập gửi qua MQTT. Số giờ trong các bảng là ước lượng, đã tính đến việc dùng công cụ AI hỗ trợ viết phần giao diện.
+
+\needspace{22\baselineskip}
+\textbf{Bảng 1. Phân công, công việc và thời gian thực hiện của từng thành viên}
+
+\needspace{14\baselineskip}
+\medskip
+\textbf{Phân công: Nguyễn Quốc Thành}
+
+\small
+\begin{tabularx}{\linewidth}{I C{1.3cm} i Y i L{2.7cm} i C{1.0cm} I}
+\outerline
+\rowcolor{gray!15}\textbf{ID chức năng} & \textbf{Công việc cụ thể (số giờ ước lượng)} & \textbf{Thời gian} & \textbf{Giờ} \\
+\hline
+Thuyết minh & Sơ đồ truyền nhận dữ liệu có màu, mục 2.3 (2,5); tìm link giá và hình ảnh linh kiện, mục 3.1 (2) & 1/11 -- 4/11 & 4,5 \\
+\hline
+1 & Đấu nối DHT22 (1); firmware đọc cảm biến và gửi MQTT (2); backend nhận và đẩy WebSocket (2); gắn vào giao diện và kiểm thử (2) & 10/11 -- 16/11 & 7 \\
+\hline
+6 & Tạo bot Telegram và lưu người nhận khi nhắn \texttt{/start} (1,5); xử lý ngưỡng độ ẩm và khoảng nghỉ giữa hai lần báo (2); kiểm thử (1,5) & 5/11 -- 12/11 & 5 \\
+\hline
+7 & Lệnh \texttt{/doam}, \texttt{/trangthai} (2); kiểm thử (1) & 9/11 -- 15/11 & 3 \\
+\hline
+10 & Tích hợp WiFiManager vào firmware (3); lưu bộ nhớ flash và nút BOOT xóa cấu hình (2); kiểm thử trang cấu hình (1) & 12/11 -- 19/11 & 6 \\
+\hline
+Việc chung & Quản lý Git, hợp nhất mã nguồn (4); đóng hộp vật lý, làm trước từ 20/11 khi đã có hộp 3D và số đo linh kiện (6); lắp mạch cùng nhóm (3); viết phần báo cáo của mình (3) & 5/11 -- 13/12 (đóng hộp từ 20/11) & 16 \\
+\hline
+\multicolumn{3}{I l i}{\textbf{Tổng của Thành}} & \textbf{41,5} \\
+\outerline
+\end{tabularx}
+\normalsize
+\needspace{14\baselineskip}
+\medskip
+\textbf{Phân công: Ngô Quốc Tuấn}
+
+\small
+\begin{tabularx}{\linewidth}{I C{1.3cm} i Y i L{2.7cm} i C{1.0cm} I}
+\outerline
+\rowcolor{gray!15}\textbf{ID chức năng} & \textbf{Công việc cụ thể (số giờ ước lượng)} & \textbf{Thời gian} & \textbf{Giờ} \\
+\hline
+Thuyết minh & Vẽ hộp 3D bên ngoài và bên trong, gắn nhãn vị trí linh kiện theo ID chức năng, mục 2.1 (8) & 1/11 -- 4/11 & 8 \\
+\hline
+2 & Đấu nối MQ-135 và cầu chia áp (2); firmware đọc ADC, tính điện trở, quy đổi ppm (4); làm nóng và hiệu chuẩn $R_0$ (3); backend và gắn vào giao diện (3) & 10/11 -- 22/11 (gồm 2 ngày làm nóng) & 12 \\
+\hline
+4 & Cấu trúc dữ liệu Firestore và kết nối (3); ghi dữ liệu mỗi khi nhận bản tin (3); kiểm thử (2) & 5/11 -- 15/11 & 8 \\
+\hline
+5 & API truy vấn theo khoảng thời gian (3); biểu đồ Chart.js (4); kiểm thử (1) & 16/11 -- 29/11 & 8 \\
+\hline
+Việc chung & Lắp mạch cùng nhóm (3); viết phần báo cáo của mình (3) & 1/12 -- 13/12 & 6 \\
+\hline
+\multicolumn{3}{I l i}{\textbf{Tổng của Tuấn}} & \textbf{42} \\
+\outerline
+\end{tabularx}
+\normalsize
+\needspace{14\baselineskip}
+\medskip
+\textbf{Phân công: Nguyễn Gia Quốc Uy}
+
+\small
+\begin{tabularx}{\linewidth}{I C{1.3cm} i Y i L{2.7cm} i C{1.0cm} I}
+\outerline
+\rowcolor{gray!15}\textbf{ID chức năng} & \textbf{Công việc cụ thể (số giờ ước lượng)} & \textbf{Thời gian} & \textbf{Giờ} \\
+\hline
+Thuyết minh & Chốt bố cục các trang web và vẽ wireframe website, mục 2.2 (3); gom và nộp thuyết minh (1) & 1/11 -- 4/11 & 4 \\
+\hline
+3 & Đấu nối LED (1); firmware nhận lệnh MQTT và điều khiển WS2812 (3); backend gửi lệnh (2); giao diện chọn màu (2); kiểm thử (1) & 10/11 -- 16/11 & 9 \\
+\hline
+8 & Trang đăng ký, đăng nhập (3); backend băm mật khẩu, SQLite, phiên đăng nhập (4); bảo vệ các API (2); kiểm thử (1) & 12/11 -- 22/11 & 10 \\
+\hline
+9 & Khung backend: Express, MQTT, WebSocket (3); khung frontend: bố cục, điều hướng, thành phần gauge và chart dùng chung (5); hoàn thiện giao diện (4) & 5/11 -- 6/12 (khung dựng trước, hoàn thiện dần) & 12 \\
+\hline
+Việc chung & Lắp mạch cùng nhóm (3); viết phần báo cáo của mình (3); gom và nộp báo cáo cuối kỳ (2) & 1/12 -- 13/12 & 8 \\
+\hline
+\multicolumn{3}{I l i}{\textbf{Tổng của Uy}} & \textbf{43} \\
+\outerline
+\end{tabularx}
+\normalsize
+
+
+\needspace{16\baselineskip}
+\medskip
+\textbf{Bảng 2. Các nhóm chức năng thực hiện song song}
+
+\small
+\begin{tabularx}{\linewidth}{I C{1.3cm} i L{2.4cm} i L{3.6cm} i Y I}
+\outerline
+\rowcolor{gray!15}\textbf{Giai đoạn} & \textbf{Thời gian} & \textbf{Chức năng chạy song song} & \textbf{Điều kiện và ghi chú} \\
+\hline
+0 & 1/11 -- 4/11 & Thuyết minh: hộp 3D (Tuấn), wireframe (Uy), sơ đồ luồng và link giá (Thành) & Ba việc làm song song, mỗi người một phần; cần chốt ID chức năng và kích thước linh kiện trước \\
+\hline
+1 & 5/11 -- 9/11 (chờ hàng) & ID 9 (khung), ID 4, ID 6, ID 7 & Không cần phần cứng; mỗi người làm ở nhà bằng dữ liệu giả lập gửi qua MQTT \\
+\hline
+2 & 10/11 -- 22/11 & ID 1, ID 2, ID 3, ID 10 (cần phần cứng); ID 8, ID 9 (hoàn thiện) & Dùng chung một board ESP32 nên nạp và thử lần lượt trong các buổi làm chung; MQ-135 làm nóng song song trong lúc thử các thiết bị khác; ID 8, ID 9 làm ở nhà \\
+\hline
+3 & 16/11 -- 29/11 & ID 5 & Cần ID 4 có dữ liệu thật từ ID 1, ID 2 và khung giao diện của ID 9 \\
+\hline
+4 & 30/11 -- 6/12 & Lắp mạch, tích hợp (hộp vật lý đã làm trước từ 20/11) & Cần các chức năng đã chạy được riêng lẻ \\
+\hline
+5 & 7/12 -- 13/12 & Kiểm thử, hiệu chỉnh ngưỡng, ôn vấn đáp & Dự phòng 14/12 -- 15/12 \\
+\outerline
+\end{tabularx}
+\normalsize
+
+\medskip
+Các chức năng phụ thuộc nhau: ID 5 cần ID 4 và ID 9; ID 1, ID 2, ID 3 hiển thị trên khung giao diện của ID 9; ID 8 bảo vệ các API của ID 9; ID 6, ID 7 dùng dữ liệu độ ẩm của ID 1 (giả lập trước, dữ liệu thật sau).
+
+\medskip
+\textbf{Các buổi làm chung dự kiến} (cả nhóm gặp nhau): khoảng 10/11 nhận linh kiện, đấu nối thử và bật MQ-135 làm nóng (3 giờ); khoảng 14/11 nạp và thử firmware của chức năng 1, 3, 10 lần lượt trên board chung (3 giờ); khoảng 21/11 hiệu chuẩn MQ-135 ở nơi thoáng (3 giờ); khoảng 28/11 ghép toàn hệ thống từ cảm biến đến web, cloud, Telegram (3 giờ); khoảng 1/12 và 5/12 hàn mạch lên board đồng lỗ và lắp hộp (4 giờ mỗi buổi); khoảng 8/12 thử với người không chuyên và hiệu chỉnh ngưỡng (3 giờ); khoảng 12/12 tập vấn đáp chéo (2 giờ). Số buổi có thể tăng thêm khi cần.
+
+\needspace{14\baselineskip}
+% ======================================================================
+\section{Tổng kết}
+% ======================================================================
+Dựa trên bảng chức năng ở mục~\ref{sec:chucnang} và bảng phân công ở mục~\ref{sec:kehoach}, mỗi thành viên dự kiến đạt:
+
+\small
+\begin{tabularx}{\linewidth}{I C{0.9cm} i L{4.2cm} i C{2.0cm} i C{2.0cm} i Y I}
+\outerline
+\rowcolor{gray!15}\textbf{STT} & \textbf{Tên thành viên} & \textbf{Điểm cơ bản} & \textbf{Điểm nâng cao} & \textbf{Tổng} \\
+\hline
+1 & Nguyễn Gia Quốc Uy & 5,0 & 3,5 & 8,5 \\
+\hline
+2 & Nguyễn Quốc Thành & 5,0 & 2,5 & 7,5 \\
+\hline
+3 & Ngô Quốc Tuấn & 5,0 & 3,0 & 8,0 \\
+\outerline
+\end{tabularx}
+\normalsize
+
+\medskip
+{\small Điểm cơ bản gồm 4,0 điểm chức năng (mỗi thành viên một luồng căn bản) và 1,0 điểm làm việc nhóm. Điểm nâng cao của từng thành viên là tổng điểm các chức năng được phân công: Uy: chức năng 8 (1,5) và 9 (2,0); Thành: chức năng 6 (1,0), 7 (0,5) và 10 (1,0); Tuấn: chức năng 4 (1,5) và 5 (1,5). Điểm đồ án cuối kỳ được tính theo quy định đồ án cuối kỳ (điểm nâng cao tối đa 4,0), nhân với hệ số mức độ hiểu của từng thành viên.}
+
+\begin{center}\textbf{-- HẾT --}\end{center}
+
+\fi
+
+\end{document}
