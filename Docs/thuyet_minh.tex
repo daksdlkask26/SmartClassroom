@@ -459,33 +459,36 @@ Cấu hình WiFi & 10 & Chọn WiFi nhà, nhập mật khẩu \\
 \end{tabularx}
 \normalsize
 
-\needspace{16\baselineskip}
+\needspace{40\baselineskip}
 \subsection{Sơ đồ truyền và nhận dữ liệu giữa các thành phần trong hệ thống}
 Một sơ đồ duy nhất gộp tất cả luồng xử lý ở mục~\ref{sec:chucnang}; mỗi luồng dùng một màu hoặc kiểu mũi tên riêng, trên mỗi mũi tên ghi rõ dữ liệu được truyền.
 
-\hinhcho{9.5cm}{Sơ đồ truyền nhận dữ liệu}{Thiết bị (DHT22, MQ-135, LED, ESP32) --- HiveMQ Cloud --- Backend --- Frontend --- Firestore --- SQLite --- Telegram --- điện thoại. Mỗi luồng một màu/kiểu mũi tên, ghi dữ liệu trên mũi tên.}{Sơ đồ truyền và nhận dữ liệu giữa các thành phần trong hệ thống.}
+\begin{center}
+\includegraphics[width=14.3cm]{so_do_truyen_nhan_du_lieu.png}
+\captionof{figure}{Sơ đồ truyền và nhận dữ liệu giữa các thành phần trong hệ thống.}
+\end{center}
 
 \needspace{12\baselineskip}
-\textbf{Bảng chú thích luồng} \tam{(chỉnh lại màu theo hình)}
+\textbf{Bảng chú thích luồng}
 
 \small
 \begin{tabularx}{\linewidth}{I L{3.6cm} i C{1.2cm} i L{2.9cm} i Y I}
 \outerline
 \rowcolor{gray!15}\textbf{Luồng} & \textbf{ID} & \textbf{Màu / kiểu mũi tên} & \textbf{Dữ liệu truyền} \\
 \hline
-DHT22 $\rightarrow$ web & 1 & \tam{màu, nét} & Độ ẩm, nhiệt độ \\
+DHT22 $\rightarrow$ web & 1 & xanh dương, nét liền & Độ ẩm, nhiệt độ \\
 \hline
-MQ-135 $\rightarrow$ web & 2 & \tam{màu, nét} & Giá trị CO\textsubscript{2} ước lượng (ppm) \\
+MQ-135 $\rightarrow$ web & 2 & xanh lá, nét đứt & Giá trị CO\textsubscript{2} ước lượng (ppm) \\
 \hline
-Web $\rightarrow$ LED & 3 & \tam{màu, nét} & Màu và trạng thái bật/tắt \\
+Web $\rightarrow$ LED & 3 & cam, nét gạch-chấm & Màu và trạng thái bật/tắt \\
 \hline
-Backend $\leftrightarrow$ Firestore & 4, 5 & \tam{màu, nét} & Giá trị cảm biến và thời gian; yêu cầu và kết quả truy vấn lịch sử \\
+Backend $\leftrightarrow$ Firestore & 4, 5 & tím (ID 4 nét liền, ID 5 nét chấm) & Giá trị cảm biến và thời gian; yêu cầu và kết quả truy vấn lịch sử \\
 \hline
-Backend $\leftrightarrow$ Telegram & 6, 7 & \tam{màu, nét} & Cảnh báo độ ẩm; lệnh \texttt{/doam}, \texttt{/trangthai} và câu trả lời \\
+Backend $\leftrightarrow$ Telegram & 6, 7 & đỏ (ID 6 nét liền, ID 7 nét đứt) & Cảnh báo độ ẩm; lệnh \texttt{/doam}, \texttt{/trangthai} và câu trả lời \\
 \hline
-Frontend $\leftrightarrow$ Backend $\leftrightarrow$ SQLite & 8 & \tam{màu, nét} & Tài khoản, mật khẩu đã băm, phiên đăng nhập \\
+Frontend $\leftrightarrow$ Backend $\leftrightarrow$ SQLite & 8 & xanh ngọc, nét chấm & Tài khoản, mật khẩu đã băm, phiên đăng nhập \\
 \hline
-Điện thoại $\leftrightarrow$ ESP32 & 10 & \tam{màu, nét} & Tên WiFi và mật khẩu \\
+Điện thoại $\leftrightarrow$ ESP32 & 10 & xám xanh, nét đứt & Tên WiFi và mật khẩu \\
 \outerline
 \end{tabularx}
 \normalsize
