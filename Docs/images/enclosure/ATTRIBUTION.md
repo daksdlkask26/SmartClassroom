@@ -1,6 +1,7 @@
 # Nguồn ảnh thiết kế hộp
 
-Bốn ảnh `exterior.png`, `interior.png`, `exploded.png`, `lid-fasteners.png` được xuất
+Các ảnh `exterior.png`, `interior.png`, `exploded.png`, `lid-fasteners.png` và bốn góc nhìn
+`front.png`, `rear.png`, `left.png`, `right.png` được xuất
 từ tài liệu Autodesk Fusion **SmartClassroom**, bản cơ khí cuối ngày 03/11/2026.
 Ảnh thể hiện hộp, gá lắp, bố trí linh kiện và bộ vít/đai ốc; không có model dây hoặc mạch điện minh họa.
 
@@ -15,3 +16,5 @@ và bổ sung đầu nối/lỗ theo ảnh tham khảo. Ren xoắn của vít/đ
 
 Giấy phép: [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
 Metadata nguồn được giữ trong `model-sources.json`.
+
+Bốn mặt đứng dùng phép chiếu vuông góc; thông tin xuất ảnh nằm trong `side-views.json`.

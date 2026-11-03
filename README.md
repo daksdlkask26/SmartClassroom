@@ -8,7 +8,7 @@ Nguồn LaTeX và tài liệu đồ án Phòng học thông minh.
 | `Docs/images/branding/` | Logo trên bìa |
 | `Docs/images/components/` | Ảnh linh kiện và vật tư |
 | `Docs/images/diagrams/` | Sơ đồ truyền nhận dữ liệu, PNG và SVG nguồn |
-| `Docs/images/enclosure/` | Bốn ảnh hộp cuối và nguồn model |
+| `Docs/images/enclosure/` | Ảnh hộp, các mặt đứng và nguồn model |
 | `Docs/reference/` | Quy định và yêu cầu đồ án |
 | `scripts/` | Lệnh biên dịch tài liệu |
 
@@ -27,5 +27,5 @@ Kết quả: `Docs/16_24127261_24127542_24127581_PROPOSAL.pdf`.
 File trung gian ở `Docs/.build/proposal/`, được Git bỏ qua.
 Phụ lục `Docs/Phu_luc_A_MQ135.pdf` được giữ nguyên.
 
-Mục 2.1 dùng ảnh cơ khí cuối: bên ngoài, bên trong, tách nắp, bộ vít và đai ốc.
+Mục 2.1 dùng ảnh cơ khí cuối: bên ngoài, bên trong, bốn mặt đứng, tách nắp, bộ vít và đai ốc.
 Nguồn model xem [ghi nguồn ảnh](Docs/images/enclosure/ATTRIBUTION.md).
