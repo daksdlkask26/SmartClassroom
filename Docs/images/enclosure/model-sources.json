@@ -1,0 +1,62 @@
+[
+  {
+    "model": "DHT22",
+    "author": "YouniqueĪdeaStudio",
+    "url": "https://sketchfab.com/3d-models/dht22-temperature-sensor-module-c46a658784034c679e4907bbddad0093",
+    "license": {
+      "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+      "label": "CC Attribution",
+      "fullname": "Creative Commons Attribution",
+      "slug": "by",
+      "summary": "Share & adapt with credit",
+      "requirements": "Author must be credited. Commercial use is allowed.",
+      "url": "http://creativecommons.org/licenses/by/4.0/",
+      "free": true,
+      "isCc": true,
+      "needsAttribution": true,
+      "ccClauses": [
+        "Attribution"
+      ]
+    }
+  },
+  {
+    "model": "MQ135",
+    "author": "Stichting Consortium Beroepsonderwijs",
+    "url": "https://sketchfab.com/3d-models/luchtkwaliteit-sensor-mq-135-gas-sensor-mq-135-394803dd013545a8b15ac4ba0f38e1be",
+    "license": {
+      "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+      "label": "CC Attribution",
+      "fullname": "Creative Commons Attribution",
+      "slug": "by",
+      "summary": "Share & adapt with credit",
+      "requirements": "Author must be credited. Commercial use is allowed.",
+      "url": "http://creativecommons.org/licenses/by/4.0/",
+      "free": true,
+      "isCc": true,
+      "needsAttribution": true,
+      "ccClauses": [
+        "Attribution"
+      ]
+    }
+  },
+  {
+    "model": "ESP32",
+    "author": "Loyalmanuka",
+    "url": "https://sketchfab.com/3d-models/esp32-devkitc-32d-3d-model-step-269445-9e64cc503f5e4923a0a381b7d73fdaac",
+    "license": {
+      "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+      "label": "CC Attribution",
+      "fullname": "Creative Commons Attribution",
+      "slug": "by",
+      "summary": "Share & adapt with credit",
+      "requirements": "Author must be credited. Commercial use is allowed.",
+      "url": "http://creativecommons.org/licenses/by/4.0/",
+      "free": true,
+      "isCc": true,
+      "needsAttribution": true,
+      "ccClauses": [
+        "Attribution"
+      ]
+    }
+  }
+]
