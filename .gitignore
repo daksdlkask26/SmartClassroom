@@ -70,3 +70,11 @@ desktop.ini
 *.swp
 *~
 .idea/
+
+# Local intermediate files and obsolete CAD/model folders
+.build/
+__pycache__/
+*.py[cod]
+/Archive/
+/Designs/
+/Models/

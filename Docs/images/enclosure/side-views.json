@@ -1,0 +1,13 @@
+{
+  "source_document": "SmartClassroom",
+  "source_id": "urn:adsk.wipprod:dm.lineage:T9J_7if9RQCa9Fe9513dOg",
+  "views": {
+    "front.png": true,
+    "rear.png": true,
+    "left.png": true,
+    "right.png": true
+  },
+  "projection": "orthographic, Z up",
+  "geometry_or_materials_edited": false,
+  "camera_and_lid_frames_restored": true
+}

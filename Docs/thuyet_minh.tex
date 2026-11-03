@@ -7,6 +7,7 @@
 %   \hinhcho{...}  : khung đỏ nét đứt, thay bằng \includegraphics khi đã có hình.
 %   \tam{...}      : ô tô vàng, nội dung tạm tính, cần kiểm tra lại (giá, link, hình).
 %   Muốn tắt tô vàng sau khi đã kiểm tra xong: đổi định nghĩa \tam thành \newcommand{\tam}[1]{#1}.
+\RequirePackage{fix-cm}
 \documentclass[12pt,a4paper]{article}
 
 % ---------- Font và ngôn ngữ (Times New Roman, cỡ 13, giãn dòng 1.15) ----------
@@ -23,7 +24,11 @@
       BoldFont       = *-bold,
       ItalicFont     = *-italic,
       BoldItalicFont = *-bolditalic]}}
-\setmonofont{DejaVu Sans Mono}[Scale=0.85]
+\IfFontExistsTF{DejaVu Sans Mono}{%
+  \setmonofont{DejaVu Sans Mono}[Scale=0.85]}{%
+  \IfFontExistsTF{Consolas}{%
+    \setmonofont{Consolas}[Scale=0.85]}{%
+    \setmonofont{Latin Modern Mono}[Scale=0.85]}}
 \usepackage{polyglossia}
 \setmainlanguage{vietnamese}
 
@@ -55,7 +60,7 @@
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows.meta, shapes.geometric}
 \usepackage{caption}
-\captionsetup{font=small, labelfont=bf}
+\captionsetup{font=small, labelfont=bf, hypcap=false}
 
 \definecolor{primary}{HTML}{7A1E3A}
 \definecolor{accent}{HTML}{1F5FA8}
@@ -89,12 +94,13 @@
   \par\medskip
   \noindent\begin{minipage}{\linewidth}
   \centering
-  \begin{tikzpicture}
-    \node[draw=red!70!black, dashed, line width=0.8pt, fill=yellow!10,
-          minimum width=0.94\linewidth, minimum height=#1,
-          text width=0.86\linewidth, align=center]
-      {\textcolor{red!70!black}{\textbf{[CHÈN HÌNH: #2]}}\\[2pt] \small #3};
-  \end{tikzpicture}
+  \setlength{\fboxsep}{8pt}%
+  \fcolorbox{red!70!black}{yellow!10}{%
+    \begin{minipage}[c][#1][c]{0.88\linewidth}
+      \centering
+      \textcolor{red!70!black}{\textbf{[CHÈN HÌNH: #2]}}\\[2pt]
+      \small #3
+    \end{minipage}}
   \captionof{figure}{#4}
   \end{minipage}\par}
 
@@ -109,7 +115,7 @@
 \newcommand{\tenDeTaiAnh}{Smart Classroom: Humidity and Air Quality Monitoring}
 \newcommand{\tenDeTaiNgan}{Thuyết minh dự án --- Nhóm 16}
 \newcommand{\maNhom}{16}
-\newcommand{\fileLogo}{logo-hcmus.png}
+\newcommand{\fileLogo}{images/branding/logo-hcmus.png}
 
 \newcommand{\svA}{Nguyễn Gia Quốc Uy}  \newcommand{\mssvA}{24127261}
 \newcommand{\svB}{Nguyễn Quốc Thành}   \newcommand{\mssvB}{24127542}
@@ -400,20 +406,82 @@ Các cấu hình kỹ thuật (cloud, MQTT broker, Telegram bot) do nhóm thiế
 \section{Thiết kế}
 % ======================================================================
 \subsection{Hình ảnh thiết kế hình dáng 3D của sản phẩm}
-Hình dáng bên ngoài và bên trong của hộp sản phẩm; mỗi linh kiện được đánh dấu vị trí kèm ID chức năng liên quan.
+Hộp được bố trí trên Autodesk Fusion với kích thước bao $160 \times 100 \times 60$~mm.
+Các hình thể hiện hình dáng, vị trí linh kiện và cơ cấu tháo lắp; khoảng trống được chừa cho giắc cắm và dây nối.
 
-\hinhcho{4.2cm}{Hình 3D bên ngoài}{Mặt trước (cửa sổ LED), các mặt bên (lỗ thông khí, cổng nguồn). Đánh dấu nhãn A--F theo bảng chú thích bên dưới.}{Hình dáng bên ngoài của hộp sản phẩm.}
-\hinhcho{4.2cm}{Hình 3D bên trong}{Vị trí ESP32, DHT22, MQ-135, LED và board mạch trong hộp. Đánh dấu nhãn A--F theo bảng chú thích bên dưới.}{Bố trí linh kiện bên trong hộp sản phẩm.}
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=0.96\linewidth,height=8cm,keepaspectratio]{images/enclosure/exterior.png}
+\captionof{figure}{Hình dáng bên ngoài của hộp, với cửa sổ LED, khe thông khí và nắp bắt vít.}
+\label{fig:hop-ben-ngoai}
+\end{minipage}\par\medskip
+
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=0.96\linewidth,height=8cm,keepaspectratio]{images/enclosure/interior.png}
+\captionof{figure}{Bố trí ESP32, DHT22, MQ-135, thanh LED và board đỡ bên trong hộp.}
+\label{fig:hop-ben-trong}
+\end{minipage}
+
+\clearpage
+\textbf{Các mặt đứng của hộp}
+
+Các góc nhìn vuông góc cho thấy vị trí cửa sổ LED, cổng USB và khe thông khí trên bốn mặt đứng của hộp.
+
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=0.96\linewidth,height=5.5cm,keepaspectratio]{images/enclosure/front.png}
+\captionof{figure}{Mặt trước: cửa sổ hiển thị của thanh LED WS2812.}
+\label{fig:hop-mat-truoc}
+\end{minipage}\par\medskip
+
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=0.96\linewidth,height=5.5cm,keepaspectratio]{images/enclosure/rear.png}
+\captionof{figure}{Mặt sau: vị trí cổng USB của ESP32.}
+\label{fig:hop-mat-sau}
+\end{minipage}\par\medskip
+
+\noindent\begin{minipage}[t]{0.48\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=5.2cm,keepaspectratio]{images/enclosure/left.png}
+\captionof{figure}{Mặt trái: khe gió DHT22.}
+\label{fig:hop-mat-trai}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=5.2cm,keepaspectratio]{images/enclosure/right.png}
+\captionof{figure}{Mặt phải: khe gió \mbox{MQ-135}.}
+\label{fig:hop-mat-phai}
+\end{minipage}
+
+\clearpage
+\noindent\begin{minipage}[t]{0.48\linewidth}
+\centering
+\includegraphics[width=\linewidth]{images/enclosure/exploded.png}
+\captionof{figure}{Hộp với nắp và vít được tách lên để quan sát cơ cấu lắp.}
+\label{fig:hop-tach-nap}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\linewidth}
+\centering
+\includegraphics[width=\linewidth]{images/enclosure/lid-fasteners.png}
+\captionof{figure}{Nắp, bốn vít M3$\times$8 và bốn đai ốc M3.}
+\label{fig:nap-vit-dai-oc}
+\end{minipage}\par\medskip
+
+Nắp dày 2,4~mm, lỗ xuyên vít đường kính 3,4~mm. Đai ốc được nạp ngang vào hốc chống xoay trên trụ;
+board đỡ cách sàn 6~mm. Thanh LED được lùi vào trong 5~mm để chừa chỗ cho đầu giắc.
+Kích thước gá và dung sai lắp sẽ được đối chiếu với linh kiện thực tế trước khi chế tạo.
 
 \needspace{10\baselineskip}
-\textbf{Bảng chú thích vị trí linh kiện} \tam{(chỉnh lại theo thiết kế 3D)}
+\textbf{Bảng chú thích vị trí linh kiện}
 
 \small
 \begin{tabularx}{\linewidth}{I C{1.0cm} i L{3.5cm} i C{2.4cm} i Y I}
 \outerline
-\rowcolor{gray!15}\textbf{Nhãn} & \textbf{Linh kiện} & \textbf{ID chức năng} & \textbf{Vị trí dự kiến} \\
+\rowcolor{gray!15}\textbf{Nhãn} & \textbf{Linh kiện} & \textbf{ID chức năng} & \textbf{Vị trí trên thiết kế} \\
 \hline
-A & ESP32 DevKit & 1--10 (dùng chung) & Trung tâm hộp; cổng USB hướng ra mặt bên \\
+A & ESP32 DevKit & 1--10 (dùng chung) & Trung tâm hộp, trên board đỡ; cổng USB hướng ra mặt sau \\
 \hline
 B & Cảm biến DHT22 & 1 & Gần lỗ thông khí, cách xa MQ-135 \\
 \hline
@@ -421,12 +489,19 @@ C & Cảm biến MQ-135 & 2 & Gần lỗ thông khí, chừa khe hở với vác
 \hline
 D & Đèn LED WS2812 & 3 & Mặt trước, sau cửa sổ trên mặt hộp \\
 \hline
-E & Nút BOOT (có sẵn trên ESP32) & 10 & Có thể tiếp cận qua lỗ nhỏ khi cần xóa cấu hình WiFi \\
+E & Nút BOOT (có sẵn trên ESP32) & 10 & Tiếp cận qua lỗ trên nắp khi cần xóa cấu hình WiFi \\
 \hline
-F & Cổng nguồn 5 V & Tất cả & Mặt bên \\
+USB & Cổng USB trên ESP32 & Tất cả & Mặt sau; dùng chung cho cấp nguồn và nạp chương trình, không bố trí cổng nguồn rời \\
 \outerline
 \end{tabularx}
 \normalsize
+
+{\footnotesize\raggedright Hộp và bố trí cơ khí do nhóm thiết kế trên Autodesk Fusion.\par
+Model linh kiện tham khảo: \href{https://sketchfab.com/3d-models/esp32-devkitc-32d-3d-model-step-269445-9e64cc503f5e4923a0a381b7d73fdaac}{ESP32 -- Loyalmanuka},
+\href{https://sketchfab.com/3d-models/dht22-temperature-sensor-module-c46a658784034c679e4907bbddad0093}{DHT22 -- YouniqueĪdeaStudio}.\par
+\href{https://sketchfab.com/3d-models/luchtkwaliteit-sensor-mq-135-gas-sensor-mq-135-394803dd013545a8b15ac4ba0f38e1be}{MQ-135 -- Stichting Consortium Beroepsonderwijs},
+theo giấy phép \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
+Thanh LED lấy tám ô từ model STEP do nhóm cung cấp và bổ sung đầu nối/lỗ theo ảnh tham khảo.\par}
 
 \needspace{14\baselineskip}
 \subsection{Hình ảnh wireframe cho website quản lý sản phẩm}
@@ -464,7 +539,7 @@ Cấu hình WiFi & 10 & Chọn WiFi nhà, nhập mật khẩu \\
 Một sơ đồ duy nhất gộp tất cả luồng xử lý ở mục~\ref{sec:chucnang}; mỗi luồng dùng một màu hoặc kiểu mũi tên riêng, trên mỗi mũi tên ghi rõ dữ liệu được truyền.
 
 \begin{center}
-\includegraphics[width=14.3cm]{so_do_truyen_nhan_du_lieu.png}
+\includegraphics[width=14.3cm]{images/diagrams/so_do_truyen_nhan_du_lieu.png}
 \captionof{figure}{Sơ đồ truyền và nhận dữ liệu giữa các thành phần trong hệ thống.}
 \end{center}
 
@@ -502,7 +577,7 @@ Frontend $\leftrightarrow$ Backend $\leftrightarrow$ SQLite & 8 & xanh ngọc, n
 Giá là giá tham khảo trên các trang Shopee tại thời điểm viết thuyết minh (tháng 11/2026) và có thể thay đổi khi mua.
 
 \small
-\begin{tabularx}{\linewidth}{I C{0.8cm} i L{2.4cm} i C{1.0cm} i C{1.6cm} i C{1.5cm} i C{1.6cm} i Y I}
+\begin{tabularx}{\linewidth}{I C{0.9cm} i L{2.4cm} i C{1.1cm} i C{1.6cm} i C{1.5cm} i C{1.6cm} i Y I}
 \outerline
 \rowcolor{gray!15}\textbf{STT} & \textbf{Tên} & \textbf{Số lượng} & \textbf{Giá (đồng)} & \textbf{Hình ảnh*} & \textbf{Link tham khảo giá} & \textbf{ID chức năng liên quan} \\
 \hline
@@ -526,7 +601,7 @@ Giá là giá tham khảo trên các trang Shopee tại thời điểm viết th
 \textbf{Vật liệu làm hộp sản phẩm}
 
 \small
-\begin{tabularx}{\linewidth}{I C{0.8cm} i L{3.2cm} i C{1.0cm} i C{1.6cm} i C{1.5cm} i C{1.6cm} i Y I}
+\begin{tabularx}{\linewidth}{I C{0.9cm} i L{3.2cm} i C{1.1cm} i C{1.6cm} i C{1.5cm} i C{1.6cm} i Y I}
 \outerline
 \rowcolor{gray!15}\textbf{STT} & \textbf{Tên} & \textbf{Số lượng} & \textbf{Giá (đồng)} & \textbf{Hình ảnh*} & \textbf{Link tham khảo giá} & \textbf{ID chức năng liên quan} \\
 \hline
