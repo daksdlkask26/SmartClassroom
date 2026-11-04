@@ -57,6 +57,10 @@
 % ---------- Bảng, màu, hình ----------
 \usepackage{array, booktabs, tabularx, longtable, multirow, makecell}
 \usepackage[table]{xcolor}
+% Compatibility for installations combining array 2.5 and newer colortbl.
+\makeatletter
+\@ifundefined{insert@pcolumn}{\let\insert@pcolumn\insert@column}{}
+\makeatother
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows.meta, shapes.geometric}
 \usepackage{caption}
@@ -503,16 +507,54 @@ Model linh kiện tham khảo: \href{https://sketchfab.com/3d-models/esp32-devki
 theo giấy phép \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}.
 Thanh LED lấy tám ô từ model STEP do nhóm cung cấp và bổ sung đầu nối/lỗ theo ảnh tham khảo.\par}
 
-\needspace{14\baselineskip}
+\clearpage
 \subsection{Hình ảnh wireframe cho website quản lý sản phẩm}
-Các vùng trên wireframe được đánh dấu ID chức năng tương ứng.
+Các hình dưới đây trích từ bộ thiết kế V3 được cập nhật ngày 04/11/2026 của nhóm, gồm website quản lý, giao diện điện thoại và portal cấu hình WiFi. Giao diện dùng Manrope cho tiêu đề, số liệu và Be Vietnam Pro cho nội dung; phong cách trắng--đen, điều hướng ngang trên desktop. Màu được giữ ở lựa chọn LED và trạng thái cần chú ý. Mỗi hình ghi ID chức năng tương ứng với mục~\ref{sec:chucnang}. Số liệu là dữ liệu minh họa. Web và điện thoại dùng chung tài khoản, dữ liệu và hệ thống ID 9.
 
-\hinhcho{4.5cm}{Wireframe trang đăng nhập và đăng ký}{Biểu mẫu đăng nhập, đăng ký. Chú thích ID 8, ID 9.}{Wireframe trang đăng nhập và đăng ký.}
-\hinhcho{6.0cm}{Wireframe trang giám sát chính}{Ô độ ẩm (ID 1), ô CO\textsubscript{2} (ID 2), điều khiển LED (ID 3), biểu đồ lịch sử (ID 5). Chú thích ID 9 cho toàn bộ website.}{Wireframe trang giám sát chính.}
-\hinhcho{4.0cm}{Wireframe trang cấu hình WiFi của thiết bị}{Trang tự hiện ra khi kết nối vào WiFi của ESP32. Chú thích ID 10.}{Wireframe trang cấu hình WiFi lần đầu.}
+Gauge bán tròn thể hiện độ ẩm trên thang 0--100\%; nhiệt độ và CO\textsubscript{2} ước lượng dùng số và xu hướng. Thanh trượt độ sáng LED 1--100\% là đề xuất mở rộng cho ID 3, cần bổ sung xử lý lệnh ở backend và ESP32 khi triển khai. Màu và độ sáng được xem trước, chỉ gửi khi nhấn Áp dụng; công tắc bật/tắt gửi ngay.
 
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=12cm,height=17.8cm,keepaspectratio]{images/wireframes/report-wireframe-web-auth.png}
+\captionof{figure}{Wireframe đăng nhập và đăng ký tài khoản trên website (ID 8, 9).}
+\label{fig:wireframe-web-auth}
+\end{minipage}
+
+\clearpage
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=12.8cm,height=18.5cm,keepaspectratio]{images/wireframes/report-wireframe-web-monitor-led.png}
+\captionof{figure}{Điều hướng ngang trên nền trắng--đen; giám sát bằng gauge độ ẩm và điều khiển màu, độ sáng LED (ID 1, 2, 3, 8, 9).}
+\label{fig:wireframe-web-monitor-led}
+\end{minipage}
+
+\clearpage
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=12.8cm,height=18.5cm,keepaspectratio]{images/wireframes/report-wireframe-web-analytics.png}
+\captionof{figure}{Wireframe lịch sử và phân tích độ ẩm theo giờ, ngày; hiển thị dữ liệu lưu trữ của ID 4 phục vụ ID 5 trên website ID 9.}
+\label{fig:wireframe-web-analytics}
+\end{minipage}
+
+\clearpage
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=9.5cm,height=20.6cm,keepaspectratio]{images/wireframes/ui-app-led.png}
+\captionof{figure}{Giao diện LED trên điện thoại: phân biệt yêu cầu đã gửi với màu và độ sáng đang chọn; nhấn Áp dụng để gửi. Bộ chọn màu trực quan và HEX nằm trong phần tùy chỉnh (ID 3, hệ thống ID 9).}
+\label{fig:wireframe-mobile-led}
+\end{minipage}
+
+\clearpage
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=12.8cm,height=18.5cm,keepaspectratio]{images/wireframes/report-wireframe-wifi.png}
+\captionof{figure}{Wireframe portal cấu hình WiFi của ESP32 trên trình duyệt điện thoại (ID 10).}
+\label{fig:wireframe-wifi}
+\end{minipage}
+
+\clearpage
 \needspace{10\baselineskip}
-\textbf{Bảng chú thích vùng trên wireframe} \tam{(chỉnh lại theo hình)}
+\textbf{Bảng chú thích vùng trên wireframe}
 
 \small
 \begin{tabularx}{\linewidth}{I L{3.2cm} i C{1.8cm} i Y I}
@@ -521,13 +563,13 @@ Các vùng trên wireframe được đánh dấu ID chức năng tương ứng.
 \hline
 Đăng nhập, đăng ký & 8, 9 & Biểu mẫu tạo tài khoản và đăng nhập \\
 \hline
-Giám sát: ô độ ẩm, nhiệt độ & 1, 9 & Giá trị thời gian thực dạng text và gauge \\
+Giám sát: ô độ ẩm, nhiệt độ & 1, 9 & Gauge độ ẩm 0--100\%; nhiệt độ dạng số và xu hướng \\
 \hline
-Giám sát: ô CO\textsubscript{2} & 2, 9 & Giá trị CO\textsubscript{2} ước lượng dạng text và gauge \\
+Giám sát: ô CO\textsubscript{2} & 2, 9 & Giá trị CO\textsubscript{2} ước lượng dạng số và xu hướng \\
 \hline
-Giám sát: điều khiển LED & 3, 9 & Chọn màu, bật/tắt đèn \\
+Giám sát và LED & 3, 9 & Chọn màu, xem trước, áp dụng; đề xuất slider độ sáng; công tắc gửi ngay \\
 \hline
-Giám sát: biểu đồ & 4, 5, 9 & Biểu đồ lịch sử theo giờ hoặc theo ngày \\
+Lịch sử, phân tích & 4, 5, 9 & Biểu đồ lịch sử theo giờ hoặc theo ngày \\
 \hline
 Cấu hình WiFi & 10 & Chọn WiFi nhà, nhập mật khẩu \\
 \outerline

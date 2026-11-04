@@ -34,6 +34,9 @@ secrets.h
 *.snm
 *.vrb
 
+# Local editor preview; the submission PDF uses the full group/student filename.
+/Docs/thuyet_minh.pdf
+
 # ==============================================================
 # Node.js (backend, frontend)
 # ==============================================================

@@ -1,0 +1,1644 @@
+{
+  "date": "2026-11-04",
+  "source": "VLcCNTT / Page 1",
+  "scope": "Flat monochrome visual system, horizontal navigation, stable UI root IDs.",
+  "roots": [
+    {
+      "root": "6:154",
+      "nodeCount": 606,
+      "reportedCount": 9,
+      "verbose": false,
+      "records": [
+        {
+          "id": "20:3596",
+          "name": "SC/V2/Navigation/History",
+          "type": "COMPONENT",
+          "declared": {
+            "x": 930,
+            "y": 366,
+            "w": 390,
+            "h": 80
+          },
+          "rendered": {
+            "x": 3290,
+            "y": 398,
+            "w": 390,
+            "h": 80
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "20:3637",
+          "name": "u2NavHistory/Label2",
+          "type": "TEXT",
+          "declared": {
+            "x": 268,
+            "y": 36,
+            "w": 114,
+            "h": 21
+          },
+          "rendered": {
+            "x": 3558,
+            "y": 434,
+            "w": 114,
+            "h": 21
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Text color is nearly identical to its background — very low contrast, likely unreadable."
+          ]
+        },
+        {
+          "id": "20:3595",
+          "name": "SC/V2/Navigation/LED",
+          "type": "COMPONENT",
+          "declared": {
+            "x": 930,
+            "y": 258,
+            "w": 390,
+            "h": 80
+          },
+          "rendered": {
+            "x": 3290,
+            "y": 290,
+            "w": 390,
+            "h": 80
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "20:3626",
+          "name": "u2NavLED/Label1",
+          "type": "TEXT",
+          "declared": {
+            "x": 138,
+            "y": 36,
+            "w": 114,
+            "h": 21
+          },
+          "rendered": {
+            "x": 3428,
+            "y": 326,
+            "w": 114,
+            "h": 21
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Text color is nearly identical to its background — very low contrast, likely unreadable."
+          ]
+        },
+        {
+          "id": "20:3594",
+          "name": "SC/V2/Navigation/Overview",
+          "type": "COMPONENT",
+          "declared": {
+            "x": 930,
+            "y": 150,
+            "w": 390,
+            "h": 80
+          },
+          "rendered": {
+            "x": 3290,
+            "y": 182,
+            "w": 390,
+            "h": 80
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "20:3615",
+          "name": "u2NavOverview/Label0",
+          "type": "TEXT",
+          "declared": {
+            "x": 8,
+            "y": 36,
+            "w": 114,
+            "h": 21
+          },
+          "rendered": {
+            "x": 3298,
+            "y": 218,
+            "w": 114,
+            "h": 21
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Text color is nearly identical to its background — very low contrast, likely unreadable."
+          ]
+        },
+        {
+          "id": "6:183",
+          "name": "SC/Navigation/History",
+          "type": "COMPONENT",
+          "declared": {
+            "x": 1650,
+            "y": 552,
+            "w": 390,
+            "h": 80
+          },
+          "rendered": {
+            "x": 1650,
+            "y": 552,
+            "w": 390,
+            "h": 80
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "6:182",
+          "name": "SC/Navigation/LED",
+          "type": "COMPONENT",
+          "declared": {
+            "x": 1650,
+            "y": 448,
+            "w": 390,
+            "h": 80
+          },
+          "rendered": {
+            "x": 1650,
+            "y": 448,
+            "w": 390,
+            "h": 80
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "6:181",
+          "name": "SC/Navigation/Overview",
+          "type": "COMPONENT",
+          "declared": {
+            "x": 1650,
+            "y": 344,
+            "w": 390,
+            "h": 80
+          },
+          "rendered": {
+            "x": 1650,
+            "y": 344,
+            "w": 390,
+            "h": 80
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        }
+      ],
+      "summary": {
+        "issues": [],
+        "issueCount": 0,
+        "styleHints": [
+          "SC/V2/Navigation/History (20:3596): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "u2NavHistory/Label2 (20:3637): Text color is nearly identical to its background — very low contrast, likely unreadable.",
+          "SC/V2/Navigation/LED (20:3595): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "u2NavLED/Label1 (20:3626): Text color is nearly identical to its background — very low contrast, likely unreadable.",
+          "SC/V2/Navigation/Overview (20:3594): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "u2NavOverview/Label0 (20:3615): Text color is nearly identical to its background — very low contrast, likely unreadable.",
+          "SC/Navigation/History (6:183): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "SC/Navigation/LED (6:182): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "SC/Navigation/Overview (6:181): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+        ],
+        "styleHintCount": 9
+      }
+    },
+    {
+      "root": "6:444",
+      "nodeCount": 755,
+      "reportedCount": 16,
+      "verbose": false,
+      "records": [
+        {
+          "id": "21:4797",
+          "name": "W06-HumidityDetail",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 1440,
+            "h": 1080
+          },
+          "rendered": {
+            "x": 3664,
+            "y": 2960,
+            "w": 1440,
+            "h": 1080
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:2200",
+          "name": "Current/Plot",
+          "type": "FRAME",
+          "declared": {
+            "x": 20,
+            "y": 76,
+            "w": 1104,
+            "h": 206
+          },
+          "rendered": {
+            "x": 3832,
+            "y": 3548,
+            "w": 1104,
+            "h": 206
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:2147",
+          "name": "Current/HumidityGauge",
+          "type": "FRAME",
+          "declared": {
+            "x": 274,
+            "y": 48,
+            "w": 174,
+            "h": 148
+          },
+          "rendered": {
+            "x": 4086,
+            "y": 3272,
+            "w": 174,
+            "h": 148
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "21:4681",
+          "name": "W05-LEDControl",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 1440,
+            "h": 1080
+          },
+          "rendered": {
+            "x": 1864,
+            "y": 2960,
+            "w": 1440,
+            "h": 1080
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1481",
+          "name": "Current/Color/4",
+          "type": "FRAME",
+          "declared": {
+            "x": 614.4,
+            "y": 76,
+            "w": 137.6,
+            "h": 92
+          },
+          "rendered": {
+            "x": 2994.4,
+            "y": 3300,
+            "w": 137.6,
+            "h": 92
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1477",
+          "name": "Current/Color/3",
+          "type": "FRAME",
+          "declared": {
+            "x": 466.8,
+            "y": 76,
+            "w": 137.6,
+            "h": 92
+          },
+          "rendered": {
+            "x": 2846.8,
+            "y": 3300,
+            "w": 137.6,
+            "h": 92
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1474",
+          "name": "Current/Color/2",
+          "type": "FRAME",
+          "declared": {
+            "x": 319.2,
+            "y": 76,
+            "w": 137.6,
+            "h": 92
+          },
+          "rendered": {
+            "x": 2699.2,
+            "y": 3300,
+            "w": 137.6,
+            "h": 92
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1471",
+          "name": "Current/Color/1",
+          "type": "FRAME",
+          "declared": {
+            "x": 171.6,
+            "y": 76,
+            "w": 137.6,
+            "h": 92
+          },
+          "rendered": {
+            "x": 2551.6,
+            "y": 3300,
+            "w": 137.6,
+            "h": 92
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1468",
+          "name": "Current/Color/0",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 76,
+            "w": 137.6,
+            "h": 92
+          },
+          "rendered": {
+            "x": 2404,
+            "y": 3300,
+            "w": 137.6,
+            "h": 92
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "21:4414",
+          "name": "W04-Analytics",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 1440,
+            "h": 1080
+          },
+          "rendered": {
+            "x": 64,
+            "y": 2960,
+            "w": 1440,
+            "h": 1080
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:2028",
+          "name": "Current/Plot",
+          "type": "FRAME",
+          "declared": {
+            "x": 20,
+            "y": 104,
+            "w": 704,
+            "h": 240
+          },
+          "rendered": {
+            "x": 232,
+            "y": 3464,
+            "w": 704,
+            "h": 240
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "6:471",
+          "name": "W03-Dashboard",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 1440,
+            "h": 1080
+          },
+          "rendered": {
+            "x": 3664,
+            "y": 1614,
+            "w": 1440,
+            "h": 1080
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1594",
+          "name": "Current/Plot",
+          "type": "FRAME",
+          "declared": {
+            "x": 20,
+            "y": 100,
+            "w": 704,
+            "h": 200
+          },
+          "rendered": {
+            "x": 3832,
+            "y": 2226,
+            "w": 704,
+            "h": 200
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1524",
+          "name": "Current/HumidityGauge",
+          "type": "FRAME",
+          "declared": {
+            "x": 274,
+            "y": 48,
+            "w": 174,
+            "h": 148
+          },
+          "rendered": {
+            "x": 4086,
+            "y": 1926,
+            "w": 174,
+            "h": 148
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1869",
+          "name": "Current/HumidityGauge",
+          "type": "FRAME",
+          "declared": {
+            "x": 258,
+            "y": 420,
+            "w": 220,
+            "h": 148
+          },
+          "rendered": {
+            "x": 2146,
+            "y": 2058,
+            "w": 220,
+            "h": 148
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1801",
+          "name": "Current/HumidityGauge",
+          "type": "FRAME",
+          "declared": {
+            "x": 258,
+            "y": 420,
+            "w": 220,
+            "h": 148
+          },
+          "rendered": {
+            "x": 346,
+            "y": 2058,
+            "w": 220,
+            "h": 148
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        }
+      ],
+      "summary": {
+        "issues": [],
+        "issueCount": 0,
+        "styleHints": [
+          "W06-HumidityDetail (21:4797): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Plot (49:2200): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/HumidityGauge (49:2147): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "W05-LEDControl (21:4681): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Color/4 (49:1481): Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Color/3 (49:1477): Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Color/2 (49:1474): Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Color/1 (49:1471): Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Color/0 (49:1468): Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "W04-Analytics (21:4414): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Plot (49:2028): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "W03-Dashboard (6:471): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Plot (49:1594): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/HumidityGauge (49:1524): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/HumidityGauge (49:1869): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/HumidityGauge (49:1801): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+        ],
+        "styleHintCount": 16
+      }
+    },
+    {
+      "root": "6:772",
+      "nodeCount": 652,
+      "reportedCount": 16,
+      "verbose": false,
+      "records": [
+        {
+          "id": "23:5955",
+          "name": "M09-ConnectionState",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 2194,
+            "y": 5614,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "23:5827",
+          "name": "M08-DailyAnalytics",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 1484,
+            "y": 5614,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "23:5758",
+          "name": "M07-ColorPicker",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 774,
+            "y": 5614,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "23:5595",
+          "name": "M06-HumidityDetail",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 64,
+            "y": 5614,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:2427",
+          "name": "Current/Plot",
+          "type": "FRAME",
+          "declared": {
+            "x": 12,
+            "y": 64,
+            "w": 318,
+            "h": 184
+          },
+          "rendered": {
+            "x": 100,
+            "y": 6038,
+            "w": 318,
+            "h": 184
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:2378",
+          "name": "Current/HumidityGauge",
+          "type": "FRAME",
+          "declared": {
+            "x": 152,
+            "y": 48,
+            "w": 174,
+            "h": 148
+          },
+          "rendered": {
+            "x": 240,
+            "y": 5786,
+            "w": 174,
+            "h": 148
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "6:821",
+          "name": "M05-History",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 2904,
+            "y": 4544,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:2329",
+          "name": "Current/Plot",
+          "type": "FRAME",
+          "declared": {
+            "x": 12,
+            "y": 60,
+            "w": 318,
+            "h": 182
+          },
+          "rendered": {
+            "x": 2940,
+            "y": 4884,
+            "w": 318,
+            "h": 182
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "6:812",
+          "name": "M04-LED",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 2194,
+            "y": 4544,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1789",
+          "name": "Current/Draft",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 544,
+            "w": 342,
+            "h": 72
+          },
+          "rendered": {
+            "x": 2218,
+            "y": 5088,
+            "w": 342,
+            "h": 72
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "cornerRadius 8px differs from similar siblings (typically 0px) — bind the same radius token across the set.",
+            "Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "6:801",
+          "name": "M03-Overview",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 1484,
+            "y": 4544,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1675",
+          "name": "Current/HumidityGauge",
+          "type": "FRAME",
+          "declared": {
+            "x": 152,
+            "y": 48,
+            "w": 174,
+            "h": 148
+          },
+          "rendered": {
+            "x": 1660,
+            "y": 4748,
+            "w": 174,
+            "h": 148
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "6:792",
+          "name": "M02-Register",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 774,
+            "y": 4544,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1972",
+          "name": "Current/AuthS",
+          "type": "TEXT",
+          "declared": {
+            "x": 39,
+            "y": 140,
+            "w": 32,
+            "h": 36
+          },
+          "rendered": {
+            "x": 813,
+            "y": 4684,
+            "w": 32,
+            "h": 36
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Text color is nearly identical to its background — very low contrast, likely unreadable."
+          ]
+        },
+        {
+          "id": "6:783",
+          "name": "M01-Login",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 64,
+            "y": 4544,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "49:1948",
+          "name": "Current/AuthS",
+          "type": "TEXT",
+          "declared": {
+            "x": 39,
+            "y": 140,
+            "w": 32,
+            "h": 36
+          },
+          "rendered": {
+            "x": 103,
+            "y": 4684,
+            "w": 32,
+            "h": 36
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Text color is nearly identical to its background — very low contrast, likely unreadable."
+          ]
+        }
+      ],
+      "summary": {
+        "issues": [],
+        "issueCount": 0,
+        "styleHints": [
+          "M09-ConnectionState (23:5955): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "M08-DailyAnalytics (23:5827): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "M07-ColorPicker (23:5758): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "M06-HumidityDetail (23:5595): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Plot (49:2427): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/HumidityGauge (49:2378): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "M05-History (6:821): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Plot (49:2329): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "M04-LED (6:812): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Draft (49:1789): cornerRadius 8px differs from similar siblings (typically 0px) — bind the same radius token across the set.",
+          "Current/Draft (49:1789): Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "M03-Overview (6:801): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/HumidityGauge (49:1675): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "M02-Register (6:792): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/AuthS (49:1972): Text color is nearly identical to its background — very low contrast, likely unreadable.",
+          "M01-Login (6:783): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/AuthS (49:1948): Text color is nearly identical to its background — very low contrast, likely unreadable."
+        ],
+        "styleHintCount": 17
+      }
+    },
+    {
+      "root": "6:1227",
+      "nodeCount": 79,
+      "reportedCount": 2,
+      "verbose": false,
+      "records": [
+        {
+          "id": "23:6131",
+          "name": "P02-WiFiReceived",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 854,
+            "y": 7094,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "6:1235",
+          "name": "P01-WiFiPortal",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 104,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 64,
+            "y": 7094,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        }
+      ],
+      "summary": {
+        "issues": [],
+        "issueCount": 0,
+        "styleHints": [
+          "P02-WiFiReceived (23:6131): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "P01-WiFiPortal (6:1235): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+        ],
+        "styleHintCount": 2
+      }
+    },
+    {
+      "root": "7:1306",
+      "nodeCount": 603,
+      "reportedCount": 1,
+      "verbose": false,
+      "records": [
+        {
+          "id": "7:1565",
+          "name": "ST05-WiFi/List/Dropdown",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 196,
+            "w": 452,
+            "h": 128
+          },
+          "rendered": {
+            "x": 1152,
+            "y": 11360,
+            "w": 452,
+            "h": 128
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 8px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        }
+      ],
+      "summary": {
+        "issues": [],
+        "issueCount": 0,
+        "styleHints": [
+          "ST05-WiFi/List/Dropdown (7:1565): Content is only 8px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+        ],
+        "styleHintCount": 1
+      }
+    },
+    {
+      "root": "8:1880",
+      "nodeCount": 657,
+      "reportedCount": 14,
+      "verbose": false,
+      "records": [
+        {
+          "id": "53:2990",
+          "name": "Report/CurrentPhone",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 112,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 1524,
+            "y": 15932,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2925",
+          "name": "Report/CurrentPhone",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 112,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 794,
+            "y": 15932,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2971",
+          "name": "Current/Draft",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 544,
+            "w": 342,
+            "h": 72
+          },
+          "rendered": {
+            "x": 818,
+            "y": 16476,
+            "w": 342,
+            "h": 72
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "cornerRadius 8px differs from similar siblings (typically 0px) — bind the same radius token across the set.",
+            "Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2826",
+          "name": "Report/CurrentPhone",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 112,
+            "w": 390,
+            "h": 844
+          },
+          "rendered": {
+            "x": 64,
+            "y": 15932,
+            "w": 390,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2846",
+          "name": "Current/HumidityGauge",
+          "type": "FRAME",
+          "declared": {
+            "x": 152,
+            "y": 48,
+            "w": 174,
+            "h": 148
+          },
+          "rendered": {
+            "x": 240,
+            "y": 16136,
+            "w": 174,
+            "h": 148
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2815",
+          "name": "Current/Preview",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 378,
+            "w": 872,
+            "h": 96
+          },
+          "rendered": {
+            "x": 1184,
+            "y": 15198,
+            "w": 872,
+            "h": 96
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2807",
+          "name": "Current/Color4",
+          "type": "FRAME",
+          "declared": {
+            "x": 731.2,
+            "y": 140,
+            "w": 164.8,
+            "h": 112
+          },
+          "rendered": {
+            "x": 1891.2,
+            "y": 14960,
+            "w": 164.8,
+            "h": 112
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2803",
+          "name": "Current/Color3",
+          "type": "FRAME",
+          "declared": {
+            "x": 554.4,
+            "y": 140,
+            "w": 164.8,
+            "h": 112
+          },
+          "rendered": {
+            "x": 1714.4,
+            "y": 14960,
+            "w": 164.8,
+            "h": 112
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2800",
+          "name": "Current/Color2",
+          "type": "FRAME",
+          "declared": {
+            "x": 377.6,
+            "y": 140,
+            "w": 164.8,
+            "h": 112
+          },
+          "rendered": {
+            "x": 1537.6,
+            "y": 14960,
+            "w": 164.8,
+            "h": 112
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2797",
+          "name": "Current/Color1",
+          "type": "FRAME",
+          "declared": {
+            "x": 200.8,
+            "y": 140,
+            "w": 164.8,
+            "h": 112
+          },
+          "rendered": {
+            "x": 1360.8,
+            "y": 14960,
+            "w": 164.8,
+            "h": 112
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2794",
+          "name": "Current/Color0",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 140,
+            "w": 164.8,
+            "h": 112
+          },
+          "rendered": {
+            "x": 1184,
+            "y": 14960,
+            "w": 164.8,
+            "h": 112
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2785",
+          "name": "Current/Metric1",
+          "type": "FRAME",
+          "declared": {
+            "x": 484,
+            "y": 376,
+            "w": 476,
+            "h": 120
+          },
+          "rendered": {
+            "x": 1604,
+            "y": 14596,
+            "w": 476,
+            "h": 120
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2782",
+          "name": "Current/Metric0",
+          "type": "FRAME",
+          "declared": {
+            "x": 484,
+            "y": 236,
+            "w": 476,
+            "h": 120
+          },
+          "rendered": {
+            "x": 1604,
+            "y": 14456,
+            "w": 476,
+            "h": 120
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "53:2735",
+          "name": "Current/HumidityGauge",
+          "type": "FRAME",
+          "declared": {
+            "x": 172,
+            "y": 72,
+            "w": 220,
+            "h": 148
+          },
+          "rendered": {
+            "x": 1332,
+            "y": 14528,
+            "w": 220,
+            "h": 148
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        }
+      ],
+      "summary": {
+        "issues": [],
+        "issueCount": 0,
+        "styleHints": [
+          "Report/CurrentPhone (53:2990): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Report/CurrentPhone (53:2925): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Draft (53:2971): cornerRadius 8px differs from similar siblings (typically 0px) — bind the same radius token across the set.",
+          "Current/Draft (53:2971): Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Report/CurrentPhone (53:2826): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/HumidityGauge (53:2846): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Preview (53:2815): Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Color4 (53:2807): Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Color3 (53:2803): Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Color2 (53:2800): Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Color1 (53:2797): Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Color0 (53:2794): Content is only 2px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Metric1 (53:2785): Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Metric0 (53:2782): Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/HumidityGauge (53:2735): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+        ],
+        "styleHintCount": 15
+      }
+    },
+    {
+      "root": "43:798",
+      "nodeCount": 136,
+      "reportedCount": 3,
+      "verbose": false,
+      "records": [
+        {
+          "id": "43:891",
+          "name": "Responsive/LED-1024",
+          "type": "FRAME",
+          "declared": {
+            "x": 376,
+            "y": 132,
+            "w": 1024,
+            "h": 1024
+          },
+          "rendered": {
+            "x": 5976,
+            "y": 1452,
+            "w": 1024,
+            "h": 1024
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "43:801",
+          "name": "Responsive/LED-320",
+          "type": "FRAME",
+          "declared": {
+            "x": 24,
+            "y": 132,
+            "w": 320,
+            "h": 844
+          },
+          "rendered": {
+            "x": 5624,
+            "y": 1452,
+            "w": 320,
+            "h": 844
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        },
+        {
+          "id": "54:3338",
+          "name": "Current/Draft",
+          "type": "FRAME",
+          "declared": {
+            "x": 19.69,
+            "y": 544,
+            "w": 280.62,
+            "h": 72
+          },
+          "rendered": {
+            "x": 5643.69,
+            "y": 1996,
+            "w": 280.62,
+            "h": 72
+          },
+          "overflowsParent": false,
+          "clippedBy": null,
+          "textTruncated": false,
+          "zIndexWarnings": [],
+          "styleWarnings": [
+            "cornerRadius 8px differs from similar siblings (typically 0px) — bind the same radius token across the set.",
+            "Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+          ]
+        }
+      ],
+      "summary": {
+        "issues": [],
+        "issueCount": 0,
+        "styleHints": [
+          "Responsive/LED-1024 (43:891): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Responsive/LED-320 (43:801): Content is only 0px from the container edge — use at least 12px padding (16–24px for cards/sections).",
+          "Current/Draft (54:3338): cornerRadius 8px differs from similar siblings (typically 0px) — bind the same radius token across the set.",
+          "Current/Draft (54:3338): Content is only 10px from the container edge — use at least 12px padding (16–24px for cards/sections)."
+        ],
+        "styleHintCount": 4
+      }
+    }
+  ],
+  "note": "Zero geometry, clipping or text truncation issues. Style hints retained."
+}

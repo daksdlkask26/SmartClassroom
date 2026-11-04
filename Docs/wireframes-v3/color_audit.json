@@ -1,0 +1,87 @@
+{
+  "version": 3,
+  "date": "2026-11-04",
+  "direction": "Flat monochrome; no decorative gradients.",
+  "palette": {
+    "ink": "#111111",
+    "muted": "#666666",
+    "surface": "#FFFFFF",
+    "subtle": "#F7F7F7",
+    "selected": "#F2F2F2",
+    "line": "#DDDDDD",
+    "inputBorder": "#888888"
+  },
+  "roles": [
+    {
+      "role": "Body / chart",
+      "foreground": "#111111",
+      "background": "#FFFFFF",
+      "minimum": 4.5,
+      "ratio": 18.88
+    },
+    {
+      "role": "Secondary text",
+      "foreground": "#666666",
+      "background": "#FFFFFF",
+      "minimum": 4.5,
+      "ratio": 5.74
+    },
+    {
+      "role": "CTA",
+      "foreground": "#FFFFFF",
+      "background": "#111111",
+      "minimum": 4.5,
+      "ratio": 18.88
+    },
+    {
+      "role": "Selected surface text",
+      "foreground": "#444444",
+      "background": "#F2F2F2",
+      "minimum": 4.5,
+      "ratio": 8.7
+    },
+    {
+      "role": "Input boundary",
+      "foreground": "#888888",
+      "background": "#FFFFFF",
+      "minimum": 3,
+      "ratio": 3.54
+    }
+  ],
+  "heatmap": {
+    "minValue": 60,
+    "maxValue": 70,
+    "stops": [
+      {
+        "value": 60,
+        "hex": "#f5f5f5",
+        "luminance": 0.9131
+      },
+      {
+        "value": 62.5,
+        "hex": "#cfcfcf",
+        "luminance": 0.62396
+      },
+      {
+        "value": 65,
+        "hex": "#a8a8a8",
+        "luminance": 0.39157
+      },
+      {
+        "value": 67.5,
+        "hex": "#828282",
+        "luminance": 0.22323
+      },
+      {
+        "value": 70,
+        "hex": "#5c5c5c",
+        "luminance": 0.10702
+      }
+    ],
+    "lightnessStrictlyDecreases": true,
+    "numericReadout": true,
+    "missingValueSymbol": "—"
+  },
+  "exceptions": "LED swatches and the functional color picker retain actual colors; error/warning semantics may use restrained red/amber. Neutral charts are not health classifications.",
+  "scope": "Calculated declared pairs and reviewed views, not a certification of all interactive states."
+}
