@@ -123,6 +123,51 @@ async function main(){
  await check('Selected desktop destination has text and an underline',"document.querySelector('.desktop-nav [aria-current=page]')?.textContent.includes('Lịch sử')&&getComputedStyle(document.querySelector('.desktop-nav [aria-current=page]')).borderBottomColor==='rgb(17, 17, 17)'");
  await check('Main interface uses flat neutral surfaces',"getComputedStyle(document.querySelector('.masthead')).backgroundImage==='none'&&getComputedStyle(document.querySelector('.masthead')).backgroundColor==='rgb(255, 255, 255)'");
  await click('[data-route=led]');await shot('led-desktop-final');
+// Validate chart meaning and every expanded route at supported widths.
+ const go=async route=>{await ev('location.hash='+JSON.stringify(route));await wait(100);await ev('document.fonts.ready.then(()=>true)');};
+ await viewport(1440,1100);await go('overview');
+ await check('Midnight uses real time position between 22:30 and 02:30', "(()=>{const c=document.querySelector('.pro-chart.chart-wide'),d=c.querySelector('.day-boundary'),p=c.querySelectorAll('.point'),x=+d.getAttribute('x1'),a=+p[0].getAttribute('cx'),b=+p[6].getAttribute('cx');return Math.abs((x-a)/(b-a)-9.5/24)<.00001&&x>+p[2].getAttribute('cx')&&x<+p[3].getAttribute('cx')})()");
+ await check('Date bands identify both full dates separately from clock labels', "[...document.querySelector('.chart-wide').querySelectorAll('.chart-day-label')].map(e=>e.textContent).join('|')==='02/11/2026|03/11/2026'");
+ await check('Overview chart has seven numeric point labels and a semantic data table', "document.querySelectorAll('.pro-chart-wrap .chart-wide .point-value').length===7&&document.querySelectorAll('.chart-data tbody tr').length===7&&!!document.querySelector('.chart-data caption')");
+ for(const [route,unit,domain]of [['temperature','°C','26–28°C'],['co2','ppm','600–900 ppm']]){
+  await go(route);
+  await check(route+' chart uses its own units and declared cropped scale', `document.querySelector('.pro-chart').getAttribute('aria-label').length>10&&document.querySelector('#chart-readout').textContent.includes(${JSON.stringify(unit)})&&document.querySelector('.chart-footnote').textContent.includes(${JSON.stringify(domain)})`);
+  await check(route+' first value label is clear of y-axis tick labels', "(()=>{const c=document.querySelector('.chart-wide'),p=c.querySelector('.point-value').getBoundingClientRect(),ticks=[...c.querySelectorAll('text[text-anchor=end]')].filter(t=>+t.getAttribute('x')<54);return ticks.every(t=>p.left>t.getBoundingClientRect().right)})()");
+ }
+ await check('CO2 is presented as an estimate without invented health bands', "document.querySelector('.measurement-note').textContent.includes('không phân loại mức an toàn')&&!document.querySelector('[role=meter]')");
+ await go('daydetail');
+ await check('Future time slots remain missing with no extrapolated line', "(()=>{const c=document.querySelector('.chart-wide'),rows=[...document.querySelectorAll('.chart-data tbody tr')];return c.querySelectorAll('.point').length===4&&[...c.querySelectorAll('line')].filter(e=>e.getAttribute('stroke')==='#111').length===3&&rows.length===6&&rows.slice(-2).every(r=>r.textContent.includes('Chưa tới mốc'))})()");
+ await viewport(390,844);
+ await check('Selected day displays all six evenly spaced four-hour landmarks', "[...document.querySelector('.chart-compact').querySelectorAll('text[y=\"223\"]')].map(t=>t.textContent).join('|')==='00:00|04:00|08:00|12:00|16:00|20:00'");
+ await ev("document.querySelector('.chart-compact [data-point=\"0\"]').focus()");
+ await ev("document.activeElement.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}))");
+ await check('Arrow keys move chart selection and announce the matching value', "document.activeElement.dataset.point==='1'&&document.querySelector('#chart-readout').textContent.includes('04:00')&&document.querySelector('#chart-readout').textContent.includes('64')");
+ await go('history');await val('#range','7d');await until("!!document.querySelector('.history-layout')");
+ for(const [metric,lastTick]of [['humidity','100'],['temperature','30'],['co2','1000']]){
+  await val('#metric',metric);await until("!!document.querySelector('.history-layout')");await go('daily');
+  await check(metric+' daily bars have a zero baseline and an honest maximum', `(()=>{const c=document.querySelector('.chart-compact'),ticks=[...c.querySelectorAll('text[y="39"]')].map(t=>t.textContent);return ticks[0]==='0'&&ticks.at(-1)===${JSON.stringify(lastTick)}&&c.querySelectorAll('[data-point]').length===7&&c.querySelector('[data-point="6"]').getAttribute('aria-label').includes('chưa trọn ngày')})()`);
+  if(metric!=='co2'){await go('history');}
+ }
+ await go('history');await val('#metric','humidity');await until("!!document.querySelector('.history-layout')");await go('daily');
+ await check('Heatmap identifies seven dates, six clock columns, scale and missing cells', "document.querySelectorAll('.heat-cell').length===42&&document.querySelectorAll('.heatmap .heat-date').length===7&&document.querySelector('.heat-scale').textContent.includes('70%')&&document.querySelectorAll('.heat-cell').length-[...document.querySelectorAll('.heat-cell')].filter(e=>e.textContent==='').length===2");
+ await check('Heatmap scroll is isolated from its legend and numeric readout', "document.querySelector('.heatmap-scroll').contains(document.querySelector('.heatmap'))&&!document.querySelector('.heatmap-scroll').contains(document.querySelector('.heat-scale'))&&!document.querySelector('.heatmap-scroll').contains(document.querySelector('#heat-readout'))");
+ await go('records');await check('All records expose time and three sensor units', "document.querySelectorAll('.records-table tbody tr').length===7&&['UTC+7','%','°C','ppm'].every(t=>document.querySelector('.records-table').textContent.includes(t))");
+ await go('device');await click('#device-refresh');await check('Device help requires a physical BOOT action and distinguishes saved WiFi from online', "document.querySelector('#device-result').textContent.includes('14:30')&&document.querySelector('#main').textContent.includes('BOOT khoảng 5 giây')&&document.querySelector('#main').textContent.includes('chưa đồng nghĩa đã online')");
+ await go('telegram');await check('Telegram guide uses strict project thresholds and three required commands', "['< 30%','> 85%','/start','/doam','/trangthai'].every(t=>document.querySelector('#main').textContent.includes(t))");
+ await go('telegram-demo');
+ for(const cmd of ['/start','/doam','/trangthai'])await click('[data-command="'+cmd+'"]');
+ await click('#telegram-alert-demo');
+ await check('Telegram demo separates current 65% reading from 88% alert example', "document.querySelector('.chat-log').textContent.includes('65%')&&document.querySelector('.chat-log').textContent.includes('Ví dụ cảnh báo: Độ ẩm 88%')&&document.querySelector('.measurement-note').textContent.includes('vẫn là 65%')");
+ for(const route of ['temperature','co2','records','daily','daydetail','filters','device','telegram','telegram-demo','profile']){
+  for(const w of [320,390,768,1440]){await viewport(w,900);await go(route);await check(route+' fits '+w+'px', "document.documentElement.scrollWidth<=innerWidth&&!!document.querySelector('#main h1')");}
+  if(['co2','records','daily','device','telegram','telegram-demo'].includes(route)){await viewport(390,844);await shot(route+'-mobile-390');}
+ }
+ await go('profile');await click('#logout');
+ for(const route of ['temperature','records','device','telegram','profile']){await go(route);await check('Session guard protects '+route, "!!document.querySelector('#auth-form')&&!document.querySelector('.chat-log')&&!document.querySelector('.records-table')");}
+ await call('Page.navigate',{url:url+'?route=expired'});await until("!!document.querySelector('#auth-form')");
+ await check('Expired session preview opens login with an explicit recovery message', "document.querySelector('.feedback').textContent.includes('Phiên đã hết')");
+ await click('#demo-login');await until("!!document.querySelector('#account')");
+
  fs.writeFileSync(path.join(output,'verification.json'),JSON.stringify({status:'passed',checks:results.length,results},null,2)+'\n');
  console.log(JSON.stringify({status:'passed',checks:results.length,output}));
  await call('Browser.close');socket.close();

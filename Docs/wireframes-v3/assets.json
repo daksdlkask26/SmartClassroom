@@ -1,0 +1,862 @@
+{
+  "version": 3,
+  "date": "2026-11-04",
+  "file": "VLcCNTT",
+  "page": "Page 1",
+  "assets": [
+    {
+      "key": "M01",
+      "title": "Đăng nhập mobile",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "6:776",
+      "uiId": "6:783",
+      "name": "screens/wireframe-app-login",
+      "scale": 2,
+      "route": "login",
+      "functions": [
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-login"
+    },
+    {
+      "key": "M02",
+      "title": "Đăng ký mobile",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "6:777",
+      "uiId": "6:792",
+      "name": "screens/wireframe-app-register",
+      "scale": 2,
+      "route": "register",
+      "functions": [
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-register"
+    },
+    {
+      "key": "M03",
+      "title": "Giám sát phòng học",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "6:778",
+      "uiId": "6:801",
+      "name": "screens/wireframe-app-overview",
+      "scale": 2,
+      "route": "overview",
+      "functions": [
+        1,
+        2,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-overview"
+    },
+    {
+      "key": "M04",
+      "title": "Điều khiển LED",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "6:779",
+      "uiId": "6:812",
+      "name": "screens/wireframe-app-led",
+      "scale": 2,
+      "route": "led",
+      "functions": [
+        3,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-led"
+    },
+    {
+      "key": "M05",
+      "title": "Lịch sử cảm biến",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "6:780",
+      "uiId": "6:821",
+      "name": "screens/wireframe-app-history",
+      "scale": 2,
+      "route": "history",
+      "functions": [
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-history"
+    },
+    {
+      "key": "M06",
+      "title": "Chi tiết độ ẩm",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "23:5745",
+      "uiId": "23:5595",
+      "name": "screens/wireframe-app-humidity-detail",
+      "scale": 2,
+      "route": "sensor",
+      "functions": [
+        1,
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-humidity-detail"
+    },
+    {
+      "key": "M07",
+      "title": "Màu tùy chỉnh",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "23:5809",
+      "uiId": "23:5758",
+      "name": "screens/wireframe-app-color-picker",
+      "scale": 2,
+      "route": "led",
+      "functions": [
+        3,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-color-picker"
+    },
+    {
+      "key": "M08",
+      "title": "Phân tích theo ngày",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "23:5942",
+      "uiId": "23:5827",
+      "name": "screens/wireframe-app-daily-analytics",
+      "scale": 2,
+      "route": "daily",
+      "functions": [
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-daily-analytics"
+    },
+    {
+      "key": "M09",
+      "title": "Dữ liệu cũ và kết nối",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "23:6067",
+      "uiId": "23:5955",
+      "name": "screens/wireframe-app-connection-state",
+      "scale": 2,
+      "route": "overview",
+      "functions": [
+        1,
+        2,
+        3,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-connection-state"
+    },
+    {
+      "key": "M10",
+      "title": "Chi tiết nhiệt độ",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "62:5233",
+      "uiId": "62:5234",
+      "name": "screens/wireframe-app-temperature-detail",
+      "scale": 2,
+      "route": "temperature",
+      "functions": [
+        1,
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-temperature-detail"
+    },
+    {
+      "key": "M11",
+      "title": "CO₂ ước lượng",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "62:5331",
+      "uiId": "62:5332",
+      "name": "screens/wireframe-app-co2-detail",
+      "scale": 2,
+      "route": "co2",
+      "functions": [
+        2,
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-co2-detail"
+    },
+    {
+      "key": "M12",
+      "title": "Bản ghi cảm biến",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "62:5427",
+      "uiId": "62:5428",
+      "name": "screens/wireframe-app-records",
+      "scale": 2,
+      "route": "records",
+      "functions": [
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-records"
+    },
+    {
+      "key": "M13",
+      "title": "Bộ lọc thời gian",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "62:5496",
+      "uiId": "62:5497",
+      "name": "screens/wireframe-app-date-filter",
+      "scale": 2,
+      "route": "filters",
+      "functions": [
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-date-filter"
+    },
+    {
+      "key": "M14",
+      "title": "Chi tiết ngày 03/11",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "62:5537",
+      "uiId": "62:5538",
+      "name": "screens/wireframe-app-day-detail",
+      "scale": 2,
+      "route": "daydetail",
+      "functions": [
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-day-detail"
+    },
+    {
+      "key": "M15",
+      "title": "Thiết bị & kết nối",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "62:5608",
+      "uiId": "62:5609",
+      "name": "screens/wireframe-app-device",
+      "scale": 2,
+      "route": "device",
+      "functions": [
+        9,
+        10
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-device"
+    },
+    {
+      "key": "M16",
+      "title": "Kết nối Telegram",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "62:5658",
+      "uiId": "62:5659",
+      "name": "screens/wireframe-app-telegram",
+      "scale": 2,
+      "route": "telegram",
+      "functions": [
+        6,
+        7,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-telegram"
+    },
+    {
+      "key": "M17",
+      "title": "Hội thoại Telegram minh họa",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "62:5699",
+      "uiId": "62:5700",
+      "name": "screens/wireframe-app-telegram-demo",
+      "scale": 2,
+      "route": "telegram-demo",
+      "functions": [
+        6,
+        7
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-telegram-demo"
+    },
+    {
+      "key": "M18",
+      "title": "Tài khoản & phiên",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "62:5740",
+      "uiId": "62:5741",
+      "name": "screens/wireframe-app-account",
+      "scale": 2,
+      "route": "profile",
+      "functions": [
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-account"
+    },
+    {
+      "key": "M19",
+      "title": "Phiên hết hạn",
+      "category": "screens",
+      "platform": "mobile",
+      "id": "62:5775",
+      "uiId": "62:5776",
+      "name": "screens/wireframe-app-session-expired",
+      "scale": 2,
+      "route": "expired",
+      "functions": [
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-app-session-expired"
+    },
+    {
+      "key": "P01",
+      "title": "Portal cấu hình WiFi",
+      "category": "screens",
+      "platform": "wifi",
+      "id": "6:1231",
+      "uiId": "6:1235",
+      "name": "screens/wireframe-wifi-portal",
+      "scale": 2,
+      "route": "wifi",
+      "functions": [
+        10
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-wifi-portal"
+    },
+    {
+      "key": "P02",
+      "title": "Đã nhận cấu hình WiFi",
+      "category": "screens",
+      "platform": "wifi",
+      "id": "23:6163",
+      "uiId": "23:6131",
+      "name": "screens/wireframe-wifi-received",
+      "scale": 2,
+      "route": "wifi",
+      "functions": [
+        10
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-wifi-received"
+    },
+    {
+      "key": "W01",
+      "title": "Đăng nhập web",
+      "category": "screens",
+      "platform": "web",
+      "id": "6:448",
+      "uiId": "6:453",
+      "name": "screens/wireframe-web-login",
+      "scale": 2,
+      "route": "login",
+      "functions": [
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-login"
+    },
+    {
+      "key": "W02",
+      "title": "Đăng ký web",
+      "category": "screens",
+      "platform": "web",
+      "id": "6:449",
+      "uiId": "6:462",
+      "name": "screens/wireframe-web-register",
+      "scale": 2,
+      "route": "register",
+      "functions": [
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-register"
+    },
+    {
+      "key": "W03",
+      "title": "Tổng quan phòng học",
+      "category": "screens",
+      "platform": "web",
+      "id": "6:450",
+      "uiId": "6:471",
+      "name": "screens/wireframe-web-dashboard",
+      "scale": 2,
+      "route": "overview",
+      "functions": [
+        1,
+        2,
+        3,
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-dashboard"
+    },
+    {
+      "key": "W04",
+      "title": "Lịch sử & phân tích",
+      "category": "screens",
+      "platform": "web",
+      "id": "21:4663",
+      "uiId": "21:4414",
+      "name": "screens/wireframe-web-analytics",
+      "scale": 2,
+      "route": "history",
+      "functions": [
+        4,
+        5,
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-analytics"
+    },
+    {
+      "key": "W05",
+      "title": "Điều khiển LED",
+      "category": "screens",
+      "platform": "web",
+      "id": "21:4784",
+      "uiId": "21:4681",
+      "name": "screens/wireframe-web-led",
+      "scale": 2,
+      "route": "led",
+      "functions": [
+        3,
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-led"
+    },
+    {
+      "key": "W06",
+      "title": "Chi tiết độ ẩm",
+      "category": "screens",
+      "platform": "web",
+      "id": "21:5015",
+      "uiId": "21:4797",
+      "name": "screens/wireframe-web-humidity-detail",
+      "scale": 2,
+      "route": "sensor",
+      "functions": [
+        1,
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-humidity-detail"
+    },
+    {
+      "key": "W07",
+      "title": "Chi tiết nhiệt độ",
+      "category": "screens",
+      "platform": "web",
+      "id": "62:4455",
+      "uiId": "62:4456",
+      "name": "screens/wireframe-web-temperature-detail",
+      "scale": 2,
+      "route": "temperature",
+      "functions": [
+        1,
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-temperature-detail"
+    },
+    {
+      "key": "W08",
+      "title": "CO₂ ước lượng",
+      "category": "screens",
+      "platform": "web",
+      "id": "62:4587",
+      "uiId": "62:4588",
+      "name": "screens/wireframe-web-co2-detail",
+      "scale": 2,
+      "route": "co2",
+      "functions": [
+        2,
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-co2-detail"
+    },
+    {
+      "key": "W09",
+      "title": "Phân tích theo ngày",
+      "category": "screens",
+      "platform": "web",
+      "id": "62:4717",
+      "uiId": "62:4718",
+      "name": "screens/wireframe-web-daily-analytics",
+      "scale": 2,
+      "route": "daily",
+      "functions": [
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-daily-analytics"
+    },
+    {
+      "key": "W10",
+      "title": "Bản ghi cảm biến",
+      "category": "screens",
+      "platform": "web",
+      "id": "62:4867",
+      "uiId": "62:4868",
+      "name": "screens/wireframe-web-records",
+      "scale": 2,
+      "route": "records",
+      "functions": [
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-records"
+    },
+    {
+      "key": "W11",
+      "title": "Thiết bị & kết nối",
+      "category": "screens",
+      "platform": "web",
+      "id": "62:4956",
+      "uiId": "62:4957",
+      "name": "screens/wireframe-web-device",
+      "scale": 2,
+      "route": "device",
+      "functions": [
+        9,
+        10
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-device"
+    },
+    {
+      "key": "W12",
+      "title": "Kết nối Telegram",
+      "category": "screens",
+      "platform": "web",
+      "id": "62:5031",
+      "uiId": "62:5032",
+      "name": "screens/wireframe-web-telegram",
+      "scale": 2,
+      "route": "telegram",
+      "functions": [
+        6,
+        7,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-telegram"
+    },
+    {
+      "key": "W13",
+      "title": "Tài khoản & phiên",
+      "category": "screens",
+      "platform": "web",
+      "id": "62:5098",
+      "uiId": "62:5099",
+      "name": "screens/wireframe-web-account",
+      "scale": 2,
+      "route": "profile",
+      "functions": [
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-account"
+    },
+    {
+      "key": "W14",
+      "title": "Chi tiết ngày 03/11",
+      "category": "screens",
+      "platform": "web",
+      "id": "62:5148",
+      "uiId": "62:5149",
+      "name": "screens/wireframe-web-day-detail",
+      "scale": 2,
+      "route": "daydetail",
+      "functions": [
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/screens/wireframe-web-day-detail"
+    },
+    {
+      "key": "R01",
+      "title": "Tài khoản web",
+      "category": "reports",
+      "platform": "report",
+      "id": "8:1884",
+      "uiId": null,
+      "name": "reports/report-wireframe-web-auth",
+      "scale": 3,
+      "route": null,
+      "functions": [
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/reports/report-wireframe-web-auth"
+    },
+    {
+      "key": "R02",
+      "title": "Giám sát và LED",
+      "category": "reports",
+      "platform": "report",
+      "id": "8:1885",
+      "uiId": null,
+      "name": "reports/report-wireframe-web-monitor-led",
+      "scale": 3,
+      "route": null,
+      "functions": [
+        1,
+        2,
+        3,
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/reports/report-wireframe-web-monitor-led"
+    },
+    {
+      "key": "R03",
+      "title": "Lịch sử và phân tích",
+      "category": "reports",
+      "platform": "report",
+      "id": "8:1886",
+      "uiId": null,
+      "name": "reports/report-wireframe-web-analytics",
+      "scale": 3,
+      "route": null,
+      "functions": [
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/reports/report-wireframe-web-analytics"
+    },
+    {
+      "key": "R04",
+      "title": "Tài khoản mobile",
+      "category": "reports",
+      "platform": "report",
+      "id": "8:1887",
+      "uiId": null,
+      "name": "reports/report-wireframe-app-auth",
+      "scale": 3,
+      "route": null,
+      "functions": [
+        8,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/reports/report-wireframe-app-auth"
+    },
+    {
+      "key": "R05",
+      "title": "Giám sát mobile",
+      "category": "reports",
+      "platform": "report",
+      "id": "8:1888",
+      "uiId": null,
+      "name": "reports/report-wireframe-app-overview",
+      "scale": 3,
+      "route": null,
+      "functions": [
+        1,
+        2,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/reports/report-wireframe-app-overview"
+    },
+    {
+      "key": "R06",
+      "title": "LED trên mobile",
+      "category": "reports",
+      "platform": "report",
+      "id": "8:1889",
+      "uiId": null,
+      "name": "reports/report-wireframe-app-led",
+      "scale": 3,
+      "route": null,
+      "functions": [
+        3,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/reports/report-wireframe-app-led"
+    },
+    {
+      "key": "R07",
+      "title": "Phân tích ngày trên mobile",
+      "category": "reports",
+      "platform": "report",
+      "id": "8:1890",
+      "uiId": null,
+      "name": "reports/report-wireframe-app-daily-analytics",
+      "scale": 3,
+      "route": null,
+      "functions": [
+        4,
+        5,
+        9
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/reports/report-wireframe-app-daily-analytics"
+    },
+    {
+      "key": "R08",
+      "title": "Cấu hình WiFi",
+      "category": "reports",
+      "platform": "report",
+      "id": "8:1891",
+      "uiId": null,
+      "name": "reports/report-wireframe-wifi",
+      "scale": 3,
+      "route": null,
+      "functions": [
+        10
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/reports/report-wireframe-wifi"
+    },
+    {
+      "key": "R09",
+      "title": "Thiết bị và Telegram",
+      "category": "reports",
+      "platform": "report",
+      "id": "62:6241",
+      "uiId": null,
+      "name": "reports/report-wireframe-connection-telegram",
+      "scale": 3,
+      "route": null,
+      "functions": [
+        6,
+        7,
+        9,
+        10
+      ],
+      "sourceKind": "figma-native",
+      "figmaSync": "synced",
+      "relative": "wireframes-v3/reports/report-wireframe-connection-telegram"
+    },
+    {
+      "key": "Responsive-LED-320",
+      "id": "43:801",
+      "category": "responsive",
+      "relative": "wireframes-v3/responsive/led-320",
+      "scale": 2,
+      "sourceKind": "figma-native",
+      "figmaSync": "synced"
+    },
+    {
+      "key": "Responsive-LED-1024",
+      "id": "43:891",
+      "category": "responsive",
+      "relative": "wireframes-v3/responsive/led-1024",
+      "scale": 2,
+      "sourceKind": "figma-native",
+      "figmaSync": "synced"
+    },
+    {
+      "key": "Report-UI-Mobile-LED",
+      "id": "6:812",
+      "category": "report-ui",
+      "relative": "images/wireframes/ui-app-led",
+      "scale": 3,
+      "sourceKind": "figma-native",
+      "figmaSync": "synced"
+    }
+  ]
+}

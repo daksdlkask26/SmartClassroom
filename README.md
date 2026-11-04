@@ -45,6 +45,8 @@ Thông số bố trí và kiểm tra hình học nằm trong [metadata thiết k
 
 ## Thiết kế hiện hành
 
-[Prototype web/mobile](Docs/prototype/index.html) · [Đặc tả UI](Docs/huong_dan_wireframe_v3.md) · [Chỉ mục ảnh và Figma](Docs/wireframe_v3_manifest.md).
+[Thư viện 35 màn hình](Docs/wireframes-v3/index.html) · [Prototype web/mobile](Docs/prototype/index.html) · [Đặc tả UI](Docs/huong_dan_wireframe_v3.md) · [Chỉ mục ảnh và Figma](Docs/wireframe_v3_manifest.md).
 
 Bộ UI trắng–đen phẳng dùng điều hướng ngang trên desktop, Manrope + Be Vietnam Pro, gauge độ ẩm, slider LED và bộ chọn màu trực quan. Font chạy offline. Bản thử dùng dữ liệu/lệnh mô phỏng; độ sáng cần tích hợp backend/ESP32 khi triển khai thật.
+
+Page 1 của Figma VLcCNTT có 14 màn web, 19 màn mobile và 2 WiFi. Chart phân biệt giờ/ngày, mốc 00:00, ngày chưa kết thúc và dữ liệu thiếu; có trang bản ghi, thiết bị, Telegram và tài khoản. Bộ ảnh hiện hành gồm 47 cặp SVG/PNG, đã đồng bộ hình dùng trong báo cáo.
