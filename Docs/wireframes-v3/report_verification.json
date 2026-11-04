@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "date": "2026-11-04",
+  "pdf": "16_24127261_24127542_24127581_PROPOSAL.pdf",
+  "pageCount": 26,
+  "pdfBytes": 6286295,
+  "pdfSha256": "092b012eed08d8b8077623bd97f9ba9cd284d29be73b0172b6816d36ed1f5cf2",
+  "reviewedPhysicalPages": [
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "latestMobileAnalysisPage": 15,
+  "reportPngCopiesMatch": true,
+  "reportImages": [
+    {
+      "filename": "report-wireframe-web-auth.png",
+      "identical": true,
+      "sha256": "ef1ec5edee1b1631ffc5c86eb09c95410cf1b1896f66a36467091a362e44d787"
+    },
+    {
+      "filename": "report-wireframe-web-monitor-led.png",
+      "identical": true,
+      "sha256": "8839f4fce01d2a2b998cc59357d1a6d2b270ccc63cdca57f33fe9d8cdf6d067b"
+    },
+    {
+      "filename": "report-wireframe-web-analytics.png",
+      "identical": true,
+      "sha256": "c97cca358307d31bde06886a3f7d231b5874e672d928625698c68a140cd6c8de"
+    },
+    {
+      "filename": "report-wireframe-app-daily-analytics.png",
+      "identical": true,
+      "sha256": "c5ad5929e2dd941b12141e6d54c6b2d176f28be0488fe31d70b0ca4c64b4b252"
+    },
+    {
+      "filename": "report-wireframe-wifi.png",
+      "identical": true,
+      "sha256": "4717a03923bc5ded2392e3955a568b24239f41763b6b7ab9db0c5789bdd5c0d0"
+    },
+    {
+      "filename": "report-wireframe-connection-telegram.png",
+      "identical": true,
+      "sha256": "474575f964e209aff21d0fd29769cdf1d2c498e0afb6f830e0cf0a533a03f26b"
+    }
+  ],
+  "visualReview": "Chart units, time/date landmarks, zero-based bars, missing values, readable enlarged mobile analysis, image captions and function-ID table checked.",
+  "existingCompilerNotes": [
+    "MiKTeX math font size substitution",
+    "Existing 0.97322pt table hbox warnings in component/material tables, visually unchanged"
+  ]
+}

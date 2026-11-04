@@ -11,8 +11,9 @@ const chrome='C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 let files=['screens','reports','responsive'].flatMap(dir=>fs.existsSync(path.join(root,dir))?fs.readdirSync(path.join(root,dir)).filter(n=>n.endsWith('.svg')).map(n=>path.join(dir,n)):[]);
 const reportPhone=path.join('..','images','wireframes','ui-app-led.svg');
 if(fs.existsSync(path.join(root,reportPhone)))files.push(reportPhone);
-const filter=process.argv[2];
-if(filter)files=files.filter(f=>f.includes(filter));
+const filter=process.argv[2]?.replace(/\\/g,'/');
+if(filter)files=files.filter(f=>f.replace(/\\/g,'/').includes(filter));
+if(!files.length)throw new Error('No SVG matches filter: '+filter);
 for(const relative of files){
   const input=path.join(root,relative),svg=fs.readFileSync(input,'utf8');
   const width=Number(svg.match(/<svg[^>]*\bwidth="([\d.]+)"/)[1]),height=Number(svg.match(/<svg[^>]*\bheight="([\d.]+)"/)[1]);

@@ -1,0 +1,798 @@
+[
+  {
+    "key": "W03",
+    "wrapper": "6:450",
+    "ui": "6:471",
+    "title": "Tổng quan phòng học",
+    "height": 1280,
+    "draw": "kOverviewWeb",
+    "route": "overview",
+    "ids": [
+      1,
+      2,
+      3,
+      8,
+      9
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "name": "screens/wireframe-web-dashboard",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 1, 2, 3, 8, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến overview. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ]
+  },
+  {
+    "key": "W04",
+    "wrapper": "21:4663",
+    "ui": "21:4414",
+    "title": "Lịch sử & phân tích",
+    "height": 1320,
+    "draw": "kHistoryWeb",
+    "route": "history",
+    "ids": [
+      4,
+      5,
+      8,
+      9
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "name": "screens/wireframe-web-analytics",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 4, 5, 8, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến history. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ]
+  },
+  {
+    "key": "W06",
+    "wrapper": "21:5015",
+    "ui": "21:4797",
+    "title": "Chi tiết độ ẩm",
+    "height": 1200,
+    "draw": "kDetailWeb",
+    "args": [
+      "humidity"
+    ],
+    "route": "sensor",
+    "ids": [
+      1,
+      4,
+      5,
+      9
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "name": "screens/wireframe-web-humidity-detail",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 1, 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến sensor. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ]
+  },
+  {
+    "key": "M03",
+    "wrapper": "6:778",
+    "ui": "6:801",
+    "title": "Giám sát phòng học",
+    "height": 1080,
+    "draw": "kOverviewPhone",
+    "route": "overview",
+    "ids": [
+      1,
+      2,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "name": "screens/wireframe-app-overview",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 1, 2, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến overview. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ]
+  },
+  {
+    "key": "M05",
+    "wrapper": "6:780",
+    "ui": "6:821",
+    "title": "Lịch sử cảm biến",
+    "height": 1080,
+    "draw": "kHistoryPhone",
+    "route": "history",
+    "ids": [
+      4,
+      5,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "name": "screens/wireframe-app-history",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến history. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ]
+  },
+  {
+    "key": "M06",
+    "wrapper": "23:5745",
+    "ui": "23:5595",
+    "title": "Chi tiết độ ẩm",
+    "height": 1080,
+    "draw": "kDetailPhone",
+    "args": [
+      "humidity"
+    ],
+    "route": "sensor",
+    "ids": [
+      1,
+      4,
+      5,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "name": "screens/wireframe-app-humidity-detail",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 1, 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến sensor. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ]
+  },
+  {
+    "key": "M08",
+    "wrapper": "23:5942",
+    "ui": "23:5827",
+    "title": "Phân tích theo ngày",
+    "height": 1240,
+    "draw": "kDailyPhone",
+    "route": "daily",
+    "ids": [
+      4,
+      5,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "name": "screens/wireframe-app-daily-analytics",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến daily. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ]
+  },
+  {
+    "key": "W07",
+    "title": "Chi tiết nhiệt độ",
+    "height": 1200,
+    "draw": "kDetailWeb",
+    "args": [
+      "temperature"
+    ],
+    "route": "temperature",
+    "name": "screens/wireframe-web-temperature-detail",
+    "ids": [
+      1,
+      4,
+      5,
+      9
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 1, 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến temperature. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:4455",
+    "ui": "62:4456"
+  },
+  {
+    "key": "W08",
+    "title": "CO₂ ước lượng",
+    "height": 1200,
+    "draw": "kDetailWeb",
+    "args": [
+      "co2"
+    ],
+    "route": "co2",
+    "name": "screens/wireframe-web-co2-detail",
+    "ids": [
+      2,
+      4,
+      5,
+      9
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 2, 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến co2. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:4587",
+    "ui": "62:4588"
+  },
+  {
+    "key": "W09",
+    "title": "Phân tích theo ngày",
+    "height": 1160,
+    "draw": "kDailyWeb",
+    "route": "daily",
+    "name": "screens/wireframe-web-daily-analytics",
+    "ids": [
+      4,
+      5,
+      9
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến daily. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:4717",
+    "ui": "62:4718"
+  },
+  {
+    "key": "W10",
+    "title": "Bản ghi cảm biến",
+    "height": 1120,
+    "draw": "kRecordsWeb",
+    "route": "records",
+    "name": "screens/wireframe-web-records",
+    "ids": [
+      4,
+      5,
+      9
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến records. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:4867",
+    "ui": "62:4868"
+  },
+  {
+    "key": "W11",
+    "title": "Thiết bị & kết nối",
+    "height": 1120,
+    "draw": "kDeviceWeb",
+    "route": "device",
+    "name": "screens/wireframe-web-device",
+    "ids": [
+      9,
+      10
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 9, 10 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến device. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:4956",
+    "ui": "62:4957"
+  },
+  {
+    "key": "W12",
+    "title": "Kết nối Telegram",
+    "height": 1120,
+    "draw": "kTelegramWeb",
+    "route": "telegram",
+    "name": "screens/wireframe-web-telegram",
+    "ids": [
+      6,
+      7,
+      9
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 6, 7, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến telegram. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5031",
+    "ui": "62:5032"
+  },
+  {
+    "key": "W13",
+    "title": "Tài khoản & phiên",
+    "height": 1024,
+    "draw": "kProfileWeb",
+    "route": "profile",
+    "name": "screens/wireframe-web-account",
+    "ids": [
+      8,
+      9
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 8, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến profile. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5098",
+    "ui": "62:5099"
+  },
+  {
+    "key": "W14",
+    "title": "Chi tiết ngày 03/11",
+    "height": 1160,
+    "draw": "kDayWeb",
+    "route": "daydetail",
+    "name": "screens/wireframe-web-day-detail",
+    "ids": [
+      4,
+      5,
+      9
+    ],
+    "platform": "web",
+    "group": "6:444",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến daydetail. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5148",
+    "ui": "62:5149"
+  },
+  {
+    "key": "M10",
+    "title": "Chi tiết nhiệt độ",
+    "height": 1080,
+    "draw": "kDetailPhone",
+    "args": [
+      "temperature"
+    ],
+    "route": "temperature",
+    "name": "screens/wireframe-app-temperature-detail",
+    "ids": [
+      1,
+      4,
+      5,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 1, 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến temperature. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5233",
+    "ui": "62:5234"
+  },
+  {
+    "key": "M11",
+    "title": "CO₂ ước lượng",
+    "height": 1080,
+    "draw": "kDetailPhone",
+    "args": [
+      "co2"
+    ],
+    "route": "co2",
+    "name": "screens/wireframe-app-co2-detail",
+    "ids": [
+      2,
+      4,
+      5,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 2, 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến co2. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5331",
+    "ui": "62:5332"
+  },
+  {
+    "key": "M12",
+    "title": "Bản ghi cảm biến",
+    "height": 1080,
+    "draw": "kRecordsPhone",
+    "route": "records",
+    "name": "screens/wireframe-app-records",
+    "ids": [
+      4,
+      5,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến records. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5427",
+    "ui": "62:5428"
+  },
+  {
+    "key": "M13",
+    "title": "Bộ lọc thời gian",
+    "height": 844,
+    "draw": "kFilterPhone",
+    "route": "filters",
+    "name": "screens/wireframe-app-date-filter",
+    "ids": [
+      5,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến filters. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5496",
+    "ui": "62:5497"
+  },
+  {
+    "key": "M14",
+    "title": "Chi tiết ngày 03/11",
+    "height": 1080,
+    "draw": "kDayPhone",
+    "route": "daydetail",
+    "name": "screens/wireframe-app-day-detail",
+    "ids": [
+      4,
+      5,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 4, 5, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Mốc giờ, ngày và đơn vị có nhãn; chọn điểm để đọc số."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến daydetail. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5537",
+    "ui": "62:5538"
+  },
+  {
+    "key": "M15",
+    "title": "Thiết bị & kết nối",
+    "height": 1080,
+    "draw": "kDevicePhone",
+    "route": "device",
+    "name": "screens/wireframe-app-device",
+    "ids": [
+      9,
+      10
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 9, 10 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến device. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5608",
+    "ui": "62:5609"
+  },
+  {
+    "key": "M16",
+    "title": "Kết nối Telegram",
+    "height": 1140,
+    "draw": "kTelegramPhone",
+    "route": "telegram",
+    "name": "screens/wireframe-app-telegram",
+    "ids": [
+      6,
+      7,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 6, 7, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến telegram. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5658",
+    "ui": "62:5659"
+  },
+  {
+    "key": "M17",
+    "title": "Hội thoại Telegram minh họa",
+    "height": 1080,
+    "draw": "kTelegramDemoPhone",
+    "route": "telegram-demo",
+    "name": "screens/wireframe-app-telegram-demo",
+    "ids": [
+      6,
+      7
+    ],
+    "scope": "External Telegram flow reference",
+    "platform": "mobile",
+    "group": "6:772",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 6, 7 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến telegram-demo. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5699",
+    "ui": "62:5700"
+  },
+  {
+    "key": "M18",
+    "title": "Tài khoản & phiên",
+    "height": 844,
+    "draw": "kProfilePhone",
+    "route": "profile",
+    "name": "screens/wireframe-app-account",
+    "ids": [
+      8,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 8, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến profile. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5740",
+    "ui": "62:5741"
+  },
+  {
+    "key": "M19",
+    "title": "Phiên hết hạn",
+    "height": 844,
+    "draw": "kExpiredPhone",
+    "route": "expired",
+    "name": "screens/wireframe-app-session-expired",
+    "ids": [
+      8,
+      9
+    ],
+    "platform": "mobile",
+    "group": "6:772",
+    "notes": [
+      [
+        "Đúng chức năng",
+        "ID 8, 9 · Cùng hệ thống web/mobile."
+      ],
+      [
+        "Đọc rõ dữ liệu",
+        "Nhãn và bước thao tác rõ, không thêm chức năng ngoài phạm vi."
+      ],
+      [
+        "Luồng có thể thử",
+        "Mở bản HTML theo tuyến expired. Dữ liệu và kết quả là mô phỏng."
+      ]
+    ],
+    "wrapper": "62:5775",
+    "ui": "62:5776"
+  }
+]

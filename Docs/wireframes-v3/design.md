@@ -1,8 +1,10 @@
 # Thiết kế hiện hành — Smart Classroom
 
-Cập nhật 04/11/2026: trắng–đen phẳng, không gradient trang trí. Desktop dùng masthead và bốn liên kết điều hướng ngang đánh số, gạch chân mục hiện hành. Nội dung căn giữa; Manrope + Be Vietnam Pro được giữ. UI workspace 1440 × 1080, auth 1440 × 1024. Gauge độ ẩm và slider LED được giữ. Màu thật chỉ dành cho LED/bộ chọn màu và trạng thái cần chú ý.
+Cập nhật 04/11/2026 trên VLcCNTT / Page 1: **35 màn hình (14 web, 19 mobile, 2 WiFi)** và 9 board báo cáo. Phong cách trắng–đen phẳng, Manrope + Be Vietnam Pro, điều hướng ngang, chart có mốc giờ/ngày rõ ràng.
 
-Xem [đặc tả và cơ sở chọn bố cục](../huong_dan_wireframe_v3.md), [chỉ mục](../wireframe_v3_manifest.md). Inventory có giới hạn độ sâu; component master/tokens tham chiếu cũ được giữ vì liên kết đang dùng, không đại diện cho style override của UI hiện hành. Page 2 không chỉnh sửa.
+[Chỉ mục chính xác từng màn](../wireframe_v3_manifest.md) · [Registry nguồn](assets.json) · [Đặc tả](../huong_dan_wireframe_v3.md) · [Thư viện ảnh](index.html).
+
+Phần dưới là inventory tự động của cả tài liệu, gồm Page 2 và component/token tham chiếu. “Screens summarized” của công cụ đếm frame canvas ở phạm vi trích xuất, không phải 35 màn UI lồng trong nhóm. Màu của component master cũ không đại diện cho override của UI hiện hành. Page 2 không được chỉnh sửa.
 
 # VLcCNTT Design System
 
@@ -23,10 +25,10 @@ VLcCNTT exposes 0 component set(s), 25 standalone component(s), and 0 set varian
 - Pages scanned: 2
 - Local components returned: 25/25
 - Screens summarized: 19/19
-- Instances inspected: 10/100
-- Component anatomy depth: 2; screen evidence depth: 2
-- Screen evidence: included; component usage: included
-- Partial extraction: 0 component(s), 0 screen(s), and 90 instance(s) omitted by limits.
+- Instances inspected: 0/83
+- Component anatomy depth: 2; screen evidence depth: 1
+- Screen evidence: included; component usage: not requested
+- Partial extraction: 0 component(s), 0 screen(s), and 83 instance(s) omitted by limits.
 
 > Evidence labels: IDs, keys, properties, values, counts, and geometry are direct Figma facts. Pattern summaries are observations from the scanned nodes. Product meaning, UX intent, and breakpoint semantics remain unknown unless explicitly named or described in Figma.
 
@@ -99,12 +101,12 @@ _No local text styles found._
 
 ## Observed Layout & Visual Patterns
 These are frequency observations, not automatically approved design tokens:
-- Screen widths: 390px (×6), 1440px (×3), 2600px (×2), 5440px (×2), 1504px (×1), 1630px (×1), 1880px (×1), 3440px (×1), 3620px (×1), 4320px (×1)
-- Auto-layout gaps: 0px (×44), 8px (×14), 12px (×13), 6px (×12), 16px (×10), 10px (×7), 4px (×4), 24px (×4), 1px (×3), 14px (×3), 20px (×3), 60px (×2), 18px (×1), 22px (×1)
-- Padding values: 0px (×256), 12px (×68), 16px (×56), 18px (×20), 20px (×14), 40px (×14), 14px (×12), 24px (×12), 6px (×8), 44px (×8), 48px (×8), 4px (×4), 32px (×4)
-- Corner radii: 0px (×269), 8px (×206), 14px (×18), 12px (×10), 2px (×7), 6px (×5), 16px (×5), 20px (×5), 3px (×3), 10px (×3), 15px (×3), 4px (×2), 24px (×2)
-- Font sizes: 14px (×74), 16px (×32), 24px (×23), 22px (×18), 28px (×14), 18px (×11), 32px (×10), 12px (×8), 20px (×7), 36px (×6), 34px (×4), 26px (×2), 10px (×1), 13px (×1), 15px (×1), 25px (×1)
-- Solid fills: #ffffff (×189), #666666 (×116), #1f1f1f (×93), #111111 (×85), #d0d0d0 (×69), #f7f7f7 (×53), #f8fafc (×13), #ececec (×12), #0f172a (×11), #1e293b (×10), #f2f2f2 (×8), #777777 (×3), #dddddd (×3), #fff1f2 (×3), #f1f5f9 (×2), #3b82f6 (×1)
+- Screen widths: 390px (×6), 1440px (×3), 2600px (×2), 5440px (×2), 1504px (×1), 1630px (×1), 1880px (×1), 3440px (×1), 3666px (×1), 4320px (×1)
+- Auto-layout gaps: 0px (×27), 8px (×3), 16px (×3), 12px (×2), 14px (×2), 20px (×2), 60px (×2), 10px (×1), 24px (×1)
+- Padding values: 0px (×116), 12px (×14), 24px (×12), 48px (×8), 16px (×6), 20px (×6), 40px (×6), 32px (×4)
+- Corner radii: 8px (×74), 0px (×56), 20px (×2), 3px (×1), 16px (×1)
+- Font sizes: 14px (×15), 16px (×10), 18px (×6), 36px (×5), 22px (×1), 24px (×1), 28px (×1), 48px (×1)
+- Solid fills: #f7f7f7 (×55), #666666 (×26), #ffffff (×22), #111111 (×16), #f8fafc (×7), #f2f2f2 (×5), #ececec (×4), #0f172a (×2), #1f1f1f (×1), #aaaaaa (×1), #dddddd (×1)
 
 ## Elevation & Depth
 _No local effect styles found. Treat elevation as flat unless component anatomy shows shadows._
@@ -488,9 +490,6 @@ await figma.instantiate("6:183", {
 - Usage:
   - Find it with figma.findComponent("SC/V2/Button/Primary").
   - Instantiate with figma.instantiate("20:3587", { parentId, props, overrides }).
-- Observed instances: 3
-- Used on pages: Page 1
-- Used in screens: Page 1 / 10-Web
 - Instantiate:
 ```js
 await figma.instantiate("20:3587", {
@@ -567,9 +566,6 @@ await figma.instantiate("20:3590", {
 - Usage:
   - Find it with figma.findComponent("SC/V2/Field/Text").
   - Instantiate with figma.instantiate("20:3591", { parentId, props, overrides }).
-- Observed instances: 4
-- Used on pages: Page 1
-- Used in screens: Page 1 / 10-Web
 - Instantiate:
 ```js
 await figma.instantiate("20:3591", {
@@ -590,9 +586,6 @@ await figma.instantiate("20:3591", {
 - Usage:
   - Find it with figma.findComponent("SC/V2/Field/Password").
   - Instantiate with figma.instantiate("20:3592", { parentId, props, overrides }).
-- Observed instances: 3
-- Used on pages: Page 1
-- Used in screens: Page 1 / 10-Web
 - Instantiate:
 ```js
 await figma.instantiate("20:3592", {
@@ -710,7 +703,7 @@ _No remote-library component instances were identified in the inspected instance
 - No local text styles were found, so typography roles may need manual extraction from selected frames.
 - No component property definitions were found; component customization may rely on layer overrides.
 - Component anatomy was not included. Re-run with `includeAnatomy:true` for subtree-level inspection.
-- 90 instance(s) were omitted by extraction limits; usage counts may be partial.
+- 83 instance(s) were omitted by extraction limits; usage counts may be partial.
 
 ## Notes
 - Generated from local Figma styles, variables and components plus bounded screen/instance evidence.

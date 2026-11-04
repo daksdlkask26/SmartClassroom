@@ -531,8 +531,8 @@ Gauge bán tròn thể hiện độ ẩm trên thang 0--100\%; nhiệt độ và
 \clearpage
 \noindent\begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=12.8cm,height=18.5cm,keepaspectratio]{images/wireframes/report-wireframe-web-analytics.png}
-\captionof{figure}{Wireframe lịch sử và phân tích độ ẩm theo giờ, ngày; hiển thị dữ liệu lưu trữ của ID 4 phục vụ ID 5 trên website ID 9.}
+\includegraphics[width=12.8cm,height=20.6cm,keepaspectratio]{images/wireframes/report-wireframe-web-analytics.png}
+\captionof{figure}{Lịch sử với mốc giờ/ngày, vạch 00:00, cột gốc 0 và heatmap có thang số; dữ liệu lưu theo ID 4 phục vụ ID 5 trên website ID 9.}
 \label{fig:wireframe-web-analytics}
 \end{minipage}
 
@@ -547,12 +547,30 @@ Gauge bán tròn thể hiện độ ẩm trên thang 0--100\%; nhiệt độ và
 \clearpage
 \noindent\begin{minipage}{\linewidth}
 \centering
+\includegraphics[width=12.8cm,height=20.6cm,keepaspectratio]{images/wireframes/report-wireframe-app-daily-analytics.png}
+\captionof{figure}{Phân tích trên điện thoại: cột ngang có nhãn từng ngày, heatmap ngày/giờ và lối vào chi tiết ngày. Dấu gạch ngang chỉ mốc chưa có dữ liệu (ID 4, 5, 9).}
+\label{fig:wireframe-mobile-daily}
+\end{minipage}
+
+\clearpage
+\noindent\begin{minipage}{\linewidth}
+\centering
 \includegraphics[width=12.8cm,height=18.5cm,keepaspectratio]{images/wireframes/report-wireframe-wifi.png}
 \captionof{figure}{Wireframe portal cấu hình WiFi của ESP32 trên trình duyệt điện thoại (ID 10).}
 \label{fig:wireframe-wifi}
 \end{minipage}
 
 \clearpage
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=12.8cm,height=19cm,keepaspectratio]{images/wireframes/report-wireframe-connection-telegram.png}
+\captionof{figure}{Kết nối thiết bị và Telegram: đổi WiFi bằng nút BOOT, đăng ký bằng \texttt{/start}, hỏi bằng \texttt{/doam}, \texttt{/trangthai} và cảnh báo khi độ ẩm dưới 30\% hoặc trên 85\% (ID 6, 7, 9, 10).}
+\label{fig:wireframe-connection-telegram}
+\end{minipage}
+
+\clearpage
+Bộ thiết kế gồm 14 màn web, 19 màn điện thoại và 2 trang WiFi. Các trang chi tiết bổ sung nhiệt độ, CO\textsubscript{2}, bản ghi, bộ lọc thời gian, ngày đã chọn, kết nối thiết bị, Telegram và phiên tài khoản. Biểu đồ tách nhãn giờ và ngày, có vạch 00:00 khi sang ngày mới và đơn vị trên trục. Cột ngày bắt đầu từ 0; ngày chưa kết thúc và mốc chưa có dữ liệu được ký hiệu riêng. Dữ liệu lưu tự động theo ID 4, không có thao tác lưu từng cảm biến.
+
 \needspace{10\baselineskip}
 \textbf{Bảng chú thích vùng trên wireframe}
 
@@ -569,7 +587,9 @@ Giám sát: ô CO\textsubscript{2} & 2, 9 & Giá trị CO\textsubscript{2} ướ
 \hline
 Giám sát và LED & 3, 9 & Chọn màu, xem trước, áp dụng; đề xuất slider độ sáng; công tắc gửi ngay \\
 \hline
-Lịch sử, phân tích & 4, 5, 9 & Biểu đồ lịch sử theo giờ hoặc theo ngày \\
+Lịch sử, bản ghi, chi tiết ngày & 4, 5, 9 & Mốc đo có đơn vị và thời gian; biểu đồ giờ/ngày, bảng bản ghi; dữ liệu lưu tự động \\
+\hline
+Thiết bị và Telegram & 6, 7, 9, 10 & Hướng dẫn kết nối; đăng ký nhận cảnh báo và hỏi nhanh qua bot Telegram \\
 \hline
 Cấu hình WiFi & 10 & Chọn WiFi nhà, nhập mật khẩu \\
 \outerline
