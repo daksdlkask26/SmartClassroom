@@ -13,7 +13,7 @@ Nguồn LaTeX và tài liệu đồ án Phòng học thông minh.
 | `Docs/wireframes-v3/` | Bộ thiết kế hiện hành, ảnh màn hình và báo cáo, bố cục responsive |
 | `Docs/prototype/` | Bản thử tương tác web/mobile, mở `index.html` bằng trình duyệt |
 | `Docs/reference/` | Quy định và yêu cầu đồ án |
-| `scripts/` | Lệnh biên dịch tài liệu |
+| `scripts/` | Biên dịch proposal bằng XeLaTeX |
 | `tools/` | Công cụ xuất ảnh, đối chiếu ảnh và kiểm thử bản thử UI |
 
 Ảnh hộp và thông tin nguồn đã được giữ trong `Docs/images/enclosure/`.
@@ -28,11 +28,20 @@ Cần XeLaTeX (MiKTeX hoặc TeX Live). Chạy trong PowerShell:
 ```
 
 Kết quả: `Docs/16_24127261_24127542_24127581_PROPOSAL.pdf`.
+`Docs/thuyet_minh.pdf` là bản xem trước cục bộ do trình soạn thảo sinh ra và được Git bỏ qua.
 File trung gian ở `Docs/.build/proposal/`, được Git bỏ qua.
 Phụ lục `Docs/Phu_luc_A_MQ135.pdf` được giữ nguyên.
 
-Mục 2.1 dùng ảnh cơ khí cuối: bên ngoài, bên trong, bốn mặt đứng, tách nắp, bộ vít và đai ốc.
+Script build chạy XeLaTeX ba lượt để khung bìa TikZ, mục lục và tham chiếu được cập nhật đầy đủ.
+Nếu biên dịch trực tiếp bằng XeLaTeX, cần chạy lại với cùng tên đầu ra đến khi hết thông báo yêu cầu chạy lại; một lượt đầu có thể tạo khung bìa lệch và mục lục trống.
+Trong trình soạn thảo, có thể chọn quy trình `latexmk` với XeLaTeX để tự chạy đủ các lượt.
+
+Mục 2.1 dùng tám ảnh cơ khí cập nhật ngày 04/11/2026: bên ngoài, bên trong, bốn mặt đứng, tách nắp, bộ vít và đai ốc.
+DHT22 nằm ngang ở đáy khoang trái, mặt lưới hướng lên nắp; MQ135 nằm trên gá đáy trong khoang phải có vách ngăn riêng. Hai cảm biến không treo lên thành.
 Nguồn model xem [ghi nguồn ảnh](Docs/images/enclosure/ATTRIBUTION.md).
+
+[Bản Fusion cuối cùng](Designs/SmartClassroom.f3d) được giữ trong `Designs/`.
+Thông số bố trí và kiểm tra hình học nằm trong [metadata thiết kế](Docs/images/enclosure/design-metadata.json).
 
 ## Thiết kế hiện hành
 
