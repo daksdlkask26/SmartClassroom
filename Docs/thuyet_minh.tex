@@ -407,7 +407,7 @@ Các cấu hình kỹ thuật (cloud, MQTT broker, Telegram bot) do nhóm thiế
 % ======================================================================
 \subsection{Hình ảnh thiết kế hình dáng 3D của sản phẩm}
 Hộp được bố trí trên Autodesk Fusion với kích thước bao $160 \times 100 \times 60$~mm.
-Các hình thể hiện hình dáng, vị trí linh kiện và cơ cấu tháo lắp; khoảng trống được chừa cho giắc cắm và dây nối.
+Các hình thể hiện bố trí mới nhất: DHT22 nằm ngang ở đáy khoang trái, mặt lưới hướng lên khe gió trên nắp; MQ-135 đặt trên gá đáy trong khoang phải có vách ngăn riêng. Khoảng trống được chừa cho giắc cắm và dây nối.
 
 \noindent\begin{minipage}{\linewidth}
 \centering
@@ -419,7 +419,7 @@ Các hình thể hiện hình dáng, vị trí linh kiện và cơ cấu tháo l
 \noindent\begin{minipage}{\linewidth}
 \centering
 \includegraphics[width=0.96\linewidth,height=8cm,keepaspectratio]{images/enclosure/interior.png}
-\captionof{figure}{Bố trí ESP32, DHT22, MQ-135, thanh LED và board đỡ bên trong hộp.}
+\captionof{figure}{Bố trí bên trong: ESP32 ở giữa, DHT22 và MQ-135 trong hai khoang riêng, thanh LED ở mặt trước.}
 \label{fig:hop-ben-trong}
 \end{minipage}
 
@@ -483,9 +483,9 @@ Kích thước gá và dung sai lắp sẽ được đối chiếu với linh ki
 \hline
 A & ESP32 DevKit & 1--10 (dùng chung) & Trung tâm hộp, trên board đỡ; cổng USB hướng ra mặt sau \\
 \hline
-B & Cảm biến DHT22 & 1 & Gần lỗ thông khí, cách xa MQ-135 \\
+B & Cảm biến DHT22 & 1 & Nằm ngang ở đáy khoang trái, mặt lưới hướng lên khe gió trên nắp \\
 \hline
-C & Cảm biến MQ-135 & 2 & Gần lỗ thông khí, chừa khe hở với vách hộp vì cảm biến tỏa nhiệt \\
+C & Cảm biến MQ-135 & 2 & Trên gá đáy khoang phải, có vách ngăn riêng và khoảng hở quanh đầu cảm biến \\
 \hline
 D & Đèn LED WS2812 & 3 & Mặt trước, sau cửa sổ trên mặt hộp \\
 \hline
