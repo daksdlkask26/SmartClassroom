@@ -1,15 +1,36 @@
 {
   "version": 3,
-  "date": "2026-11-03",
+  "date": "2026-11-04",
   "file": "VLcCNTT",
   "modifiedPage": "Page 1",
   "status": "passed",
   "screenCount": 17,
   "reportCount": 8,
-  "pngCount": 25,
-  "svgCount": 25,
+  "corePairCount": 25,
+  "responsivePairCount": 2,
+  "reportUiPairCount": 1,
+  "pngCount": 28,
+  "svgCount": 28,
   "pngDimensionsMatchSvgScale": true,
   "noStalePng": true,
+  "copiedReportImages": [
+    {
+      "filename": "report-wireframe-web-auth.png",
+      "identical": true
+    },
+    {
+      "filename": "report-wireframe-web-monitor-led.png",
+      "identical": true
+    },
+    {
+      "filename": "report-wireframe-web-analytics.png",
+      "identical": true
+    },
+    {
+      "filename": "report-wireframe-wifi.png",
+      "identical": true
+    }
+  ],
   "records": [
     {
       "key": "W01-Login",
@@ -22,10 +43,10 @@
       "svgHeight": 1176,
       "pngWidth": 3536,
       "pngHeight": 2352,
-      "svgBytes": 504109,
-      "pngBytes": 297410,
-      "svgSha256": "0c7d240d54b31a40658d3bf8cc26d22074269a635104c6c6aef9542498cffd4e",
-      "pngSha256": "903956c4d1a34332b24e5236c2557f12481bd472ceea260507d386ff077076a2"
+      "svgBytes": 439324,
+      "pngBytes": 251772,
+      "svgSha256": "b0798bda534e6f03d9f0b89928fa572caa2a9e3089112e79d1e2ade10018a66d",
+      "pngSha256": "bbc63834a20a08d960e620b2aaf611d66da2059ec8449586e93c411bd66c3f99"
     },
     {
       "key": "W02-Register",
@@ -38,10 +59,10 @@
       "svgHeight": 1176,
       "pngWidth": 3536,
       "pngHeight": 2352,
-      "svgBytes": 577086,
-      "pngBytes": 313460,
-      "svgSha256": "b811a777545b85fdd63339795744757e82d278db006d4a5aeab7bed90d94efaa",
-      "pngSha256": "700d537ba711d264a509c9b3edaa3a1ac0fe884574fd5e39b0aa025304dcc117"
+      "svgBytes": 466070,
+      "pngBytes": 261167,
+      "svgSha256": "5cd0beb5d7e95eb86ea472fc97f543c1fabd084789cb06ba9c36a2108f2c2cc4",
+      "pngSha256": "a63dae92dba82122da5d17a30b6ae9e4defa39274d8fa9d95ca6cc4e1aa73792"
     },
     {
       "key": "W03-Dashboard",
@@ -51,13 +72,13 @@
       "png": "wireframes-v3/screens/wireframe-web-dashboard.png",
       "scale": 2,
       "svgWidth": 1768,
-      "svgHeight": 1176,
+      "svgHeight": 1232,
       "pngWidth": 3536,
-      "pngHeight": 2352,
-      "svgBytes": 867604,
-      "pngBytes": 476647,
-      "svgSha256": "c7c7b988f1fe6488cf747a50e0c15869ed1c7d66d3db82ac6d1261694d6173d3",
-      "pngSha256": "5e870994c7c42ff305c9b5f90b71ceb5774cd18473fa6093997df8e598bfcded"
+      "pngHeight": 2464,
+      "svgBytes": 885674,
+      "pngBytes": 406083,
+      "svgSha256": "f21c0bcd4f12a61c49f36390c7ac3c9719d162003c242ef0531c649958d94a70",
+      "pngSha256": "da109a9d958283c86e71783329b912a5a842f4e78c5a4d30115f61ca8cc339f1"
     },
     {
       "key": "W04-Analytics",
@@ -67,13 +88,13 @@
       "png": "wireframes-v3/screens/wireframe-web-analytics.png",
       "scale": 2,
       "svgWidth": 1768,
-      "svgHeight": 1176,
+      "svgHeight": 1232,
       "pngWidth": 3536,
-      "pngHeight": 2352,
-      "svgBytes": 869314,
-      "pngBytes": 447655,
-      "svgSha256": "1fbdd94aaaa281e0b0728e6b9809d6e3119afb746f5358e22c12a895784eaf51",
-      "pngSha256": "266f386a242653e4190361e7a9c5f3b4257f38eeac14ff8706019b4aa49ffca0"
+      "pngHeight": 2464,
+      "svgBytes": 776783,
+      "pngBytes": 356797,
+      "svgSha256": "248fde0bf1eadccc77125ca5e4093a4fc98be5ae876f40cdbb12b421b882ae33",
+      "pngSha256": "4a023cb862747110600c5205fed997c086c7f43f2f7ec89350451afb98993378"
     },
     {
       "key": "W05-LEDControl",
@@ -83,13 +104,13 @@
       "png": "wireframes-v3/screens/wireframe-web-led.png",
       "scale": 2,
       "svgWidth": 1768,
-      "svgHeight": 1176,
+      "svgHeight": 1232,
       "pngWidth": 3536,
-      "pngHeight": 2352,
-      "svgBytes": 504065,
-      "pngBytes": 308592,
-      "svgSha256": "186ec6555f58843ab3319e5bd8ad93c6e73f140af21c1311e082f16849e1fae1",
-      "pngSha256": "1d292b256968e86ba5d4a4c78525eccc9d8c7ad86c6ce05a330d1c428499bec4"
+      "pngHeight": 2464,
+      "svgBytes": 675171,
+      "pngBytes": 318215,
+      "svgSha256": "7cdb243137b7b692b978c34dccb452ec9e46029f179c97ad09d107ccfa3a1fd6",
+      "pngSha256": "531fa6cbfe051fcafb6919a6fb14903fa80d318bb7317a73f705f42bebacdc74"
     },
     {
       "key": "W06-HumidityDetail",
@@ -99,13 +120,13 @@
       "png": "wireframes-v3/screens/wireframe-web-humidity-detail.png",
       "scale": 2,
       "svgWidth": 1768,
-      "svgHeight": 1176,
+      "svgHeight": 1232,
       "pngWidth": 3536,
-      "pngHeight": 2352,
-      "svgBytes": 781733,
-      "pngBytes": 413886,
-      "svgSha256": "147514a6e9b5e71442bc08ced5b567bd22ffbc462dca8de17389abbb56281c99",
-      "pngSha256": "c4a55f8c0bcea22bc4952fd6986d2e1b3025293297af3b9ae8372a82e3fb087e"
+      "pngHeight": 2464,
+      "svgBytes": 701817,
+      "pngBytes": 333293,
+      "svgSha256": "6d46b54b42cb601fe168ceb29acfae91b88f1802c2209198a27aea60229e06e9",
+      "pngSha256": "bbcdd3957e69c72fb75fc8fdeac9fafae3015f0f8bd2d57469cb3e61f62cea0e"
     },
     {
       "key": "M01-Login",
@@ -118,10 +139,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 343234,
-      "pngBytes": 150063,
-      "svgSha256": "4d206de589b0ffe663225d81936140e623548575e4cbb8a82c449b29f4d25e9e",
-      "pngSha256": "cb655f9fb07fb66ddbb1b2f45ebc0f19b799e51dcbb3fe003fa014271981102d"
+      "svgBytes": 311118,
+      "pngBytes": 135836,
+      "svgSha256": "0378d07741d9c8d72de8890f9b10edb0dc5e871f8653f48d2801ca616b211a2c",
+      "pngSha256": "855ad94e4bb84f6606e85fa4e2fffb942146475cca8831641540a433b7825a72"
     },
     {
       "key": "M02-Register",
@@ -134,10 +155,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 408323,
-      "pngBytes": 172914,
-      "svgSha256": "1aedc2d953e15869254e23ccf27c76d46d733f41787cea726c42084795edbf29",
-      "pngSha256": "cbd47c50b8d792dea1549409a83b19636b791ad16ba15fdec5c3a2b1902f18ad"
+      "svgBytes": 314327,
+      "pngBytes": 143711,
+      "svgSha256": "33a67618fc082a4f5cdaabc44c3f2d4f8bc37f1f7deab43c3b4fb74463e03f41",
+      "pngSha256": "0a32eb63d6f0d1b625de273fa88f86b7a9500fc53c9df557657036b4d3d79007"
     },
     {
       "key": "M03-Overview",
@@ -150,10 +171,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 470090,
-      "pngBytes": 233633,
-      "svgSha256": "aeabb344aa1ab6ea03cf323e2ab2c043599c14c0cb5ad9e4f1c9c1671a389154",
-      "pngSha256": "03a598e6fa223d23924d20f6f5348713ced355061a43ebfc596d2fa74cec5efc"
+      "svgBytes": 489693,
+      "pngBytes": 202315,
+      "svgSha256": "60dcb5d2798e856e365527af153767e46585eed4f563130beab66dd64a90bc34",
+      "pngSha256": "44b57221906c1d15b555d176b87a84812587895a4ce76dc23be5333f414fa57c"
     },
     {
       "key": "M04-LED",
@@ -166,10 +187,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 366452,
-      "pngBytes": 180395,
-      "svgSha256": "6c82c567339481fa8275077270c4502c9b50c4de454511e106eb4ceb5eab1dde",
-      "pngSha256": "5d869d0ad5e0d14930d9505c2c2fedf48b117e6e8c3142b5d50dc130d46f57c3"
+      "svgBytes": 388578,
+      "pngBytes": 168047,
+      "svgSha256": "2e9f94ad94ecb73273a58b20480fba2113e16abcdddddb90dd56638b3a2066b3",
+      "pngSha256": "ca93a4cfd6a99b87cbca7e19eee0ef4a443d6d862dbc3b172b0d4d90f7f96e7f"
     },
     {
       "key": "M05-History",
@@ -182,10 +203,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 419331,
-      "pngBytes": 203891,
-      "svgSha256": "a05636f0abd899b00d7baf70921b5496d9a20269fa18c20df7a106234438344f",
-      "pngSha256": "287911684cc7daa59c1f64adc25ad74dcdbc1b5e32fd313c4d3ce08c30c6b45f"
+      "svgBytes": 405778,
+      "pngBytes": 174535,
+      "svgSha256": "d4ba6ba30f1571aa6cfdda44a816e3f4beb6114d72f864a15bcee3486d82ee23",
+      "pngSha256": "38a1f9e1d2e15f875bb5e4d17f6d105042f77717a8fc8255cd904abad68946d3"
     },
     {
       "key": "M06-HumidityDetail",
@@ -198,10 +219,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 322561,
-      "pngBytes": 180022,
-      "svgSha256": "b92ae2651f84d99cde90a9781323f9f264a86ecdd7a2481946cb9d86ec11eaf8",
-      "pngSha256": "9298f84ad9ba592b1be98cd45180ca123b16fe0ea824e082c84fc34026fef2cf"
+      "svgBytes": 336523,
+      "pngBytes": 156100,
+      "svgSha256": "9bdc2ea967a1b08bb9c011ee4cfd17cc40e7705c31d3ec327f6a03ade9fb4530",
+      "pngSha256": "2a62faeaa75cb5fc4d0f7349c7dc51c1021267d7ef1d12dd909c0b655ec912ad"
     },
     {
       "key": "M07-ColorPicker",
@@ -214,10 +235,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 345254,
-      "pngBytes": 186057,
-      "svgSha256": "4061b121b31a002f67f9b854919bb72f9c4a1ee577ff1cc2a56f2a3cacbe9ddd",
-      "pngSha256": "8835cfff4fb9563ccab30b013fec99793787fb19b2fc94d61f0c79e5aaf71e0d"
+      "svgBytes": 378176,
+      "pngBytes": 284456,
+      "svgSha256": "8e11404c41c6981a84535071e0d0a5f39b8c25246b556486c5efd580bdcd55d4",
+      "pngSha256": "e689f0dd8ddcecf56b78c0ffeeb87145fc770a72238bfb87712132f93b918177"
     },
     {
       "key": "M08-DailyAnalytics",
@@ -230,10 +251,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 443023,
-      "pngBytes": 222677,
-      "svgSha256": "0a438369d689dbde02bb8b5d9a2a7d42073a9a3c22108c0f8637214e226a3545",
-      "pngSha256": "6914a5f9b38a280f40ff497530d9fcff0f4deda2f26a36804ea265c92e956d7c"
+      "svgBytes": 449405,
+      "pngBytes": 183205,
+      "svgSha256": "36bbe7ab7c17902d0e13744393c51e7e8bbcd39456b47b3d793270d1bf2ff27b",
+      "pngSha256": "c41da9d17867037c1e00d704248803db6834362e3d0c720553b39215dbf56a5f"
     },
     {
       "key": "M09-ConnectionState",
@@ -246,10 +267,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 419606,
-      "pngBytes": 192626,
-      "svgSha256": "ba675a9cdb2e008ae599061381cbace5cd24f73ee1c3d6c3fc002fbd256c1a09",
-      "pngSha256": "e91bc3f34d5d79fe12e5d90e2f3eed4a08b0b8291c725d88c6949a934e4902fc"
+      "svgBytes": 413812,
+      "pngBytes": 173010,
+      "svgSha256": "13539efe1c359567997070bd61b3907ad1bcfed13f6b017f3c8f4e43331715c5",
+      "pngSha256": "e74232d1b3460a96995b0cd751e1996f11efb9bac88209ef9a1df41974d5b0e8"
     },
     {
       "key": "P01-WiFiPortal",
@@ -262,10 +283,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 421974,
-      "pngBytes": 190370,
-      "svgSha256": "e0a007485feeeb256a8e09410e5c9b6b5edc3f78447eb6cd7bc94996296d2eef",
-      "pngSha256": "47810a93e6de42bb455bc9f20be5163bebb13368b8bde6e22b4c444e473675b0"
+      "svgBytes": 340751,
+      "pngBytes": 148464,
+      "svgSha256": "775d287010dd343db8f7a1b6bbb012da4905bb6fc8af34f06b602f2e75c9a7ae",
+      "pngSha256": "4b49eb2a1b57fb4603c4a1ce81efe3ec5d7ae218673d0d489cfd0b1494e83253"
     },
     {
       "key": "P02-WiFiReceived",
@@ -278,10 +299,10 @@
       "svgHeight": 996,
       "pngWidth": 1396,
       "pngHeight": 1992,
-      "svgBytes": 452862,
-      "pngBytes": 196562,
-      "svgSha256": "a62070d10768bba4a6a538c73b52fbc66d4711ad5227b5d76a73c96bea52214c",
-      "pngSha256": "8033e008ff83deaf60d341168c02e1640dbcbe5e2afd5e0497ab4aa9e8508b49"
+      "svgBytes": 335896,
+      "pngBytes": 148366,
+      "svgSha256": "24840a0c66e60454c1df757ab06c59b20f308852c0a7e7094bd147365ea484b8",
+      "pngSha256": "e9d05c2f0d8c60753b0a7d71bdab6e6fc64bde483ad9d93ec144a4602967a778"
     },
     {
       "key": "R01-WebAuth",
@@ -294,10 +315,10 @@
       "svgHeight": 1180,
       "pngWidth": 3000,
       "pngHeight": 3540,
-      "svgBytes": 348661,
-      "pngBytes": 348652,
-      "svgSha256": "1e616e7f2a57dce327c8170fb2b930931248412473216d7f58ce0be4a4ce7e22",
-      "pngSha256": "2d86aae59dc6da8c8678b1aa3387d5adae7f5baf7f01c7aece20d057f3d9087e"
+      "svgBytes": 305864,
+      "pngBytes": 300528,
+      "svgSha256": "5115d3ee0435281985754ca3c187aed5a5bae9635c65abd9d1afd8d3123dc541",
+      "pngSha256": "ef1ec5edee1b1631ffc5c86eb09c95410cf1b1896f66a36467091a362e44d787"
     },
     {
       "key": "R02-WebMonitorLED",
@@ -307,13 +328,13 @@
       "png": "wireframes-v3/reports/report-wireframe-web-monitor-led.png",
       "scale": 3,
       "svgWidth": 1000,
-      "svgHeight": 1280,
+      "svgHeight": 1456,
       "pngWidth": 3000,
-      "pngHeight": 3840,
-      "svgBytes": 446583,
-      "pngBytes": 517406,
-      "svgSha256": "8b65daef56a8fd029119df37efd5175cfc123427546656025f042849af9c12ea",
-      "pngSha256": "38407b3559d0562d10509f63353e52034565ed0636a5de2f6c52e9c25bbe7970"
+      "pngHeight": 4368,
+      "svgBytes": 519970,
+      "pngBytes": 545151,
+      "svgSha256": "000cd9bcde135d94c567d5841f7fde0e4d7005d74963a20b641f904363f06795",
+      "pngSha256": "8839f4fce01d2a2b998cc59357d1a6d2b270ccc63cdca57f33fe9d8cdf6d067b"
     },
     {
       "key": "R03-WebAnalytics",
@@ -326,10 +347,10 @@
       "svgHeight": 1520,
       "pngWidth": 3000,
       "pngHeight": 4560,
-      "svgBytes": 395024,
-      "pngBytes": 509026,
-      "svgSha256": "c474e3528227300d60a0fb78b026e48eeeac0a0b7d4b55371f71ec7e88e5f75a",
-      "pngSha256": "f9ba5df7535557002d66b57793697c086edc691de23a0413a81aa7a7c3ab4c45"
+      "svgBytes": 378341,
+      "pngBytes": 435999,
+      "svgSha256": "5d442125710445aea8335ca5df30e231967eedc14802ad1ef1d2899356700a22",
+      "pngSha256": "b85b8ca208285b1a98a564d1e5384baf501580379856314e6912ea01a86a6a8c"
     },
     {
       "key": "R04-AppAuth",
@@ -338,14 +359,14 @@
       "svg": "wireframes-v3/reports/report-wireframe-app-auth.svg",
       "png": "wireframes-v3/reports/report-wireframe-app-auth.png",
       "scale": 3,
-      "svgWidth": 900,
+      "svgWidth": 1000,
       "svgHeight": 1180,
-      "pngWidth": 2700,
+      "pngWidth": 3000,
       "pngHeight": 3540,
-      "svgBytes": 397674,
-      "pngBytes": 358887,
-      "svgSha256": "f933e0ac090da5d538f0aa0d1d1c21743685124c641b4e066724975ae3a16a02",
-      "pngSha256": "0439aa80ec7ecedc17ff3074a69acb702eefda8446c9e2a28a5563a97fa972cd"
+      "svgBytes": 305105,
+      "pngBytes": 300209,
+      "svgSha256": "adc3b9785bbc94551993210d8083e86e2ebdabe7a2412128bbf10e2f39d96798",
+      "pngSha256": "ddb68dbcdce3a4498f4b339cf7eee7ab77e48e2e593f615d4833d6b9cb4c3dc0"
     },
     {
       "key": "R05-AppOverview",
@@ -358,10 +379,10 @@
       "svgHeight": 1000,
       "pngWidth": 1950,
       "pngHeight": 3000,
-      "svgBytes": 426949,
-      "pngBytes": 337025,
-      "svgSha256": "99f44ae3e2c645df060612a67c56f1c6c9f2ccf11113b3b816f8d412b948a919",
-      "pngSha256": "f479756a035a92d2bab9894a08e930e09600159da5bb18278ebc1a04f71ff344"
+      "svgBytes": 396747,
+      "pngBytes": 267580,
+      "svgSha256": "a7ad52d3f5af48a310e7b958e352c07b312ecb559bc1257166886553b140fd7a",
+      "pngSha256": "62f2f3210337cbd3e319e74975a895665a1799f030006f0e177af3e53fc712d2"
     },
     {
       "key": "R06-AppLED",
@@ -374,10 +395,10 @@
       "svgHeight": 1000,
       "pngWidth": 1950,
       "pngHeight": 3000,
-      "svgBytes": 372650,
-      "pngBytes": 288328,
-      "svgSha256": "8f67707943faf5bfe885aa9fbb38feb34bfaf0547c6723112673f02ff0dd6894",
-      "pngSha256": "a21a90949bee9e42cd5891e367757b32564835f40a61c3426bbc42b099717db2"
+      "svgBytes": 350323,
+      "pngBytes": 248960,
+      "svgSha256": "331d3f2d5a0ef7b0f9e0ee092eec96014f2bc7c8d8489a7135b8a0cd716adef2",
+      "pngSha256": "6994497b5515845d72cb7818a2c6d8a8ceee7635bfeb77856f3a6308f0192bb5"
     },
     {
       "key": "R07-AppDailyAnalytics",
@@ -390,10 +411,10 @@
       "svgHeight": 1000,
       "pngWidth": 1950,
       "pngHeight": 3000,
-      "svgBytes": 424865,
-      "pngBytes": 339925,
-      "svgSha256": "e23db9c7c28108c5faa89745620bb30ecc75a62ce36c1caac27175870e6ee299",
-      "pngSha256": "3e5301fbf783947707544e67780669b690614a2a6fb121747ff8f3948f649920"
+      "svgBytes": 397251,
+      "pngBytes": 259722,
+      "svgSha256": "5f61e255e2a1261716a573e0ce3d7e9ce2c89be976bc04901d70d2f9deaed0c2",
+      "pngSha256": "57b4695e69ac1c528b6d6fff7a40dcdf9d467b64ade3f922c54eb1efec8187df"
     },
     {
       "key": "R08-WiFi",
@@ -406,10 +427,58 @@
       "svgHeight": 1000,
       "pngWidth": 1950,
       "pngHeight": 3000,
-      "svgBytes": 458646,
-      "pngBytes": 318030,
-      "svgSha256": "74b4b02ef416669a9c01d6ec31e6f4c2486b9e52a612facfa9da08e900cbcd51",
-      "pngSha256": "47aec1c71c65ca591f5f0a65be5eb5ba0116383cc8d4644197ff5b25046ee40a"
+      "svgBytes": 172240,
+      "pngBytes": 188003,
+      "svgSha256": "42c4ded3970dcebebd535dd0a633aa5eb6e01d682bee7b5dcf657cd033d7c786",
+      "pngSha256": "4717a03923bc5ded2392e3955a568b24239f41763b6b7ab9db0c5789bdd5c0d0"
+    },
+    {
+      "key": "Responsive-LED-320",
+      "sourceNodeId": "43:801",
+      "uiNodeId": null,
+      "svg": "wireframes-v3/responsive/led-320.svg",
+      "png": "wireframes-v3/responsive/led-320.png",
+      "scale": 2,
+      "svgWidth": 320,
+      "svgHeight": 844,
+      "pngWidth": 640,
+      "pngHeight": 1688,
+      "svgBytes": 202714,
+      "pngBytes": 90393,
+      "svgSha256": "3731bdc1ad1965be8a7a2ae5eeab826aa6b2f6aededdd5716cb150d4da36c9dd",
+      "pngSha256": "b21ae073972fa55636485fbdc18eba1f40d14a6f42e364028ca66fb6e5e39148"
+    },
+    {
+      "key": "Responsive-LED-1024",
+      "sourceNodeId": "43:891",
+      "uiNodeId": null,
+      "svg": "wireframes-v3/responsive/led-1024.svg",
+      "png": "wireframes-v3/responsive/led-1024.png",
+      "scale": 2,
+      "svgWidth": 1024,
+      "svgHeight": 1024,
+      "pngWidth": 2048,
+      "pngHeight": 2048,
+      "svgBytes": 511165,
+      "pngBytes": 226088,
+      "svgSha256": "a0759431990c54ee13b4b44659bea9cedb08f538d4b446002bc800317def1e51",
+      "pngSha256": "16b553e1256e980a94e2d24232025c812c49c8bb48850bd5b2c89dcf9a1017ea"
+    },
+    {
+      "key": "Report-UI-Mobile-LED",
+      "sourceNodeId": "6:812",
+      "uiNodeId": null,
+      "svg": "images/wireframes/ui-app-led.svg",
+      "png": "images/wireframes/ui-app-led.png",
+      "scale": 3,
+      "svgWidth": 390,
+      "svgHeight": 844,
+      "pngWidth": 1170,
+      "pngHeight": 2532,
+      "svgBytes": 202210,
+      "pngBytes": 147306,
+      "svgSha256": "e560a79472ff309a5bc50c6d52cf0fe36c2a5205af92b11c622b4c1233c02fab",
+      "pngSha256": "2c89679230a36cefd601a73ef7fc8353bbe356b7f4c92bca4e0a125c82d5110f"
     }
   ]
 }

@@ -1,182 +1,87 @@
 {
   "version": 3,
-  "date": "2026-11-03",
+  "date": "2026-11-04",
+  "direction": "Flat monochrome; no decorative gradients.",
   "palette": {
-    "humidity": "#2563EB",
-    "temperature": "#C2410C",
-    "co2": "#7C3AED",
-    "humidityLight": "#93C5FD",
-    "temperatureLight": "#FDBA74",
-    "co2Light": "#C4B5FD",
-    "bar": "#64748B",
-    "fieldBorder": "#8793A2",
-    "success": "#166534",
-    "successBg": "#F0FDF4",
-    "warning": "#92400E",
-    "warningBg": "#FFFBEB",
-    "danger": "#991B1B",
-    "dangerBg": "#FEF2F2",
-    "info": "#1D4ED8",
-    "infoBg": "#EFF6FF",
-    "bg": "#F6F8FB",
-    "canvas": "#EAF0F5",
-    "area": "#DBEAFE",
-    "darkArea": "#20334F",
-    "text": "#1F1F1F",
-    "muted": "#5B6472",
-    "heat": [
-      "#DBEAFE",
-      "#93C5FD",
-      "#60A5FA",
-      "#2563EB",
-      "#1E3A8A"
-    ]
+    "ink": "#111111",
+    "muted": "#666666",
+    "surface": "#FFFFFF",
+    "subtle": "#F7F7F7",
+    "selected": "#F2F2F2",
+    "line": "#DDDDDD",
+    "inputBorder": "#888888"
   },
   "roles": [
     {
-      "token": "humidity",
-      "hex": "#2563EB",
-      "against": "#FFFFFF",
-      "ratio": 5.17
+      "role": "Body / chart",
+      "foreground": "#111111",
+      "background": "#FFFFFF",
+      "minimum": 4.5,
+      "ratio": 18.88
     },
     {
-      "token": "temperature",
-      "hex": "#C2410C",
-      "against": "#FFFFFF",
-      "ratio": 5.18
+      "role": "Secondary text",
+      "foreground": "#666666",
+      "background": "#FFFFFF",
+      "minimum": 4.5,
+      "ratio": 5.74
     },
     {
-      "token": "co2",
-      "hex": "#7C3AED",
-      "against": "#FFFFFF",
-      "ratio": 5.7
+      "role": "CTA",
+      "foreground": "#FFFFFF",
+      "background": "#111111",
+      "minimum": 4.5,
+      "ratio": 18.88
     },
     {
-      "token": "bar",
-      "hex": "#64748B",
-      "against": "#FFFFFF",
-      "ratio": 4.76
+      "role": "Selected surface text",
+      "foreground": "#444444",
+      "background": "#F2F2F2",
+      "minimum": 4.5,
+      "ratio": 8.7
     },
     {
-      "token": "fieldBorder",
-      "hex": "#8793A2",
-      "against": "#FFFFFF",
-      "ratio": 3.12
-    },
-    {
-      "token": "success",
-      "hex": "#166534",
-      "against": "#FFFFFF",
-      "ratio": 7.13
-    },
-    {
-      "token": "warning",
-      "hex": "#92400E",
-      "against": "#FFFFFF",
-      "ratio": 7.09
-    },
-    {
-      "token": "danger",
-      "hex": "#991B1B",
-      "against": "#FFFFFF",
-      "ratio": 8.31
-    },
-    {
-      "token": "info",
-      "hex": "#1D4ED8",
-      "against": "#FFFFFF",
-      "ratio": 6.7
-    },
-    {
-      "token": "text",
-      "hex": "#1F1F1F",
-      "against": "#FFFFFF",
-      "ratio": 16.48
-    },
-    {
-      "token": "muted",
-      "hex": "#5B6472",
-      "against": "#FFFFFF",
-      "ratio": 5.98
-    },
-    {
-      "token": "humidityLight",
-      "hex": "#93C5FD",
-      "against": "#1F1F1F",
-      "ratio": 9.14
-    },
-    {
-      "token": "temperatureLight",
-      "hex": "#FDBA74",
-      "against": "#1F1F1F",
-      "ratio": 9.77
-    },
-    {
-      "token": "co2Light",
-      "hex": "#C4B5FD",
-      "against": "#1F1F1F",
-      "ratio": 8.93
+      "role": "Input boundary",
+      "foreground": "#888888",
+      "background": "#FFFFFF",
+      "minimum": 3,
+      "ratio": 3.54
     }
   ],
-  "semanticPairs": [
-    {
-      "role": "success",
-      "foreground": "#166534",
-      "background": "#F0FDF4",
-      "ratio": 6.81
-    },
-    {
-      "role": "warning",
-      "foreground": "#92400E",
-      "background": "#FFFBEB",
-      "ratio": 6.84
-    },
-    {
-      "role": "danger",
-      "foreground": "#991B1B",
-      "background": "#FEF2F2",
-      "ratio": 7.6
-    },
-    {
-      "role": "info",
-      "foreground": "#1D4ED8",
-      "background": "#EFF6FF",
-      "ratio": 6.16
-    }
-  ],
-  "bodyOnScreenBackground": {
-    "foreground": "#5B6472",
-    "background": "#F6F8FB",
-    "ratio": 5.62
-  },
   "heatmap": {
+    "minValue": 60,
+    "maxValue": 70,
     "stops": [
       {
-        "hex": "#DBEAFE",
-        "luminance": 0.81061
+        "value": 60,
+        "hex": "#f5f5f5",
+        "luminance": 0.9131
       },
       {
-        "hex": "#93C5FD",
-        "luminance": 0.53227
+        "value": 62.5,
+        "hex": "#cfcfcf",
+        "luminance": 0.62396
       },
       {
-        "hex": "#60A5FA",
-        "luminance": 0.36299
+        "value": 65,
+        "hex": "#a8a8a8",
+        "luminance": 0.39157
       },
       {
-        "hex": "#2563EB",
-        "luminance": 0.15315
+        "value": 67.5,
+        "hex": "#828282",
+        "luminance": 0.22323
       },
       {
-        "hex": "#1E3A8A",
-        "luminance": 0.05137
+        "value": 70,
+        "hex": "#5c5c5c",
+        "luminance": 0.10702
       }
     ],
     "lightnessStrictlyDecreases": true,
-    "minValue": 60,
-    "maxValue": 70,
-    "missingValueSymbol": "—",
-    "note": "Color changes monotonically with the scalar humidity value. Empty future slots have a dash and a border. The scale is not a health classification."
+    "numericReadout": true,
+    "missingValueSymbol": "—"
   },
-  "scope": "Calculated contrast for the declared palette roles and reviewed views; not a certification of every possible interactive state. Metric names, units, values and missing-data symbols are visible independently of hue."
+  "exceptions": "LED swatches and the functional color picker retain actual colors; error/warning semantics may use restrained red/amber. Neutral charts are not health classifications.",
+  "scope": "Calculated declared pairs and reviewed views, not a certification of all interactive states."
 }

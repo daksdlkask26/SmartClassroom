@@ -8,13 +8,15 @@ const temp=path.join(workspace,'tmp','figma-smartclassroom','render-input');
 const profile=path.join(workspace,'tmp','figma-smartclassroom','chrome-render-profile');
 fs.mkdirSync(temp,{recursive:true});
 const chrome='C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-let files=['screens','reports'].flatMap(dir=>fs.existsSync(path.join(root,dir))?fs.readdirSync(path.join(root,dir)).filter(n=>n.endsWith('.svg')).map(n=>path.join(dir,n)):[]);
+let files=['screens','reports','responsive'].flatMap(dir=>fs.existsSync(path.join(root,dir))?fs.readdirSync(path.join(root,dir)).filter(n=>n.endsWith('.svg')).map(n=>path.join(dir,n)):[]);
+const reportPhone=path.join('..','images','wireframes','ui-app-led.svg');
+if(fs.existsSync(path.join(root,reportPhone)))files.push(reportPhone);
 const filter=process.argv[2];
 if(filter)files=files.filter(f=>f.includes(filter));
 for(const relative of files){
   const input=path.join(root,relative),svg=fs.readFileSync(input,'utf8');
   const width=Number(svg.match(/<svg[^>]*\bwidth="([\d.]+)"/)[1]),height=Number(svg.match(/<svg[^>]*\bheight="([\d.]+)"/)[1]);
-  const scale=relative.startsWith('reports')?3:2;
+  const scale=relative.startsWith('reports')||relative===reportPhone?3:2;
   const html=path.join(temp,path.basename(relative,'.svg')+'.html');
   const output=input.replace(/\.svg$/,'.png');
   if(fs.existsSync(output)&&fs.statSync(output).mtimeMs>=fs.statSync(input).mtimeMs){
