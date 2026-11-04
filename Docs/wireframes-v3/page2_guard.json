@@ -1,0 +1,18 @@
+{
+  "version": 3,
+  "date": "2026-11-03",
+  "file": "VLcCNTT",
+  "protectedPage": {
+    "id": "8:1879",
+    "name": "Page 2"
+  },
+  "method": "Canonical recursive comparison of full get_design_context tree responses (detail full, depth 40); object keys sorted, child order retained.",
+  "beforeNodeCount": 817,
+  "afterNodeCount": 817,
+  "exactTreeEqual": true,
+  "modifiedPageId": "0:1",
+  "existingComponentMasters": 25,
+  "existingComponentMasterTreesUnchanged": true,
+  "newTokens": "12 independent scv3 color variables; existing variable values were not changed.",
+  "note": "Comparison covers all fields returned by the API. No writes were issued against Page 2. Full protected-page snapshots are excluded from the handoff."
+}

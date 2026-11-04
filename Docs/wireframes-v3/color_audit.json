@@ -1,0 +1,182 @@
+{
+  "version": 3,
+  "date": "2026-11-03",
+  "palette": {
+    "humidity": "#2563EB",
+    "temperature": "#C2410C",
+    "co2": "#7C3AED",
+    "humidityLight": "#93C5FD",
+    "temperatureLight": "#FDBA74",
+    "co2Light": "#C4B5FD",
+    "bar": "#64748B",
+    "fieldBorder": "#8793A2",
+    "success": "#166534",
+    "successBg": "#F0FDF4",
+    "warning": "#92400E",
+    "warningBg": "#FFFBEB",
+    "danger": "#991B1B",
+    "dangerBg": "#FEF2F2",
+    "info": "#1D4ED8",
+    "infoBg": "#EFF6FF",
+    "bg": "#F6F8FB",
+    "canvas": "#EAF0F5",
+    "area": "#DBEAFE",
+    "darkArea": "#20334F",
+    "text": "#1F1F1F",
+    "muted": "#5B6472",
+    "heat": [
+      "#DBEAFE",
+      "#93C5FD",
+      "#60A5FA",
+      "#2563EB",
+      "#1E3A8A"
+    ]
+  },
+  "roles": [
+    {
+      "token": "humidity",
+      "hex": "#2563EB",
+      "against": "#FFFFFF",
+      "ratio": 5.17
+    },
+    {
+      "token": "temperature",
+      "hex": "#C2410C",
+      "against": "#FFFFFF",
+      "ratio": 5.18
+    },
+    {
+      "token": "co2",
+      "hex": "#7C3AED",
+      "against": "#FFFFFF",
+      "ratio": 5.7
+    },
+    {
+      "token": "bar",
+      "hex": "#64748B",
+      "against": "#FFFFFF",
+      "ratio": 4.76
+    },
+    {
+      "token": "fieldBorder",
+      "hex": "#8793A2",
+      "against": "#FFFFFF",
+      "ratio": 3.12
+    },
+    {
+      "token": "success",
+      "hex": "#166534",
+      "against": "#FFFFFF",
+      "ratio": 7.13
+    },
+    {
+      "token": "warning",
+      "hex": "#92400E",
+      "against": "#FFFFFF",
+      "ratio": 7.09
+    },
+    {
+      "token": "danger",
+      "hex": "#991B1B",
+      "against": "#FFFFFF",
+      "ratio": 8.31
+    },
+    {
+      "token": "info",
+      "hex": "#1D4ED8",
+      "against": "#FFFFFF",
+      "ratio": 6.7
+    },
+    {
+      "token": "text",
+      "hex": "#1F1F1F",
+      "against": "#FFFFFF",
+      "ratio": 16.48
+    },
+    {
+      "token": "muted",
+      "hex": "#5B6472",
+      "against": "#FFFFFF",
+      "ratio": 5.98
+    },
+    {
+      "token": "humidityLight",
+      "hex": "#93C5FD",
+      "against": "#1F1F1F",
+      "ratio": 9.14
+    },
+    {
+      "token": "temperatureLight",
+      "hex": "#FDBA74",
+      "against": "#1F1F1F",
+      "ratio": 9.77
+    },
+    {
+      "token": "co2Light",
+      "hex": "#C4B5FD",
+      "against": "#1F1F1F",
+      "ratio": 8.93
+    }
+  ],
+  "semanticPairs": [
+    {
+      "role": "success",
+      "foreground": "#166534",
+      "background": "#F0FDF4",
+      "ratio": 6.81
+    },
+    {
+      "role": "warning",
+      "foreground": "#92400E",
+      "background": "#FFFBEB",
+      "ratio": 6.84
+    },
+    {
+      "role": "danger",
+      "foreground": "#991B1B",
+      "background": "#FEF2F2",
+      "ratio": 7.6
+    },
+    {
+      "role": "info",
+      "foreground": "#1D4ED8",
+      "background": "#EFF6FF",
+      "ratio": 6.16
+    }
+  ],
+  "bodyOnScreenBackground": {
+    "foreground": "#5B6472",
+    "background": "#F6F8FB",
+    "ratio": 5.62
+  },
+  "heatmap": {
+    "stops": [
+      {
+        "hex": "#DBEAFE",
+        "luminance": 0.81061
+      },
+      {
+        "hex": "#93C5FD",
+        "luminance": 0.53227
+      },
+      {
+        "hex": "#60A5FA",
+        "luminance": 0.36299
+      },
+      {
+        "hex": "#2563EB",
+        "luminance": 0.15315
+      },
+      {
+        "hex": "#1E3A8A",
+        "luminance": 0.05137
+      }
+    ],
+    "lightnessStrictlyDecreases": true,
+    "minValue": 60,
+    "maxValue": 70,
+    "missingValueSymbol": "—",
+    "note": "Color changes monotonically with the scalar humidity value. Empty future slots have a dash and a border. The scale is not a health classification."
+  },
+  "scope": "Calculated contrast for the declared palette roles and reviewed views; not a certification of every possible interactive state. Metric names, units, values and missing-data symbols are visible independently of hue."
+}
