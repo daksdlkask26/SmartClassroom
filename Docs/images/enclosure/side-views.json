@@ -1,13 +1,18 @@
 {
   "source_document": "SmartClassroom",
-  "source_id": "urn:adsk.wipprod:dm.lineage:T9J_7if9RQCa9Fe9513dOg",
+  "revision": "2026-11-04 both sensors on floor in separate white compartments",
   "views": {
+    "exterior.png": true,
+    "interior.png": true,
     "front.png": true,
     "rear.png": true,
     "left.png": true,
-    "right.png": true
+    "right.png": true,
+    "exploded.png": true,
+    "lid-fasteners.png": true
   },
   "projection": "orthographic, Z up",
   "geometry_or_materials_edited": false,
-  "camera_and_lid_frames_restored": true
+  "camera_and_assembly_restored": true,
+  "elevation_visual_style": "ShadedWithVisibleEdgesOnlyVisualStyle"
 }

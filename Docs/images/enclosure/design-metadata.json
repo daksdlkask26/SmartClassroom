@@ -1,0 +1,146 @@
+{
+  "layout": {
+    "revision": "2026-11-04 separate sensor compartments, neither sensor wall mounted",
+    "units": "mm",
+    "DHT22_bounds": [
+      [
+        5.74999797716734,
+        30.925664716286015,
+        3.3999999999999986
+      ],
+      [
+        21.25000202283266,
+        74.672911156745,
+        12.775312289227724
+      ]
+    ],
+    "DHT22_sensing_face": "+Z, facing the existing lid vents",
+    "DHT22_minimum_gap_over_floor": 0.9999999999999987,
+    "DHT22_floor_fixing": "No mounting posts. Adhesive/pad type and final thickness to be selected against the actual module.",
+    "MQ135_transform_unchanged": true,
+    "MQ135_compartment": {
+      "inner_wall_x": [
+        118.0,
+        119.8
+      ],
+      "front_wall_y": [
+        16.3,
+        17.9
+      ],
+      "rear_wall_y": [
+        82.0,
+        83.8
+      ],
+      "outer_edge_x": 157.0,
+      "bottom_z": 2.4,
+      "top_z": 57.1,
+      "top_gap_to_lid": 0.5,
+      "outer_side_gap": 0.6,
+      "removal": "Lift upward with the lid removed."
+    },
+    "both_low_passages_yz": {
+      "y": [
+        22,
+        32
+      ],
+      "z": [
+        4,
+        14
+      ],
+      "corner_radius": 2
+    },
+    "wiring": "No wire or harness solids.",
+    "timeline_problems": [],
+    "validation_limit": "Mechanical prototype only. Verify real sensor dimensions, floor fixation, print fit and powered temperature/humidity/gas readings."
+  },
+  "verification": {
+    "solid_body_count": 5,
+    "solid_interferences_with_lid_seated": [],
+    "mesh_checks": [
+      {
+        "sensor": "B1 - DHT22 module - downloaded mesh:1",
+        "sample_count": 5360,
+        "hit_count": 0,
+        "hit_examples": [],
+        "bounds_mm": [
+          [
+            5.74999797716734,
+            30.925664716286015,
+            3.3999999999999986
+          ],
+          [
+            21.25000202283266,
+            74.672911156745,
+            12.775312289227724
+          ]
+        ]
+      },
+      {
+        "sensor": "C1 - MQ-135 module - downloaded mesh:1",
+        "sample_count": 19938,
+        "hit_count": 0,
+        "hit_examples": [],
+        "bounds_mm": [
+          [
+            129.17499908320605,
+            35.76310504619934,
+            5.778478458203056
+          ],
+          [
+            149.82500091679395,
+            75.12500024028122,
+            27.13677469397745
+          ]
+        ]
+      }
+    ],
+    "old_DHT22_and_unused_MQ_wire_supports_removed": true,
+    "DHT22_wall_mounts_removed": true,
+    "remaining_DHT22_fastener_or_wire_occurrences": [],
+    "DHT22_sensing_face_up": true,
+    "DHT22_gap_above_floor_mm": 0.9999999999999987,
+    "MQ135_original_pose_preserved": true,
+    "MQ135_max_pose_difference": 0.0,
+    "MQ135_compartment_top_gap_mm": 0.4999999999999929,
+    "wall_colours_match": true,
+    "colour_audit": [
+      {
+        "component": "01 - Enclosure base [160 x 100 x 57.6 mm]:1",
+        "appearance": "SC - warm white shell",
+        "different_face_count": 0
+      },
+      {
+        "component": "03 - Removable MQ135 sensor compartment:1",
+        "appearance": "SC - warm white shell",
+        "different_face_count": 0
+      },
+      {
+        "component": "B3 - DHT22 lift-out front service gate:1",
+        "appearance": "SC - warm white shell",
+        "different_face_count": 0
+      }
+    ],
+    "user_lid_pose_restored": true,
+    "timeline_problems": [],
+    "limits": "BRep checks and sampled imported mesh checks only; verify physical fixation, print tolerances and sensor readings on a powered prototype."
+  },
+  "proposal_export": {
+    "source_document": "SmartClassroom",
+    "revision": "2026-11-04 both sensors on floor in separate white compartments",
+    "views": {
+      "exterior.png": true,
+      "interior.png": true,
+      "front.png": true,
+      "rear.png": true,
+      "left.png": true,
+      "right.png": true,
+      "exploded.png": true,
+      "lid-fasteners.png": true
+    },
+    "archive": true,
+    "projection": "orthographic, Z up",
+    "geometry_or_materials_edited": false,
+    "camera_and_assembly_restored": true,
+    "elevation_visual_style": "ShadedWithVisibleEdgesOnlyVisualStyle"
+  }
+}
