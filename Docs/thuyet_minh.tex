@@ -400,9 +400,9 @@ Quản lý mã nguồn & Git, GitHub & Tích hợp mã nguồn của cả nhóm 
 \label{sec:caidat}
 Các cấu hình kỹ thuật (cloud, MQTT broker, Telegram bot) do nhóm thiết lập sẵn. Người dùng chỉ thao tác trên giao diện:
 \begin{enumerate}
-  \item \textbf{Kết nối WiFi (chức năng 10):} cắm điện, kết nối điện thoại vào WiFi của thiết bị, chọn WiFi nhà trên trang tự hiện ra.
-  \item \textbf{Tạo tài khoản (chức năng 8):} đăng ký và đăng nhập trên website.
-  \item \textbf{Kết nối Telegram (chức năng 6, 7):} nhắn \texttt{/start} cho bot để nhận thông báo và hỏi nhanh tình trạng phòng.
+  \item \textbf{Kết nối WiFi (chức năng 10):} cắm điện, kết nối điện thoại vào WiFi của thiết bị, chọn WiFi nhà trên trang tự hiện ra (Hình~\ref{fig:ri-portal}).
+  \item \textbf{Tạo tài khoản (chức năng 8):} đăng ký và đăng nhập trên website (Hình~\ref{fig:ri-dk01}, \ref{fig:ri-mb01}).
+  \item \textbf{Kết nối Telegram (chức năng 6, 7):} nhắn \texttt{/start} cho bot để nhận thông báo và hỏi nhanh tình trạng phòng; trang Telegram trên website hướng dẫn 3 bước (Hình~\ref{fig:ri-dk12}).
 \end{enumerate}
 
 \clearpage
@@ -415,15 +415,15 @@ Các hình thể hiện bố trí mới nhất: DHT22 nằm ngang ở đáy khoa
 
 \noindent\begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=0.96\linewidth,height=8cm,keepaspectratio]{images/enclosure/exterior.png}
-\captionof{figure}{Hình dáng bên ngoài của hộp, với cửa sổ LED, khe thông khí và nắp bắt vít.}
+\includegraphics[width=0.96\linewidth,height=8cm,keepaspectratio]{images/enclosure/exterior-annotated.png}
+\captionof{figure}{Hình dáng bên ngoài của hộp: B, C là khe gió trên nắp cho DHT22 (ID 1) và MQ-135 (ID 2); D là cửa sổ thanh LED WS2812 (ID 3); E là lỗ nhấn nút BOOT để đổi WiFi (ID 10).}
 \label{fig:hop-ben-ngoai}
 \end{minipage}\par\medskip
 
 \noindent\begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=0.96\linewidth,height=8cm,keepaspectratio]{images/enclosure/interior.png}
-\captionof{figure}{Bố trí bên trong: ESP32 ở giữa, DHT22 và MQ-135 trong hai khoang riêng, thanh LED ở mặt trước.}
+\includegraphics[width=0.96\linewidth,height=8cm,keepaspectratio]{images/enclosure/interior-annotated.png}
+\captionof{figure}{Bố trí bên trong (đã tháo nắp): A là ESP32 trên board đỡ ở giữa (ID 1--10); B là DHT22 (ID 1) và C là MQ-135 (ID 2), mỗi cảm biến một khoang riêng; D là thanh LED WS2812 sau cửa sổ mặt trước (ID 3); E là nút BOOT có sẵn trên ESP32 (ID 10).}
 \label{fig:hop-ben-trong}
 \end{minipage}
 
@@ -509,89 +509,164 @@ Thanh LED lấy tám ô từ model STEP do nhóm cung cấp và bổ sung đầu
 
 \clearpage
 \subsection{Hình ảnh wireframe cho website quản lý sản phẩm}
-Các hình dưới đây trích từ bộ thiết kế V3 được cập nhật ngày 04/11/2026 của nhóm, gồm website quản lý, giao diện điện thoại và portal cấu hình WiFi. Giao diện dùng Manrope cho tiêu đề, số liệu và Be Vietnam Pro cho nội dung; phong cách trắng--đen, điều hướng ngang trên desktop. Màu được giữ ở lựa chọn LED và trạng thái cần chú ý. Mỗi hình ghi ID chức năng tương ứng với mục~\ref{sec:chucnang}. Số liệu là dữ liệu minh họa. Web và điện thoại dùng chung tài khoản, dữ liệu và hệ thống ID 9.
+\label{sec:wireframe}
+Các hình dưới đây trích từ bộ thiết kế giao diện \emph{Room Instrument} của nhóm (thiết kế trên Figma, cập nhật ngày 07/11/2026). Bộ thiết kế gồm 17 màn hình cho máy tính (rộng 1440~px), 19 màn hình cho điện thoại (rộng 390~px), 4 trang portal cấu hình WiFi chạy trên ESP32 và 14 khung trạng thái (đang tải, mất kết nối, dữ liệu cũ, lỗi cảm biến, lỗi đăng nhập\ldots). Mục này trình bày sáu trang chính; ID chức năng (mục~\ref{sec:chucnang}) của từng trang ghi ở tiêu đề và chú thích hình, bảng cuối mục tổng hợp lại theo ID. Số liệu trên hình là dữ liệu minh họa (độ ẩm 64,5\%, nhiệt độ 27,5~°C, CO\textsubscript{2} 850~ppm lúc 14:30).
 
-Gauge bán tròn thể hiện độ ẩm trên thang 0--100\%; nhiệt độ và CO\textsubscript{2} ước lượng dùng số và xu hướng. Thanh trượt độ sáng LED 1--100\% là đề xuất mở rộng cho ID 3, cần bổ sung xử lý lệnh ở backend và ESP32 khi triển khai. Màu và độ sáng được xem trước, chỉ gửi khi nhấn Áp dụng; công tắc bật/tắt gửi ngay.
+\textbf{Bố cục chung.} Máy tính có thanh điều hướng bên trái, điện thoại có thanh điều hướng ở đáy, cùng năm mục: Giám sát, Đèn LED, Lịch sử, Telegram, Thiết bị. Trên mọi trang, thanh trạng thái ở trên cùng (ID 9) cho biết website đang nhận dữ liệu từ thiết bị hay không: \emph{trực tuyến}, \emph{dữ liệu cũ} (quá 90 giây không có bản tin mới), \emph{thiết bị ngoại tuyến} hoặc \emph{mất kết nối}.
+
+\textbf{Phong cách.} Giao diện mô phỏng mặt một dụng cụ đo: nền trắng--đen--xám, chữ số dạng ma trận chấm, đồng hồ (gauge) có vạch chia cho cả ba chỉ số. Màu chỉ dùng để nhấn: cam đỏ cho cảnh báo và vùng ngoài ngưỡng 30--85\%, xanh lá cho trạng thái trực tuyến và ``Đã gửi lệnh'', vàng cho dữ liệu cũ; mỗi chỉ số có một màu dữ liệu riêng (độ ẩm xanh dương, nhiệt độ hồng tím, CO\textsubscript{2} xanh ngọc) nhưng nhiệt độ và CO\textsubscript{2} không được tô màu tốt/xấu. Mọi trạng thái đều có chữ đi kèm nên in đen trắng vẫn đọc được. Hình bản sao thiết bị (Device Twin) vẽ đúng hộp $160 \times 100 \times 60$~mm ở mục 2.1 với các điểm B, C, D, E; cửa sổ LED trên hình hiển thị màu đã gửi.
+
+\textbf{Đèn LED (ID 3)} chỉ có hai thao tác đúng như luồng xử lý ở mục 1: chọn màu và bật/tắt. Màu được chọn là bản nháp và chỉ gửi khi nhấn \emph{Áp dụng}; công tắc bật/tắt gửi ngay. Vì ESP32 không gửi lại xác nhận, giao diện chỉ ghi ``Đã gửi lệnh đến thiết bị'', không khẳng định đèn đã đổi màu.
+
+% ---------------- Trang 1: Đăng nhập, đăng ký ----------------
+\needspace{22\baselineskip}
+\medskip
+\textbf{Trang 1 --- Đăng nhập và đăng ký (ID 8, 9)}
 
 \noindent\begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=12cm,height=17.8cm,keepaspectratio]{images/wireframes/report-wireframe-web-auth.png}
-\captionof{figure}{Wireframe đăng nhập và đăng ký tài khoản trên website (ID 8, 9).}
-\label{fig:wireframe-web-auth}
-\end{minipage}
+\includegraphics[width=\linewidth]{images/wireframes-room-instrument/clean/dk01.png}
+\captionof{figure}{Đăng nhập trên máy tính (DK-01). Chưa đăng nhập thì chỉ thấy hình thiết bị, không thấy số liệu (ID 8, 9).}
+\label{fig:ri-dk01}
+\end{minipage}\par\medskip
 
-\clearpage
 \noindent\begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=12.8cm,height=18.5cm,keepaspectratio]{images/wireframes/report-wireframe-web-monitor-led.png}
-\captionof{figure}{Điều hướng ngang trên nền trắng--đen; giám sát bằng gauge độ ẩm và điều khiển màu, độ sáng LED (ID 1, 2, 3, 8, 9).}
-\label{fig:wireframe-web-monitor-led}
+\includegraphics[width=0.62\linewidth,height=10.5cm,keepaspectratio]{images/wireframes-room-instrument/clean/mb01-02.png}
+\captionof{figure}{Đăng nhập (MB-01) và đăng ký (MB-02) trên điện thoại: tên đăng nhập, mật khẩu có Hiện/Ẩn, quy tắc mật khẩu (ID 8).}
+\label{fig:ri-mb01}
 \end{minipage}
 
-\clearpage
+% ---------------- Trang 2: Giám sát ----------------
+\needspace{22\baselineskip}
+\medskip
+\textbf{Trang 2 --- Giám sát (ID 1, 2, 3, 5, 9)}
+
 \noindent\begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=12.8cm,height=20.6cm,keepaspectratio]{images/wireframes/report-wireframe-web-analytics.png}
-\captionof{figure}{Lịch sử với mốc giờ/ngày, vạch 00:00, cột gốc 0 và heatmap có thang số; dữ liệu lưu theo ID 4 phục vụ ID 5 trên website ID 9.}
-\label{fig:wireframe-web-analytics}
+\includegraphics[width=\linewidth]{images/wireframes-room-instrument/clean/dk04.png}
+\captionof{figure}{Giám sát trên máy tính (DK-04): ba đồng hồ độ ẩm, nhiệt độ, CO\textsubscript{2} ước lượng; hình thiết bị; khối LED nhanh và đường xu hướng 24 giờ; thanh trạng thái kết nối ở trên cùng (ID 1, 2, 3, 5, 9).}
+\label{fig:ri-dk04}
 \end{minipage}
 
-\clearpage
+\medskip
 \noindent\begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=9.5cm,height=20.6cm,keepaspectratio]{images/wireframes/ui-app-led.png}
-\captionof{figure}{Giao diện LED trên điện thoại: phân biệt yêu cầu đã gửi với màu và độ sáng đang chọn; nhấn Áp dụng để gửi. Bộ chọn màu trực quan và HEX nằm trong phần tùy chỉnh (ID 3, hệ thống ID 9).}
-\label{fig:wireframe-mobile-led}
+\includegraphics[width=0.40\linewidth,height=19cm,keepaspectratio]{images/wireframes-room-instrument/clean/mb04.png}
+\captionof{figure}{Giám sát trên điện thoại (MB-04): độ ẩm với ngưỡng 30--85\%, nhiệt độ, CO\textsubscript{2} ước lượng, LED nhanh, xu hướng 24 giờ (ID 1, 2, 3, 5).}
+\label{fig:ri-mb04}
 \end{minipage}
 
-\clearpage
+% ---------------- Trang 3: Đèn LED ----------------
+\needspace{22\baselineskip}
+\medskip
+\textbf{Trang 3 --- Đèn LED (ID 3)}
+
 \noindent\begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=12.8cm,height=20.6cm,keepaspectratio]{images/wireframes/report-wireframe-app-daily-analytics.png}
-\captionof{figure}{Phân tích trên điện thoại: cột ngang có nhãn từng ngày, heatmap ngày/giờ và lối vào chi tiết ngày. Dấu gạch ngang chỉ mốc chưa có dữ liệu (ID 4, 5, 9).}
-\label{fig:wireframe-mobile-daily}
-\end{minipage}
+\includegraphics[width=\linewidth]{images/wireframes-room-instrument/clean/dk06.png}
+\captionof{figure}{Điều khiển đèn LED trên máy tính (DK-06): cửa sổ 8 ô so sánh bản nháp với màu đã gửi, bảng 10 màu có tên và mã HEX, công tắc Bật/Tắt, Áp dụng / Hủy (ID 3).}
+\label{fig:ri-dk06}
+\end{minipage}\par\medskip
 
-\clearpage
 \noindent\begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=12.8cm,height=18.5cm,keepaspectratio]{images/wireframes/report-wireframe-wifi.png}
-\captionof{figure}{Wireframe portal cấu hình WiFi của ESP32 trên trình duyệt điện thoại (ID 10).}
-\label{fig:wireframe-wifi}
+\includegraphics[width=0.40\linewidth,height=11cm,keepaspectratio]{images/wireframes-room-instrument/clean/mb06.png}
+\captionof{figure}{Đèn LED trên điện thoại (MB-06); nút Áp dụng / Hủy dính ở đáy màn hình (ID 3).}
+\label{fig:ri-mb06}
 \end{minipage}
 
-\clearpage
+% ---------------- Trang 4: Lịch sử ----------------
+\needspace{22\baselineskip}
+\medskip
+\textbf{Trang 4 --- Lịch sử (ID 4, 5)}
+
 \noindent\begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=12.8cm,height=19cm,keepaspectratio]{images/wireframes/report-wireframe-connection-telegram.png}
-\captionof{figure}{Kết nối thiết bị và Telegram: đổi WiFi bằng nút BOOT, đăng ký bằng \texttt{/start}, hỏi bằng \texttt{/doam}, \texttt{/trangthai} và cảnh báo khi độ ẩm dưới 30\% hoặc trên 85\% (ID 6, 7, 9, 10).}
-\label{fig:wireframe-connection-telegram}
+\includegraphics[width=\linewidth]{images/wireframes-room-instrument/clean/dk08.png}
+\captionof{figure}{Lịch sử theo giờ trên máy tính (DK-08): mỗi chỉ số một biểu đồ có đơn vị và tóm tắt; biểu đồ độ ẩm có đường ngưỡng 30\% và 85\% (ID 4, 5).}
+\label{fig:ri-dk08}
 \end{minipage}
 
-\clearpage
-Bộ thiết kế gồm 14 màn web, 19 màn điện thoại và 2 trang WiFi. Các trang chi tiết bổ sung nhiệt độ, CO\textsubscript{2}, bản ghi, bộ lọc thời gian, ngày đã chọn, kết nối thiết bị, Telegram và phiên tài khoản. Biểu đồ tách nhãn giờ và ngày, có vạch 00:00 khi sang ngày mới và đơn vị trên trục. Cột ngày bắt đầu từ 0; ngày chưa kết thúc và mốc chưa có dữ liệu được ký hiệu riêng. Dữ liệu lưu tự động theo ID 4, không có thao tác lưu từng cảm biến.
+\medskip
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=0.40\linewidth,height=14cm,keepaspectratio]{images/wireframes-room-instrument/clean/mb08.png}
+\captionof{figure}{Lịch sử trên điện thoại (MB-08): tab chọn chỉ số, chạm và kéo để đọc giá trị từng giờ (ID 4, 5).}
+\label{fig:ri-mb08}
+\end{minipage}
 
-\needspace{10\baselineskip}
-\textbf{Bảng chú thích vùng trên wireframe}
+Dữ liệu được Backend lưu tự động vào Firestore mỗi khi thiết bị gửi bản tin (ID 4), nên trang này không có nút lưu. Biểu đồ không nối qua mốc thiếu dữ liệu; ngày chưa kết thúc được ký hiệu riêng.
+
+% ---------------- Trang 5: Telegram ----------------
+\needspace{22\baselineskip}
+\medskip
+\textbf{Trang 5 --- Telegram (ID 6, 7)}
+
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{images/wireframes-room-instrument/clean/dk12.png}
+\captionof{figure}{Trang Telegram trên máy tính (DK-12): liên kết 3 bước, quy tắc cảnh báo khi độ ẩm dưới 30\% hoặc trên 85\% với khoảng nghỉ 30 phút, lệnh \texttt{/doam}, \texttt{/trangthai} (ID 6, 7).}
+\label{fig:ri-dk12}
+\end{minipage}
+
+\medskip
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=0.40\linewidth,height=21cm,keepaspectratio]{images/wireframes-room-instrument/clean/mb12.png}
+\captionof{figure}{Telegram trên điện thoại (MB-12) (ID 6, 7).}
+\label{fig:ri-mb12}
+\end{minipage}
+
+Trang chỉ hướng dẫn và nêu quy tắc; website không hiển thị trạng thái ``đã liên kết'' vì việc đăng ký người nhận diễn ra trong Telegram. Nhiệt độ và CO\textsubscript{2} không có cảnh báo.
+
+% ---------------- Trang 6: Thiết bị, WiFi ----------------
+\needspace{22\baselineskip}
+\medskip
+\textbf{Trang 6 --- Thiết bị và cấu hình WiFi (ID 10)}
+
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{images/wireframes-room-instrument/clean/dk13.png}
+\captionof{figure}{Thiết bị và WiFi trên máy tính (DK-13): tình trạng kết nối, cảm biến, LED; đổi WiFi bằng cách giữ nút BOOT (điểm E) 5 giây (ID 1, 2, 3, 9, 10).}
+\label{fig:ri-dk13}
+\end{minipage}\par\medskip
+
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{images/wireframes-room-instrument/clean/pt01-03.png}
+\captionof{figure}{Portal cấu hình WiFi do ESP32 phát: chọn mạng (PT-01), nhập mật khẩu và đang kết nối (PT-02), đã lưu và khởi động lại (PT-03). Trang chạy trên điện thoại không có internet nên chỉ dùng phông chữ của hệ thống (ID 10).}
+\label{fig:ri-portal}
+\end{minipage}
+
+\medskip
+\noindent\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=0.40\linewidth,height=19cm,keepaspectratio]{images/wireframes-room-instrument/clean/mb13.png}
+\captionof{figure}{Thiết bị và WiFi trên điện thoại (MB-13) (ID 1, 2, 3, 9, 10).}
+\label{fig:ri-mb13}
+\end{minipage}
+
+\medskip
+\needspace{12\baselineskip}
+\textbf{Tổng hợp vùng giao diện theo ID chức năng}
 
 \small
-\begin{tabularx}{\linewidth}{I L{3.2cm} i C{1.8cm} i Y I}
+\begin{tabularx}{\linewidth}{I L{3.6cm} i C{1.8cm} i Y I}
 \outerline
-\rowcolor{gray!15}\textbf{Trang, vùng} & \textbf{ID chức năng} & \textbf{Nội dung} \\
+\rowcolor{gray!15}\textbf{Trang} & \textbf{ID chức năng} & \textbf{Vùng chính} \\
 \hline
-Đăng nhập, đăng ký & 8, 9 & Biểu mẫu tạo tài khoản và đăng nhập \\
+Đăng nhập, đăng ký & 8, 9 & Biểu mẫu tài khoản (tên đăng nhập, mật khẩu Hiện/Ẩn, quy tắc mật khẩu); chưa đăng nhập không thấy số liệu \\
 \hline
-Giám sát: ô độ ẩm, nhiệt độ & 1, 9 & Gauge độ ẩm 0--100\%; nhiệt độ dạng số và xu hướng \\
+Giám sát & 1, 2, 3, 5, 9 & Đồng hồ và số độ ẩm (ngưỡng 30--85\%), nhiệt độ, CO\textsubscript{2} ước lượng; hình thiết bị; LED nhanh; xu hướng 24 giờ; thanh trạng thái \\
 \hline
-Giám sát: ô CO\textsubscript{2} & 2, 9 & Giá trị CO\textsubscript{2} ước lượng dạng số và xu hướng \\
+Đèn LED & 3 & Chọn màu (bản nháp, Áp dụng / Hủy), Bật/Tắt; ghi ``Đã gửi lệnh'' \\
 \hline
-Giám sát và LED & 3, 9 & Chọn màu, xem trước, áp dụng; đề xuất slider độ sáng; công tắc gửi ngay \\
+Lịch sử & 4, 5 & Biểu đồ theo giờ / ngày, khoảng thời gian, bảng số; dữ liệu lưu tự động \\
 \hline
-Lịch sử, bản ghi, chi tiết ngày & 4, 5, 9 & Mốc đo có đơn vị và thời gian; biểu đồ giờ/ngày, bảng bản ghi; dữ liệu lưu tự động \\
+Telegram & 6, 7 & Hướng dẫn 3 bước, quy tắc ngưỡng và khoảng nghỉ 30 phút, lệnh \texttt{/doam}, \texttt{/trangthai} \\
 \hline
-Thiết bị và Telegram & 6, 7, 9, 10 & Hướng dẫn kết nối; đăng ký nhận cảnh báo và hỏi nhanh qua bot Telegram \\
-\hline
-Cấu hình WiFi & 10 & Chọn WiFi nhà, nhập mật khẩu \\
+Thiết bị, portal WiFi & 1, 2, 3, 9, 10 & Tình trạng thiết bị; đổi WiFi bằng nút BOOT; chọn mạng và nhập mật khẩu trên portal \\
 \outerline
 \end{tabularx}
 \normalsize
@@ -680,8 +755,32 @@ Giá là giá tham khảo trên các trang Shopee tại thời điểm viết th
 \end{tabularx}
 \normalsize
 
-{\small\textit{* Hình ảnh linh kiện đặt riêng trên Google Drive ở chế độ công khai; bấm ``Xem ảnh'' trong bảng để mở từng ảnh, hoặc xem cả thư mục tại \href{https://drive.google.com/drive/folders/1DEdrkEqPuPWwYqI82GZheDMker8lTOZY}{\textcolor{blue}{\underline{liên kết thư mục ảnh}}}.}\\
+{\small\textit{* Hình ảnh linh kiện và vật liệu được in ngay bên dưới (Hình~\ref{fig:linhkien}, \ref{fig:vatlieu}); ảnh gốc đặt trên Google Drive ở chế độ công khai, bấm ``Xem ảnh'' trong bảng để mở từng ảnh, hoặc xem cả thư mục tại \href{https://drive.google.com/drive/folders/1DEdrkEqPuPWwYqI82GZheDMker8lTOZY}{\textcolor{blue}{\underline{liên kết thư mục ảnh}}}.}\\
 \textit{Phần mềm và hạ tầng (HiveMQ Cloud, Firebase, Telegram Bot API, SQLite) dùng gói miễn phí nên không tính chi phí.}}
+
+\needspace{18\baselineskip}
+\medskip
+\noindent\begin{minipage}{\linewidth}
+\centering
+\newcommand{\anhlk}[2]{\begin{minipage}[t]{0.19\linewidth}\centering\includegraphics[width=\linewidth]{images/components/report/#1}\\[-2pt]{\footnotesize #2}\end{minipage}}
+\anhlk{esp32.png}{1. ESP32 DevKitC\\(ID 1--10)}\hfill
+\anhlk{dht22.png}{2. DHT22\\(ID 1)}\hfill
+\anhlk{mq135.png}{3. MQ-135\\(ID 2)}\hfill
+\anhlk{ws2812.png}{4. LED WS2812\\8 bóng (ID 3)}\hfill
+\anhlk{board-day.png}{5. Dây nối\\(ID 1--3)}
+\captionof{figure}{Hình ảnh linh kiện điện tử, đánh số theo cột STT của bảng linh kiện.}
+\label{fig:linhkien}
+\end{minipage}\par\medskip
+
+\noindent\begin{minipage}{\linewidth}
+\centering
+\newcommand{\anhvl}[2]{\begin{minipage}[t]{0.19\linewidth}\centering\includegraphics[width=\linewidth]{images/components/report/#1}\\[-2pt]{\footnotesize #2}\end{minipage}}
+\anhvl{foamboard.png}{1. Bìa Formex\\2 mm}\hspace{0.06\linewidth}
+\anhvl{sungbankeo.png}{2. Súng bắn keo\\và keo nến}\hspace{0.06\linewidth}
+\anhvl{bangkeo.png}{3. Băng keo\\hai mặt}
+\captionof{figure}{Hình ảnh vật liệu làm hộp, đánh số theo cột STT của bảng vật liệu.}
+\label{fig:vatlieu}
+\end{minipage}
 
 \needspace{18\baselineskip}
 \subsection{Kế hoạch thực hiện}
