@@ -6,6 +6,9 @@ $jobName = '16_24127261_24127542_24127581_PROPOSAL'
 $compiler = Get-Command xelatex -ErrorAction Stop
 $jobOption = if ($compiler.Source -match '(?i)miktex') { "--job-name=$jobName" } else { "--jobname=$jobName" }
 New-Item -ItemType Directory -Path $buildPath -Force | Out-Null
+# Prefer this build's auxiliary files over legacy files beside the source.
+$previousTexInputs = $env:TEXINPUTS
+$env:TEXINPUTS = "$buildPath;$docsPath;$previousTexInputs"
 Push-Location -LiteralPath $docsPath
 try {
     for ($pass = 1; $pass -le 3; $pass++) {
@@ -23,4 +26,7 @@ try {
     $outputPdf = Join-Path $docsPath "$jobName.pdf"
     Copy-Item -LiteralPath $builtPdf -Destination $outputPdf -Force
     Write-Output "Built: $outputPdf"
-} finally { Pop-Location }
+} finally {
+    Pop-Location
+    $env:TEXINPUTS = $previousTexInputs
+}
