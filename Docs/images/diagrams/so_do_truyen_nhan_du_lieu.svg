@@ -20,13 +20,13 @@
 <text x="135" y="228" font-size="18" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">chất lượng không khí</text>
 <rect x="20" y="300" width="230" height="76" rx="10" fill="#E3F0FB" stroke="#1F5FA8" stroke-width="2.5"/>
 <text x="135" y="330" font-size="22" text-anchor="middle" font-weight="bold" font-style="normal" fill="#111">LED RGB WS2812</text>
-<text x="135" y="356" font-size="18" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">8 bóng (thiết bị đầu ra)</text>
+<text x="135" y="356" font-size="17" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">2 hệ thống + 6 môi trường</text>
 <rect x="345" y="70" width="340" height="300" rx="10" fill="#FFF3E0" stroke="#5D4037" stroke-width="2.5"/>
 <text x="515" y="102" font-size="22" text-anchor="middle" font-weight="bold" font-style="normal" fill="#111">Board ESP32 DevKitC</text>
 <text x="515" y="140" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">Firmware C++ (Arduino)</text>
 <text x="515" y="170" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">đọc cảm biến, quy đổi CO<tspan baseline-shift="sub" font-size="72%">2</tspan></text>
-<text x="515" y="200" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">nhận lệnh, điều khiển LED</text>
-<text x="515" y="230" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">WiFiManager: lưu WiFi vào flash</text>
+<text x="515" y="200" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">phân mức, tự đổi màu LED</text>
+<text x="515" y="230" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">lưu WiFi, bảng màu vào flash</text>
 <text x="515" y="260" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">MQTT client: publish, subscribe</text>
 <text x="515" y="290" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">phục vụ chức năng ID 1, 2, 3, 10</text>
 <text x="515" y="345" font-size="18" text-anchor="middle" font-weight="normal" font-style="italic" fill="#555">kết nối WiFi nhà → internet</text>
@@ -85,7 +85,7 @@
 <circle cx="650" cy="605" r="15" fill="#E65100" stroke="#fff" stroke-width="2"/>
 <text x="650" y="611" font-size="16" text-anchor="middle" font-weight="bold" fill="#fff">3</text>
 <text x="672" y="586" font-size="17" text-anchor="start" font-weight="normal" font-style="normal" fill="#111">publish led/cmd</text>
-<text x="672" y="606" font-size="17" text-anchor="start" font-weight="normal" font-style="normal" fill="#111">{màu, bật/tắt}</text>
+<text x="672" y="606" font-size="17" text-anchor="start" font-weight="normal" font-style="normal" fill="#111">{bảng màu, chế độ}</text>
 <rect x="345" y="660" width="340" height="180" rx="10" fill="#F5F5F5" stroke="#555555" stroke-width="2.5"/>
 <text x="515" y="696" font-size="22" text-anchor="middle" font-weight="bold" font-style="normal" fill="#111">Backend Node.js</text>
 <text x="515" y="728" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">Express · mqtt.js · WebSocket</text>
@@ -149,13 +149,13 @@
 <circle cx="645" cy="920" r="15" fill="#6A1B9A" stroke="#fff" stroke-width="2"/>
 <text x="645" y="926" font-size="16" text-anchor="middle" font-weight="bold" fill="#fff">5</text>
 <text x="668" y="905" font-size="18" text-anchor="start" font-weight="bold" font-style="normal" fill="#111">HTTP</text>
-<text x="668" y="928" font-size="17" text-anchor="start" font-weight="normal" font-style="normal" fill="#E65100">ID 3: lệnh LED</text>
+<text x="668" y="928" font-size="17" text-anchor="start" font-weight="normal" font-style="normal" fill="#E65100">ID 3: cấu hình LED</text>
 <text x="668" y="951" font-size="17" text-anchor="start" font-weight="normal" font-style="normal" fill="#00838F">ID 8: đăng nhập</text>
 <text x="668" y="974" font-size="17" text-anchor="start" font-weight="normal" font-style="normal" fill="#6A1B9A">ID 5: biểu đồ</text>
 <rect x="345" y="1000" width="340" height="120" rx="10" fill="#F5F5F5" stroke="#555555" stroke-width="2.5"/>
 <text x="515" y="1036" font-size="22" text-anchor="middle" font-weight="bold" font-style="normal" fill="#111">Frontend (trình duyệt)</text>
 <text x="515" y="1066" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">đăng nhập · gauge · biểu đồ</text>
-<text x="515" y="1094" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">nút điều khiển LED</text>
+<text x="515" y="1094" font-size="19" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">bảng màu · chế độ LED</text>
 <rect x="20" y="1010" width="230" height="100" rx="10" fill="#FFFFFF" stroke="#212121" stroke-width="2.5"/>
 <text x="135" y="1050" font-size="22" text-anchor="middle" font-weight="bold" font-style="normal" fill="#111">Người dùng</text>
 <text x="135" y="1078" font-size="18" text-anchor="middle" font-weight="normal" font-style="normal" fill="#111">giảng viên, sinh viên</text>
@@ -169,7 +169,7 @@
 <line x1="20" y1="1283" x2="78" y2="1283" stroke="#2E7D32" stroke-width="4" stroke-dasharray="14 7" stroke-linecap="butt" marker-end="url(#a-green)"/>
 <text x="92" y="1289" font-size="17.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#111">ID 2: MQ-135 → web: {CO<tspan baseline-shift="sub" font-size="72%">2</tspan> ppm}</text>
 <line x1="20" y1="1317" x2="78" y2="1317" stroke="#E65100" stroke-width="4" stroke-dasharray="18 6 3 6" stroke-linecap="butt" marker-end="url(#a-orange)"/>
-<text x="92" y="1323" font-size="17.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#111">ID 3: web → LED: {màu, bật/tắt}</text>
+<text x="92" y="1323" font-size="17.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#111">ID 3: bảng màu / chế độ → ESP32 → LED</text>
 <line x1="20" y1="1351" x2="78" y2="1351" stroke="#6A1B9A" stroke-width="4" stroke-linecap="butt" marker-end="url(#a-purple)"/>
 <text x="92" y="1357" font-size="17.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#111">ID 4: ghi {giá trị, thời gian} lên Firestore</text>
 <line x1="20" y1="1385" x2="78" y2="1385" stroke="#6A1B9A" stroke-width="4" stroke-dasharray="3 7" stroke-linecap="butt" marker-end="url(#a-purple)"/>
