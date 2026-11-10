@@ -423,7 +423,7 @@ Các hình thể hiện bố trí mới nhất: DHT22 nằm ngang ở đáy khoa
 \noindent\begin{minipage}{\linewidth}
 \centering
 \includegraphics[width=0.96\linewidth,height=8cm,keepaspectratio]{images/enclosure/interior-annotated.png}
-\captionof{figure}{Bố trí bên trong (đã tháo nắp): A là ESP32 trên board đỡ ở giữa (ID 1--10); B là DHT22 (ID 1) và C là MQ-135 (ID 2), mỗi cảm biến một khoang riêng; D là thanh LED WS2812 sau cửa sổ mặt trước (ID 3); E là nút BOOT có sẵn trên ESP32 (ID 10).}
+\captionof{figure}{Bố trí bên trong (đã tháo nắp): A là ESP32 cắm trên breadboard ở giữa (ID 1--10); B là DHT22 (ID 1) và C là MQ-135 (ID 2), mỗi cảm biến một khoang riêng; D là thanh LED WS2812 sau cửa sổ mặt trước (ID 3); E là nút BOOT có sẵn trên ESP32 (ID 10).}
 \label{fig:hop-ben-trong}
 \end{minipage}
 
@@ -474,7 +474,7 @@ Các góc nhìn vuông góc cho thấy vị trí cửa sổ LED, cổng USB và 
 \end{minipage}\par\medskip
 
 Nắp dày 2,4~mm, lỗ xuyên vít đường kính 3,4~mm. Đai ốc được nạp ngang vào hốc chống xoay trên trụ;
-board đỡ cách sàn 6~mm. Thanh LED được lùi vào trong 5~mm để chừa chỗ cho đầu giắc.
+đế đỡ breadboard cách sàn 6~mm. Thanh LED được lùi vào trong 5~mm để chừa chỗ cho đầu giắc.
 Kích thước gá và dung sai lắp sẽ được đối chiếu với linh kiện thực tế trước khi chế tạo.
 
 \needspace{10\baselineskip}
@@ -485,7 +485,7 @@ Kích thước gá và dung sai lắp sẽ được đối chiếu với linh ki
 \outerline
 \rowcolor{gray!15}\textbf{Nhãn} & \textbf{Linh kiện} & \textbf{ID chức năng} & \textbf{Vị trí trên thiết kế} \\
 \hline
-A & ESP32 DevKit & 1--10 (dùng chung) & Trung tâm hộp, trên board đỡ; cổng USB hướng ra mặt sau \\
+A & ESP32 DevKit & 1--10 (dùng chung) & Trung tâm hộp, cắm trên breadboard; cổng USB hướng ra mặt sau \\
 \hline
 B & Cảm biến DHT22 & 1 & Nằm ngang ở đáy khoang trái, mặt lưới hướng lên khe gió trên nắp \\
 \hline
@@ -579,7 +579,7 @@ Giá là giá tham khảo trên các trang Shopee tại thời điểm viết th
 \hline
 4 & LED RGB WS2812 (8 bóng) & 1 & 25.200 & \anh{1CTG5yTQKL_TElJmCkjV5GRHQf98vevVo} & \shopee{310609561}{5471462816} & 3 \\
 \hline
-5 & Board đồng lỗ, dây nối, điện trở & 1 bộ & 40.000 & \anh{13zAd58Zgde7bqI4P5-B8x1ylb44hYGFn} & \shopee{16504852}{7050771926} & 1--3 \\
+5 & Breadboard, dây cắm, điện trở & 1 bộ & 40.000 & \anh{13zAd58Zgde7bqI4P5-B8x1ylb44hYGFn} & \shopee{16504852}{7050771926} & 1--3 \\
 \hline
 \multicolumn{3}{I l i}{\textbf{Tổng chi phí linh kiện điện tử}} & \textbf{295.178} & & & \\
 \outerline
@@ -620,7 +620,7 @@ Giá là giá tham khảo trên các trang Shopee tại thời điểm viết th
 \anhlk{dht22.png}{2. DHT22\\(ID 1)}\hfill
 \anhlk{mq135.png}{3. MQ-135\\(ID 2)}\hfill
 \anhlk{ws2812.png}{4. LED WS2812\\8 bóng (ID 3)}\hfill
-\anhlk{board-day.png}{5. Dây nối\\(ID 1--3)}
+\anhlk{board-day.png}{5. Breadboard, dây cắm\\(ID 1--3)}
 \captionof{figure}{Hình ảnh linh kiện điện tử, đánh số theo cột STT của bảng linh kiện.}
 \label{fig:linhkien}
 \end{minipage}\par\medskip
@@ -638,9 +638,9 @@ Giá là giá tham khảo trên các trang Shopee tại thời điểm viết th
 \needspace{18\baselineskip}
 \subsection{Kế hoạch thực hiện}
 \label{sec:kehoach}
-Linh kiện được đặt mua sau khi giảng viên xem xét thuyết minh (4/11/2026), dự kiến hàng về trước ngày 9/11/2026. Sản phẩm hoàn thành trước ngày 15/12/2026.
+Sau khi rà soát xong thuyết minh (10/11/2026), nhóm thuyết minh với giảng viên vào ngày 11/11/2026. Linh kiện được đặt mua sau buổi này, dự kiến hàng về trước ngày 16/11/2026, và việc làm chức năng bắt đầu từ 12/11/2026. Trong lúc chờ hàng (12/11 -- 19/11), mỗi người làm trước các việc không cần mạch; sau đó cả nhóm gặp nhau lắp mạch thử vào khoảng 20/11 để dựng khung xương hệ thống, rồi triển khai trên phần cứng thật. Sản phẩm hoàn thành trước ngày 20/12/2026; tuần 21/12 -- 28/12 dành để kiểm tra lại toàn bộ dự án, chốt và báo cáo với giảng viên (hạn báo cáo đồ án khoảng 28/12/2026).
 
-Bảng 1 gồm cả việc chuẩn bị bản thuyết minh này (1/11 -- 4/11) và việc làm sản phẩm. Nhóm có thể gặp nhau nhiều buổi để làm chung. Vì cả nhóm \textbf{dùng chung một board ESP32}, các việc cần phần cứng được gom vào các buổi làm chung và thực hiện lần lượt; các việc phần mềm không cần phần cứng thì mỗi người làm song song ở nhà, dùng dữ liệu giả lập gửi qua MQTT. Số giờ trong các bảng là ước lượng, đã tính đến việc dùng công cụ AI hỗ trợ viết phần giao diện.
+Bảng 1 gồm cả việc chuẩn bị bản thuyết minh này (viết bản đầu 1/11 -- 4/11, rà soát và sửa đổi 4/11 -- 10/11), việc làm sản phẩm và tuần chốt cuối. Nhóm có thể gặp nhau nhiều buổi để làm chung. Vì cả nhóm \textbf{dùng chung một board ESP32}, các việc cần phần cứng được gom vào các buổi làm chung và thực hiện lần lượt; các việc phần mềm không cần phần cứng thì mỗi người làm song song ở nhà, dùng dữ liệu giả lập gửi qua MQTT. Bảng 1 chỉ liệt kê việc riêng của từng thành viên; các việc làm chung (buổi lắp mạch, quản lý Git, đóng hộp, lắp breadboard vào hộp, viết phần báo cáo của mình, gom và nộp báo cáo) nằm ở Bảng 2 và đoạn các buổi làm chung bên dưới, không tính vào số giờ của từng người. Số giờ trong các bảng là ước lượng, đã tính đến việc dùng công cụ AI hỗ trợ viết phần giao diện.
 
 \needspace{22\baselineskip}
 \textbf{Bảng 1. Phân công, công việc và thời gian thực hiện của từng thành viên}
@@ -656,17 +656,19 @@ Bảng 1 gồm cả việc chuẩn bị bản thuyết minh này (1/11 -- 4/11) 
 \hline
 Thuyết minh & Sơ đồ truyền nhận dữ liệu có màu, mục 2.3 (2,5); tìm link giá và hình ảnh linh kiện, mục 3.1 (2) & 1/11 -- 4/11 & 4,5 \\
 \hline
-1 & Đấu nối DHT22 (1); firmware đọc cảm biến và gửi MQTT (2); backend nhận và đẩy WebSocket (2); gắn vào giao diện và kiểm thử (2) & 10/11 -- 16/11 & 7 \\
+Rà soát & Kiểm tra lại sơ đồ truyền nhận dữ liệu (mục 2.3) và bảng linh kiện (giá, link Shopee, hình ảnh, mục 3.1); sửa các thông tin chưa hoàn thiện (3) & 4/11 -- 10/11 & 3 \\
 \hline
-6 & Tạo bot Telegram và lưu người nhận khi nhắn \texttt{/start} (1,5); xử lý ngưỡng độ ẩm và khoảng nghỉ giữa hai lần báo (2); kiểm thử (1,5) & 5/11 -- 12/11 & 5 \\
+6 & Tạo bot Telegram và lưu người nhận khi nhắn \texttt{/start} (2); xử lý ngưỡng độ ẩm trên 85\% và dưới 30\%, khoảng nghỉ giữa hai lần báo (3); xử lý lỗi gửi tin, chống báo trùng (1); kiểm thử (2) & 12/11 -- 17/11 & 8 \\
 \hline
-7 & Lệnh \texttt{/doam}, \texttt{/trangthai} (2); kiểm thử (1) & 9/11 -- 15/11 & 3 \\
+7 & Lệnh \texttt{/doam}, \texttt{/trangthai} (2); định dạng tin trả lời, xử lý lệnh sai (1); kiểm thử (1) & 18/11 -- 19/11 & 4 \\
 \hline
-10 & Tích hợp WiFiManager vào firmware (3); lưu bộ nhớ flash và nút BOOT xóa cấu hình (2); kiểm thử trang cấu hình (1) & 12/11 -- 19/11 & 6 \\
+1 & Firmware đọc cảm biến và gửi MQTT (2); backend nhận và đẩy WebSocket (2); gắn vào giao diện và kiểm thử (2) & 21/11 -- 27/11 & 6 \\
 \hline
-Việc chung & Quản lý Git, hợp nhất mã nguồn (4); đóng hộp vật lý, làm trước từ 20/11 khi đã có hộp 3D và số đo linh kiện (6); lắp mạch cùng nhóm (3); viết phần báo cáo của mình (3) & 5/11 -- 13/12 (đóng hộp từ 20/11) & 16 \\
+10 & Tích hợp WiFiManager vào firmware (3); tùy chỉnh trang cấu hình WiFi theo wireframe, Hình~\ref{fig:ri-portal} (2); lưu bộ nhớ flash và nút BOOT xóa cấu hình (2); kiểm thử khi mất mạng và đổi WiFi (2) & 27/11 -- 6/12 & 9 \\
 \hline
-\multicolumn{3}{I l i}{\textbf{Tổng của Thành}} & \textbf{41,5} \\
+Chốt & Chạy thử chức năng 1, 6, 7, 10 trên sản phẩm hoàn chỉnh; đối chiếu thuyết minh với sản phẩm thật; sửa lỗi cuối; chuẩn bị báo cáo với giảng viên (5) & 21/12 -- 28/12 & 5 \\
+\hline
+\multicolumn{3}{I l i}{\textbf{Tổng của Thành}} & \textbf{39,5} \\
 \outerline
 \end{tabularx}
 \normalsize
@@ -681,15 +683,19 @@ Việc chung & Quản lý Git, hợp nhất mã nguồn (4); đóng hộp vật 
 \hline
 Thuyết minh & Vẽ hộp 3D bên ngoài và bên trong, gắn nhãn vị trí linh kiện theo ID chức năng, mục 2.1 (8) & 1/11 -- 4/11 & 8 \\
 \hline
-2 & Đấu nối MQ-135 và cầu chia áp (2); firmware đọc ADC, tính điện trở, quy đổi ppm (4); làm nóng và hiệu chuẩn $R_0$ (3); backend và gắn vào giao diện (3) & 10/11 -- 22/11 (gồm 2 ngày làm nóng) & 12 \\
+Rà soát & Kiểm tra lại hình 3D hộp, bảng chú thích vị trí linh kiện (mục 2.1) và phần công nghệ phần cứng (mục 1.3); sửa các thông tin chưa hoàn thiện (3) & 4/11 -- 10/11 & 3 \\
 \hline
-4 & Cấu trúc dữ liệu Firestore và kết nối (3); ghi dữ liệu mỗi khi nhận bản tin (3); kiểm thử (2) & 5/11 -- 15/11 & 8 \\
+4 & Cấu trúc dữ liệu Firestore và kết nối (2); ghi dữ liệu mỗi khi nhận bản tin (3); kiểm thử (2) & 12/11 -- 16/11 & 7 \\
 \hline
-5 & API truy vấn theo khoảng thời gian (3); biểu đồ Chart.js (4); kiểm thử (1) & 16/11 -- 29/11 & 8 \\
+2 & Viết phép toán ước lượng CO\textsubscript{2}: tính $R_S$ từ điện áp, quy đổi ppm theo đường đặc tuyến, lọc nhiễu; kiểm thử bằng số liệu giả lập (3) & 17/11 -- 19/11 & 3 \\
 \hline
-Việc chung & Lắp mạch cùng nhóm (3); viết phần báo cáo của mình (3) & 1/12 -- 13/12 & 6 \\
+2 & Firmware đọc ADC thật trên board (1); làm nóng và hiệu chuẩn $R_0$ (3); backend và gắn vào giao diện (3) & 21/11 -- 1/12 (gồm 2 ngày làm nóng) & 7 \\
 \hline
-\multicolumn{3}{I l i}{\textbf{Tổng của Tuấn}} & \textbf{42} \\
+5 & API truy vấn theo khoảng thời gian (3); biểu đồ Chart.js (3); kiểm thử (1) & 25/11 -- 6/12 & 7 \\
+\hline
+Chốt & Chạy thử chức năng 2, 4, 5 trên sản phẩm hoàn chỉnh; đối chiếu thuyết minh với sản phẩm thật; sửa lỗi cuối; chuẩn bị báo cáo với giảng viên (4) & 21/12 -- 28/12 & 4 \\
+\hline
+\multicolumn{3}{I l i}{\textbf{Tổng của Tuấn}} & \textbf{39} \\
 \outerline
 \end{tabularx}
 \normalsize
@@ -704,40 +710,52 @@ Việc chung & Lắp mạch cùng nhóm (3); viết phần báo cáo của mình
 \hline
 Thuyết minh & Chốt bố cục các trang web và vẽ wireframe website, mục 2.2 (3); gom và nộp thuyết minh (1) & 1/11 -- 4/11 & 4 \\
 \hline
-3 & Đấu nối LED (1); firmware nhận lệnh MQTT và điều khiển WS2812 (3); backend gửi lệnh (2); giao diện chọn màu (2); kiểm thử (1) & 10/11 -- 16/11 & 9 \\
+Rà soát & Kiểm tra lại wireframe và bảng chú thích (mục 2.2); rà chính tả, định dạng, tên file; sửa các thông tin chưa hoàn thiện, chuẩn bị nộp (3) & 4/11 -- 10/11 & 3 \\
 \hline
-8 & Trang đăng ký, đăng nhập (3); backend băm mật khẩu, SQLite, phiên đăng nhập (4); bảo vệ các API (2); kiểm thử (1) & 12/11 -- 22/11 & 10 \\
+9 & Khung backend: Express, MQTT, WebSocket (3); khung frontend: bố cục, điều hướng, thành phần gauge và chart dùng chung (5) & 12/11 -- 19/11 & 8 \\
 \hline
-9 & Khung backend: Express, MQTT, WebSocket (3); khung frontend: bố cục, điều hướng, thành phần gauge và chart dùng chung (5); hoàn thiện giao diện (4) & 5/11 -- 6/12 (khung dựng trước, hoàn thiện dần) & 12 \\
+3 & Firmware nhận lệnh MQTT và điều khiển WS2812 (3); backend gửi lệnh (2); giao diện chọn màu (2); kiểm thử (1) & 21/11 -- 29/11 & 8 \\
 \hline
-Việc chung & Lắp mạch cùng nhóm (3); viết phần báo cáo của mình (3); gom và nộp báo cáo cuối kỳ (2) & 1/12 -- 13/12 & 8 \\
+8 & Trang đăng ký, đăng nhập (3); backend băm mật khẩu, SQLite, phiên đăng nhập (4); bảo vệ các API (1); kiểm thử (1) & 30/11 -- 9/12 & 9 \\
 \hline
-\multicolumn{3}{I l i}{\textbf{Tổng của Uy}} & \textbf{43} \\
+9 & Hoàn thiện giao diện (3) & 10/12 -- 13/12 & 3 \\
+\hline
+Chốt & Chạy thử chức năng 3, 8, 9 trên sản phẩm hoàn chỉnh; đối chiếu thuyết minh với sản phẩm thật; sửa lỗi cuối; chuẩn bị báo cáo với giảng viên (4) & 21/12 -- 28/12 & 4 \\
+\hline
+\multicolumn{3}{I l i}{\textbf{Tổng của Uy}} & \textbf{39} \\
 \outerline
 \end{tabularx}
 \normalsize
 
 
-\needspace{16\baselineskip}
+\needspace{42\baselineskip}
 \medskip
 \textbf{Bảng 2. Các nhóm chức năng thực hiện song song}
 
 \small
-\begin{tabularx}{\linewidth}{I C{1.3cm} i L{2.4cm} i L{3.6cm} i Y I}
+\begin{tabularx}{\linewidth}{I C{1.2cm} i L{2.0cm} i L{4.6cm} i Y I}
 \outerline
 \rowcolor{gray!15}\textbf{Giai đoạn} & \textbf{Thời gian} & \textbf{Chức năng chạy song song} & \textbf{Điều kiện và ghi chú} \\
 \hline
 0 & 1/11 -- 4/11 & Thuyết minh: hộp 3D (Tuấn), wireframe (Uy), sơ đồ luồng và link giá (Thành) & Ba việc làm song song, mỗi người một phần; cần chốt ID chức năng và kích thước linh kiện trước \\
 \hline
-1 & 5/11 -- 9/11 (chờ hàng) & ID 9 (khung), ID 4, ID 6, ID 7 & Không cần phần cứng; mỗi người làm ở nhà bằng dữ liệu giả lập gửi qua MQTT \\
+1 & 4/11 -- 10/11 & Rà soát, sửa đổi, hoàn thiện thuyết minh (cả ba người) & Mỗi người rà phần mình làm (Thành: sơ đồ, linh kiện; Tuấn: hộp 3D; Uy: wireframe, định dạng) \\
 \hline
-2 & 10/11 -- 22/11 & ID 1, ID 2, ID 3, ID 10 (cần phần cứng); ID 8, ID 9 (hoàn thiện) & Dùng chung một board ESP32 nên nạp và thử lần lượt trong các buổi làm chung; MQ-135 làm nóng song song trong lúc thử các thiết bị khác; ID 8, ID 9 làm ở nhà \\
+2 & 11/11 & Buổi thuyết minh với giảng viên (cả nhóm) & Linh kiện đặt mua sau buổi này; hàng dự kiến về trước 16/11 \\
 \hline
-3 & 16/11 -- 29/11 & ID 5 & Cần ID 4 có dữ liệu thật từ ID 1, ID 2 và khung giao diện của ID 9 \\
+3 & 12/11 -- 19/11 (chờ hàng) & Các việc không cần mạch: ID 6, 7 (bot Telegram); ID 9 (khung website); ID 4 (cơ sở dữ liệu); phép toán CO\textsubscript{2} của ID 2 & Làm song song ở nhà bằng dữ liệu giả lập gửi qua MQTT; chưa cần linh kiện \\
 \hline
-4 & 30/11 -- 6/12 & Lắp mạch, tích hợp (hộp vật lý đã làm trước từ 20/11) & Cần các chức năng đã chạy được riêng lẻ \\
+4 & 20/11 -- 21/11 & Buổi chung lắp mạch thử, dựng khung xương hệ thống (cả nhóm) & Mỗi người đấu nối thiết bị của mình lên board chung, kiểm tra đọc và ghi cơ bản; bật MQ-135 làm nóng \\
 \hline
-5 & 7/12 -- 13/12 & Kiểm thử, hiệu chỉnh ngưỡng, ôn vấn đáp & Dự phòng 14/12 -- 15/12 \\
+5 & 21/11 -- 6/12 & Triển khai trên phần cứng thật: ID 1, ID 2 (phần cứng), ID 3, ID 10; ID 5 (từ 25/11) & Dùng chung một board ESP32 nên nạp và thử lần lượt; ID 5 dùng khung giao diện (ID 9) và cơ sở dữ liệu (ID 4) đã chuẩn bị ở giai đoạn 3 \\
+\hline
+6 & 30/11 -- 13/12 & ID 8, ID 9 (hoàn thiện giao diện) & Làm ở nhà, dựa trên khung đã dựng ở giai đoạn 3 \\
+\hline
+7 & 7/12 -- 13/12 & Cố định breadboard vào hộp, đi và cố định dây cắm cho gọn, tích hợp (hộp vật lý làm từ 27/11) & Cần các chức năng đã chạy được riêng lẻ; không hàn, chỉ cắm dây trên breadboard \\
+\hline
+8 & 14/12 -- 20/12 & Kiểm thử, hiệu chỉnh ngưỡng, ôn vấn đáp & Sản phẩm hoàn thành vào cuối giai đoạn này \\
+\hline
+9 & 21/12 -- 28/12 & Kiểm tra lại toàn bộ dự án, chốt và báo cáo với giảng viên (cả ba người) & Hạn báo cáo đồ án khoảng 28/12; tuần này cũng là thời gian đệm để sửa lỗi cuối \\
 \outerline
 \end{tabularx}
 \normalsize
@@ -746,7 +764,7 @@ Việc chung & Lắp mạch cùng nhóm (3); viết phần báo cáo của mình
 Các chức năng phụ thuộc nhau: ID 5 cần ID 4 và ID 9; ID 1, ID 2, ID 3 hiển thị trên khung giao diện của ID 9; ID 8 bảo vệ các API của ID 9; ID 6, ID 7 dùng dữ liệu độ ẩm của ID 1 (giả lập trước, dữ liệu thật sau).
 
 \medskip
-\textbf{Các buổi làm chung dự kiến} (cả nhóm gặp nhau): khoảng 10/11 nhận linh kiện, đấu nối thử và bật MQ-135 làm nóng (3 giờ); khoảng 14/11 nạp và thử firmware của chức năng 1, 3, 10 lần lượt trên board chung (3 giờ); khoảng 21/11 hiệu chuẩn MQ-135 ở nơi thoáng (3 giờ); khoảng 28/11 ghép toàn hệ thống từ cảm biến đến web, cloud, Telegram (3 giờ); khoảng 1/12 và 5/12 hàn mạch lên board đồng lỗ và lắp hộp (4 giờ mỗi buổi); khoảng 8/12 thử với người không chuyên và hiệu chỉnh ngưỡng (3 giờ); khoảng 12/12 tập vấn đáp chéo (2 giờ). Số buổi có thể tăng thêm khi cần.
+\textbf{Các buổi làm chung dự kiến} (cả nhóm gặp nhau): khoảng 20/11 lắp mạch thử, đấu nối từng thiết bị, dựng khung xương hệ thống và bật MQ-135 làm nóng (3 giờ); khoảng 24/11 nạp và thử firmware của chức năng 1 và 3 lần lượt trên board chung (3 giờ); khoảng 28/11 hiệu chuẩn MQ-135 ở nơi thoáng (3 giờ); khoảng 5/12 ghép các chức năng đã xong, từ cảm biến đến web, cloud, Telegram, kể cả chức năng 10 (3 giờ); khoảng 8/12 và 12/12 lắp breadboard vào hộp, đi và cố định dây cắm, kiểm tra từng mối cắm (3 giờ mỗi buổi); khoảng 15/12 ghép toàn hệ thống hoàn chỉnh, thử với người không chuyên và hiệu chỉnh ngưỡng (3 giờ); khoảng 22/12 rà soát toàn bộ dự án, đối chiếu thuyết minh với sản phẩm thật (3 giờ); khoảng 26/12 tập vấn đáp chéo và chốt báo cáo (3 giờ). Số buổi có thể tăng thêm khi cần.
 
 \needspace{14\baselineskip}
 % ======================================================================
