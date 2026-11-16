@@ -141,6 +141,10 @@
     "projection": "orthographic, Z up",
     "geometry_or_materials_edited": false,
     "camera_and_assembly_restored": true,
-    "elevation_visual_style": "ShadedWithVisibleEdgesOnlyVisualStyle"
+    "elevation_visual_style": "ShadedWithVisibleEdgesOnlyVisualStyle",
+    "image_revision": "2026-11-16 white Fusion background",
+    "background": "white",
+    "layout_grid": false,
+    "annotation_style": "black and white, editable SVG overlays"
   }
 }

@@ -57,7 +57,7 @@ node tools/verify-proposal.cjs tmp/pdfs/submission-audit.xml tmp/pdfs/font-spaci
 
 Vẫn cần xem bản render PDF để kiểm tra bố cục. Chữ văn bản, bảng và chú thích dùng cỡ 13; bìa có cỡ riêng, chỉ số khoa học như số 2 trong CO₂ và ký hiệu toán được thu nhỏ theo quy ước. Các chữ nằm bên trong ảnh wireframe là một phần của ảnh gốc, không được công cụ kiểm tra font của PDF đánh giá.
 
-Mục 2.1 dùng tám ảnh cơ khí cập nhật ngày 04/11/2026: bên ngoài, bên trong, bốn mặt đứng, tách nắp, bộ vít và đai ốc.
+Mục 2.1 dùng tám ảnh cơ khí xuất lại ngày 16/11/2026 trên nền trắng: bên ngoài, bên trong, bốn mặt đứng, tách nắp, bộ vít và đai ốc. Ảnh ẩn lưới, có đường biên nhìn thấy và chú thích đen trắng để phù hợp khi in PDF đen trắng; bản cơ khí giữ nguyên ngày 04/11/2026.
 DHT22 nằm ngang ở đáy khoang trái, mặt lưới hướng lên nắp; MQ135 nằm trên gá đáy trong khoang phải có vách ngăn riêng. Hai cảm biến không treo lên thành.
 Nguồn model xem [ghi nguồn ảnh](Docs/images/enclosure/ATTRIBUTION.md).
 
