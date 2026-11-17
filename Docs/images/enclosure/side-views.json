@@ -1,18 +1,204 @@
 {
   "source_document": "SmartClassroom",
-  "revision": "2026-11-04 both sensors on floor in separate white compartments",
+  "mechanical_revision": "2026-11-04",
+  "image_revision": "2026-11-16 white Fusion background",
   "views": {
-    "exterior.png": true,
-    "interior.png": true,
-    "front.png": true,
-    "rear.png": true,
-    "left.png": true,
-    "right.png": true,
-    "exploded.png": true,
-    "lid-fasteners.png": true
+    "exterior.png": {
+      "width": 2000,
+      "height": 1440,
+      "camera_target": [
+        8.0,
+        5.0,
+        3.083
+      ],
+      "camera_direction": [
+        22,
+        -40,
+        29
+      ],
+      "camera_extents": [
+        24.18117893333454,
+        17.410448832000867
+      ],
+      "annotation_points": {
+        "B": [
+          541.26,
+          360.82
+        ],
+        "C": [
+          1467.07,
+          608.55
+        ],
+        "D": [
+          822.81,
+          897.12
+        ],
+        "E": [
+          1223.39,
+          372.19
+        ]
+      }
+    },
+    "interior.png": {
+      "width": 2000,
+      "height": 1520,
+      "camera_target": [
+        8.0,
+        5.0,
+        2.8800000000000003
+      ],
+      "camera_direction": [
+        16,
+        -30,
+        130
+      ],
+      "camera_extents": [
+        28.195909981227057,
+        21.42889158573256
+      ],
+      "annotation_points": {
+        "A": [
+          1035.47,
+          693.29
+        ],
+        "B": [
+          613.84,
+          519.47
+        ],
+        "C": [
+          1402.44,
+          900.7
+        ],
+        "D": [
+          881.79,
+          994.37
+        ],
+        "E": [
+          1188.6,
+          548.19
+        ]
+      }
+    },
+    "front.png": {
+      "width": 1800,
+      "height": 800,
+      "camera_target": [
+        8.0,
+        5.0,
+        3.083
+      ],
+      "camera_direction": [
+        0,
+        -1,
+        0
+      ],
+      "camera_extents": [
+        18.402300000000004,
+        8.1788
+      ],
+      "annotation_points": {}
+    },
+    "rear.png": {
+      "width": 1800,
+      "height": 800,
+      "camera_target": [
+        8.0,
+        5.0,
+        3.083
+      ],
+      "camera_direction": [
+        0,
+        1,
+        0
+      ],
+      "camera_extents": [
+        18.402300000000004,
+        8.1788
+      ],
+      "annotation_points": {}
+    },
+    "left.png": {
+      "width": 1450,
+      "height": 1000,
+      "camera_target": [
+        8.0,
+        5.0,
+        3.083
+      ],
+      "camera_direction": [
+        -1,
+        0,
+        0
+      ],
+      "camera_extents": [
+        11.502299999999998,
+        7.932620689655171
+      ],
+      "annotation_points": {}
+    },
+    "right.png": {
+      "width": 1450,
+      "height": 1000,
+      "camera_target": [
+        8.0,
+        5.0,
+        3.083
+      ],
+      "camera_direction": [
+        1,
+        0,
+        0
+      ],
+      "camera_extents": [
+        11.502299999999998,
+        7.932620689655171
+      ],
+      "annotation_points": {}
+    },
+    "exploded.png": {
+      "width": 1700,
+      "height": 1664,
+      "camera_target": [
+        8.0,
+        5.0,
+        5.9830000000000005
+      ],
+      "camera_direction": [
+        22,
+        -40,
+        33
+      ],
+      "camera_extents": [
+        23.328474415520603,
+        22.83445966319193
+      ],
+      "annotation_points": {}
+    },
+    "lid-fasteners.png": {
+      "width": 1700,
+      "height": 1436,
+      "camera_target": [
+        8.0,
+        5.0,
+        5.5625
+      ],
+      "camera_direction": [
+        22,
+        -40,
+        34
+      ],
+      "camera_extents": [
+        22.232802800920474,
+        18.78017930713047
+      ],
+      "annotation_points": {}
+    }
   },
   "projection": "orthographic, Z up",
+  "background": "white",
+  "layout_grid": false,
+  "visual_style": "ShadedWithVisibleEdgesOnlyVisualStyle",
   "geometry_or_materials_edited": false,
   "camera_and_assembly_restored": true,
-  "elevation_visual_style": "ShadedWithVisibleEdgesOnlyVisualStyle"
+  "grid_restored": true
 }

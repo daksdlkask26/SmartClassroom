@@ -3,6 +3,9 @@
 Các ảnh `exterior.png`, `interior.png`, `exploded.png`, `lid-fasteners.png` và bốn góc nhìn
 `front.png`, `rear.png`, `left.png`, `right.png` được xuất
 từ tài liệu Autodesk Fusion **SmartClassroom**, bản cơ khí cập nhật ngày 04/11/2026.
+Bộ ảnh được xuất lại ngày 16/11/2026 với nền trắng, ẩn lưới và dùng kiểu tô bóng
+có đường biên nhìn thấy để dễ đọc khi in PDF đen trắng. Chú thích A–E dùng nét đen,
+nền trắng; các bản SVG giữ riêng lớp chú thích để có thể chỉnh sửa.
 Ảnh thể hiện hộp, gá lắp, bố trí linh kiện và bộ vít/đai ốc; không có model dây hoặc mạch điện minh họa.
 
 DHT22 nằm ngang ở đáy khoang trái; MQ135 đặt trên gá đáy trong khoang phải có cụm vách ngăn chữ U.
@@ -22,3 +25,7 @@ Metadata nguồn được giữ trong `model-sources.json`.
 
 Bốn mặt đứng dùng phép chiếu vuông góc; thông tin xuất ảnh nằm trong `side-views.json`.
 Thông số bố trí và kết quả kiểm tra hình học nằm trong `design-metadata.json`.
+
+Quá trình xuất ảnh giữ nguyên hình học, vật liệu và khôi phục camera, lưới,
+vị trí/ẩn hiện các cụm. Các bản `exterior-annotated.svg` và `interior-annotated.svg`
+tham chiếu ảnh PNG tương ứng trong cùng thư mục.
