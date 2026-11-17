@@ -1,0 +1,10 @@
+{
+  "v": 1,
+  "seq": 1240,
+  "uptimeS": 86580,
+  "temperature": 27.8,
+  "humidity": 88,
+  "co2": 870,
+  "sensors": { "dht22": "ok", "mq135": "ok" },
+  "levels": { "temperature": "normal", "humidity": "alert", "co2": "normal" }
+}
