@@ -1,0 +1,229 @@
+/* ==========================================================================
+   Room Instrument — design tokens (Smart Classroom · nhóm 16)
+   Nguồn: Figma file "VLcCNTT", collection "Room Instrument" (exportTokens → css, 70 biến).
+   Chuyển đổi khi bàn giao:
+     --body-color-*  →  :root            (chủ đề Body · sáng · mặc định)
+     --lid-color-*   →  [data-theme="lid"] (chủ đề Lid · tối)
+   Lưu ý: exportTokens ghi mọi số là "px"; các biến motion / data / alert đã sửa lại đơn vị đúng.
+   Nền, khung, chữ, đường kẻ: trắng–đen–xám. Màu nhấn (--accent-*, --data-*) chỉ dùng có chủ đích — xem khối "Màu nhấn".
+   Màu LED (--led, --led-*) là màu thật của đèn.
+   ========================================================================== */
+
+/* ---------- Chủ đề Body (sáng, theo thân hộp) — mặc định ---------- */
+:root {
+  color-scheme: light;
+  --paper:        #f4f4f1;  /* nền trang */
+  --surface:      #ffffff;  /* mặt panel */
+  --ink:          #0b0b0c;  /* chữ chính, đường dữ liệu, nút chính · 17,9:1 trên paper */
+  --ink-2:        #55555a;  /* chữ phụ · 6,7:1 trên paper, 7,4:1 trên surface */
+  --line:         #d6d6d1;  /* đường kẻ 1 px */
+  --line-strong:  #8a8a90;  /* viền ô nhập, vạch chia · 3,4:1 trên surface */
+  --track:        #c9c9c4;  /* đoạn gauge chưa đạt (nền, không mang thông tin) */
+  --invert-bg:    #0b0b0c;  /* vùng đảo màu: hero, cảnh báo */
+  --invert-ink:   #f4f4f1;
+  --invert-ink-2: #a5a5ab;  /* 8,0:1 trên invert-bg */
+  --invert-track: #3a3a40;
+}
+
+/* ---------- Chủ đề Lid (tối, theo nắp hộp) ---------- */
+[data-theme="lid"] {
+  color-scheme: dark;
+  --paper:        #0e0e10;
+  --surface:      #17171a;
+  --ink:          #f4f4f1;  /* 17,5:1 trên paper */
+  --ink-2:        #a5a5ab;  /* 7,3:1 trên surface */
+  --line:         #2c2c31;
+  --line-strong:  #6a6a70;  /* 3,3:1 trên surface */
+  --track:        #3a3a40;
+  --invert-bg:    #f4f4f1;  /* hero đảo màu thành panel sáng */
+  --invert-ink:   #0e0e10;
+  --invert-ink-2: #55555a;
+  --invert-track: #c9c9c4;
+}
+
+/* Theo hệ điều hành khi người dùng chưa chọn (DK-14 / MB-14: "Theo hệ điều hành") */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="body"]) {
+    color-scheme: dark;
+    --paper: #0e0e10; --surface: #17171a; --ink: #f4f4f1; --ink-2: #a5a5ab;
+    --line: #2c2c31; --line-strong: #6a6a70; --track: #3a3a40;
+    --invert-bg: #f4f4f1; --invert-ink: #0e0e10; --invert-ink-2: #55555a; --invert-track: #c9c9c4;
+  }
+}
+
+/* ---------- Màu nhấn (accent) — thêm ngày 06/11/2026, đảo quyết định #1 "thuần trắng–đen" ----------
+   Figma: accent/* (nền sáng) · accent-dark/* (nền tối: hero đảo màu trong Body, toàn bộ chủ đề Lid) · mono/* (bản in).
+   Quy tắc: màu chỉ để NHẤN (chấm, viền, vạch, đường dữ liệu) — không phủ nền lớn; luôn đi kèm chữ hoặc họa tiết.
+   *-text: dùng cho CHỮ (≥ 4,5:1). Bản không hậu tố: chấm/viền/vạch (≥ 3:1). Đo trong DECISIONS.md mục 6. */
+:root {
+  --accent-alert:        #ff4b1f;  /* báo động: ngoài ngưỡng độ ẩm, lỗi, mất kết nối · 3,0–3,3:1 */
+  --accent-alert-text:   #c2300f;  /* chữ báo động · 5,1–5,6:1 */
+  --accent-alert-tint:   #ffefea;  /* nền ghi chú "mốc ngoài ngưỡng" (banner lỗi không còn nền nhạt từ 07/11/2026) */
+  --accent-ok:           #26944f;  /* trực tuyến, đã gửi lệnh, bước đã xong · 3,5–3,9:1 */
+  --accent-ok-text:      #1f7a42;  /* 4,9–5,4:1 */
+  --accent-warn:         #a87700;  /* dữ liệu cũ, đang kết nối, chú ý · 3,6–4,0:1 */
+  --accent-warn-text:    #8a5f00;  /* 5,1–5,7:1 */
+  --accent-warn-tint:    #fff6df;
+  /* Màu dữ liệu: CHỈ cho đường/cột/đoạn gauge — không cho chữ số lớn, không mang nghĩa tốt/xấu */
+  --data-humidity:       #2a5fe8;  /* 4,9:1 với chữ paper đặt trên cột */
+  --data-temperature:    #b0307a;  /* 5,4:1 */
+  --data-co2:            #087a82;  /* 4,6:1 */
+}
+/* Nền tối: hero đảo màu (Body) và chủ đề Lid */
+[data-theme="lid"], .ri-invert, .ri-panel--hero {
+  --accent-alert:        #ff6a45;  /* 6,3–6,9:1 trên nền tối */
+  --accent-alert-text:   #ff6a45;
+  --accent-alert-tint:   #2a1712;
+  --accent-ok:           #4cc777;
+  --accent-ok-text:      #4cc777;
+  --accent-warn:         #f2b830;
+  --accent-warn-text:    #f2b830;
+  --accent-warn-tint:    #2a2210;
+  --data-humidity:       #6b95ff;
+  --data-temperature:    #e066ad;
+  --data-co2:            #2fc3cc;
+}
+/* Trong chủ đề Lid, hero đảo màu là panel SÁNG → dùng lại bộ màu nền sáng */
+[data-theme="lid"] .ri-invert, [data-theme="lid"] .ri-panel--hero {
+  --accent-alert: #ff4b1f; --accent-alert-text: #c2300f; --accent-ok: #26944f; --accent-ok-text: #1f7a42;
+  --accent-warn: #a87700; --accent-warn-text: #8a5f00;
+  --data-humidity: #2a5fe8; --data-temperature: #b0307a; --data-co2: #087a82;
+}
+/* Bản in / bảng báo cáo đen trắng: mọi accent về đen–xám; gạch chéo + chữ giữ nguyên nghĩa */
+@media print { :root, [data-theme="lid"], .ri-invert, .ri-panel--hero {
+  --accent-alert: var(--ink); --accent-alert-text: var(--ink); --accent-alert-tint: transparent;
+  --accent-ok: var(--ink); --accent-ok-text: var(--ink); --accent-warn: var(--ink-2); --accent-warn-text: var(--ink-2); --accent-warn-tint: transparent;
+  --data-humidity: var(--ink); --data-temperature: var(--ink); --data-co2: var(--ink);
+} }
+.ri-mono { /* lớp tương đương @media print, dùng cho chế độ xuất báo cáo trên màn hình */
+  --accent-alert: var(--ink); --accent-alert-text: var(--ink); --accent-alert-tint: transparent;
+  --accent-ok: var(--ink); --accent-ok-text: var(--ink); --accent-warn: var(--ink-2); --accent-warn-text: var(--ink-2); --accent-warn-tint: transparent;
+  --data-humidity: var(--ink); --data-temperature: var(--ink); --data-co2: var(--ink);
+}
+
+/* ---------- LED (màu thật · luôn hiển thị kèm tên + HEX) ---------- */
+:root {
+  --led-trang:       #ffffff;  /* Trắng */
+  --led-trang-am:    #ffc98a;  /* Trắng ấm */
+  --led-do:          #ff2a2a;  /* Đỏ */
+  --led-cam:         #ff7a00;  /* Cam */
+  --led-vang:        #ffd400;  /* Vàng */
+  --led-xanh-la:     #22e05a;  /* Xanh lá */
+  --led-xanh-ngoc:   #00c9b7;  /* Xanh ngọc — màu đã gửi ở chế độ Kiểm tra đèn trong dữ liệu minh họa */
+  --led-xanh-duong:  #2f6bff;  /* Xanh dương */
+  --led-tim:         #8a3fff;  /* Tím */
+  --led-hong:        #ff3fa4;  /* Hồng */
+
+  /* Bóng 1–2: màu cố định, không cho đổi (HANDOFF §3.5) */
+  --led-sys-run:  var(--led-trang);        /* bóng 1 · nháy chậm = chương trình đang chạy */
+  --led-sys-net:  var(--led-xanh-duong);   /* bóng 2 · sáng = WiFi + MQTT, nháy = đang kết nối lại */
+
+  /* Chế độ Tự động: bảng màu 3 thông số × 3 mức = 9 màu (cập nhật 13/11/2026).
+     Giá trị dưới đây là bảng mặc định; JS ghi đè bằng bảng đã gửi, và bằng bản nháp khi đang sửa. */
+  --led-temperature-normal: var(--led-xanh-la);  /* cặp 3–4 */
+  --led-temperature-watch:  var(--led-vang);
+  --led-temperature-alert:  var(--led-do);
+  --led-humidity-normal:    var(--led-xanh-la);  /* cặp 5–6 */
+  --led-humidity-watch:     var(--led-vang);
+  --led-humidity-alert:     var(--led-do);
+  --led-co2-normal:         var(--led-xanh-la);  /* cặp 7–8 */
+  --led-co2-watch:          var(--led-vang);
+  --led-co2-alert:          var(--led-do);
+
+  /* Chế độ Kiểm tra đèn: một màu cho cả thanh (giao diện DK-06b / MB-06b) */
+  --led-test: var(--led-xanh-ngoc);  /* JS ghi đè bằng màu đã gửi lệnh gần nhất */
+  --led-test-draft: var(--led-cam);  /* JS ghi đè bằng bản nháp đang chọn */
+}
+
+/* ---------- Khoảng cách · hình khối · nét ---------- */
+:root {
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px; --space-5: 20px;
+  --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px;
+  --radius-0: 0px; --radius-1: 1px; --radius-2: 2px;   /* góc vuông như linh kiện */
+  --stroke-hair: 1px; --stroke-strong: 2px;
+  --shadow-key: 3px 3px 0 0 var(--line-strong);         /* nút chính: bóng cứng, không mờ */
+  --shadow-key-ink: 3px 3px 0 0 var(--ink);             /* nút phụ */
+  --shadow-key-pressed: 1px 1px 0 0 var(--line-strong);  /* lún còn 1 px */
+  --focus-ring: 2px solid var(--ink);                    /* dùng với outline-offset: 2px */
+  --touch-min: 44px;                                     /* vùng chạm mobile tối thiểu */
+  --content-max: 1280px;                                 /* màn ≥ 1920: giữ tối đa 1280 */
+  --rail-w: 232px;
+}
+
+/* ---------- Chữ ---------- */
+:root {
+  --font-ui:   "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  --font-dot:  "Doto", var(--font-mono);   /* CHỈ chữ số; dấu phẩy + đơn vị dùng --font-mono */
+  --font-portal: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* portal WiFi: không tải font */
+
+  --type-label: 11px;  --type-label-lg: 12px;
+  --type-body-sm: 14px; --type-body: 16px;
+  --type-subtitle: 20px; --type-title: 25px;
+  --type-h1: 40px; --type-h1-mobile: 28px;
+  --type-num-sm: 28px; --type-num-md: 40px;
+  --type-hero-mobile: 72px; --type-hero: 112px;  /* hero desktop dùng 104–112 */
+
+  --lh-body: 1.5;      /* tiếng Việt cần dòng rộng */
+  --lh-heading: 1.25;  /* tiêu đề viết hoa có dấu ≥ 1,25 */
+  --ls-label: 0.08em;  /* nhãn mono viết hoa */
+}
+
+/* ---------- Chuyển động (tắt hết khi prefers-reduced-motion) ---------- */
+:root {
+  --motion-flip: 240ms;       /* lật số khi giá trị đổi · ease-out */
+  --motion-needle: 400ms;     /* kim gauge có đà */
+  --motion-led-sweep: 320ms;  /* quét 8 ô */
+  --motion-led-step: 40ms;    /* trễ mỗi ô */
+  --motion-press: 80ms;       /* nút lún */
+  --motion-route: 200ms;      /* chuyển trang */
+  --ease-out: cubic-bezier(.2,.7,.2,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-flip: 0ms; --motion-needle: 0ms; --motion-led-sweep: 0ms; --motion-led-step: 0ms; --motion-press: 0ms; --motion-route: 0ms; }
+}
+
+/* ---------- Hằng số dữ liệu (đã chốt — dùng chung JS/CSS) ---------- */
+:root {
+  --data-interval-s: 30;        /* ESP32 gửi bản tin ~30 giây */
+  --data-stale-after-s: 90;     /* "dữ liệu cũ" khi quá 90 giây */
+  --alert-humidity-low: 30;     /* % */
+  --alert-humidity-high: 85;    /* % */
+  --alert-cooldown-min: 30;     /* phút nghỉ giữa hai lần cảnh báo Telegram */
+}
+
+/* ---------- Họa tiết trạng thái (thay cho màu) ---------- */
+.ri-hatch {        /* gạch chéo 45° màu mực · 2 px / 6 px = CHỈ cột "hôm nay chưa xong" và dòng thời gian khoảng nghỉ */
+  background-image: repeating-linear-gradient(-45deg, var(--ink) 0 2px, transparent 2px 8px);
+}
+.ri-hatch--invert { background-image: repeating-linear-gradient(-45deg, var(--invert-ink) 0 2px, transparent 2px 8px); }
+/* .ri-hatch--alert đã bỏ (07/11/2026): không dùng gạch chéo màu đỏ ở bất kỳ đâu. Vùng ngoài ngưỡng dùng .ri-zone--out */
+.ri-zone--out     { background: var(--accent-alert-tint); }                         /* biểu đồ, thang Telegram */
+.ri-zone--out.ri-zone--edge { box-shadow: inset 0 -2px 0 var(--accent-alert); }   /* thang Telegram: gạch đáy 2 px */
+.ri-gauge__out    { fill: none; stroke: var(--accent-alert); stroke-width: 3; }    /* cung ngoài ngưỡng gauge độ ẩm (2.5 ở cỡ M) */
+.ri-hatch--warn   { background-image: repeating-linear-gradient(-45deg, var(--accent-warn) 0 2px, transparent 2px 8px); }  /* dự phòng; dữ liệu cũ nay dùng biểu tượng đồng hồ + chữ */
+.ri-dashed { border-style: dashed; }                    /* Figma vẽ bằng dãy thanh ngắn; CSS dùng border dashed */
+.ri-invert { background: var(--invert-bg); color: var(--invert-ink); }
+
+/* ---------- Trạng thái lỗi · "gạch đáy" (chốt 07/11/2026, HANDOFF §3.11) ----------
+   Viền 1 px giữ màu thường, chỉ cạnh đáy 2 px mang màu trạng thái; biểu tượng ⚠ + chữ luôn đi kèm. */
+.ri-field          { display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 14px;
+                     border: 1px solid var(--line-strong); background: var(--surface); }
+.ri-field--error   { border-bottom: 2px solid var(--accent-alert); }
+.ri-field__icon    { flex: none; width: 24px; height: 24px; color: var(--accent-alert-text); }
+.ri-field__msg     { margin-top: 4px; font-size: 12px; color: var(--accent-alert-text); }
+.ri-banner, .ri-toast { border: 1px solid var(--line-strong); background: var(--surface); }
+.ri-banner--error, .ri-toast--failed { border-bottom: 2px solid var(--accent-alert); }
+.ri-banner--warning { border-bottom: 2px solid var(--accent-warn); }
+.ri-statusbar--stale        { border-bottom: 2px solid var(--accent-warn); }
+.ri-statusbar--offline,
+.ri-statusbar--disconnected { border-bottom: 2px solid var(--accent-alert); } /* thanh đảo màu → giá trị sáng qua .ri-invert */
+
+/* ---------- Dải đèn hiệu 3 mức · hero độ ẩm khi ngoài ngưỡng ---------- */
+.ri-annunciator    { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; list-style: none; margin: 0; padding: 0;
+                     font: 500 12px/1 var(--font-mono); }
+.ri-annunciator > li         { height: 32px; display: grid; place-items: center; padding: 0 4px;
+                               border: 1px solid var(--invert-track); color: var(--invert-ink-2); }
+.ri-annunciator > li.is-lit  { border-color: transparent; background: var(--accent-alert); color: var(--invert-bg); }
+@media (max-width: 480px) { .ri-annunciator { font-size: 11px; } }

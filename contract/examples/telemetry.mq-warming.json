@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "seq": 3,
+  "uptimeS": 90,
+  "temperature": 27.5,
+  "humidity": 64.5,
+  "co2": null,
+  "sensors": { "dht22": "ok", "mq135": "warming" },
+  "levels": { "temperature": "normal", "humidity": "normal", "co2": null },
+  "ts": 1763364600
+}
