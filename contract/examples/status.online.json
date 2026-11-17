@@ -1,0 +1,9 @@
+{
+  "v": 1,
+  "online": true,
+  "fw": "0.1.0",
+  "intervalS": 30,
+  "ssid": "Phong_A12",
+  "rssi": -61,
+  "ledMode": "auto"
+}

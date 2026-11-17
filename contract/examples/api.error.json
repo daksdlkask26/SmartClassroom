@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "DEVICE_OFFLINE",
+    "message": "Thiết bị đang ngoại tuyến nên chưa gửi được bảng màu."
+  }
+}

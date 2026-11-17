@@ -1,0 +1,106 @@
+{
+  "contractVersion": "0.1.0",
+  "messageVersion": 1,
+  "deviceId": "sc-01",
+  "topics": {
+    "telemetry": "smartclassroom/{deviceId}/telemetry",
+    "status": "smartclassroom/{deviceId}/status",
+    "ledCmd": "smartclassroom/{deviceId}/led/cmd"
+  },
+  "timing": {
+    "intervalS": 30,
+    "staleAfterS": 90,
+    "offlineAfterS": 300
+  },
+  "metrics": {
+    "humidity": {
+      "unit": "%",
+      "decimals": 1,
+      "scale": [0, 100],
+      "valid": [0, 100]
+    },
+    "temperature": {
+      "unit": "°C",
+      "decimals": 1,
+      "scale": [10, 40],
+      "valid": [-40, 80]
+    },
+    "co2": {
+      "unit": "ppm",
+      "decimals": 0,
+      "scale": [400, 2000],
+      "valid": [0, 10000]
+    }
+  },
+  "levels": {
+    "temperature": {
+      "provisional": true,
+      "bands": [
+        { "level": "alert", "max": 16, "maxInclusive": false },
+        { "level": "watch", "min": 16, "max": 20, "maxInclusive": false },
+        { "level": "normal", "min": 20, "max": 30 },
+        { "level": "watch", "min": 30, "max": 34, "minInclusive": false },
+        { "level": "alert", "min": 34, "minInclusive": false }
+      ]
+    },
+    "humidity": {
+      "provisional": false,
+      "bands": [
+        { "level": "alert", "max": 30, "maxInclusive": false },
+        { "level": "watch", "min": 30, "max": 40, "maxInclusive": false },
+        { "level": "normal", "min": 40, "max": 70 },
+        { "level": "watch", "min": 70, "max": 85, "minInclusive": false },
+        { "level": "alert", "min": 85, "minInclusive": false }
+      ]
+    },
+    "co2": {
+      "provisional": true,
+      "bands": [
+        { "level": "normal", "max": 1000, "maxInclusive": false },
+        { "level": "watch", "min": 1000, "max": 1500, "maxInclusive": false },
+        { "level": "alert", "min": 1500 }
+      ]
+    }
+  },
+  "hysteresis": {
+    "temperature": 0.5,
+    "humidity": 2,
+    "co2": 50
+  },
+  "telegram": {
+    "humidityLow": 30,
+    "humidityHigh": 85,
+    "cooldownMin": 30
+  },
+  "led": {
+    "count": 8,
+    "pairs": {
+      "system": [1, 2],
+      "temperature": [3, 4],
+      "humidity": [5, 6],
+      "co2": [7, 8]
+    },
+    "systemColors": {
+      "run": "#FFFFFF",
+      "net": "#2F6BFF"
+    },
+    "levelOrder": ["normal", "watch", "alert"],
+    "defaultPalette": {
+      "temperature": ["#22E05A", "#FFD400", "#FF2A2A"],
+      "humidity": ["#22E05A", "#FFD400", "#FF2A2A"],
+      "co2": ["#22E05A", "#FFD400", "#FF2A2A"]
+    },
+    "namedColors": [
+      { "name": "Trắng", "hex": "#FFFFFF" },
+      { "name": "Trắng ấm", "hex": "#FFC98A" },
+      { "name": "Đỏ", "hex": "#FF2A2A" },
+      { "name": "Cam", "hex": "#FF7A00" },
+      { "name": "Vàng", "hex": "#FFD400" },
+      { "name": "Xanh lá", "hex": "#22E05A" },
+      { "name": "Xanh ngọc", "hex": "#00C9B7" },
+      { "name": "Xanh dương", "hex": "#2F6BFF" },
+      { "name": "Tím", "hex": "#8A3FFF" },
+      { "name": "Hồng", "hex": "#FF3FA4" }
+    ]
+  }
+}

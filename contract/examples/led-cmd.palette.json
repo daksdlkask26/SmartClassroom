@@ -1,0 +1,9 @@
+{
+  "v": 1,
+  "mode": "auto",
+  "palette": {
+    "temperature": ["#22E05A", "#FFD400", "#FF2A2A"],
+    "humidity": ["#22E05A", "#FF7A00", "#FF2A2A"],
+    "co2": ["#22E05A", "#FFD400", "#FF2A2A"]
+  }
+}
