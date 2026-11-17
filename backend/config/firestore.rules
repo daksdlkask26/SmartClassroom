@@ -1,0 +1,9 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // The website uses the backend. Admin SDK access is controlled by IAM.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -3,6 +3,7 @@
 # ==============================================================
 # Biến môi trường của backend (HiveMQ, Telegram bot token, ...)
 .env
+# Includes local env variants, temporary files and backups.
 .env.*
 !.env.example
 

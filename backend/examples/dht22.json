@@ -1,0 +1,8 @@
+{
+  "deviceId": "esp32-01",
+  "bootId": "demo-boot-01",
+  "seq": 1,
+  "status": "ok",
+  "temperatureC": 27.5,
+  "humidityPct": 65
+}
