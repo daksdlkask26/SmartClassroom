@@ -1,6 +1,6 @@
 # Hợp đồng dữ liệu — Smart Classroom · Nhóm 16
 
-**Phiên bản 0.1.0 · bản đề xuất · 17/11/2026** — chờ Thành và Tuấn xác nhận.
+**Phiên bản 0.1.1 · bản đề xuất · 17/11/2026** — chờ Thành và Tuấn xác nhận.
 
 Tài liệu này quy định dữ liệu đi giữa **ESP32 ↔ MQTT ↔ Backend ↔ Trình duyệt**. Đây là chỗ duy nhất cả ba người cùng phụ thuộc, nên:
 
@@ -168,7 +168,7 @@ Phong bì chung: `{ "type": "...", "at": "<ISO>", "data": { ... } }`. Trình duy
 |---|---|---|---|
 | `hello` | Ngay khi kết nối | `serverTime`, `mode` (`"sim"`/`"live"`), `config` (= `system.json`), `latest` (Reading hoặc `null`), `device`, `led` | [`ws.hello.json`](examples/ws.hello.json) (trường `config` viết tắt) |
 | `reading` | Mỗi bản tin hợp lệ | Reading = telemetry đã kiểm tra, cộng `receivedAt`, `levelsSource`; bỏ `v`, `uptimeS` | [`ws.reading.json`](examples/ws.reading.json) |
-| `device` | Trạng thái thiết bị đổi | `online`, `reason` (`"status"`/`"lwt"`/`"timeout"`/`"unknown"`), `lastSeenAt`, `fw`, `ssid`, `rssi`, `intervalS`, `ledMode` | trong `ws.hello.json` |
+| `device` | Trạng thái thiết bị đổi | `online`, `reason` (`"status"`: thiết bị tự báo · `"telemetry"`: suy ra từ bản tin vừa nhận · `"lwt"`: broker báo rớt mạng · `"timeout"`: quá `offlineAfterS` không có bản tin · `"unknown"`: chưa có thông tin), `lastSeenAt`, `fw`, `ssid`, `rssi`, `intervalS`, `ledMode` | trong `ws.hello.json` |
 | `led` | Sau khi publish `led/cmd` thành công | `mode`, `palette`, `test` (`{on,color}` hoặc `null`), `sentAt` | trong `ws.hello.json` |
 
 Giao diện tự suy ra trạng thái thanh trên cùng (HANDOFF §3.4): **ĐANG KẾT NỐI** (chưa có bản tin) · **TRỰC TUYẾN** (bản tin cuối ≤ 90 giây) · **DỮ LIỆU CŨ** (> 90 giây) · **THIẾT BỊ NGOẠI TUYẾN** (`device.online = false`) · **MẤT KẾT NỐI** (WebSocket đứt).
@@ -240,3 +240,4 @@ Lỗi dùng chung một dạng ([`api.error.json`](examples/api.error.json)): `{
 | Phiên bản | Ngày | Thay đổi |
 |---|---|---|
 | 0.1.0 | 17/11/2026 | Bản đề xuất đầu tiên (Uy) |
+| 0.1.1 | 17/11/2026 | Thêm giá trị `reason: "telemetry"` cho tin `device` (chỉ thêm, không ảnh hưởng firmware) |

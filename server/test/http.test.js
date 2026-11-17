@@ -24,7 +24,7 @@ test('GET /api/health trả trạng thái', async () => {
   assert.equal(body.ok, true);
   assert.equal(body.mode, 'sim');
   assert.equal(body.mqtt, 'disconnected');
-  assert.equal(body.contractVersion, '0.1.0');
+  assert.equal(body.contractVersion, readContract().contractVersion);
   assert.equal(typeof body.uptimeS, 'number');
   assert.equal(res.headers.get('x-powered-by'), null);
   assert.equal(res.headers.get('x-content-type-options'), 'nosniff');
