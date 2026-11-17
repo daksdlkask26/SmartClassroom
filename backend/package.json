@@ -1,0 +1,31 @@
+{
+  "name": "smartclassroom-backend",
+  "version": "1.0.0",
+  "description": "ID 4: MQTT sensor history stored in Cloud Firestore",
+  "private": true,
+  "main": "src/ingest.cjs",
+  "engines": {
+    "node": ">=22.9.0"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/ingest.cjs",
+    "check:firestore": "node --env-file-if-exists=.env scripts/smoke-firestore.cjs",
+    "publish:test": "node --env-file-if-exists=.env scripts/publish-test.cjs",
+    "readings": "node --env-file-if-exists=.env scripts/list-readings.cjs",
+    "test": "node --test test/*.test.cjs",
+    "test:integration": "node scripts/run-emulator.cjs test",
+    "emulators": "node scripts/run-emulator.cjs start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "firebase-admin": "^14.5.1",
+    "mqtt": "^5.16.1"
+  },
+  "devDependencies": {
+    "aedes": "^1.2.0",
+    "firebase-tools": "^15.36.0"
+  }
+}
