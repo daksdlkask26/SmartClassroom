@@ -1,9 +1,7 @@
-// Điểm khởi động backend.
-// Thứ tự (theo plan.md mục 6.1): cấu hình → bus/state (G2) → MQTT (G2) → HTTP + WS (G1, G3) → plugin (G3).
-import http from 'node:http';
+// Điểm khởi động backend: đọc cấu hình rồi gọi startServer() (src/server.js).
 import { describeConfig, loadConfig, loadEnvFile } from './config.js';
 import { createLogger } from './log.js';
-import { createApp } from './http/app.js';
+import { startServer } from './server.js';
 
 async function main() {
   const envLoaded = loadEnvFile();
@@ -13,23 +11,17 @@ async function main() {
   log.info(envLoaded ? 'Đã nạp server/.env' : 'Không có server/.env, dùng giá trị mặc định');
   log.info('Cấu hình', JSON.stringify(describeConfig(config)));
 
-  const app = createApp({ config, log: log.child('http') });
-  const server = http.createServer(app);
-
-  await new Promise((resolve, reject) => {
-    server.once('error', reject);
-    server.listen(config.port, resolve);
-  });
-  log.info(`Đang chạy tại http://localhost:${server.address().port} (chế độ ${config.mode})`);
+  const app = await startServer({ config, log });
+  log.info(`Đang chạy tại http://localhost:${app.port} (chế độ ${config.mode})`);
 
   let closing = false;
-  const shutdown = (signal) => {
+  const shutdown = async (signal) => {
     if (closing) return;
     closing = true;
     log.info(`Nhận ${signal}, đang dừng…`);
-    server.close(() => process.exit(0));
-    server.closeAllConnections?.();
     setTimeout(() => process.exit(1), 3000).unref();
+    await app.close().catch((err) => log.error('Lỗi khi dừng:', err.message));
+    process.exit(0);
   };
   process.on('SIGINT', () => shutdown('SIGINT'));
   process.on('SIGTERM', () => shutdown('SIGTERM'));

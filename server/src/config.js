@@ -46,6 +46,12 @@ function bool(env, key, fallback) {
   throw new Error(`${key}="${v}" không hợp lệ. Dùng true hoặc false`);
 }
 
+function intInRange(env, key, fallback, min, max) {
+  const n = Number(str(env, key, String(fallback)));
+  if (!Number.isInteger(n) || n < min || n > max) throw new Error(`${key} phải là số nguyên ${min}–${max}`);
+  return n;
+}
+
 function port(env, key, fallback) {
   const n = Number(str(env, key, String(fallback)));
   if (!Number.isInteger(n) || n < 0 || n > 65535) throw new Error(`${key} phải là số cổng 0–65535`);
@@ -76,7 +82,10 @@ export function loadConfig({ env = process.env, contract = readContract() } = {}
       password: str(env, 'MQTT_PASS', undefined),
     }),
     historyProvider: str(env, 'HISTORY_PROVIDER', 'memory'),
+    historySeedHours: intInRange(env, 'HISTORY_SEED_HOURS', 0, 0, 24 * 7),
     authEnabled: bool(env, 'AUTH_ENABLED', false),
+    // In mỗi bản tin ra log ở mức info (mặc định bật khi giả lập; npm run dev tắt vì giả lập đã in)
+    logReadings: bool(env, 'LOG_READINGS', str(env, 'MODE', 'sim').toLowerCase() === 'sim'),
     pluginsDisabled: str(env, 'PLUGINS_DISABLED', '')
       .split(',').map((s) => s.trim()).filter(Boolean),
     webRoot: WEB_ROOT,
@@ -92,6 +101,7 @@ export function describeConfig(cfg) {
     deviceId: cfg.deviceId,
     mqtt: { url: cfg.mqtt.url, username: cfg.mqtt.username ?? null, password: cfg.mqtt.password ? '***' : null },
     historyProvider: cfg.historyProvider,
+    historySeedHours: cfg.historySeedHours,
     authEnabled: cfg.authEnabled,
     pluginsDisabled: cfg.pluginsDisabled,
     contractVersion: cfg.contract.contractVersion,
