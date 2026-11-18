@@ -1,0 +1,50 @@
+/* Thanh LED 8 bóng (HANDOFF §2, §3.5): 4 cặp, khe 4 px trong cặp, 12 px giữa các cặp → 232 × 48 px.
+   Màu mỗi bóng qua biến --led do js/components/led-strip.js đặt (từ contract/system.json hoặc bảng màu đã gửi). */
+
+.ri-led {
+  display: inline-flex;
+  gap: 12px;
+  padding: 6px;
+  border: var(--stroke-strong) solid var(--ink);
+  background: var(--paper);
+}
+.ri-led__pair { position: relative; display: flex; gap: 4px; }
+.ri-led__cell {
+  display: block;
+  width: 20px;
+  height: 32px;
+  border: var(--stroke-hair) solid var(--ink);
+  background: var(--led, var(--track));
+}
+/* Không rõ (dữ liệu cũ, ngoại tuyến, chưa có bản tin): xám, nét đứt */
+.ri-led__cell.is-unknown { background: var(--track); border-style: dashed; }
+/* Nháy trắng (cảm biến lỗi / MQ-135 làm nóng). #fff là màu thật của bóng (như led.systemColors.run), không phải màu giao diện */
+.ri-led__cell.is-blink { background: #fff; }
+
+/* Dấu 4 góc mở quanh cặp đang nháy (Figma vẽ "nháy" bằng dấu góc) */
+.ri-led__pair.is-blink::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  pointer-events: none;
+  --c: var(--ink);
+  --l: 8px;
+  --w: 2px;
+  background:
+    linear-gradient(var(--c) 0 0) top left / var(--l) var(--w),
+    linear-gradient(var(--c) 0 0) top left / var(--w) var(--l),
+    linear-gradient(var(--c) 0 0) top right / var(--l) var(--w),
+    linear-gradient(var(--c) 0 0) top right / var(--w) var(--l),
+    linear-gradient(var(--c) 0 0) bottom left / var(--l) var(--w),
+    linear-gradient(var(--c) 0 0) bottom left / var(--w) var(--l),
+    linear-gradient(var(--c) 0 0) bottom right / var(--l) var(--w),
+    linear-gradient(var(--c) 0 0) bottom right / var(--w) var(--l);
+  background-repeat: no-repeat;
+}
+
+/* Mobile / khối gọn: thanh kéo hết chiều ngang thẻ (LED/Strip-8/M · Mobile) */
+@container (max-width: 480px) {
+  .ri-ledcard .ri-led { display: flex; width: 100%; }
+  .ri-ledcard .ri-led__pair { flex: 1; }
+  .ri-ledcard .ri-led__cell { flex: 1; width: auto; }
+}
