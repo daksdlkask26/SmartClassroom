@@ -15,7 +15,8 @@ export function paintLeds(root, result) {
     const c = result?.colors[Number(cell.dataset.n) - 1] ?? null;
     cell.classList.toggle('is-unknown', c === null);
     cell.classList.toggle('is-blink', c === 'blink');
-    if (c && c !== 'blink') cell.style.setProperty('--led', c);
+    cell.classList.toggle('is-off', c === 'off');
+    if (c && c !== 'blink' && c !== 'off') cell.style.setProperty('--led', c);
     else cell.style.removeProperty('--led');
   }
   for (const pair of root.querySelectorAll('[data-pair]')) {

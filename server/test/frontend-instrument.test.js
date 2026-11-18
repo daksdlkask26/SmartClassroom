@@ -86,11 +86,11 @@ test('LED: thiếu mức của một thông số → cặp đó không rõ màu,
   assert.deepEqual(r.colors.slice(4, 6), [null, null]);
 });
 
-test('LED: chế độ Kiểm tra đèn → một màu cho cả thanh, Tắt → không màu', () => {
+test('LED: chế độ Kiểm tra đèn → một màu cho cả thanh, Tắt → bóng tắt (không phải "không rõ")', () => {
   const on = ledColors({ latest: reading(), led: { mode: 'test', test: { on: true, color: '#00C9B7' } }, config, live: true });
   assert.deepEqual(on.colors, Array(8).fill('#00C9B7'));
   const off = ledColors({ latest: reading(), led: { mode: 'test', test: { on: false, color: '#00C9B7' } }, config, live: true });
-  assert.deepEqual(off.colors, Array(8).fill(null));
+  assert.deepEqual(off.colors, Array(8).fill('off'));
 });
 
 test('LED: câu tóm tắt mức, mức nặng nói trước', () => {

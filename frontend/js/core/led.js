@@ -3,7 +3,7 @@
 //
 // Bóng 1–2 hệ thống (màu cố định) · 3–4 nhiệt độ · 5–6 độ ẩm · 7–8 CO₂ (contract/system.json → led.pairs).
 // Kết quả: { colors: [8 phần tử], blink: { metric: 'error'|'warming' } } hoặc null = "không rõ" (vẽ xám).
-// Mỗi phần tử colors: '#RRGGBB', 'blink' (nháy trắng) hoặc null (không rõ màu).
+// Mỗi phần tử colors: '#RRGGBB', 'blink' (nháy trắng), 'off' (bóng tắt, Kiểm tra đèn · Tắt) hoặc null (không rõ màu).
 
 export const PAIRS = ['temperature', 'humidity', 'co2'];
 const SENSOR_OF = { temperature: 'dht22', humidity: 'dht22', co2: 'mq135' };
@@ -14,7 +14,7 @@ export function ledColors({ latest, led, config, live }) {
 
   // Chế độ Kiểm tra đèn: một màu cho cả thanh, Bật/Tắt thủ công (contract/examples/led-cmd.test.json)
   if (led?.mode === 'test') {
-    const c = led.test?.on ? (led.test.color ?? null) : null;
+    const c = led.test?.on ? (led.test.color ?? null) : 'off';
     return { colors: Array(count).fill(c), blink: {} };
   }
 

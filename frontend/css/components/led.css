@@ -20,6 +20,8 @@
 .ri-led__cell.is-unknown { background: var(--track); border-style: dashed; }
 /* Nháy trắng (cảm biến lỗi / MQ-135 làm nóng). #fff là màu thật của bóng (như led.systemColors.run), không phải màu giao diện */
 .ri-led__cell.is-blink { background: #fff; }
+/* Bóng tắt (Kiểm tra đèn · Tắt): nền giấy, viền liền — khác "không rõ" nét đứt */
+.ri-led__cell.is-off { background: var(--paper); }
 
 /* Dấu 4 góc mở quanh cặp đang nháy (Figma vẽ "nháy" bằng dấu góc) */
 .ri-led__pair.is-blink::before {
