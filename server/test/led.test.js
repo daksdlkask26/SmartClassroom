@@ -128,11 +128,12 @@ describe('toàn hệ thống: trang web → backend → broker → ESP32', () =>
   let broker; let app; let base; let esp; let ws; let config;
   // Thư mục plugin rỗng: không nạp plugin thật của đồng đội (Telegram, Firestore) khi kiểm thử
   const pluginsDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sc-led-plugins-'));
+  const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sc-led-data-')); // không ghi vào server/data/ thật
   const wsMsgs = [];
 
   before(async () => {
     broker = await startBroker({ port: 0, log: () => {} });
-    config = loadConfig({ env: { PORT: '0', MQTT_URL: `mqtt://127.0.0.1:${broker.port}` }, contract: readContract() });
+    config = loadConfig({ env: { PORT: '0', MQTT_URL: `mqtt://127.0.0.1:${broker.port}`, DATA_DIR: dataDir }, contract: readContract() });
     app = await startServer({ config, log: quiet, host: '127.0.0.1', pluginsDir });
     base = `http://127.0.0.1:${app.port}`;
     for (let i = 0; i < 60 && app.mqtt.status() !== 'connected'; i++) await new Promise((r) => setTimeout(r, 50));
@@ -153,6 +154,7 @@ describe('toàn hệ thống: trang web → backend → broker → ESP32', () =>
     await app?.close();
     await broker?.close();
     fs.rmSync(pluginsDir, { recursive: true, force: true });
+    fs.rmSync(dataDir, { recursive: true, force: true });
   });
 
   const nextCmd = () => new Promise((resolve) => esp.once('message', (t, p, packet) => resolve({ t, cmd: JSON.parse(p), retain: packet.retain })));

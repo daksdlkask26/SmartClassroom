@@ -88,6 +88,8 @@ export function loadConfig({ env = process.env, contract = readContract() } = {}
     logReadings: bool(env, 'LOG_READINGS', str(env, 'MODE', 'sim').toLowerCase() === 'sim'),
     pluginsDisabled: str(env, 'PLUGINS_DISABLED', '')
       .split(',').map((s) => s.trim()).filter(Boolean),
+    // Dữ liệu lúc chạy: bảng màu LED gửi gần nhất (core/led-store.js). Thư mục đã ignore.
+    dataDir: path.resolve(SERVER_ROOT, str(env, 'DATA_DIR', 'data')),
     webRoot: WEB_ROOT,
     contract,
   });
@@ -104,6 +106,7 @@ export function describeConfig(cfg) {
     historySeedHours: cfg.historySeedHours,
     authEnabled: cfg.authEnabled,
     pluginsDisabled: cfg.pluginsDisabled,
+    dataDir: cfg.dataDir,
     contractVersion: cfg.contract.contractVersion,
   };
 }

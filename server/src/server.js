@@ -3,6 +3,7 @@
 import http from 'node:http';
 import { createBus } from './core/bus.js';
 import { createDeviceWatch } from './core/device-watch.js';
+import { createLedStore } from './core/led-store.js';
 import { createState } from './core/state.js';
 import { createApp } from './http/app.js';
 import { authorizeUpgrade } from './http/middleware/auth.js';
@@ -20,7 +21,17 @@ import { createWsServer } from './ws/server.js';
  */
 export async function startServer({ config, log, host, pluginsDir }) {
   const bus = createBus(log.child('bus'));
-  const state = createState({ bus });
+  const ledStore = createLedStore({
+    dir: config.dataDir, mode: config.mode, deviceId: config.deviceId,
+    levelCount: config.contract?.led?.levelOrder?.length, log: log.child('led'),
+  });
+  const savedLed = ledStore.load();
+  if (savedLed) log.child('led').info(`Bảng màu đã gửi lần trước (${savedLed.sentAt}) đọc lại từ ${ledStore.file}`);
+  const state = createState({ bus, savedLed });
+  // Lưu sau mỗi lệnh đưa đèn về Tự động (Áp dụng bảng màu, Về tự động). Lệnh Kiểm tra đèn không đổi bảng màu.
+  bus.on('led:sent', (led) => {
+    if (led.mode === 'auto' && led.palette) ledStore.save({ palette: led.palette, sentAt: led.sentAt });
+  }, 'core:led-store');
 
   logActivity({ bus, config, log });
 
@@ -64,6 +75,7 @@ export async function startServer({ config, log, host, pluginsDir }) {
       await ws.close();
       await mqttClient.end().catch(() => {});
       await history.close();
+      await ledStore.flush();
       server.closeAllConnections?.();
       await new Promise((r) => server.close(() => r()));
     },

@@ -14,6 +14,20 @@
 
 `package.json` và `package-lock.json` nằm cùng trong `backend/` vì đây là phần dùng npm. Commit cả hai file; dùng `npm ci` để cài đúng phiên bản trong lockfile.
 
+## Web giám sát (`server/`, `frontend/`, `contract/`)
+
+Website (Node.js + Express, HTML/CSS/JS thuần) chạy được ở chế độ giả lập, không cần phần cứng hay Firebase:
+
+```powershell
+cd server
+npm ci
+npm run dev   # broker cục bộ + giả lập ESP32 + backend → http://localhost:3000
+```
+
+- Hợp đồng dữ liệu (topic MQTT, trường JSON, REST, WebSocket): [`contract/README.md`](contract/README.md)
+- Cấu hình, kiểm thử, cách cắm module Firestore / Telegram: [`server/README.md`](server/README.md)
+- Kiểm giao diện tự động bằng Chrome: `node tools/verify-web.cjs`
+
 ## Java 21 và HiveMQ trên Windows
 
 **1. Cài Java 21:** tải [Temurin JDK 21 cho Windows x64](https://adoptium.net/temurin/releases/?version=21&os=windows&arch=x64&package=jdk), chọn **MSI**, bật **PATH** và **JAVA_HOME** khi cài. `JAVA_HOME` trỏ tới thư mục JDK 21, không gồm `\bin`. Sau đó mở PowerShell mới. [Hướng dẫn cài](https://adoptium.net/installation/windows/).

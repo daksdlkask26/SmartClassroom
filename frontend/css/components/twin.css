@@ -22,6 +22,15 @@
 }
 .ri-twin text.ri-twin__tagline { font-size: 10px; fill: var(--invert-ink-2); }
 
+/* Chủ đề Lid: nắp hộp thật vẫn đen (DECISIONS T13, DeviceTwin/Desktop · Lid). Trong Lid, --invert-* là màu SÁNG
+   (để hero đảo màu thành panel sáng) → trong bản vẽ hộp gán lại về màu tối của chủ đề, thêm viền để nắp đen
+   không chìm vào nền panel tối. */
+[data-theme="lid"] .ri-twin { --invert-bg: var(--paper); --invert-ink: var(--ink); --invert-ink-2: var(--ink-2); }
+[data-theme="lid"] .ri-twin__lid { stroke: var(--line-strong); }
+/* Ô nhãn trên nắp đen: nền sáng chữ tối như chủ đề Body */
+[data-theme="lid"] .ri-twin__key rect { fill: var(--ink); }
+[data-theme="lid"] .ri-twin__key text { fill: var(--paper); }
+
 /* Ô nhãn A–E */
 .ri-twin__key rect { fill: var(--surface); }
 .ri-twin__key text { fill: var(--ink); font-weight: 700; }

@@ -12,6 +12,7 @@ import { startBroker } from '../scripts/dev-broker.js';
 
 const quiet = { error() {}, warn() {}, info() {}, debug() {}, child() { return quiet; } };
 const pluginsDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sc-e2e-plugins-'));
+const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sc-e2e-data-')); // không ghi vào server/data/ thật
 fs.writeFileSync(path.join(pluginsDir, 'spy.js'), `
 export function register({ bus }) {
   globalThis.__spy = [];
@@ -25,7 +26,7 @@ const clients = [];
 before(async () => {
   broker = await startBroker({ port: 0, log: () => {} });
   config = loadConfig({
-    env: { PORT: '0', MQTT_URL: `mqtt://127.0.0.1:${broker.port}`, HISTORY_SEED_HOURS: '2' },
+    env: { PORT: '0', MQTT_URL: `mqtt://127.0.0.1:${broker.port}`, HISTORY_SEED_HOURS: '2', DATA_DIR: dataDir },
     contract: readContract(),
   });
   app = await startServer({ config, log: quiet, host: '127.0.0.1', pluginsDir });
@@ -41,6 +42,7 @@ after(async () => {
   await app.close();
   await broker.close();
   fs.rmSync(pluginsDir, { recursive: true, force: true });
+  fs.rmSync(dataDir, { recursive: true, force: true });
 });
 
 /** Mở WebSocket và gom tin nhắn; trả về { ws, next(type, predicate) } */

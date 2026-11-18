@@ -81,6 +81,7 @@ Mọi biến đều có mặc định, xem chú thích trong [`.env.example`](.e
 | `HISTORY_SEED_HOURS` | `0` | Chỉ với `sim` + `memory`: gieo sẵn N giờ dữ liệu giả |
 | `AUTH_ENABLED` | `false` | Đăng nhập (ID 8). `false` = không chặn |
 | `PLUGINS_DISABLED` | trống | Tắt plugin theo tên file, ví dụ `firestore,telegram` |
+| `DATA_DIR` | `data` | Thư mục dữ liệu lúc chạy, tính từ `server/` (đã ignore). Hiện chỉ có `led-<MODE>-<DEVICE_ID>.json`: bảng màu LED gửi gần nhất, để khởi động lại backend vẫn hiện đúng bảng ESP32 đang dùng |
 | `LOG_LEVEL` | `info` | `error` · `warn` · `info` · `debug` |
 
 Chuyển sang thiết bị thật: đặt `MODE=live`, `MQTT_URL=mqtts://…:8883`, `MQTT_USER`, `MQTT_PASS`, rồi chạy `npm start` (không dùng `npm run dev`). Khi nhiều máy cùng nối HiveMQ thật, **chỉ một máy** bật plugin ghi dữ liệu (`contract/README.md` mục 8).
@@ -104,6 +105,20 @@ Chạy bằng `node:test`, không cần mạng hay tài khoản. Gồm:
 | `frontend-core`, `frontend-connection`, `frontend-instrument` | Phần thuần của giao diện: định dạng số, router, 5 trạng thái kết nối, gauge, màu LED, sparkline |
 | `frontend-device` | Trang Thiết bị & WiFi, Telegram: hàng cảm biến, hàng LED, câu trả lời mẫu của bot |
 | `led`, `frontend-led` | Lệnh đèn LED: kiểm tra bảng màu / Kiểm tra đèn, mã lỗi 409 · 422 · 503, web → broker → ESP32; bản nháp, khoảng ngưỡng, trùng màu |
+| `led-store` | Lưu bảng màu gửi gần nhất ra `DATA_DIR`, đọc lại khi khởi động lại backend; file hỏng thì bỏ qua |
+| `frontend-theme` | Chủ đề Theo hệ điều hành / Sáng · Body / Tối · Lid; script đầu `<head>` khớp `theme.js` |
+
+### Kiểm tra giao diện bằng Chrome (`tools/verify-web.cjs`)
+
+Cần Chrome trên máy (đặt `CHROME_PATH` nếu không ở chỗ mặc định). Chạy từ thư mục gốc repo:
+
+```bash
+node tools/verify-web.cjs                              # tự chạy broker + giả lập + backend riêng ở cổng 1884 / 3100
+node tools/verify-web.cjs --only layout,contrast --widths 390,1440 --shots ../shots
+node tools/verify-web.cjs --url http://localhost:3000  # dùng backend đang chạy (bỏ phần thanh trạng thái)
+```
+
+Kiểm 7 trang ở 320 · 390 · 768 · 1280 · 1440 · 1920 px, cả hai chủ đề: không cuộn ngang, không tràn panel, tương phản chữ ≥ 4,5:1, chọn chủ đề, Tab + vòng focus, Enter / Space / Esc trên trang Đèn LED, `prefers-reduced-motion`, vùng bấm ≥ 44 px ở 390 px, thanh trạng thái Trực tuyến → Ngoại tuyến (LWT) → Mất kết nối, và không có lỗi JS. Có lỗi thì thoát mã 1.
 
 ---
 
@@ -115,10 +130,10 @@ server/
   src/
     index.js               khởi động
     config.js              đọc .env + contract/system.json (module khác không đọc process.env)
-    core/                  bus.js · state.js · validate.js · levels.js · device-watch.js
+    core/                  bus.js · state.js · validate.js · levels.js · device-watch.js · led-cmd.js · led-store.js
     mqtt/client.js         nhận telemetry/status, gửi led/cmd
     ws/server.js           /ws: hello (toàn bộ trạng thái) → reading · device · led
-    http/                  app.js · routes/{health,session,state,history}.js · middleware/auth.js
+    http/                  app.js · routes/{health,session,state,history,led}.js · middleware/auth.js
     providers/history/     index.js (chọn theo HISTORY_PROVIDER) · memory.js
     plugins/               index.js (tự nạp) · _example.js (mẫu, không được nạp)
   test/
@@ -179,7 +194,7 @@ Thêm `frontend/js/pages/<tên>.js` xuất `{ mount(el, { store, t, url, navigat
 
 ### Uy (ID 3, 8)
 
-- **LED (ID 3):** trang `frontend/js/pages/led.js`, route `POST /api/led/palette` và `POST /api/led/test` gửi `led/cmd` (`contract/README.md` mục 2.3, 6).
+- **LED (ID 3):** trang `frontend/js/pages/led.js`, route `POST /api/led/palette` và `POST /api/led/test` gửi `led/cmd` (`contract/README.md` mục 2.3, 6). Bảng màu gửi gần nhất lưu ở `data/led-<MODE>-<DEVICE_ID>.json` (`src/core/led-store.js`). Chế độ Kiểm tra đèn không được lưu, vì firmware cũng không lưu chế độ này vào flash.
 - **Đăng nhập (ID 8):** thay thân hàm trong `src/http/middleware/auth.js`, giữ nguyên chữ ký `requireAuth` / `authorizeUpgrade`.
 
 ---

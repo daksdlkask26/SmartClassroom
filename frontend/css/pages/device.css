@@ -81,6 +81,9 @@
 }
 .ri-boot__illus { grid-area: illus; width: 192px; height: 192px; align-self: center; }
 .ri-boot__lid   { fill: var(--invert-bg); }
+/* Chủ đề Lid: nút BOOT nằm trên nắp đen thật → giữ tối (xem twin.css), viền để không chìm vào nền panel */
+[data-theme="lid"] .ri-boot__illus { --invert-bg: var(--paper); --invert-ink: var(--ink); --invert-ink-2: var(--ink-2); }
+[data-theme="lid"] .ri-boot__lid { stroke: var(--line-strong); stroke-width: 2; }
 .ri-boot__ring  { fill: none; stroke: var(--invert-ink-2); stroke-width: 3; }
 .ri-boot__hole  { fill: var(--invert-ink-2); }
 .ri-boot__pen   { stroke: var(--invert-ink); stroke-width: 7; stroke-linecap: round; }

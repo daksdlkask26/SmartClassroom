@@ -3,7 +3,13 @@
 
 const DEVICE_META = ['fw', 'intervalS', 'ssid', 'rssi', 'ledMode'];
 
-export function createState({ bus, now = () => new Date() }) {
+/**
+ * @param {object} opts
+ * @param {object} opts.bus
+ * @param {() => Date} [opts.now]
+ * @param {{ palette: object, sentAt: string } | null} [opts.savedLed]  bảng màu đã gửi lần trước (core/led-store.js)
+ */
+export function createState({ bus, now = () => new Date(), savedLed = null }) {
   let latest = null;
   let device = {
     online: false,
@@ -15,7 +21,8 @@ export function createState({ bus, now = () => new Date() }) {
     rssi: null,
     ledMode: null,
   };
-  let led = { mode: null, palette: null, test: null, sentAt: null };
+  // mode để null khi khôi phục từ file: chế độ thật lấy từ status của thiết bị (device.ledMode)
+  let led = { mode: null, palette: savedLed?.palette ?? null, test: null, sentAt: savedLed?.sentAt ?? null };
 
   function setDevice(patch) {
     const next = { ...device, ...patch };

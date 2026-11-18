@@ -1,0 +1,72 @@
+/* Tài khoản & phiên (DK-14 / MB-14): ô chọn giao diện "Theo hệ điều hành / Sáng · Body / Tối · Lid" (DECISIONS D10).
+   Cùng kiểu chip đã dùng ở Kiểm tra đèn: viền mảnh, đang chọn viền 2 px + dấu ✓ (không chỉ dựa vào màu). */
+
+.ri-themeopts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.ri-themeopt {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 72px;
+  padding: var(--space-3);
+  border: var(--stroke-hair) solid var(--line-strong);
+  background: var(--surface);
+  cursor: pointer;
+}
+.ri-themeopt:hover { border-color: var(--ink); }
+.ri-themeopt:has(:checked) { border: var(--stroke-strong) solid var(--ink); padding: calc(var(--space-3) - 1px); }
+.ri-themeopt:has(:focus-visible) { outline: var(--focus-ring); outline-offset: 2px; }
+
+/* Ô radio thật vẫn nhận bàn phím (mũi tên đổi lựa chọn), chỉ ẩn khỏi mắt */
+.ri-themeopt__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Mẫu chủ đề: nửa của chủ đề đang dùng = paper / ink; nửa của chủ đề kia = invert-bg / invert-ink
+   (trong tokens.css cặp invert của Body là màu tối của Lid và ngược lại) → không viết cứng mã màu. */
+.ri-themeopt__sample {
+  display: flex;
+  height: 40px;
+  border: var(--stroke-hair) solid var(--line-strong);
+  overflow: hidden;
+}
+.ri-themeopt__sample > span {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+}
+.ri-themeopt__sample > span > i {
+  width: 14px;
+  height: 14px;
+  background: var(--ink);
+}
+:root[data-theme="lid"] .ri-themeopt__half--body,
+:root:not([data-theme="lid"]) .ri-themeopt__half--lid { background: var(--invert-bg); }
+:root[data-theme="lid"] .ri-themeopt__half--body > i,
+:root:not([data-theme="lid"]) .ri-themeopt__half--lid > i { background: var(--invert-ink); }
+
+.ri-themeopt__text { display: grid; gap: 2px; min-width: 0; }
+.ri-themeopt__name { font-weight: 600; }
+.ri-themeopt__hint { font-size: var(--type-body-sm); color: var(--ink-2); }
+.ri-themeopt__check { visibility: hidden; width: 20px; height: 20px; }
+.ri-themeopt:has(:checked) .ri-themeopt__check { visibility: visible; }
+
+@media (max-width: 1023.98px) {
+  .ri-themeopts { grid-template-columns: minmax(0, 1fr); }
+}
