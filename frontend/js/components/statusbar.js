@@ -17,6 +17,9 @@ const VIEW = {
 };
 const ALL_CLASSES = Object.values(VIEW).map((v) => `ri-statusbar--${v.cls}`);
 
+/** Cách hiển thị từng trạng thái (8 ô + nhãn), dùng lại ở hàng "Kết nối" trang Thiết bị. */
+export const STATUS_VIEW = VIEW;
+
 export function createStatusbar(el, { store, t, onRetry }) {
   el.innerHTML = `
     <div class="ri-statusbar__state" role="status" aria-live="polite" aria-atomic="true">
