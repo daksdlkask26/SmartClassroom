@@ -102,6 +102,8 @@ Chạy bằng `node:test`, không cần mạng hay tài khoản. Gồm:
 | `mqtt.integration`, `e2e` | Broker + backend thật trên cổng ngẫu nhiên: publish → WebSocket nhận |
 | `sim-device` | Kịch bản giả lập |
 | `frontend-core`, `frontend-connection`, `frontend-instrument` | Phần thuần của giao diện: định dạng số, router, 5 trạng thái kết nối, gauge, màu LED, sparkline |
+| `frontend-device` | Trang Thiết bị & WiFi, Telegram: hàng cảm biến, hàng LED, câu trả lời mẫu của bot |
+| `led`, `frontend-led` | Lệnh đèn LED: kiểm tra bảng màu / Kiểm tra đèn, mã lỗi 409 · 422 · 503, web → broker → ESP32; bản nháp, khoảng ngưỡng, trùng màu |
 
 ---
 
