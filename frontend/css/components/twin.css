@@ -1,0 +1,88 @@
+/* Bản sao thiết bị — Device Twin (HANDOFF §2). SVG dựng bởi js/components/twin.js, 1 đơn vị = 1 px ở 1440. */
+
+.ri-twin { display: block; width: 100%; max-width: 484px; height: auto; margin-inline: auto; }
+
+.ri-twin text { font-family: var(--font-mono); font-size: var(--type-label); letter-spacing: var(--ls-label); }
+.ri-twin__caption { fill: var(--ink); font-weight: 500; text-transform: uppercase; }
+.ri-twin__note    { fill: var(--ink-2); }
+
+/* Nắp (mặt tối) */
+.ri-twin__lid    { fill: var(--invert-bg); stroke: var(--invert-bg); stroke-width: 2; }
+.ri-twin__usb    { fill: var(--ink); }
+.ri-twin__screw circle { fill: none; stroke: var(--invert-ink-2); stroke-width: 1.5; }
+.ri-twin__screw circle + circle { fill: var(--invert-ink-2); stroke: none; }
+.ri-twin__grille line { stroke: var(--invert-ink-2); stroke-width: 3; }
+.ri-twin__boot   { fill: var(--invert-ink-2); }
+.ri-twin text.ri-twin__brand {
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+  fill: var(--invert-ink);
+}
+.ri-twin text.ri-twin__tagline { font-size: 10px; fill: var(--invert-ink-2); }
+
+/* Ô nhãn A–E */
+.ri-twin__key rect { fill: var(--surface); }
+.ri-twin__key text { fill: var(--ink); font-weight: 700; }
+.ri-twin__key--dark rect { fill: var(--ink); }
+.ri-twin__key--dark text { fill: var(--surface); }
+
+/* Mặt trước (mặt sáng) */
+.ri-twin__link   { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.ri-twin__front  { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+.ri-twin__rim    { fill: var(--ink); }
+.ri-twin__window { fill: var(--paper); stroke: var(--ink); stroke-width: 2; }
+.ri-twin__led    { fill: var(--led, var(--track)); stroke: var(--ink); stroke-width: 1; }
+.ri-twin__led.is-unknown { fill: var(--track); stroke-dasharray: 3 2; }
+.ri-twin__led.is-blink   { fill: #fff; } /* màu thật của bóng, xem led.css */
+.ri-twin__icons  { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Đường kích thước */
+.ri-twin__dim line { stroke: var(--ink-2); stroke-width: 1; }
+.ri-twin__dim text { fill: var(--ink-2); }
+
+/* Thiết bị ngoại tuyến (DeviceTwin/Desktop · Offline): chỉ còn viền nét đứt */
+.ri-twin.is-offline .ri-twin__body { fill: none; stroke: var(--ink); stroke-width: 2; stroke-dasharray: 6 4; }
+.ri-twin.is-offline .ri-twin__screw circle,
+.ri-twin.is-offline .ri-twin__grille line,
+.ri-twin.is-offline .ri-twin__boot { stroke: var(--ink-2); }
+.ri-twin.is-offline .ri-twin__screw circle + circle,
+.ri-twin.is-offline .ri-twin__boot { fill: var(--ink-2); }
+.ri-twin.is-offline text.ri-twin__brand { fill: var(--ink); }
+.ri-twin.is-offline text.ri-twin__tagline { fill: var(--ink-2); }
+
+/* ---------- Chú giải ---------- */
+.ri-twin__legend { display: grid; gap: var(--space-3); margin: var(--space-6) 0 0; }
+.ri-twin__row { display: flex; align-items: baseline; gap: var(--space-3); }
+.ri-twin__row dt {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--type-body-sm);
+  font-weight: 700;
+}
+.ri-twin__row dd { margin: 0; color: var(--ink-2); }
+.ri-key {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  background: var(--ink);
+  color: var(--surface);
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  font-weight: 700;
+}
+.ri-twin__groups-title { margin-top: var(--space-6); color: var(--ink-2); }
+.ri-twin__groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ri-twin__groups li { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--ink-2); }
+.ri-twin__groups b { font-family: var(--font-mono); font-size: var(--type-body-sm); color: var(--ink); }

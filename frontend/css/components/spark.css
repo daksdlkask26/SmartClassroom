@@ -1,0 +1,48 @@
+/* Sparkline 24 giờ (HANDOFF §2). SVG dựng bởi js/components/spark.js. */
+
+.ri-spark { --spark-color: var(--ink); }
+.ri-spark[data-metric="humidity"]    { --spark-color: var(--data-humidity); }
+.ri-spark[data-metric="temperature"] { --spark-color: var(--data-temperature); }
+.ri-spark[data-metric="co2"]         { --spark-color: var(--data-co2); }
+
+.ri-spark__plot { display: grid; gap: var(--space-3); min-height: 64px; align-content: end; }
+.ri-spark__svg { display: block; width: 100%; height: 64px; overflow: visible; }
+.ri-spark__line polyline {
+  fill: none;
+  stroke: var(--spark-color);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.ri-spark__th {
+  stroke: var(--accent-alert);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  vector-effect: non-scaling-stroke;
+}
+.ri-spark__dot {
+  stroke: var(--spark-color);
+  stroke-width: 8;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.ri-spark__axis {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  color: var(--ink-2);
+}
+.ri-spark__empty {
+  align-self: center;
+  font-size: var(--type-body-sm);
+  color: var(--ink-2);
+}
+
+/* MB-04: không có trục giờ */
+@container (max-width: 480px) {
+  .ri-spark__axis { display: none; }
+  .ri-spark__plot { min-height: 48px; }
+  .ri-spark__svg { height: 48px; }
+}

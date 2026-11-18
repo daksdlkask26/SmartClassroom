@@ -1,0 +1,50 @@
+/* Gauge 61 đoạn trên cung 240° (HANDOFF §3.1). SVG dựng bởi js/components/gauge.js.
+   Đoạn sáng theo màu dữ liệu của thông số; trong hero (mặt tối) tokens.css đã đổi --data-* sang bản sáng. */
+
+.ri-gauge { display: block; width: 240px; height: auto; overflow: visible; }
+.ri-gauge--s { width: 160px; margin-bottom: var(--space-5); }
+
+.ri-gauge--humidity    { --gauge-color: var(--data-humidity); }
+.ri-gauge--temperature { --gauge-color: var(--data-temperature); }
+.ri-gauge--co2         { --gauge-color: var(--data-co2); }
+
+.ri-gauge__seg        { stroke: var(--track); stroke-width: 3; }
+.ri-gauge__seg--major { stroke-width: 3.5; }
+.ri-gauge__seg--on    { stroke: var(--gauge-color); }
+.ri-gauge__mark       { stroke: var(--accent-alert); stroke-width: 3; }
+.ri-gauge__label {
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  font-weight: 500;
+  fill: var(--ink-2);
+}
+.ri-gauge--s .ri-gauge__label { font-size: 16px; } /* SVG thu 160/240 → hiện ≈ 11 px */
+
+.ri-gauge__needle {
+  transform-box: view-box;
+  transform-origin: 120px 120px;
+  transition: transform var(--motion-needle) var(--ease-spring);
+}
+.ri-gauge__needle line { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.ri-gauge__hub      { fill: var(--ink); }
+.ri-gauge__hub-core { fill: var(--surface); }
+
+/* Hero độ ẩm là mặt tối. Phải lặp lại --on: ".ri-panel--hero .ri-gauge__seg" (0,2,0) đè ".ri-gauge__seg--on" (0,1,0) */
+.ri-panel--hero .ri-gauge__seg         { stroke: var(--invert-track); }
+.ri-panel--hero .ri-gauge__seg--on     { stroke: var(--gauge-color); }
+.ri-panel--hero .ri-gauge__label       { fill: var(--invert-ink-2); }
+.ri-panel--hero .ri-gauge__needle line { stroke: var(--invert-ink); }
+.ri-panel--hero .ri-gauge__hub         { fill: var(--invert-ink); }
+.ri-panel--hero .ri-gauge__hub-core    { fill: var(--invert-bg); }
+
+/* Không có số (chưa có bản tin, cảm biến lỗi, đang làm nóng): không kim, không đoạn sáng */
+.ri-gauge.is-empty .ri-gauge__needle { display: none; }
+/* Dữ liệu cũ / mất kết nối / ngoại tuyến: giữ giá trị cuối, mờ (đi kèm nhãn "CŨ · hh:mm") */
+.ri-gauge.is-stale { opacity: .4; }
+
+@container (max-width: 480px) {
+  .ri-hero .ri-gauge { width: 100%; max-width: 240px; }
+}
+@container (max-width: 200px) {
+  .ri-gauge--s { width: 100%; }
+}
