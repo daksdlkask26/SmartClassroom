@@ -21,7 +21,12 @@ import { pageHead } from './_shared.js';
 
 const DECIMALS = { temperature: 1, humidity: 1, co2: 0 };
 const FALLBACK_LEVELS = ['normal', 'watch', 'alert'];
-const DEFAULT_TEST_COLOR = '#00C9B7'; // Xanh ngọc (tokens.css --led-test)
+/** Màu Kiểm tra đèn mặc định = token --led-test (tokens.css, Xanh ngọc); không viết cứng mã màu ở đây. */
+function defaultTestColor(config) {
+  let css = null;
+  try { css = parseHex(getComputedStyle(document.documentElement).getPropertyValue('--led-test')); } catch { /* không có DOM */ }
+  return css ?? parseHex(config?.led?.namedColors?.[0]?.hex) ?? '#FFFFFF';
+}
 const NBSP = ' ';
 
 // Bản nháp được giữ khi rời trang rồi quay lại trong cùng phiên (không lưu xuống máy).
@@ -176,7 +181,8 @@ function metricCard(t, config, m) {
     </section>`;
 }
 
-function rulesPanel(t) {
+function rulesPanel(t, config) {
+  const net = config?.led?.systemColors?.net ?? ''; // bóng 2 · Xanh dương (contract led.systemColors)
   const item = (cells, title, desc) => `
     <li class="ri-rule"><span class="ri-rule__cells" aria-hidden="true">${cells}</span>
       <span><span class="ri-rule__title">${esc(title)}</span><span class="ri-rule__desc">${esc(desc)}</span></span></li>`;
@@ -194,7 +200,7 @@ function rulesPanel(t) {
         <p class="ri-rules__group">${esc(t('led.rules.system'))}</p>
         <ul class="ri-rules__list ri-rules__list--2">
           ${item(blink(cell('ri-legend-cell--blink')), t('led.rules.b1'), t('led.rules.b1d'))}
-          ${item(cell('', '#2F6BFF') + blink(cell('', '#2F6BFF')), t('led.rules.b2'), t('led.rules.b2d'))}
+          ${item(cell('', net) + blink(cell('', net)), t('led.rules.b2'), t('led.rules.b2d'))}
         </ul>
         <p class="ri-rules__group">${esc(t('led.rules.blink'))}</p>
         <ul class="ri-rules__list ri-rules__list--3">
@@ -231,7 +237,7 @@ function autoTemplate(t, config) {
       ${boxPanel(t)}
       <div class="ri-ledp__cards">${METRICS.map((m) => metricCard(t, config, m)).join('')}</div>
       <p class="ri-ledp__reset-m"><button class="ri-link" type="button" data-act="reset">${esc(t('led.reset'))}</button></p>
-      ${rulesPanel(t)}
+      ${rulesPanel(t, config)}
       ${actionBar(t, 'auto')}
     </div>`;
 }
@@ -476,7 +482,7 @@ function renderTest(root, s, t, ui) {
   apply.disabled = Boolean(lock) || sending || same;
   apply.setAttribute('aria-busy', String(ui.sending === 'test'));
   setText(apply, ui.sending === 'test' ? t('led.sending') : t('led.test.apply', { color: colorLabel(draft, config) }));
-  root.querySelector('[data-act="test-cancel"]').disabled = sending || draft === (sentColor ?? DEFAULT_TEST_COLOR);
+  root.querySelector('[data-act="test-cancel"]').disabled = sending || draft === (sentColor ?? defaultTestColor(config));
   setText(root.querySelector('[data-status]'), ui.sending ? t('led.sending') : lock ? t(`led.lock.${lock}`) : '');
 }
 
@@ -513,7 +519,7 @@ export default {
       rulesOpen: false,
       sending: null,
       lastSent: null,
-      testColor: memo.testColor ?? parseHex(s0.led?.test?.color) ?? DEFAULT_TEST_COLOR,
+      testColor: memo.testColor ?? parseHex(s0.led?.test?.color) ?? defaultTestColor(s0.config),
     };
     let bannerKey = null;
 
@@ -660,7 +666,7 @@ export default {
           return send('test', '/api/led/test', { mode: 'test', on: true, color: ui.testColor },
             { mode: 'test', test: { on: true, color: ui.testColor } });
         case 'test-cancel':
-          ui.testColor = (s.led?.mode === 'test' && s.led.test?.color) || DEFAULT_TEST_COLOR;
+          ui.testColor = (s.led?.mode === 'test' && s.led.test?.color) || defaultTestColor(s.config);
           return render();
         case 'power': {
           const on = s.led?.mode === 'test' && s.led.test?.on;
