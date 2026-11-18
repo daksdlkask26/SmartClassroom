@@ -89,11 +89,20 @@
   font-weight: 500;
 }
 .ri-readout--hero .ri-readout__value { font-size: calc(var(--type-hero) - 8px); }
+/* Số hero co lại khi cột số hẹp (đúng 1440: cột 223 px, "64,1 %" cỡ 104 cần 251 px; "100,0 %" còn rộng hơn).
+   --digits do monitor.js đặt = số chữ số; mỗi chữ số Doto rộng 0,6 em, dấu phẩy ~0,4 em, chừa 32 px cho "%".
+   100cqi = bề rộng panel (container ở .ri-monitor > .ri-panel); cột số = panel − gauge 240 − khe 24. */
+.ri-hero .ri-readout--hero .ri-readout__value {
+  font-size: min(calc(var(--type-hero) - 8px), calc((100cqi - 296px) / (var(--digits, 3) * 0.6 + 0.4)));
+}
 .ri-readout--hero .ri-readout__unit  { font-size: var(--type-num-sm); }
 .ri-readout--card .ri-readout__value { font-size: var(--type-hero-mobile); }
 .ri-readout--card .ri-readout__unit  { font-size: var(--type-subtitle); }
 @media (min-width: 1920px) {
   .ri-readout--hero .ri-readout__value { font-size: calc(var(--type-hero) * 1.16); } /* RS-1920: hero 130 */
+  .ri-hero .ri-readout--hero .ri-readout__value {
+    font-size: min(calc(var(--type-hero) * 1.16), calc((100cqi - 296px) / (var(--digits, 3) * 0.6 + 0.4)));
+  }
 }
 .ri-readout.is-stale { opacity: .4; }
 
@@ -225,7 +234,10 @@
     align-items: center;
   }
   .ri-hero__level { align-self: center; }
-  .ri-readout--hero .ri-readout__value { font-size: var(--type-hero-mobile); }
+  .ri-readout--hero .ri-readout__value,
+  .ri-hero .ri-readout--hero .ri-readout__value {
+    font-size: min(var(--type-hero-mobile), calc((100cqi - 32px) / (var(--digits, 3) * 0.6 + 0.4))); /* số nằm cả hàng */
+  }
   .ri-readout--hero .ri-readout__unit { font-size: var(--type-subtitle); }
   .ri-ledcard { grid-template-columns: minmax(0, 1fr); grid-template-areas: "text" "strip" "btn"; }
   .ri-day { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
@@ -239,6 +251,9 @@
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "gauge" "level" "read" "ann";
   }
+  /* 3 cột chỉ còn ~80 px, khoảng "62,8 – 89,1 %" đè sang cột bên → một cột (plan §8.6: 320–389 một cột) */
+  .ri-day { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+  .ri-spark__head { flex-direction: row; justify-content: space-between; gap: var(--space-3); }
 }
 @container (max-width: 200px) {
   .ri-card .ri-panel__meta { display: none; } /* MB-04: thẻ nhỏ không ghi tên cảm biến */

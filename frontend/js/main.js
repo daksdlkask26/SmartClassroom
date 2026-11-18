@@ -11,10 +11,12 @@ import { createRail } from './components/rail.js';
 import { createTabbar } from './components/tabbar.js';
 import { createStatusbar } from './components/statusbar.js';
 import { initToasts, showToast } from './components/toast.js';
+import { initTheme } from './core/theme.js';
 
 const $ = (id) => document.getElementById(id);
 
 async function boot() {
+  initTheme();
   try {
     await loadStrings();
   } catch (err) {

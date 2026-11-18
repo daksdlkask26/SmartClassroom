@@ -184,6 +184,7 @@ function renderMetric(root, metric, s, t) {
     valueEl.dataset.text = text;
     const { int, sep, frac } = splitNumber(value, decimals);
     valueEl.innerHTML = `${esc(int)}${sep ? `<span class="ri-readout__sep">${esc(sep)}</span>${esc(frac)}` : ''}`;
+    valueEl.style.setProperty('--digits', String(`${int}${frac ?? ''}`.length || 1)); // để CSS co số hero vừa cột
   }
   setText(box.querySelector('[data-unit]'), value === null ? '' : unit);
   const readEl = box.querySelector('[data-readout]');
