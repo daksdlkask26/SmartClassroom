@@ -1,0 +1,549 @@
+/* Đèn LED — DK-06 (1440) / MB-06 (390, bảng 07-3), DK-06b / MB-06b (Kiểm tra đèn, theo mb06 bản một màu).
+   Màu của bóng, ô màu, thanh ngưỡng = màu DỮ LIỆU của thiết bị (--led / --sw do JS đặt), không phải màu giao diện
+   (HANDOFF §3.5, mục 4 bảng màu: ngoại lệ duy nhất có màu thật). */
+
+.ri-ledp .is-short, .ri-ledt .is-short { display: none; }
+
+/* ---------- Chọn chế độ: Tự động | Kiểm tra đèn ---------- */
+.ri-ledmode {
+  display: inline-flex;
+  margin-bottom: var(--space-6);
+  border: var(--stroke-strong) solid var(--ink);
+  background: var(--surface);
+}
+.ri-ledmode__btn {
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  font-weight: 500;
+}
+.ri-ledmode__btn + .ri-ledmode__btn { border-left: var(--stroke-strong) solid var(--ink); }
+.ri-ledmode__btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); font-weight: 600; }
+
+/* ---------- Banner: ngoại tuyến (ST-09) · đang Kiểm tra đèn ---------- */
+.ri-ledbanners { display: grid; gap: var(--space-3); margin-bottom: var(--space-6); }
+.ri-ledbanners:empty { display: none; }
+.ri-ledbanner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-3) var(--space-4);
+}
+.ri-ledbanner > p { flex: 1 1 260px; line-height: var(--lh-body); }
+.ri-ledbanner strong { font-weight: 700; margin-right: var(--space-2); }
+.ri-banner--error.ri-ledbanner > .ri-icon { color: var(--accent-alert-text); }
+.ri-banner--warning.ri-ledbanner > .ri-icon { color: var(--accent-warn-text); }
+.ri-ledbanner .ri-btn { height: 40px; padding: 0 var(--space-4); }
+
+/* ---------- Bố cục Tự động ---------- */
+.ri-ledp {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas:
+    "preview preview box"
+    "cards   cards   cards"
+    "rules   rules   rules"
+    "bar     bar     bar";
+  gap: var(--space-6);
+  align-items: start;
+}
+.ri-ledp__preview { grid-area: preview; }
+.ri-ledp__box     { grid-area: box; align-self: stretch; }
+.ri-ledp__cards   { grid-area: cards; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-6); align-items: start; }
+.ri-ledp__rules   { grid-area: rules; }
+.ri-ledp > .ri-ledbar { grid-area: bar; }
+.ri-ledp__reset-m { display: none; }
+
+/* ---------- Thanh xem trước 4 nhóm (chỉ hiển thị) ---------- */
+.ri-ledpv {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: var(--space-5) var(--space-3) var(--space-4);
+  border: var(--stroke-strong) solid var(--ink);
+  background: var(--paper);
+}
+.ri-ledpv__group {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: var(--space-1);
+  min-width: 0;
+  padding: 0 var(--space-2) var(--space-1);
+  text-align: left;
+}
+.ri-ledpv__cells.ri-led__pair { display: flex; gap: var(--space-2); width: 100%; margin-bottom: var(--space-4); }
+.ri-ledpv__cell {
+  position: relative;
+  flex: 1;
+  max-width: 68px;
+  aspect-ratio: 68 / 92;
+  border: var(--stroke-hair) solid var(--ink);
+  background: var(--led, var(--track));
+}
+/* Cặp đang sửa: gạch dưới 4 px (DK-06, cặp độ ẩm) */
+.ri-ledpv__group.is-editing .ri-ledpv__cells::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -12px;
+  height: 4px;
+  background: var(--ink);
+}
+.ri-ledpv__name {
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  font-weight: 700;
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-heading);
+}
+.ri-ledpv__cap {
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  letter-spacing: 0.02em; /* 0,08em làm "27,5 °C · BÌNH THƯỜNG" xuống dòng ở 1440 */
+  line-height: var(--lh-heading);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+button.ri-ledpv__group:hover .ri-ledpv__name { text-decoration: underline; text-underline-offset: 4px; }
+.ri-ledpv__unknown { margin-top: var(--space-3); font-size: var(--type-body-sm); color: var(--ink-2); }
+.ri-ledpv__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-2);
+}
+.ri-ledpv__legend > li { display: inline-flex; align-items: center; gap: var(--space-3); }
+.ri-ledpv__sent { display: none; }
+.ri-ledpv__sentlbl {
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  font-weight: 700;
+  letter-spacing: var(--ls-label);
+}
+.ri-ledpv__senttext { color: var(--ink-2); font-size: var(--type-body-sm); }
+
+/* Trạng thái bóng dùng chung cho xem trước và Kiểm tra đèn (như .ri-led__cell ở components/led.css) */
+.ri-ledpv__cell.is-unknown, .ri-ledt__cell.is-unknown { background: var(--track); border-style: dashed; }
+.ri-ledpv__cell.is-blink, .ri-ledt__cell.is-blink { background: #fff; } /* màu thật của bóng nháy trắng */
+.ri-ledpv__cell.is-off, .ri-ledt__cell.is-off { background: var(--paper); }
+
+/* Ô chú giải nhỏ: sáng ổn định / nháy */
+.ri-legend-cell {
+  display: block;
+  width: 16px;
+  height: 22px;
+  border: var(--stroke-hair) solid var(--ink);
+  background: var(--led, var(--led-xanh-la));
+}
+.ri-legend-cell--blink { background: #fff; }
+.ri-legend-cell--dim { background: var(--track); }
+
+/* Thanh LED nhỏ (Trên hộp, dòng ĐÃ GỬI) */
+.ri-ledxs .ri-led { gap: 6px; padding: 3px; border-width: var(--stroke-hair); }
+.ri-ledxs .ri-led__pair { gap: 2px; }
+.ri-ledxs .ri-led__cell { width: 10px; height: 18px; }
+.ri-ledxs .ri-led__pair.is-blink::before { inset: -3px; --l: 5px; }
+
+/* ---------- Trên hộp ---------- */
+.ri-ledbox__face {
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  letter-spacing: var(--ls-label);
+  color: var(--ink-2);
+  margin-bottom: var(--space-2);
+}
+.ri-ledbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 108px;
+  border: var(--stroke-strong) solid var(--ink);
+  border-top-width: 5px;
+}
+.ri-ledbox__d {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  font-weight: 700;
+}
+.ri-ledbox__note { margin-top: var(--space-5); color: var(--ink-2); line-height: var(--lh-body); }
+
+/* ---------- Thẻ thông số ---------- */
+.ri-ledm__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+.ri-ledm__head .ri-panel__title:focus { outline: none; }
+.ri-ledm__toggle, .ri-ledm__peek { display: none; }
+.ri-chev { display: inline-grid; place-items: center; }
+.ri-chev .ri-icon { transition: transform var(--motion-press) linear; }
+[aria-expanded="true"] > .ri-chev .ri-icon { transform: rotate(180deg); }
+
+.ri-ledm__now { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.ri-ledm__mini { display: inline-flex; gap: 6px; }
+.ri-ledm__mini > i {
+  display: block;
+  width: 14px;
+  height: 20px;
+  border: var(--stroke-hair) solid var(--ink);
+  background: var(--led, var(--track));
+}
+.ri-ledm__mini--lg > i { width: 24px; height: 34px; }
+.ri-ledm__mini > i.is-unknown { background: var(--track); border-style: dashed; }
+.ri-ledm__value { font-size: var(--type-title); font-weight: 700; line-height: 1.1; white-space: nowrap; }
+.ri-ledm__level { color: var(--ink-2); }
+
+/* Thanh ngưỡng chỉ đọc, tô theo bản nháp */
+.ri-ledscale { margin: var(--space-6) 0 var(--space-5); }
+.ri-ledscale__bar { position: relative; height: 14px; border: var(--stroke-hair) solid var(--ink); }
+.ri-ledscale__bar > i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--led);
+  box-shadow: inset -1px 0 0 var(--surface);
+}
+.ri-ledscale__now {
+  position: absolute;
+  top: -7px;
+  bottom: -7px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--ink);
+}
+.ri-ledscale__ticks { position: relative; height: 16px; margin-top: var(--space-2); }
+.ri-ledscale__ticks > span {
+  position: absolute;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  color: var(--ink-2);
+}
+
+/* 3 hàng mức */
+.ri-ledrows {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); /* không để ô nhập HEX nới rộng cột rồi tràn sang thẻ bên (lỗi 18/11) */
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ri-ledrow__btn {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: 88px;
+  padding: var(--space-3) var(--space-4);
+  border: var(--stroke-hair) solid var(--line-strong);
+  background: var(--surface);
+}
+.ri-ledrow.is-open .ri-ledrow__btn { border: var(--stroke-strong) solid var(--ink); padding: calc(var(--space-3) - 1px) calc(var(--space-4) - 1px); }
+.ri-ledrow__sw, .ri-picker__sw, .ri-tcolor__sw {
+  display: block;
+  border: var(--stroke-hair) solid var(--ink);
+  background: var(--led, var(--sw));
+}
+.ri-ledrow__sw { width: 40px; height: 40px; }
+.ri-ledrow__text { display: grid; gap: 2px; min-width: 0; }
+.ri-ledrow__label {
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  font-weight: 700;
+  letter-spacing: var(--ls-label);
+}
+.ri-ledrow__band { color: var(--ink-2); }
+.ri-ledrow__color { font-family: var(--font-mono); font-size: var(--type-label); color: var(--ink-2); }
+.ri-ledrow.is-changed .ri-ledrow__color { color: var(--ink); font-weight: 600; }
+
+/* Bộ chọn 10 màu có tên + Tùy chỉnh HEX */
+.ri-picker {
+  margin-top: var(--space-3);
+  padding: var(--space-4);
+  border: var(--stroke-hair) solid var(--line-strong);
+  background: var(--paper);
+}
+.ri-picker__title {
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  letter-spacing: var(--ls-label);
+  color: var(--ink-2);
+  margin-bottom: var(--space-3);
+}
+.ri-picker__grid { display: grid; grid-template-columns: repeat(5, minmax(0, 40px)); justify-content: space-between; gap: var(--space-4) var(--space-2); }
+.ri-picker__sw { width: 100%; aspect-ratio: 1; }
+.ri-picker__sw[aria-pressed="true"] { outline: var(--stroke-strong) solid var(--ink); outline-offset: 3px; }
+.ri-picker__custom { width: 100%; margin-top: var(--space-5); }
+.ri-hex { margin-top: var(--space-4); }
+.ri-hex__label { display: block; margin-bottom: var(--space-2); font-size: var(--type-body-sm); font-weight: 600; }
+.ri-hex__row { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.ri-hex__pick {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  padding: 2px;
+  border: var(--stroke-hair) solid var(--line-strong);
+  background: var(--surface);
+  cursor: pointer;
+}
+.ri-hex__input { flex: 1 1 96px; width: 100%; min-width: 0; font-family: var(--font-mono); text-transform: uppercase; }
+.ri-hex .ri-btn { height: 48px; padding: 0 var(--space-4); }
+.ri-hex [hidden], .ri-picker[hidden], .ri-hex[hidden] { display: none; }
+
+/* Hai mức trùng màu (ST-17): ⚠ + chữ warn-text + gạch đáy 2 px warn, không nền nhạt */
+.ri-ledm__dup {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  color: var(--accent-warn-text);
+  font-size: var(--type-body-sm);
+  line-height: var(--lh-body);
+}
+.ri-ledm__dup[hidden] { display: none; }
+
+/* ---------- Quy ước cố định ---------- */
+.ri-rules__group {
+  margin: var(--space-5) 0 var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  letter-spacing: var(--ls-label);
+  color: var(--ink-2);
+}
+.ri-ledm__body > .ri-rules__group:first-child { margin-top: 0; }
+.ri-rules__list { display: grid; gap: var(--space-4) var(--space-8); margin: 0; padding: 0; list-style: none; }
+.ri-rules__list--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ri-rules__list--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ri-rule { display: flex; align-items: flex-start; gap: var(--space-4); }
+.ri-rule__cells { display: inline-flex; gap: 6px; flex: none; min-width: 56px; padding: 5px; }
+.ri-rule__cells .ri-led__pair { gap: 6px; }
+.ri-rule__title { display: block; }
+.ri-rule__desc { display: block; color: var(--ink-2); font-size: var(--type-body-sm); }
+
+/* ---------- Nút: Áp dụng / Hủy / Khôi phục ---------- */
+.ri-ledbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
+}
+.ri-ledbar__status { flex: 1 1 240px; color: var(--ink-2); font-size: var(--type-body-sm); }
+.ri-ledbar.has-draft .ri-ledbar__status { color: var(--ink); }
+.ri-ledbar__reset:disabled, .ri-ledp__reset-m .ri-link:disabled { color: var(--ink-2); text-decoration-color: var(--line-strong); cursor: not-allowed; }
+
+/* ---------- Kiểm tra đèn (DK-06b / MB-06b) ---------- */
+.ri-ledt {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    "preview palette"
+    "power   palette"
+    "bar     bar";
+  gap: var(--space-6);
+  align-items: start;
+}
+.ri-ledt__preview { grid-area: preview; }
+.ri-ledt__palette { grid-area: palette; }
+.ri-ledt__power   { grid-area: power; }
+.ri-ledt > .ri-ledbar { grid-area: bar; }
+
+.ri-ledt__strip {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: var(--stroke-strong) solid var(--ink);
+  background: var(--paper);
+}
+.ri-ledt__cell {
+  flex: 1;
+  aspect-ratio: 64 / 100;
+  max-height: 110px;
+  border: var(--stroke-hair) solid var(--ink);
+  background: var(--led, var(--track));
+}
+.ri-ledt__draft { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-top: var(--space-5); }
+.ri-ledt__badge {
+  padding: var(--space-2) var(--space-3);
+  border: var(--stroke-strong) solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  font-weight: 700;
+  letter-spacing: var(--ls-label);
+}
+.ri-ledt__draftval { font-size: var(--type-subtitle); font-weight: 700; }
+.ri-ledt__sent { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); margin-top: var(--space-4); }
+
+.ri-tcolors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.ri-tcolor {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: var(--stroke-hair) solid var(--line-strong);
+  background: var(--surface);
+}
+.ri-tcolor[aria-pressed="true"] { border: var(--stroke-strong) solid var(--ink); padding: calc(var(--space-3) - 1px); }
+.ri-tcolor__sw { width: 48px; height: 48px; }
+.ri-tcolor__text { display: grid; min-width: 0; }
+.ri-tcolor__name { font-weight: 600; }
+.ri-tcolor__hex { font-family: var(--font-mono); font-size: var(--type-label-lg); color: var(--ink-2); }
+.ri-tcolor__check { visibility: hidden; }
+.ri-tcolor[aria-pressed="true"] .ri-tcolor__check { visibility: visible; }
+
+.ri-ledt__power { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.ri-ledt__powlast { margin-top: var(--space-2); font-weight: 500; }
+
+/* Công tắc Bật/Tắt (Toggle/Power) */
+.ri-switch {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  width: 128px;
+  height: 52px;
+  padding: 4px;
+  border: var(--stroke-strong) solid var(--ink);
+  background: var(--surface);
+}
+.ri-switch__label {
+  padding: 0 var(--space-3);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.ri-switch__knob { width: 48px; height: 40px; background: var(--ink); }
+.ri-switch[aria-checked="true"] { flex-direction: row; background: var(--ink); color: var(--paper); }
+.ri-switch[aria-checked="true"] .ri-switch__knob { background: var(--paper); }
+.ri-switch:disabled { border-color: var(--track); background: var(--track); color: var(--ink-2); }
+.ri-switch:disabled .ri-switch__knob { background: var(--line-strong); }
+
+/* ---------- 768–1279 ---------- */
+@media (max-width: 1279.98px) {
+  .ri-ledp { grid-template-columns: minmax(0, 1fr); grid-template-areas: "preview" "box" "cards" "rules" "bar"; }
+  .ri-ledp__box .ri-ledbox { max-width: 420px; }
+  .ri-rules__list--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- MB-06 (< 768) ---------- */
+@media (max-width: 767.98px) {
+  .ri-ledp .is-long, .ri-ledt .is-long { display: none; }
+  .ri-ledp .is-short, .ri-ledt .is-short { display: inline; }
+  .ri-ledmode { margin-bottom: var(--space-4); }
+  .ri-ledmode__btn { padding: 0 var(--space-4); }
+  .ri-ledbanners { margin-bottom: var(--space-4); }
+
+  .ri-ledp { grid-template-areas: "preview" "cards" "reset" "rules" "bar"; gap: var(--space-4); }
+  .ri-ledp .ri-panel { padding: var(--space-4); }
+  .ri-ledp__box { display: none; }
+  .ri-ledp__cards { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+
+  /* Xem trước: 4 nhóm vừa 358 px, chú thích 2 dòng */
+  .ri-ledpv { padding: var(--space-3) var(--space-1) var(--space-2); }
+  .ri-ledpv__group { padding: 0 var(--space-1); }
+  .ri-ledpv__cells.ri-led__pair { gap: 4px; margin-bottom: var(--space-3); }
+  .ri-ledpv__name { font-size: 10px; }
+  .ri-ledpv__cap { font-size: 9px; letter-spacing: 0.04em; }
+  .ri-ledpv__group.is-editing .ri-ledpv__cells::after { bottom: -8px; height: 3px; }
+  .ri-ledpv__legend { display: none; }
+  .ri-ledpv__sent { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); margin-top: var(--space-4); }
+
+  /* Thẻ thu gọn ˅ / mở ^ */
+  .ri-ledm__head { margin-bottom: var(--space-3); }
+  .ri-ledm__toggle {
+    display: inline-grid;
+    place-items: center;
+    width: var(--touch-min);
+    height: var(--touch-min);
+    margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) 0;
+  }
+  .ri-ledm.is-collapsed .ri-ledm__body, .ri-ledp__rules.is-collapsed .ri-ledm__body { display: none; }
+  .ri-ledm.is-collapsed .ri-ledm__peek { display: flex; }
+  .ri-ledp__rules.is-collapsed .ri-rules__peek { display: block; color: var(--ink-2); font-size: var(--type-body-sm); }
+  .ri-ledm__peek { align-items: center; gap: var(--space-3); font-size: var(--type-body-sm); }
+  .ri-ledm__chips { display: inline-flex; gap: 2px; margin-left: auto; }
+  .ri-ledm__chips > i { display: block; width: 12px; height: 14px; border: var(--stroke-hair) solid var(--ink); background: var(--led); }
+  .ri-ledm__value { font-size: var(--type-subtitle); }
+  .ri-ledm__mini--lg > i { width: 16px; height: 24px; }
+  .ri-ledrow__btn { min-height: 72px; gap: var(--space-3); padding: var(--space-3); }
+  .ri-ledrow.is-open .ri-ledrow__btn { padding: calc(var(--space-3) - 1px); }
+  .ri-ledrow__sw { width: 32px; height: 32px; }
+  .ri-ledrow__band { font-size: var(--type-body-sm); }
+  .ri-ledrow__btn { grid-template-columns: 32px minmax(0, 1fr) 24px; }
+  .ri-picker { padding: var(--space-3); }
+  .ri-picker__grid { grid-template-columns: repeat(5, minmax(0, 36px)); }
+
+  .ri-ledp__reset-m { display: block; grid-area: reset; padding: var(--space-2) 0; }
+  .ri-ledbar__reset { display: none; }
+  .ri-rules__list--2, .ri-rules__list--3 { grid-template-columns: minmax(0, 1fr); }
+
+  /* Áp dụng / Hủy dính đáy, ngay trên tab bar */
+  .ri-ledbar {
+    position: sticky;
+    bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
+    z-index: 5;
+    flex-wrap: nowrap;
+    gap: var(--space-4);
+    margin: 0 calc(-1 * var(--page-gutter));
+    padding: var(--space-3) var(--page-gutter);
+    border-top: var(--stroke-hair) solid var(--ink);
+    border-bottom: var(--stroke-hair) solid var(--ink);
+    background: var(--surface);
+  }
+  .ri-ledbar__apply { flex: 1; min-width: 0; padding: 0 var(--space-3); }
+  .ri-ledbar__cancel {
+    height: 48px;
+    padding: 0 var(--space-2);
+    border: 0;
+    background: none;
+    box-shadow: none;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+  .ri-ledbar__cancel:disabled { background: none; color: var(--ink-2); }
+  /* Dòng trạng thái vẫn được đọc (aria-live) nhưng không chiếm chỗ trên thanh dính đáy */
+  .ri-ledbar__status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* Kiểm tra đèn (MB-06b = mb06 bản một màu) */
+  .ri-ledt { grid-template-columns: minmax(0, 1fr); grid-template-areas: "preview" "palette" "power" "bar"; gap: var(--space-4); }
+  .ri-ledt .ri-panel { padding: var(--space-4); }
+  .ri-ledt__strip { gap: 6px; padding: var(--space-4) var(--space-3); }
+  .ri-ledt__draftval { font-size: var(--type-subtitle); }
+  .ri-tcolors {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(200px, 62%);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--space-2);
+  }
+  .ri-tcolor { scroll-snap-align: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ri-chev .ri-icon { transition: none; }
+}

@@ -5,6 +5,7 @@ import { ApiError, sendError } from './errors.js';
 import { requireAuth } from './middleware/auth.js';
 import { healthRoutes } from './routes/health.js';
 import { historyRoutes } from './routes/history.js';
+import { ledRoutes } from './routes/led.js';
 import { sessionRoutes } from './routes/session.js';
 import { stateRoutes } from './routes/state.js';
 
@@ -15,8 +16,9 @@ import { stateRoutes } from './routes/state.js';
  * @param {() => string} [deps.getMqttStatus]      'connected' | 'disconnected'
  * @param {object} [deps.state]                    createState() — cần cho /api/state
  * @param {object} [deps.history]                  provider lịch sử — cần cho /api/history
+ * @param {(cmd: object) => Promise} [deps.publishLedCmd]  gửi led/cmd — cần cho /api/led/* (cùng với state)
  */
-export function createApp({ config, log, getMqttStatus = () => 'disconnected', state, history }) {
+export function createApp({ config, log, getMqttStatus = () => 'disconnected', state, history, publishLedCmd }) {
   const app = express();
   app.disable('x-powered-by');
 
@@ -39,7 +41,7 @@ export function createApp({ config, log, getMqttStatus = () => 'disconnected', s
   api.use(requireAuth({ config }));
   if (state) api.use(stateRoutes({ config, state }));
   if (history) api.use(historyRoutes({ history }));
-  // G8: led
+  if (state && publishLedCmd) api.use(ledRoutes({ config, state, publishLedCmd }));
 
   api.use((req, res) => sendError(res, 404, 'NOT_FOUND', `Không có API ${req.method} ${req.originalUrl}`));
   app.use('/api', api);

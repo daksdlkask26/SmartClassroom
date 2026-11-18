@@ -29,7 +29,9 @@ export async function startServer({ config, log, host, pluginsDir }) {
 
   const mqttClient = createMqttClient({ config, state, log: log.child('mqtt') });
 
-  const app = createApp({ config, log: log.child('http'), getMqttStatus: mqttClient.status, state, history });
+  const app = createApp({ config, log: log.child('http'), getMqttStatus: mqttClient.status, state, history,
+    publishLedCmd: mqttClient.publishLedCmd,
+  });
   const server = http.createServer(app);
   const ws = createWsServer({ server, state, bus, config, log: log.child('ws'), authorize: authorizeUpgrade({ config }) });
 

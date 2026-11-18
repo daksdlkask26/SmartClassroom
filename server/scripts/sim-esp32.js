@@ -113,13 +113,18 @@ function connect() {
     will: { topic: topic.status, payload: Buffer.from(JSON.stringify({ v: 1, online: false })), qos: 1, retain: true },
   });
 
-  client.on('connect', () => {
-    say(`Đã kết nối ${args.url} với tên ${args.device}-sim`);
+  // status retained: gửi khi vừa kết nối và khi chế độ LED đổi (contract/README.md mục 2.2)
+  const publishStatus = () => {
     const status = {
       v: 1, online: true, fw: 'sim-0.1.0', intervalS: Math.round(intervalMs / 1000),
       ssid: 'Phong_A12', rssi: -55 - Math.floor(Math.random() * 15), ledMode: led.mode,
     };
     client.publish(topic.status, JSON.stringify(status), { qos: 0, retain: true });
+  };
+
+  client.on('connect', () => {
+    say(`Đã kết nối ${args.url} với tên ${args.device}-sim`);
+    publishStatus();
     client.subscribe(topic.ledCmd, { qos: 1 });
     clearInterval(timer);
     // Chờ một chút rồi mới gửi telemetry: broker aedes làm mất bản tin retained nếu ngay sau đó
@@ -134,12 +139,14 @@ function connect() {
     if (t !== topic.ledCmd) return;
     let cmd;
     try { cmd = JSON.parse(payload.toString()); } catch { return say('Nhận led/cmd hỏng, bỏ qua'); }
+    const prevMode = led.mode;
     if (cmd.mode === 'test') {
       led = { ...led, mode: 'test', test: { on: !!cmd.on, color: cmd.color } };
     } else if (cmd.mode === 'auto') {
       led = { ...led, mode: 'auto', test: null, ...(cmd.palette ? { palette: cmd.palette } : {}) };
     } else return say(`Nhận led/cmd không rõ chế độ: ${payload}`);
     say(`Nhận lệnh LED (${cmd.mode}${cmd.palette ? ', bảng 9 màu, lưu vào flash' : ''})  ${drawLeds()}`);
+    if (led.mode !== prevMode) publishStatus();
   });
 
   client.on('reconnect', () => say('Đang kết nối lại broker…'));
