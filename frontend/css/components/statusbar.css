@@ -1,0 +1,205 @@
+/* Nav/StatusBar/Desktop + /Mobile — 5 trạng thái (HANDOFF §3.4, DECISIONS 7.8)
+   Desktop: một hàng cao 56 px, lề trái 32 px.  Mobile: hai dòng, cao 57 px.
+   Không còn gạch chéo: Stale / DeviceOffline / Disconnected dùng gạch đáy 2 px (tokens.css). */
+
+.ri-statusbar {
+  --sb-accent: var(--accent-ok);
+  --sb-accent-text: var(--accent-ok-text);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: var(--statusbar-h);
+  padding: 0 var(--page-gutter);
+  background: var(--surface);
+  color: var(--ink);
+  border-bottom: var(--stroke-hair) solid var(--line);
+}
+
+.ri-statusbar__state {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex: none;
+}
+
+/* ---------- 8 ô sức khỏe ---------- */
+.ri-cells {
+  display: flex;
+  gap: 2px;
+  color: var(--sb-accent);
+}
+.ri-cells > i {
+  display: block;
+  width: 6px;
+  height: 16px;
+  box-shadow: inset 0 0 0 var(--stroke-hair) currentColor; /* ô rỗng = chỉ viền */
+}
+.ri-cells > i.is-on { background: currentColor; }
+
+/* ĐANG KẾT NỐI: một vệt sáng quét qua 8 ô (--motion-led-step mỗi ô) */
+.ri-cells--sweep > i {
+  animation: ri-cell-sweep calc(var(--motion-led-step) * 16) steps(1, end) infinite both;
+  animation-delay: calc(var(--i) * var(--motion-led-step) * 2);
+}
+@keyframes ri-cell-sweep {
+  0%, 24.99% { background: currentColor; }
+  25%, 100%  { background: transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ri-cells--sweep > i { animation: none; }
+  .ri-cells--sweep > i:nth-child(odd) { background: currentColor; } /* xen kẽ, đứng yên */
+}
+
+.ri-statusbar__label {
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--ls-label);
+  color: var(--sb-accent-text);
+  white-space: nowrap;
+}
+
+/* Chấm nhịp: sáng lại mỗi khi có bản tin (HANDOFF §3.9) */
+.ri-statusbar__pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sb-accent);
+}
+.ri-statusbar__pulse.is-beat { animation: ri-beat calc(var(--motion-led-sweep) * 2) var(--ease-out); }
+@keyframes ri-beat {
+  from { opacity: .3; }
+  to   { opacity: 1; }
+}
+
+.ri-statusbar__detail {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--type-body-sm);
+  line-height: var(--lh-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.ri-statusbar__end {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-left: auto;
+  flex: none;
+}
+
+.ri-statusbar__chip {
+  padding: 3px var(--space-2);
+  border: var(--stroke-hair) solid currentColor;
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: var(--ls-label);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.ri-statusbar__clock {
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  line-height: 1;
+  color: var(--ink-2);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.ri-statusbar__account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 40px;
+  padding: 0 var(--space-4) 0 var(--space-3);
+  border: var(--stroke-hair) solid var(--line);
+  font-size: var(--type-body-sm);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.ri-statusbar__account:hover { background: var(--paper); }
+.ri-statusbar__account[aria-current="page"] { border-color: var(--ink); }
+
+.ri-statusbar__retry {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 36px;
+  padding: 0 var(--space-3);
+  border: var(--stroke-hair) solid currentColor;
+  font-size: var(--type-body-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.ri-statusbar__retry:active { transform: translate(2px, 2px); }
+.ri-statusbar__retry[hidden] { display: none; }
+
+/* ---------- Trạng thái ---------- */
+.ri-statusbar--connecting,
+.ri-statusbar--stale {
+  --sb-accent: var(--accent-warn);
+  --sb-accent-text: var(--accent-warn-text);
+}
+/* Nhắc lại gạch đáy 2 px của tokens.css vì quy tắc nền .ri-statusbar ở trên nạp sau và cùng độ ưu tiên */
+.ri-statusbar--stale { border-bottom: var(--stroke-strong) solid var(--accent-warn); }
+
+/* Ngoại tuyến / mất kết nối: thanh đảo màu. .ri-invert (tokens.css) đổi accent sang giá trị sáng. */
+.ri-statusbar--offline,
+.ri-statusbar--disconnected {
+  --sb-accent: var(--accent-alert);
+  --sb-accent-text: var(--accent-alert-text);
+  border-bottom: var(--stroke-strong) solid var(--accent-alert);
+}
+.ri-statusbar.ri-invert { background: var(--invert-bg); color: var(--invert-ink); }
+.ri-statusbar.ri-invert .ri-statusbar__clock,
+.ri-statusbar.ri-invert .ri-statusbar__chip { color: var(--invert-ink-2); }
+.ri-statusbar.ri-invert .ri-statusbar__account { border-color: var(--invert-track); }
+.ri-statusbar.ri-invert .ri-statusbar__account:hover { background: var(--invert-track); }
+.ri-statusbar.ri-invert :focus-visible { outline-color: var(--invert-ink); }
+
+/* ---------- 768–1023: rail thu gọn, thanh hẹp → nút tài khoản chỉ còn biểu tượng, giờ bỏ "UTC+7" ---------- */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .ri-statusbar { gap: var(--space-3); }
+  .ri-statusbar__end { gap: var(--space-3); }
+  .ri-statusbar__tz { display: none; }
+  .ri-statusbar__account { width: 40px; padding: 0; justify-content: center; }
+  .ri-statusbar__account [data-user] {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+}
+
+/* ---------- Mobile: hai dòng ---------- */
+@media (max-width: 767.98px) {
+  .ri-statusbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "state  clock"
+      "detail extra";
+    align-content: center;
+    column-gap: var(--space-3);
+    row-gap: 6px;
+    height: var(--statusbar-h-mobile);
+  }
+  .ri-statusbar__state { grid-area: state; gap: var(--space-3); }
+  .ri-statusbar__detail { grid-area: detail; font-size: var(--type-label-lg); }
+  .ri-statusbar__end { display: contents; }
+  .ri-statusbar__clock { grid-area: clock; justify-self: end; }
+  .ri-statusbar__tz { display: none; }
+  .ri-statusbar__chip,
+  .ri-statusbar__retry { grid-area: extra; justify-self: end; }
+  .ri-statusbar__retry { height: 24px; padding: 0 var(--space-2); font-size: var(--type-label-lg); }
+  .ri-statusbar__retry:not([hidden]) ~ .ri-statusbar__chip { display: none; }
+  .ri-statusbar__account { display: none; }
+  .ri-cells > i { height: 12px; }
+  .ri-statusbar__pulse { display: none; } /* thiết kế MB-04 không có chấm nhịp */
+}

@@ -8,7 +8,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 export const SERVER_ROOT = path.resolve(here, '..');
 export const REPO_ROOT = path.resolve(SERVER_ROOT, '..');
 export const CONTRACT_PATH = path.join(REPO_ROOT, 'contract', 'system.json');
-export const WEB_ROOT = path.join(REPO_ROOT, 'web');
+export const WEB_ROOT = path.join(REPO_ROOT, 'frontend'); // giao diện (HTML/CSS/JS thuần)
 
 const MODES = ['sim', 'live'];
 const LOG_LEVELS = ['error', 'warn', 'info', 'debug'];

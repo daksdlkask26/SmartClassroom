@@ -1,4 +1,4 @@
-// Ứng dụng Express: API dưới /api, phục vụ thư mục web/, các đường dẫn trang trả về index.html.
+// Ứng dụng Express: API dưới /api, phục vụ thư mục frontend/, các đường dẫn trang trả về index.html.
 import path from 'node:path';
 import express from 'express';
 import { ApiError, sendError } from './errors.js';

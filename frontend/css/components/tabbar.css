@@ -1,0 +1,95 @@
+/* Nav/TabBar (HANDOFF §2) — MB-04: 5 mục cố định đáy, mỗi mục ≥ 74 × 64 px.
+   Mục đang chọn: vạch mực dày 3 px ở mép trên + chữ đậm. "Thêm" mở danh sách Thiết bị & WiFi, Tài khoản. */
+
+.ri-tabbar {
+  position: fixed;
+  z-index: 30;
+  inset: auto 0 0 0;
+  background: var(--surface);
+  border-top: var(--stroke-hair) solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.ri-tabbar__list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.ri-tabbar__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  width: 100%;
+  min-height: var(--tabbar-h);
+  padding: var(--space-2) var(--space-1) 6px;
+  color: var(--ink-2);
+  font-size: var(--type-label-lg);
+  font-weight: 500;
+  line-height: var(--lh-heading);
+  text-align: center;
+  white-space: nowrap;
+}
+.ri-tabbar__item .ri-icon { color: var(--ink); }
+.ri-tabbar__item::before {
+  content: "";
+  position: absolute;
+  inset: -1px 4px auto;
+  height: 3px;
+  background: transparent;
+}
+.ri-tabbar__item[aria-current="page"],
+.ri-tabbar__item.is-current {
+  color: var(--ink);
+  font-weight: 700;
+}
+.ri-tabbar__item[aria-current="page"]::before,
+.ri-tabbar__item.is-current::before { background: var(--ink); }
+.ri-tabbar__item:focus-visible { outline-offset: -4px; }
+
+/* ---------- Danh sách "Thêm" ---------- */
+.ri-more {
+  position: fixed;
+  z-index: 29;
+  right: var(--space-2);
+  bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + var(--space-2));
+  width: min(280px, calc(100vw - var(--space-4)));
+  background: var(--surface);
+  border: var(--stroke-hair) solid var(--ink);
+  box-shadow: var(--shadow-key-ink);
+  animation: ri-more-in var(--motion-route) var(--ease-out);
+}
+.ri-more[hidden] { display: none; }
+@keyframes ri-more-in {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+.ri-more__title {
+  padding: var(--space-3) var(--space-4) var(--space-2);
+  color: var(--ink-2);
+}
+.ri-more__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: 0 var(--space-4);
+  border-top: var(--stroke-hair) solid var(--line);
+  font-weight: 500;
+}
+.ri-more__link:hover { background: var(--paper); }
+.ri-more__link[aria-current="page"] { background: var(--ink); color: var(--paper); }
+.ri-more__num {
+  width: 16px;
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  color: var(--ink-2);
+}
+.ri-more__link[aria-current="page"] .ri-more__num { color: var(--invert-ink-2); }
+.ri-more__link:focus-visible { outline-offset: -4px; }
+
+@media (min-width: 768px) {
+  .ri-more { display: none; }
+}
