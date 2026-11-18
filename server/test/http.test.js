@@ -50,7 +50,7 @@ test('trang gốc và đường dẫn trang đều trả index.html', async () =
     const res = await fetch(base + p, { headers: { Accept: 'text/html' } });
     assert.equal(res.status, 200, p);
     assert.match(res.headers.get('content-type'), /text\/html/, p);
-    assert.match(await res.text(), /<html lang="vi">/, p);
+    assert.match(await res.text(), /<html lang="vi"[\s>]/, p);
   }
 });
 

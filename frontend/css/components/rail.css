@@ -1,0 +1,149 @@
+/* Nav/Rail (HANDOFF §2) — DK-04: rộng 232 px, 5 mục đánh số 01–05, cuối rail là tài khoản.
+   Kích thước đo từ Docs/images/wireframes-room-instrument/clean/dk04.png (2×). */
+
+.ri-rail {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  background: var(--surface);
+  border-right: var(--stroke-hair) solid var(--line);
+}
+
+/* ---------- Đầu rail: 8 ô + tên sản phẩm ---------- */
+.ri-rail__brand {
+  display: block;
+  padding: var(--space-6) var(--space-5) var(--space-6);
+  border-bottom: var(--stroke-hair) solid var(--line);
+}
+.ri-rail__mark {
+  display: flex;
+  gap: 2px;
+}
+.ri-rail__mark > span {
+  width: 8px;
+  height: 12px;
+  background: var(--ink);
+}
+.ri-rail__name {
+  display: block;
+  margin-top: 10px;
+  font-size: var(--type-body);
+  font-weight: 700;
+  line-height: var(--lh-heading);
+  letter-spacing: -0.005em;
+}
+.ri-rail__tagline {
+  display: block;
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  line-height: var(--lh-heading);
+  color: var(--ink-2);
+}
+
+/* ---------- 5 mục ---------- */
+.ri-rail__list {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-4) 13px;
+}
+.ri-rail__item {
+  display: grid;
+  grid-template-columns: 16px 24px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 48px;
+  padding: 0 var(--space-3);
+  color: var(--ink);
+  font-size: var(--type-body);
+  font-weight: 500;
+  transition: background-color var(--motion-press) linear;
+}
+.ri-rail__num {
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  color: var(--ink-2);
+}
+.ri-rail__item:hover { background: var(--paper); }
+.ri-rail__item[aria-current="page"] {
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+}
+.ri-rail__item[aria-current="page"] .ri-rail__num { color: var(--invert-ink-2); }
+
+/* ---------- Chân rail: tài khoản ---------- */
+.ri-rail__foot {
+  margin: auto var(--space-5) 0;
+  padding: var(--space-5) 0 var(--space-6);
+  border-top: var(--stroke-hair) solid var(--line);
+  display: grid;
+  gap: var(--space-5);
+}
+.ri-rail__account,
+.ri-rail__logout {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-min);
+  margin: 0 calc(-1 * var(--space-2));
+  padding: 0 var(--space-2);
+}
+.ri-rail__account:hover,
+.ri-rail__logout:hover { background: var(--paper); }
+/* Trang Tài khoản không phải mục rail → tô khối tài khoản (DECISIONS D9) */
+.ri-rail__account[aria-current="page"] { background: var(--ink); color: var(--paper); }
+.ri-rail__account[aria-current="page"] .ri-rail__sub { color: var(--invert-ink-2); }
+.ri-rail__who { display: grid; min-width: 0; }
+.ri-rail__user {
+  font-size: var(--type-body-sm);
+  font-weight: 500;
+  line-height: var(--lh-heading);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ri-rail__sub {
+  font-size: var(--type-label-lg);
+  line-height: var(--lh-heading);
+  color: var(--ink-2);
+}
+.ri-rail__logout {
+  font-size: var(--type-body-sm);
+  font-weight: 500;
+}
+
+/* ---------- 768–1279: rail thu gọn 92 px — chỉ số + biểu tượng, ẩn chữ và logo ---------- */
+@media (max-width: 1279.98px) {
+  .ri-rail__brand {
+    height: var(--statusbar-h);
+    padding: 0;
+  }
+  .ri-rail__mark,
+  .ri-rail__name,
+  .ri-rail__tagline,
+  .ri-rail__text,
+  .ri-rail__who,
+  .ri-rail__logout-text {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .ri-rail__list { padding: var(--space-4) var(--space-2); }
+  .ri-rail__item {
+    grid-template-columns: 16px 24px;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 52px;
+    padding: 0;
+  }
+  .ri-rail__foot { margin-inline: var(--space-2); }
+  .ri-rail__account,
+  .ri-rail__logout { justify-content: center; margin: 0; }
+}

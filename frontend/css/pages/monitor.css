@@ -1,0 +1,264 @@
+/* Giám sát — DK-04 (1440) / MB-04 (390) và các khung thích nghi RS-320 / RS-768 / RS-1280 / RS-1920 (HANDOFF §4).
+   G4: lưới 6 vùng, số đo, nhãn mức. Các ô .ri-slot là chỗ của gauge / thanh LED / Device Twin / sparkline (G5). */
+
+.ri-monitor {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 568px minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "twin hum  hum"
+    "twin temp co2"
+    "twin led  led"
+    "day  day  day";
+}
+.ri-monitor__twin        { grid-area: twin; display: flex; flex-direction: column; }
+.ri-monitor__humidity    { grid-area: hum; }
+.ri-monitor__temperature { grid-area: temp; }
+.ri-monitor__co2         { grid-area: co2; }
+.ri-monitor__led         { grid-area: led; }
+.ri-monitor__day         { grid-area: day; }
+
+/* RS-1280: cột hình thiết bị giữ 568 px, cột số liệu ~392 px dùng khối gọn; dải 24 giờ vào cột này */
+@media (max-width: 1439.98px) {
+  .ri-monitor {
+    grid-template-areas:
+      "twin hum  hum"
+      "twin temp co2"
+      "twin led  led"
+      "twin day  day";
+  }
+}
+/* RS-768: một cột nội dung — độ ẩm → hai thẻ → Đèn LED → hình thiết bị → 24 giờ */
+@media (max-width: 1279.98px) {
+  .ri-monitor {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "hum  hum"
+      "temp co2"
+      "led  led"
+      "twin twin"
+      "day  day";
+  }
+}
+/* Mobile (MB-04): không có hình thiết bị */
+@media (max-width: 767.98px) {
+  .ri-monitor {
+    gap: var(--space-4);
+    grid-template-areas:
+      "hum  hum"
+      "temp co2"
+      "led  led"
+      "day  day";
+  }
+  .ri-monitor__twin { display: none; }
+}
+/* RS-320: hai thẻ nhỏ xếp dọc */
+@media (max-width: 389.98px) {
+  .ri-monitor {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "hum" "temp" "co2" "led" "day";
+  }
+}
+
+/* Mỗi vùng tự co theo bề rộng của chính nó (khối gọn ở cột 392 px) */
+.ri-monitor > .ri-panel { container-type: inline-size; }
+
+/* ---------- Chỗ của dụng cụ (G5) ---------- */
+.ri-slot {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: var(--space-2);
+  border: var(--stroke-hair) dashed var(--line-strong);
+  color: var(--ink-2);
+}
+.ri-slot .ri-cells { color: currentColor; }
+.ri-slot .ri-cells > i { width: 6px; height: 12px; }
+.ri-slot__text {
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+}
+.ri-slot--invert { border-color: var(--invert-track); color: var(--invert-ink-2); }
+.ri-slot--twin    { flex: 1; min-height: 520px; }
+.ri-slot--gauge-l { width: 240px; height: 200px; }
+.ri-slot--gauge-s { width: 160px; height: 120px; margin-bottom: var(--space-5); }
+.ri-slot--strip   { width: 232px; height: 48px; }
+.ri-slot--strip .ri-slot__text { display: none; }
+.ri-slot--spark   { height: 96px; }
+
+/* ---------- Số ma trận chấm (HANDOFF §3.2) — chữ số Doto Black, dấu phẩy + đơn vị JetBrains Mono ---------- */
+.ri-readout {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  line-height: 1;
+  white-space: nowrap;
+  transition: opacity var(--motion-flip) var(--ease-out);
+}
+/* Doto: bước chữ số 0,6 em, cao 0,7 em. Đo từ DK-04: chữ số hero cao 73 px → 104 px (HANDOFF: hero 104–112),
+   chữ số thẻ cao 50 px → 72 px; MB-04: hero 72, thẻ 40. */
+.ri-readout__value {
+  font-family: var(--font-dot);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+.ri-readout__sep {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: .62em; /* dấu phẩy mono cỡ đầy đủ rộng bằng một chữ số — DK-04 vẽ hẹp hơn */
+}
+.ri-readout__unit {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.ri-readout--hero .ri-readout__value { font-size: calc(var(--type-hero) - 8px); }
+.ri-readout--hero .ri-readout__unit  { font-size: var(--type-num-sm); }
+.ri-readout--card .ri-readout__value { font-size: var(--type-hero-mobile); }
+.ri-readout--card .ri-readout__unit  { font-size: var(--type-subtitle); }
+@media (min-width: 1920px) {
+  .ri-readout--hero .ri-readout__value { font-size: calc(var(--type-hero) * 1.16); } /* RS-1920: hero 130 */
+}
+.ri-readout.is-stale { opacity: .4; }
+
+/* "CŨ · hh:mm" — biểu tượng đồng hồ + chữ màu chú ý (không gạch chéo, DECISIONS 7.8) */
+.ri-stale {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  font-weight: 600;
+  letter-spacing: var(--ls-label);
+  color: var(--accent-warn-text);
+}
+.ri-stale[hidden] { display: none; }
+
+/* KHÔNG ĐỌC ĐƯỢC / ĐANG LÀM NÓNG */
+.ri-sensor {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  font-weight: 600;
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-body);
+}
+
+/* ---------- Hero độ ẩm ---------- */
+/* DK-04: gauge trái, số + nhãn mức phải.  MB-04 / khối gọn: gauge + nhãn mức một hàng, số bên dưới. */
+.ri-hero {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-areas:
+    "gauge read"
+    "gauge level";
+  align-items: end;
+  column-gap: var(--space-6);
+  row-gap: var(--space-5);
+}
+.ri-hero > .ri-slot { grid-area: gauge; align-self: center; }
+.ri-hero__read { grid-area: read; min-width: 0; }
+.ri-hero__level {
+  grid-area: level;
+  align-self: start;
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+}
+.ri-hero__note { font-size: var(--type-body); line-height: var(--lh-heading); }
+
+/* ---------- Thẻ nhiệt độ / CO₂ ---------- */
+.ri-card { display: flex; flex-direction: column; align-items: flex-start; }
+.ri-card > .ri-panel__head { align-self: stretch; }
+.ri-card .ri-level { margin-top: var(--space-5); }
+.ri-card__note {
+  margin-top: var(--space-4);
+  font-size: var(--type-body-sm);
+  color: var(--ink-2);
+}
+.ri-card__note:empty { display: none; }
+.ri-card__note--strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- Đèn LED ---------- */
+.ri-ledcard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "strip text"
+    ".     btn";
+  gap: var(--space-5) var(--space-6);
+  align-items: center;
+}
+.ri-ledcard > .ri-slot { grid-area: strip; }
+.ri-ledcard__text { grid-area: text; display: grid; gap: var(--space-1); }
+.ri-ledcard__sent { font-size: var(--type-label-lg); color: var(--ink-2); }
+.ri-ledcard__btn { grid-area: btn; justify-self: end; }
+
+/* ---------- 24 giờ qua ---------- */
+.ri-day__head { align-items: center; margin-bottom: var(--space-6); }
+.ri-day__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-4);
+  row-gap: var(--space-1);
+}
+.ri-day__range { color: var(--ink-2); }
+.ri-day {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+.ri-spark {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: var(--stroke-hair) solid var(--line);
+}
+.ri-spark:hover { border-color: var(--line-strong); }
+.ri-spark__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+/* ---------- Khối gọn (cột hẹp RS-1280, mobile) ---------- */
+@container (max-width: 480px) {
+  .ri-hero {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    grid-template-areas:
+      "gauge level"
+      "read  read";
+    align-items: center;
+  }
+  .ri-hero__level { align-self: center; }
+  .ri-slot--gauge-l { width: 100%; max-width: 240px; height: 160px; }
+  .ri-readout--hero .ri-readout__value { font-size: var(--type-hero-mobile); }
+  .ri-readout--hero .ri-readout__unit { font-size: var(--type-subtitle); }
+  .ri-ledcard { grid-template-columns: minmax(0, 1fr); grid-template-areas: "text" "strip" "btn"; }
+  .ri-ledcard > .ri-slot { width: 100%; }
+  .ri-day { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
+  .ri-spark { padding: 0; border: 0; gap: var(--space-2); }
+  .ri-spark__head { flex-direction: column; gap: var(--space-1); }
+  .ri-day__range { display: none; }
+}
+/* RS-320: hero quá hẹp cho gauge + nhãn cạnh nhau → xếp dọc */
+@container (max-width: 300px) {
+  .ri-hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "gauge" "level" "read";
+  }
+}
+@container (max-width: 200px) {
+  .ri-card .ri-panel__meta { display: none; } /* MB-04: thẻ nhỏ không ghi tên cảm biến */
+  .ri-card .ri-panel__head { margin-bottom: var(--space-4); }
+  .ri-slot--gauge-s { width: 100%; height: 100px; }
+  .ri-readout--card .ri-readout__value { font-size: var(--type-num-md); }
+  .ri-readout--card .ri-readout__unit { font-size: var(--type-body-sm); }
+}
+@media (max-width: 767.98px) {
+  .ri-day__head { margin-bottom: var(--space-4); }
+}

@@ -1,0 +1,58 @@
+/* Toast (Sent / Failed) — HANDOFF §3.11: viền 1 px --line-strong, nền --surface,
+   Failed thêm gạch đáy 2 px màu báo động (tokens.css), biểu tượng ⚠ + tiêu đề màu *-text, thân chữ --ink. */
+
+.ri-toasts {
+  position: fixed;
+  z-index: 40;
+  right: var(--space-8);
+  bottom: var(--space-8);
+  display: grid;
+  gap: var(--space-3);
+  justify-items: end;
+  pointer-events: none;
+}
+
+.ri-toast {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-1) var(--space-3);
+  width: min(380px, calc(100vw - var(--space-8)));
+  padding: var(--space-4);
+  pointer-events: auto;
+  animation: ri-toast-in var(--motion-route) var(--ease-out);
+}
+.ri-toast .ri-icon { grid-row: span 2; }
+.ri-toast__title { font-weight: 600; line-height: var(--lh-heading); }
+.ri-toast__body { grid-column: 2; font-size: var(--type-body-sm); }
+.ri-toast__close {
+  grid-column: 3;
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: -6px -6px 0 0;
+  color: var(--ink-2);
+}
+.ri-toast__close:hover { color: var(--ink); }
+
+.ri-toast--failed .ri-icon,
+.ri-toast--failed .ri-toast__title { color: var(--accent-alert-text); }
+.ri-toast--sent .ri-icon,
+.ri-toast--sent .ri-toast__title { color: var(--accent-ok-text); }
+
+@keyframes ri-toast-in {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+@media (max-width: 767.98px) {
+  .ri-toasts {
+    right: var(--space-4);
+    left: var(--space-4);
+    bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + var(--space-3));
+    justify-items: stretch;
+  }
+  .ri-toast { width: auto; }
+}

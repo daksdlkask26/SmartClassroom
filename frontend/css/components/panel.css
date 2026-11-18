@@ -1,0 +1,187 @@
+/* Tiêu đề trang, panel (thường / đảo màu / hero có 4 vít), nhãn mức, nút, khối "đang xây dựng".
+   HANDOFF §2, §3.11, §3.12. */
+
+/* ---------- Tiêu đề trang ---------- */
+.ri-page__head { margin-bottom: var(--space-6); }
+.ri-page__title {
+  font-size: var(--type-h1);
+  font-weight: 700;
+  line-height: var(--lh-heading);
+  letter-spacing: -0.015em;
+}
+.ri-page__title:focus { outline: none; }
+.ri-page__subtitle {
+  margin-top: var(--space-2);
+  max-width: 72ch;
+  color: var(--ink-2);
+}
+.ri-page__subtitle .is-short { display: none; }
+@media (max-width: 767.98px) {
+  .ri-page__head { margin-bottom: var(--space-5); }
+  .ri-page__title { font-size: var(--type-h1-mobile); }
+  .ri-page__subtitle { font-size: var(--type-body-sm); }
+  .ri-page__subtitle .is-long { display: none; }
+  .ri-page__subtitle .is-short { display: inline; }
+}
+
+/* ---------- Panel ---------- */
+.ri-panel {
+  position: relative;
+  min-width: 0;
+  padding: var(--space-6);
+  background: var(--surface);
+  border: var(--stroke-hair) solid var(--line);
+}
+.ri-panel__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+.ri-panel__title {
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  font-weight: 700;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+}
+.ri-panel__meta {
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  line-height: var(--lh-heading);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.ri-panel--invert,
+.ri-panel--hero {
+  background: var(--invert-bg);
+  color: var(--invert-ink);
+  border-color: var(--invert-bg);
+}
+.ri-panel--invert .ri-panel__meta,
+.ri-panel--hero .ri-panel__meta { color: var(--invert-ink-2); }
+
+/* 4 vít ở góc — chỉ hero độ ẩm (Panel/Screw) */
+.ri-screw {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--invert-ink-2);
+  border-radius: 50%;
+  background: linear-gradient(135deg, transparent 44%, var(--invert-ink-2) 44% 56%, transparent 56%);
+}
+.ri-screw--tl { top: 6px; left: 6px; }
+.ri-screw--tr { top: 6px; right: 6px; }
+.ri-screw--bl { bottom: 6px; left: 6px; }
+.ri-screw--br { bottom: 6px; right: 6px; }
+
+@media (max-width: 767.98px) {
+  .ri-panel { padding: var(--space-4); }
+  .ri-panel--hero { padding: var(--space-5); }
+}
+
+/* ---------- Nhãn mức: chấm màu + chữ in hoa, viền 1 px màu chữ (HANDOFF §3.12) ---------- */
+.ri-level {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 28px;
+  padding: 0 10px;
+  border: var(--stroke-hair) solid currentColor;
+  font-family: var(--font-mono);
+  font-size: var(--type-label-lg);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--ls-label);
+  white-space: nowrap;
+}
+.ri-level::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--level-dot, var(--accent-ok));
+}
+.ri-level--normal { --level-dot: var(--accent-ok); }
+.ri-level--watch  { --level-dot: var(--accent-warn); }
+.ri-level--alert  { --level-dot: var(--accent-alert); }
+.ri-level[hidden] { display: none; }
+
+/* ---------- Nút (Button: Primary / Secondary / Ghost) ---------- */
+.ri-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 48px;
+  padding: 0 var(--space-6);
+  border: var(--stroke-strong) solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--type-body);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: var(--shadow-key-ink);
+  transition: transform var(--motion-press) linear, box-shadow var(--motion-press) linear;
+}
+.ri-btn--primary {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: var(--shadow-key);
+}
+.ri-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-key-pressed);
+}
+.ri-btn:disabled {
+  background: var(--track);
+  border-color: var(--track);
+  color: var(--ink-2);
+  box-shadow: none;
+}
+
+.ri-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  white-space: nowrap;
+}
+
+/* ---------- Khối "đang xây dựng" cho trang tạm ---------- */
+.ri-wip {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+  padding: var(--space-8);
+}
+.ri-wip .ri-cells { color: var(--ink-2); }
+.ri-wip .ri-cells > i { width: 10px; height: 20px; }
+.ri-wip__text { max-width: 60ch; color: var(--ink-2); }
+@media (max-width: 767.98px) {
+  .ri-wip { padding: var(--space-5) var(--space-4); }
+}
+
+/* ---------- Trang tạm: xếp các panel theo cột ---------- */
+.ri-stack { display: grid; gap: var(--space-6); }
+@media (max-width: 767.98px) { .ri-stack { gap: var(--space-4); } }
+
+.ri-account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--type-subtitle);
+  font-weight: 600;
+}
+.ri-account__note {
+  margin-top: var(--space-3);
+  font-size: var(--type-body-sm);
+  color: var(--ink-2);
+}

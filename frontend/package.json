@@ -1,0 +1,6 @@
+{
+  "name": "smartclassroom-frontend",
+  "private": true,
+  "description": "Giao diện web thuần (không bước build). File này chỉ để Node hiểu frontend/js/*.js là ES module khi chạy kiểm thử trong server/test/frontend-*.test.js; frontend/ không có phụ thuộc npm.",
+  "type": "module"
+}

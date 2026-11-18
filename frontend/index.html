@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- data-theme="body": chủ đề sáng như ảnh báo cáo. Chủ đề Lid (tối) và "Theo hệ điều hành" bật ở trang Tài khoản sau. -->
+<html lang="vi" data-theme="body">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>Smart Classroom</title>
+  <meta name="description" content="Theo dõi độ ẩm, nhiệt độ, CO₂ ước lượng và đèn LED của hộp đo Smart Classroom (nhóm 16).">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230b0b0c'/%3E%3Cpath fill='%23f4f4f1' d='M2 5h2v6H2zm3 0h2v6H5zm3 0h2v6H8zm3 0h2v6h-2z'/%3E%3C/svg%3E">
+  <link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/space-grotesk-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Thứ tự: token → font → nền → bố cục → thành phần → trang -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components/rail.css">
+  <link rel="stylesheet" href="/css/components/statusbar.css">
+  <link rel="stylesheet" href="/css/components/tabbar.css">
+  <link rel="stylesheet" href="/css/components/panel.css">
+  <link rel="stylesheet" href="/css/components/toast.css">
+  <link rel="stylesheet" href="/css/pages/monitor.css">
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body>
+  <a class="ri-skip" href="#main" data-external>Bỏ qua điều hướng, tới nội dung</a>
+
+  <div class="ri-app">
+    <nav class="ri-rail ri-app__rail" id="rail" aria-label="Điều hướng chính"></nav>
+
+    <div class="ri-app__main">
+      <header class="ri-statusbar ri-statusbar--connecting" id="statusbar"></header>
+      <main class="ri-page" id="main" tabindex="-1">
+        <div class="ri-page__inner" id="page">
+          <noscript><p>Trang cần bật JavaScript để hiển thị số liệu trực tiếp.</p></noscript>
+        </div>
+      </main>
+    </div>
+
+    <nav class="ri-tabbar ri-app__tabbar" id="tabbar" aria-label="Điều hướng chính"></nav>
+    <div class="ri-more" id="more" hidden></div>
+  </div>
+
+  <div class="ri-toasts" id="toasts"></div>
+</body>
+</html>
