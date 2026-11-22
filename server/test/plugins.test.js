@@ -46,13 +46,14 @@ test('nạp plugin hợp lệ, bỏ qua plugin lỗi / bị tắt / bắt đầu
     sensors: { dht22: 'ok', mq135: 'ok' }, levels: {}, levelsSource: 'server' });
   assert.deepEqual(globalThis.__goodSeen, [7]);
 
-  await plugins.closeAll();
+  assert.deepEqual(await plugins.closeAll(), []); // không plugin nào lỗi khi đóng
   assert.equal(globalThis.__goodClosed, true);
 });
 
-test('thư mục plugin thật: _example.js không bị nạp, hiện chưa có plugin nào', async () => {
+test('thư mục plugin thật: _example.js không bị nạp, plugin firestore được nạp nhưng tự tắt khi chưa cấu hình', async () => {
   const log = { error() {}, warn() {}, info() {}, debug() {}, child() { return log; } };
   const bus = createBus(log);
   const plugins = await loadPlugins({ bus, state: createState({ bus }), config: loadConfig({ env: {}, contract: readContract() }), log });
-  assert.deepEqual(plugins.names, []);
+  assert.deepEqual(plugins.names, ['firestore']);
+  await plugins.closeAll();
 });

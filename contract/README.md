@@ -1,6 +1,6 @@
 # Hợp đồng dữ liệu — Smart Classroom · Nhóm 16
 
-**Phiên bản 0.1.1 · bản đề xuất · 17/11/2026** — chờ Thành và Tuấn xác nhận.
+**Phiên bản 0.2.0 · bản đề xuất · 22/11/2026** — chờ Thành và Tuấn xác nhận.
 
 Tài liệu này quy định dữ liệu đi giữa **ESP32 ↔ MQTT ↔ Backend ↔ Trình duyệt**. Đây là chỗ duy nhất cả ba người cùng phụ thuộc, nên:
 
@@ -13,7 +13,7 @@ Tài liệu này quy định dữ liệu đi giữa **ESP32 ↔ MQTT ↔ Backend
 | [`system.json`](system.json) | Hằng số dùng chung |
 | [`examples/`](examples/) | Mẫu từng loại bản tin, dùng để đối chiếu và làm dữ liệu kiểm thử |
 
-Căn cứ: thuyết minh (mục 1.1–1.3, 2.3, 3.2) và bản bàn giao giao diện `design-claude/HANDOFF.md` (§3.4, §3.5, §3.12, §6).
+Căn cứ: thuyết minh (mục 1.1–1.3, 2.3, 3.2) và bản bàn giao giao diện `design/HANDOFF.md` (§3.4, §3.5, §3.12, §6).
 
 ---
 
@@ -52,7 +52,7 @@ Mẫu: [`telemetry.normal.json`](examples/telemetry.normal.json), [`telemetry.hu
 
 ```json
 {
-  "v": 1, "seq": 1234, "uptimeS": 86400,
+  "v": 1, "seq": 1234, "bootId": "a1b2c3d4", "uptimeS": 86400,
   "temperature": 27.5, "humidity": 64.5, "co2": 850,
   "sensors": { "dht22": "ok", "mq135": "ok" },
   "levels": { "temperature": "normal", "humidity": "normal", "co2": "normal" }
@@ -63,6 +63,7 @@ Mẫu: [`telemetry.normal.json`](examples/telemetry.normal.json), [`telemetry.hu
 |---|---|---|---|---|
 | `v` | số nguyên | có | Luôn là `1` | |
 | `seq` | số nguyên ≥ 0 | có | Đếm tăng mỗi bản tin, về 0 khi khởi động lại | Thành (ID 1) |
+| `bootId` | chuỗi 1–64 ký tự `A-Z a-z 0-9 _ -` | **không** | Mã ngẫu nhiên tạo **mỗi lần ESP32 khởi động** (ví dụ 8 ký tự hex từ `esp_random()`). Cùng `seq`, tạo mã bản ghi Firestore để bản tin của hai lần chạy không đè nhau (mục 8.1). Thiếu thì backend vẫn nhận, chỉ không chống trùng được | Thành (ID 1) |
 | `uptimeS` | số nguyên ≥ 0 | có | Số giây từ lúc khởi động | Thành (ID 1) |
 | `temperature` | số \| `null` | có | °C, một chữ số thập phân | Thành (ID 1, DHT22) |
 | `humidity` | số \| `null` | có | %, một chữ số thập phân | Thành (ID 1, DHT22) |
@@ -167,7 +168,7 @@ Phong bì chung: `{ "type": "...", "at": "<ISO>", "data": { ... } }`. Trình duy
 | `type` | Khi nào | `data` | Mẫu |
 |---|---|---|---|
 | `hello` | Ngay khi kết nối | `serverTime`, `mode` (`"sim"`/`"live"`), `config` (= `system.json`), `latest` (Reading hoặc `null`), `device`, `led` | [`ws.hello.json`](examples/ws.hello.json) (trường `config` viết tắt) |
-| `reading` | Mỗi bản tin hợp lệ | Reading = telemetry đã kiểm tra, cộng `receivedAt`, `levelsSource`; bỏ `v`, `uptimeS` | [`ws.reading.json`](examples/ws.reading.json) |
+| `reading` | Mỗi bản tin hợp lệ | Reading = telemetry đã kiểm tra, cộng `receivedAt`, `levelsSource`; giữ `bootId` nếu có; bỏ `v`, `uptimeS` | [`ws.reading.json`](examples/ws.reading.json) |
 | `device` | Trạng thái thiết bị đổi | `online`, `reason` (`"status"`: thiết bị tự báo · `"telemetry"`: suy ra từ bản tin vừa nhận · `"lwt"`: broker báo rớt mạng · `"timeout"`: quá `offlineAfterS` không có bản tin · `"unknown"`: chưa có thông tin), `lastSeenAt`, `fw`, `ssid`, `rssi`, `intervalS`, `ledMode` | trong `ws.hello.json` |
 | `led` | Sau khi publish `led/cmd` thành công | `mode`, `palette`, `test` (`{on,color}` hoặc `null`), `sentAt` | trong `ws.hello.json` |
 
@@ -202,7 +203,7 @@ Lỗi dùng chung một dạng ([`api.error.json`](examples/api.error.json)): `{
 
 ## 7. Ghi chú cho firmware (ESP32 · PubSubClient · ArduinoJson)
 
-- **Kích thước gói:** `PubSubClient` mặc định chỉ có 256 byte cho cả topic và nội dung. Đã đo: `telemetry` trường hợp dài nhất khoảng **255 byte** (sát giới hạn), `led/cmd` bảng màu khoảng 193 byte. **Bắt buộc** gọi `client.setBufferSize(512)` trước `connect()`, nếu không bản tin sẽ bị âm thầm bỏ.
+- **Kích thước gói:** `PubSubClient` mặc định chỉ có 256 byte cho cả topic và nội dung. Đã đo (trước khi thêm `bootId`): `telemetry` trường hợp dài nhất khoảng **255 byte**; thêm `bootId` 8 ký tự là khoảng **280 byte**, vượt bộ đệm mặc định 256, `led/cmd` bảng màu khoảng 193 byte. **Bắt buộc** gọi `client.setBufferSize(512)` trước `connect()`, nếu không bản tin sẽ bị âm thầm bỏ.
 - **LWT:** `client.connect(clientId, user, pass, "smartclassroom/sc-01/status", 1, true, "{\"v\":1,\"online\":false}")`. Ngay sau khi kết nối, publish `status` online với `retained = true`.
 - **Client ID** phải khác nhau giữa các thiết bị và backend, ví dụ ESP32 `sc-01-esp32`, backend `sc-backend-<ngẫu nhiên>`. Trùng ID thì broker ngắt kết nối cũ, hai bên đá nhau liên tục.
 - **Subscribe** `smartclassroom/sc-01/led/cmd` với QoS 1 **sau mỗi lần kết nối lại**.
@@ -214,6 +215,33 @@ Lỗi dùng chung một dạng ([`api.error.json`](examples/api.error.json)): `{
 - Khi chạy với HiveMQ thật, **chỉ một máy** được bật plugin ghi Firestore. Nếu cả ba laptop cùng chạy backend, mỗi bản tin sẽ bị ghi ba lần. Máy khác đặt `PLUGINS_DISABLED=firestore`.
 - Tương tự, chỉ một máy bật plugin Telegram, để tránh gửi cảnh báo trùng.
 - Chế độ giả lập dùng broker cục bộ, không ảnh hưởng HiveMQ thật.
+
+### 8.1 Lược đồ Firestore (chức năng 4)
+
+Mỗi **bản tin telemetry hợp lệ** là **một document** (chứa cả ba số đo), do `server/src/plugins/firestore.js` ghi khi nghe sự kiện `reading`.
+
+```text
+devices/{deviceId}/readings/{readingId}        MODE=live
+devices/{deviceId}/readings_sim/{readingId}    MODE=sim (dữ liệu giả, tách riêng để không lẫn)
+```
+
+| Trường | Kiểu | Ghi chú |
+|---|---|---|
+| `receivedAt` | Timestamp | Giờ backend nhận bản tin (mốc chuẩn) |
+| `storedAt` | Timestamp | Giờ máy chủ Firestore ghi (`serverTimestamp`) |
+| `seq` | số nguyên \| `null` | Như bản tin |
+| `bootId` | chuỗi \| `null` | `null` khi firmware chưa gửi |
+| `temperature`, `humidity`, `co2` | số \| `null` | Như Reading |
+| `sensors` | `{ dht22, mq135 }` | Trạng thái cảm biến |
+| `levels`, `levelsSource` | như Reading | Mức lúc ghi |
+
+- **`readingId`** = SHA-256 của `[deviceId, bootId, seq]` khi có `bootId`, để bản tin gửi lại (cùng `bootId` và `seq`) chỉ tạo **một** document (`create()` báo trùng thì bỏ qua). Thiếu `bootId` thì băm `[deviceId, receivedAt, seq]`, không chống trùng được nhưng không đè dữ liệu nào.
+- Truy vấn theo khoảng thời gian chỉ cần chỉ mục đơn trên `receivedAt` (Firestore tự có), không cần chỉ mục ghép.
+- Truy cập từ trình duyệt bị chặn hoàn toàn (`server/firebase/firestore.rules`); chỉ backend ghi và đọc qua Admin SDK.
+
+### 8.2 Hạn mức Firestore
+
+Gói miễn phí giới hạn lượt đọc và ghi mỗi ngày (kiểm tra con số hiện hành trên trang giá của Firebase). Ghi 30 giây một bản tin là 2.880 lượt mỗi ngày, ổn. **Đọc** mới là chỗ dễ vượt: trang Giám sát gọi `/api/history` 3 lần, mỗi 5 phút. Vì vậy provider lịch sử Firestore giữ dữ liệu gần đây trong bộ nhớ và chỉ hỏi Firestore cho khoảng cũ hơn, có cache (xem `server/README.md`).
 
 ---
 
@@ -234,6 +262,8 @@ Lỗi dùng chung một dạng ([`api.error.json`](examples/api.error.json)): `{
 | C3 | `offlineAfterS` = 300 giây? | Có | Cả nhóm |
 | C4 | Có đồng bộ NTP trên ESP32 không? | Không bắt buộc; backend gắn giờ | Thành |
 | C5 | `metrics.*.valid` (khoảng hợp lệ) | Như `system.json` | Thành, Tuấn |
+| C6 | Firmware gửi thêm `bootId` (0.2.0)? | Được: một chuỗi ngẫu nhiên tạo mỗi lần khởi động | Thành |
+| C7 | Lược đồ Firestore mục 8.1: một document cho mỗi bản tin | Như trên | Tuấn |
 
 ## 11. Lịch sử
 
@@ -241,3 +271,4 @@ Lỗi dùng chung một dạng ([`api.error.json`](examples/api.error.json)): `{
 |---|---|---|
 | 0.1.0 | 17/11/2026 | Bản đề xuất đầu tiên (Uy) |
 | 0.1.1 | 17/11/2026 | Thêm giá trị `reason: "telemetry"` cho tin `device` (chỉ thêm, không ảnh hưởng firmware) |
+| 0.2.0 | 22/11/2026 | Thêm `bootId` tùy chọn vào `telemetry` và Reading; thêm mục 8.1 (lược đồ Firestore) và 8.2 (hạn mức). Chỉ thêm, bản tin cũ không có `bootId` vẫn hợp lệ |

@@ -36,9 +36,10 @@ export function createMqttClient({ config, state, log, connect = mqtt.connect })
     });
   });
 
+  let ending = false; // backend tự ngắt khi dừng: không báo "mất kết nối"
   const down = (why) => {
     connected = false;
-    if (!warnedDown) {
+    if (!warnedDown && !ending) {
       log.warn(`Mất kết nối broker (${why}), tự thử lại mỗi 5 giây…`);
       warnedDown = true;
     }
@@ -80,6 +81,7 @@ export function createMqttClient({ config, state, log, connect = mqtt.connect })
     },
 
     end() {
+      ending = true;
       return client.endAsync();
     },
   };

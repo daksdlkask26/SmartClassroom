@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Kiểm tra giao diện web tự động (plan.md mục 11.2) bằng Chrome headless qua DevTools Protocol.
-// Không thêm phụ thuộc: dùng Chrome có sẵn trên máy + WebSocket của Node (Node 22) hoặc gói `ws` của server/.
+// Không thêm phụ thuộc: dùng Chrome có sẵn trên máy + WebSocket có sẵn của Node 22+.
 //
 //   node tools/verify-web.cjs                       tự chạy broker + giả lập + backend riêng (cổng 1884 / 3100)
 //   node tools/verify-web.cjs --url http://localhost:3000   dùng backend đang chạy (bỏ qua phần thanh trạng thái)
@@ -24,7 +24,6 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { spawn } = require('node:child_process');
-const { createRequire } = require('node:module');
 const { parseArgs } = require('node:util');
 
 const REPO = path.resolve(__dirname, '..');
@@ -54,7 +53,8 @@ for (const g of only) if (!GROUPS.includes(g)) { console.error(`Nhóm không có
 const WIDTHS = args.widths ? args.widths.split(',').map(Number) : ALL_WIDTHS;
 if (args.url && only.has('status')) only.delete('status'); // không điều khiển được thiết bị của backend người khác
 
-const WS = globalThis.WebSocket ?? createRequire(path.join(SERVER, 'package.json'))('ws');
+const WS = globalThis.WebSocket; // Node 22+ có sẵn, không mượn gói `ws` của server/
+if (!WS) { console.error('Cần Node.js 22 trở lên (có WebSocket sẵn).'); process.exit(2); }
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function findChrome() {

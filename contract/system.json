@@ -1,5 +1,5 @@
 {
-  "contractVersion": "0.1.1",
+  "contractVersion": "0.2.0",
   "messageVersion": 1,
   "deviceId": "sc-01",
   "topics": {

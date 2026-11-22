@@ -132,3 +132,20 @@ test('status: thiếu online thì bỏ; trường phụ sai thì bỏ trường 
   assert.deepEqual(r.status, { online: true, ssid: 'A' });
   assert.equal(r.warnings.length, 2);
 });
+
+test('bootId: hợp lệ thì giữ trong Reading; sai định dạng thì bỏ kèm cảnh báo; thiếu thì không có trường', () => {
+  const ok = parse(good({ bootId: 'a1b2c3d4' }));
+  assert.equal(ok.reading.bootId, 'a1b2c3d4');
+  assert.deepEqual(ok.warnings, []);
+
+  for (const bad of ['', 'có dấu', 'x'.repeat(65), 123, null]) {
+    const r = parse(good({ bootId: bad }));
+    assert.equal(r.ok, true);
+    assert.equal('bootId' in r.reading, false, JSON.stringify(bad));
+    assert.ok(r.warnings.some((w) => w.startsWith('bootId=')), JSON.stringify(bad));
+  }
+
+  const missing = parse(good());
+  assert.equal('bootId' in missing.reading, false);
+  assert.deepEqual(missing.warnings, []);
+});

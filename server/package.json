@@ -2,11 +2,11 @@
   "name": "smartclassroom-server",
   "version": "0.1.0",
   "private": true,
-  "description": "Backend Smart Classroom (nhóm 16): MQTT → WebSocket, REST API, phục vụ giao diện web",
+  "description": "Backend Smart Classroom (nhóm 16): MQTT → WebSocket, REST API, Firestore, phục vụ giao diện web",
   "type": "module",
   "main": "src/index.js",
   "engines": {
-    "node": ">=20.12"
+    "node": ">=22.9"
   },
   "scripts": {
     "start": "node src/index.js",
@@ -14,10 +14,15 @@
     "dev": "node scripts/dev.js",
     "broker": "node scripts/dev-broker.js",
     "sim": "node scripts/sim-esp32.js",
-    "test": "node --test"
+    "test": "node --test test/*.test.js",
+    "test:integration": "node scripts/emulator/run.js test",
+    "emulators": "node scripts/emulator/run.js start",
+    "check:firestore": "node --env-file-if-exists=.env scripts/emulator/smoke-firestore.js",
+    "readings": "node --env-file-if-exists=.env scripts/emulator/list-readings.js"
   },
   "dependencies": {
     "express": "5.3.0",
+    "firebase-admin": "14.5.1",
     "mqtt": "5.16.1",
     "ws": "8.22.1"
   },

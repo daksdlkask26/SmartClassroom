@@ -1,0 +1,12 @@
+# Thống nhất xuống dòng LF cho cả Windows và Linux, tránh diff "đổi toàn bộ dòng" khi di chuyển file.
+* text=auto eol=lf
+
+# Tệp nhị phân: Git không đụng vào nội dung.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.woff2 binary
+*.ttf binary
+*.xdv binary
+*.gz binary

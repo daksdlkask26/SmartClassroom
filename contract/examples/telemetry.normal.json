@@ -1,6 +1,7 @@
 {
   "v": 1,
   "seq": 1234,
+  "bootId": "a1b2c3d4",
   "uptimeS": 86400,
   "temperature": 27.5,
   "humidity": 64.5,

@@ -46,6 +46,7 @@ function gaussian(rng) {
  */
 export function createSimDevice({ contract, withLevels = true, rng = Math.random, now = Date.now }) {
   const startedAt = now();
+  const bootId = Math.floor(rng() * 0xffffffff).toString(16).padStart(8, '0'); // mỗi lần chạy một mã, như firmware sau mỗi lần khởi động
   const values = { ...BASE };
   const prevLevels = { temperature: null, humidity: null, co2: null };
   let seq = 0;
@@ -86,6 +87,7 @@ export function createSimDevice({ contract, withLevels = true, rng = Math.random
       const msg = {
         v: 1,
         seq: seq++,
+        bootId,
         uptimeS: Math.floor((now() - startedAt) / 1000),
         ...out,
         sensors,
