@@ -4,6 +4,7 @@
   "data": {
     "receivedAt": "2026-11-17T07:30:12.000Z",
     "seq": 1234,
+    "bootId": "a1b2c3d4",
     "temperature": 27.5,
     "humidity": 64.5,
     "co2": 850,

@@ -69,15 +69,19 @@ export async function startServer({ config, log, host, pluginsDir }) {
     history,
     mqtt: mqttClient,
     plugins: plugins.names,
+    /** @returns {Promise<{ clean: boolean }>} clean = false khi có plugin báo lỗi (ví dụ bản tin không lưu được) */
     async close() {
       watch.stop();
-      await plugins.closeAll();
-      await ws.close();
+      // Ngắt MQTT TRƯỚC: không nhận bản tin mới nữa, rồi mới chờ plugin ghi nốt bản tin đã nhận.
+      // Làm ngược lại thì bản tin đến giữa hai bước được nhận nhưng không được lưu.
       await mqttClient.end().catch(() => {});
+      const failedPlugins = await plugins.closeAll();
+      await ws.close();
       await history.close();
       await ledStore.flush();
       server.closeAllConnections?.();
       await new Promise((r) => server.close(() => r()));
+      return { clean: failedPlugins.length === 0 };
     },
   };
 }

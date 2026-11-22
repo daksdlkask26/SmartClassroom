@@ -1,7 +1,0 @@
-{
-  "deviceId": "esp32-01",
-  "bootId": "demo-boot-01",
-  "seq": 1,
-  "status": "ok",
-  "co2EstimatedPpm": 850
-}

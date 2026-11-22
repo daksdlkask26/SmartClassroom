@@ -49,10 +49,18 @@ export async function loadPlugins({ bus, state, config, log, dir = PLUGINS_DIR }
 
   return {
     names: loaded.map((p) => p.name),
+    /** Đóng lần lượt mọi plugin; một plugin lỗi không chặn plugin khác. @returns {Promise<string[]>} tên plugin lỗi khi đóng */
     async closeAll() {
+      const failed = [];
       for (const p of loaded) {
-        try { await p.close?.(); } catch (err) { log.warn(`Plugin "${p.name}" lỗi khi đóng: ${err.message}`); }
+        try {
+          await p.close?.();
+        } catch (err) {
+          failed.push(p.name);
+          log.error(`Plugin "${p.name}" lỗi khi đóng: ${err.message}`);
+        }
       }
+      return failed;
     },
   };
 }

@@ -6,6 +6,7 @@ export const MAX_PAYLOAD_BYTES = 2048;
 const SENSOR_STATES = { dht22: ['ok', 'error'], mq135: ['warming', 'ok', 'error'] };
 const SENSOR_OF = { temperature: 'dht22', humidity: 'dht22', co2: 'mq135' };
 const LED_MODES = ['auto', 'test'];
+const BOOT_ID = /^[A-Za-z0-9_-]{1,64}$/;
 
 function parseJson(raw) {
   const text = Buffer.isBuffer(raw) ? raw.toString('utf8') : String(raw);
@@ -110,12 +111,20 @@ export function parseTelemetry(raw, contract, now = new Date()) {
   const seq = nonNegInt(obj, 'seq', warnings);
   nonNegInt(obj, 'uptimeS', warnings); // chỉ kiểm tra; không đưa vào Reading (contract mục 5)
 
+  // bootId (contract 0.2.0): mã lần khởi động, cùng seq tạo mã bản ghi không trùng. Tùy chọn: thiếu thì bỏ qua.
+  let bootId;
+  if ('bootId' in obj) {
+    if (typeof obj.bootId === 'string' && BOOT_ID.test(obj.bootId)) bootId = obj.bootId;
+    else warnings.push(`bootId=${JSON.stringify(obj.bootId)} không hợp lệ (1–64 ký tự chữ, số, _ hoặc -), bỏ qua`);
+  }
+
   return {
     ok: true,
     warnings,
     reading: {
       receivedAt: now.toISOString(),
       seq,
+      ...(bootId ? { bootId } : {}),
       ...values,
       sensors,
       levels,

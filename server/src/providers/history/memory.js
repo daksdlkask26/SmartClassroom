@@ -12,7 +12,7 @@ export function bucketStart(t, bucket) {
   return Math.floor((t + VN_OFFSET_MS) / day) * day - VN_OFFSET_MS;
 }
 
-function bucketSize(bucket) {
+export function bucketSize(bucket) {
   return bucket === 'hour' ? HOUR_MS : 24 * HOUR_MS;
 }
 
