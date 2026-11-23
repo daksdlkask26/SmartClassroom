@@ -2,7 +2,7 @@
 
 Đồ án môn Vật lý cho CNTT: thiết bị IoT đặt trong phòng, đo độ ẩm, nhiệt độ, chất lượng không khí và báo về website, Telegram. Phần cứng gồm ESP32, DHT22, MQ-135 và thanh LED WS2812; dữ liệu đi qua MQTT (HiveMQ), được lưu trên Firestore.
 
-**Hiện trạng:** website chạy trọn bộ ở chế độ giả lập (không cần phần cứng, broker hay Firebase). Firmware ESP32 chưa có.
+**Hiện trạng:** website chạy trọn bộ ở chế độ giả lập (không cần phần cứng, broker hay Firebase). Firmware ESP32 đã có mô-đun ước lượng CO₂ và kiểm thử giả lập.
 
 ## Bắt đầu nhanh
 
@@ -17,11 +17,11 @@ npm run dev        # broker cục bộ + ESP32 giả + backend → http://localh
 Cấu hình tùy chọn (Telegram, Firebase, broker thật) nằm trong `server/.env`, tạo từ mẫu:
 
 ```bash
-cp .env.example .env              # Linux (bash), trong thư mục server/
+npm run env:init    # tạo .env từ mẫu khi chưa có file
+npm run env:update  # thêm biến còn thiếu sau khi .env.example thay đổi
 ```
-```powershell
-Copy-Item .env.example .env       # Windows (PowerShell), trong thư mục server\
-```
+
+Chạy hai lệnh trong thư mục `server/`. Khi cập nhật, các giá trị đã cấu hình trong `.env` được giữ nguyên.
 
 PowerShell chặn `npm.ps1` thì dùng `npm.cmd` thay `npm`. Hướng dẫn đầy đủ (biến cấu hình, kịch bản giả lập, Firestore, Emulator, HiveMQ cục bộ, sự cố thường gặp): [`server/README.md`](server/README.md).
 
@@ -32,7 +32,7 @@ PowerShell chặn `npm.ps1` thì dùng `npm.cmd` thay `npm`. Hướng dẫn đ�
 | [`server/`](server/README.md) | **Backend duy nhất**: MQTT → WebSocket, REST, plugin Firestore và Telegram, giả lập ESP32, kiểm thử | Làm backend, plugin, chạy thử |
 | [`frontend/`](frontend/) | Giao diện web (HTML/CSS/JS thuần, không bước build), `server/` phục vụ tĩnh | Làm giao diện |
 | [`contract/`](contract/README.md) | **Hợp đồng dữ liệu**: topic MQTT, JSON, REST, WebSocket, ngưỡng, lược đồ Firestore | Viết firmware hoặc đổi định dạng dữ liệu |
-| [`firmware/`](firmware/README.md) | Mã ESP32 (PlatformIO). Chưa có mã nguồn | Làm firmware |
+| [`firmware/`](firmware/README.md) | Mã ESP32 (PlatformIO) và bộ kiểm thử MQ-135 | Làm firmware |
 | [`design/`](design/) | Thiết kế Figma "Room Instrument": kế hoạch, quyết định, bàn giao, token CSS | Hỏi "vì sao giao diện thế này" |
 | [`Docs/`](Docs/) | Thuyết minh (LaTeX và PDF), wireframe, prototype cũ, tài liệu của giảng viên | Viết báo cáo |
 | [`tools/`](tools/) | Kiểm tra giao diện bằng Chrome, kiểm tra báo cáo, xuất wireframe, biên dịch báo cáo | Kiểm thử và build |

@@ -5,7 +5,7 @@
 //   npm run dev -- --interval 30      đúng chu kỳ thật
 //   npm run dev -- --scenario humid-high
 //
-// Mọi tham số sau "--" được chuyển cho giả lập (xem scripts/sim-esp32.js).
+// Truyền tham số kịch bản sau "--" cho giả lập (xem scripts/sim-esp32.js).
 // Phím đổi kịch bản vẫn dùng được; q hoặc Ctrl+C tắt cả ba.
 //
 // Luôn dùng broker trên máy này và MODE=sim, kể cả khi server/.env đang trỏ tới HiveMQ thật,
@@ -114,7 +114,7 @@ async function main() {
   console.log(color('1', `\n  Giao diện: http://localhost:${HTTP_PORT}\n`));
 
   // Giả lập chạy trực tiếp trong cửa sổ này để nhận phím
-  const sim = spawn(process.execPath, ['scripts/sim-esp32.js', '--url', `mqtt://localhost:${BROKER_PORT}`, ...simArgs], {
+  const sim = spawn(process.execPath, ['scripts/sim-esp32.js', ...simArgs, '--url', `mqtt://localhost:${BROKER_PORT}`], {
     cwd: ROOT, stdio: 'inherit',
   });
   children.push(sim);
