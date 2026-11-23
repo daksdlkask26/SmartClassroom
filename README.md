@@ -17,11 +17,11 @@ npm run dev        # broker cục bộ + ESP32 giả + backend → http://localh
 Cấu hình tùy chọn (Telegram, Firebase, broker thật) nằm trong `server/.env`, tạo từ mẫu:
 
 ```bash
-cp .env.example .env              # Linux (bash), trong thư mục server/
+npm run env:init    # tạo .env từ mẫu khi chưa có file
+npm run env:update  # thêm biến còn thiếu sau khi .env.example thay đổi
 ```
-```powershell
-Copy-Item .env.example .env       # Windows (PowerShell), trong thư mục server\
-```
+
+Chạy hai lệnh trong thư mục `server/`. Khi cập nhật, các giá trị đã cấu hình trong `.env` được giữ nguyên.
 
 PowerShell chặn `npm.ps1` thì dùng `npm.cmd` thay `npm`. Hướng dẫn đầy đủ (biến cấu hình, kịch bản giả lập, Firestore, Emulator, HiveMQ cục bộ, sự cố thường gặp): [`server/README.md`](server/README.md).
 

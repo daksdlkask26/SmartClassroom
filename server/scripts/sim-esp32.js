@@ -6,43 +6,61 @@
 //   npm run sim -- --scenario humid-high
 //   npm run sim -- --no-levels                    không gửi `levels` (thử backend tự tính mức)
 //   npm run sim -- --count 5                      gửi 5 bản tin rồi thoát
+//   npm run sim -- --from-env --allow-remote --device sc-test --count 3
 //
 // Trong lúc chạy, bấm phím để đổi kịch bản (xem danh sách in ra khi khởi động), q để thoát.
-// An toàn: chỉ kết nối broker trên máy này. Muốn trỏ tới broker khác phải thêm --allow-remote,
-// vì dữ liệu giả gửi lên HiveMQ thật sẽ bị ghi vào Firestore của nhóm.
+// Mặc định nối broker cục bộ. --from-env đọc MQTT_* từ server/.env, --allow-remote cho phép broker từ xa.
 import { parseArgs } from 'node:util';
 import mqtt from 'mqtt';
-import { readContract } from '../src/config.js';
+import { loadConfig, loadEnvFile, readContract } from '../src/config.js';
 import { computeLevels } from '../src/core/levels.js';
 import { BAD_PAYLOADS, SCENARIOS, createSimDevice } from './sim/device.js';
 
 const contract = readContract();
 const { values: args } = parseArgs({
   options: {
-    url: { type: 'string', default: 'mqtt://localhost:1883' },
+    url: { type: 'string' },
     user: { type: 'string' },
     pass: { type: 'string' },
-    device: { type: 'string', default: contract.deviceId },
+    device: { type: 'string' },
     interval: { type: 'string', default: String(contract.timing.intervalS) },
     scenario: { type: 'string', default: 'normal' },
     count: { type: 'string' },
     'no-levels': { type: 'boolean', default: false },
+    'from-env': { type: 'boolean', default: false },
     'allow-remote': { type: 'boolean', default: false },
   },
 });
 
 const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]', '::1']);
-const host = new URL(args.url).hostname;
-if (!LOCAL_HOSTS.has(host) && !args['allow-remote']) {
-  console.error(`Từ chối kết nối ${args.url}: giả lập chỉ chạy với broker trên máy này.`);
-  console.error('Nếu thật sự muốn gửi dữ liệu giả lên broker khác, thêm --allow-remote.');
+let broker = { url: args.url ?? 'mqtt://localhost:1883', username: args.user, password: args.pass };
+let deviceId = args.device ?? contract.deviceId;
+let brokerAddress;
+try {
+  if (args['from-env']) {
+    if (['url', 'user', 'pass'].some((key) => args[key] !== undefined)) {
+      throw new Error('Dùng --from-env hoặc các tham số --url / --user / --pass.');
+    }
+    loadEnvFile();
+    const { MQTT_URL, MQTT_USER, MQTT_PASS, DEVICE_ID } = process.env;
+    const config = loadConfig({ contract, env: { MQTT_URL, MQTT_USER, MQTT_PASS, DEVICE_ID: args.device ?? DEVICE_ID } });
+    broker = config.mqtt;
+    deviceId = config.deviceId;
+  }
+  const { protocol, host, hostname } = new URL(broker.url);
+  if (!LOCAL_HOSTS.has(hostname) && !args['allow-remote']) {
+    throw new Error('Cần --allow-remote để gửi dữ liệu giả lên broker từ xa.');
+  }
+  brokerAddress = `${protocol}//${host}`;
+} catch (err) {
+  console.error(err.code === 'ERR_INVALID_URL' ? 'URL broker MQTT không hợp lệ.' : err.message);
   process.exit(2);
 }
 
 const intervalMs = Math.max(0.5, Number(args.interval)) * 1000;
 const maxCount = args.count ? Number(args.count) : Infinity;
 const topic = Object.fromEntries(
-  Object.entries(contract.topics).map(([k, t]) => [k, t.replace('{deviceId}', args.device)]),
+  Object.entries(contract.topics).map(([k, t]) => [k, t.replace('{deviceId}', deviceId)]),
 );
 const sim = createSimDevice({ contract, withLevels: !args['no-levels'] });
 sim.setScenario(SCENARIOS[args.scenario] && !['pause', 'offline', 'bad', 'burst'].includes(args.scenario) ? args.scenario : 'normal');
@@ -103,10 +121,10 @@ function publishTelemetry() {
 }
 
 function connect() {
-  client = mqtt.connect(args.url, {
-    clientId: `${args.device}-sim`,
-    username: args.user,
-    password: args.pass,
+  client = mqtt.connect(broker.url, {
+    clientId: `${deviceId}-sim`,
+    username: broker.username,
+    password: broker.password,
     clean: true,
     keepalive: 15,
     reconnectPeriod: 3000,
@@ -123,7 +141,7 @@ function connect() {
   };
 
   client.on('connect', () => {
-    say(`Đã kết nối ${args.url} với tên ${args.device}-sim`);
+    say(`Đã kết nối ${brokerAddress} với tên ${deviceId}-sim`);
     publishStatus();
     client.subscribe(topic.ledCmd, { qos: 1 });
     clearInterval(timer);
@@ -151,7 +169,7 @@ function connect() {
 
   client.on('reconnect', () => say('Đang kết nối lại broker…'));
   client.on('error', (err) => {
-    if (err.code === 'ECONNREFUSED') say(`Chưa có broker tại ${args.url}. Chạy "npm run broker" ở cửa sổ khác.`);
+    if (err.code === 'ECONNREFUSED') say(`Chưa có broker tại ${brokerAddress}.`);
     else say(`Lỗi MQTT: ${err.message}`);
   });
 }
@@ -198,7 +216,7 @@ function quit(asCrash = true) {
 }
 
 // ---------- Khởi động ----------
-console.log(`Giả lập ESP32 "${args.device}" · mỗi ${intervalMs / 1000} giây · ${args['no-levels'] ? 'không gửi levels' : 'có gửi levels (có khoảng trễ)'}`);
+console.log(`Giả lập ESP32 "${deviceId}" · mỗi ${intervalMs / 1000} giây · ${args['no-levels'] ? 'không gửi levels' : 'có gửi levels (có khoảng trễ)'}`);
 if (process.stdin.isTTY) {
   printHelp();
   process.stdin.setRawMode(true);

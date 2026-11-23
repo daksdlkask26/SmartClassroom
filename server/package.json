@@ -9,6 +9,8 @@
     "node": ">=22.9"
   },
   "scripts": {
+    "env:init": "node scripts/sync-env.js init",
+    "env:update": "node scripts/sync-env.js update",
     "start": "node src/index.js",
     "start:watch": "node --watch src/index.js",
     "dev": "node scripts/dev.js",

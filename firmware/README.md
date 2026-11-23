@@ -32,25 +32,25 @@ g++ -std=c++11 -Wall -Wextra -Werror -pedantic -Iinclude src/mq135.cpp test/mq13
 
 ## Quy ước bắt buộc
 
-Firmware phải theo [`contract/README.md`](../contract/README.md), nhất là mục 7:
+Firmware phải theo [`contract/README.md`](../contract/README.md), nhất là mục 7.
 
 - Topic, trường JSON và hằng số lấy từ [`contract/system.json`](../contract/system.json).
-- `client.setBufferSize(512)` trước khi `connect()` (bản tin dài nhất khoảng 255 byte, bộ đệm mặc định chỉ 256).
+- `client.setBufferSize(512)` trước khi `connect()`.
 - Khai báo LWT trên `status` (QoS 1, retained) và publish `status` online (retained) sau mỗi lần kết nối.
 - Client ID riêng, ví dụ `sc-01-esp32`.
-- HiveMQ Cloud bắt buộc TLS cổng 8883 (`WiFiClientSecure`).
 - Gửi `bootId` (chuỗi ngẫu nhiên tạo mỗi lần khởi động, ví dụ từ `esp_random()`) trong mọi `telemetry`.
 
-## Bí mật
+## Bí mật và HiveMQ Cloud
 
-Thông tin WiFi và MQTT đặt trong `secrets.h` (đã nằm trong `.gitignore`). Commit bản `secrets.example.h` làm mẫu.
+Khi ghép WiFi và MQTT, sao chép [`include/secrets.example.h`](include/secrets.example.h) thành `include/secrets.h` và điền thông tin thật. `secrets.h` đã được Git bỏ qua. Lấy hostname của broker trong **Overview** và tài khoản MQTT của thiết bị trong **Access Management**. Dùng hostname với cổng `8883` và xác thực CA qua `WiFiClientSecure`. Backend dùng cùng broker và mã thiết bị, cấu hình theo [hướng dẫn server](../server/README.md#hivemq-cloud).
 
 ## Cấu trúc
 
 ```text
 firmware/
 ├── include/
-│   └── mq135.h
+│   ├── mq135.h
+│   └── secrets.example.h
 ├── src/mq135.cpp
 └── test/mq135_test.cpp
 ```

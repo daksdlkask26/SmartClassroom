@@ -15,7 +15,7 @@ Hợp đồng dữ liệu (topic, JSON, WebSocket, REST, hằng số) nằm ở 
 
 ## 1. Chạy nhanh
 
-Yêu cầu: **Node.js ≥ 20.12** (khuyến nghị 22 LTS). Mọi lệnh chạy trong thư mục `server/`.
+Yêu cầu **Node.js 22.9 trở lên**. Mọi lệnh chạy trong thư mục `server/`.
 
 ```bash
 cd server
@@ -59,26 +59,26 @@ npm start                                       # backend, đọc server/.env
 npm run sim -- --interval 3 --scenario normal   # ESP32 giả
 ```
 
-Giả lập từ chối kết nối broker không phải `localhost`, trừ khi thêm `--allow-remote`.
+`npm run sim` mặc định dùng broker cục bộ. Dùng `--from-env` để đọc cấu hình MQTT trong `server/.env` và `--allow-remote` để cho phép broker từ xa.
 
 ---
 
 ## 2. Cấu hình (`server/.env`)
 
 ```bash
-cp .env.example .env        # Linux/macOS (bash)
+npm run env:init    # tạo .env từ mẫu khi chưa có file
+npm run env:update  # thêm biến còn thiếu sau khi .env.example thay đổi
 ```
-```powershell
-Copy-Item .env.example .env   # Windows (PowerShell)
-```
+
+Khi cập nhật, các giá trị đã cấu hình, kể cả giá trị trống, và các biến riêng vẫn được giữ nguyên. Dòng chú thích trong mẫu chỉ dùng để tham khảo.
 
 Mọi biến đều có mặc định, xem chú thích trong [`.env.example`](.env.example). **Không commit `.env`.**
 
 | Biến | Mặc định | Ý nghĩa |
 |---|---|---|
 | `PORT` | `3000` | Cổng HTTP và WebSocket |
-| `MQTT_URL`, `MQTT_USER`, `MQTT_PASS` | `mqtt://localhost:1883` | Broker. HiveMQ Cloud: `mqtts://<cluster>.s1.eu.hivemq.cloud:8883`. Broker từ xa **bắt buộc** `mqtts://` và có `MQTT_USER`, `MQTT_PASS`; không nhét tài khoản vào URL; giá trị mẫu (`your-…`, `thay-…`) bị từ chối |
-| `DEVICE_ID` | `sc-01` | Phải khớp `contract/system.json` và firmware |
+| `MQTT_URL`, `MQTT_USER`, `MQTT_PASS` | `mqtt://localhost:1883`, tài khoản trống | Broker từ xa dùng `mqtts://` với tài khoản MQTT. Đặt tài khoản ở hai biến riêng. Dùng giá trị thật khi kết nối. |
+| `DEVICE_ID` | `sc-01` | Mã thiết bị trong topic MQTT, khớp ESP32 hoặc `--device` của bộ giả lập |
 | `MODE` | `sim` | `sim` (dữ liệu giả, hiện nhãn GIẢ LẬP) · `live` (thiết bị thật) |
 | `HISTORY_PROVIDER` | `memory` | Nguồn lịch sử: `memory` · `firestore` (cần `FIREBASE_PROJECT_ID`) |
 | `FIREBASE_PROJECT_ID` | trống | Bật plugin ghi Firestore (ID 4) và provider lịch sử Firestore (ID 5). Trống = plugin tự tắt |
@@ -90,7 +90,26 @@ Mọi biến đều có mặc định, xem chú thích trong [`.env.example`](.e
 | `DATA_DIR` | `data` | Thư mục dữ liệu lúc chạy, tính từ `server/` (đã ignore). Hiện chỉ có `led-<MODE>-<DEVICE_ID>.json`: bảng màu LED gửi gần nhất, để khởi động lại backend vẫn hiện đúng bảng ESP32 đang dùng |
 | `LOG_LEVEL` | `info` | `error` · `warn` · `info` · `debug` |
 
-Chuyển sang thiết bị thật: đặt `MODE=live`, `MQTT_URL=mqtts://…:8883`, `MQTT_USER`, `MQTT_PASS`, rồi chạy `npm start` (không dùng `npm run dev`). Khi nhiều máy cùng nối HiveMQ thật, **chỉ một máy** bật plugin ghi dữ liệu (`contract/README.md` mục 8).
+### HiveMQ Cloud
+
+Trước khi tạo broker Cloud, có thể chạy dự án với broker cục bộ bằng `npm run dev`.
+
+1. Trong HiveMQ Console, mở **Connect → Get Broker or Edge → Deploy a new Broker → HiveMQ Cloud**, chọn **Starter** và bắt đầu trial 15 ngày. Khi broker báo **Running**, chọn broker, mở **Configure → Overview** và sao chép toàn bộ hostname. [HiveMQ Console](https://app.hivemq.com) · [Hướng dẫn tạo broker](https://docs.hivemq.com/hivemq-platform/connect/deploy-a-broker.html)
+2. Trong **Access Management → Authentication → Credentials**, chọn **Add Credentials**. Tạo username và password MQTT rồi gán role có quyền trên các topic bên dưới. [Hướng dẫn tạo tài khoản MQTT](https://docs.hivemq.com/hivemq-platform/connect/create-access-credentials.html)
+3. Điền `server/.env` với hostname và tài khoản lấy ở hai bước trên. `MQTT_URL` dùng `mqtts://` và cổng `8883`. Hostname dưới đây minh họa định dạng Starter. [Ví dụ hostname từ HiveMQ](https://www.hivemq.com/blog/step-by-step-guide-using-hivemq-cloud-starter-iot/)
+
+```dotenv
+MODE=live
+MQTT_URL=mqtts://your-cluster.a01.euc1.aws.hivemq.cloud:8883
+MQTT_USER=your-mqtt-username
+MQTT_PASS="your-mqtt-password"
+```
+
+HiveMQ cũng có MQTT qua WebSocket ở cổng `8884` cho Web Client trong **Troubleshooting → Test your connection**. Trình duyệt của Smart Classroom nhận dữ liệu qua `/ws` của backend. [Hướng dẫn kiểm tra kết nối HiveMQ](https://docs.hivemq.com/hivemq-cloud/quick-start-guide.html)
+
+- **Backend:** chạy `npm start` và xem `GET /api/health` để kiểm tra `mqtt: "connected"`. Tài khoản cần quyền subscribe `smartclassroom/<DEVICE_ID>/telemetry` và `status`, cùng quyền publish `smartclassroom/<DEVICE_ID>/led/cmd`. Khi nhiều máy cùng nối broker thật, chỉ một máy bật plugin ghi Firestore.
+- **ESP32:** sao chép mẫu thành `firmware/include/secrets.h` rồi điền hostname, cổng `8883` và tài khoản thiết bị. Tài khoản cần quyền publish `telemetry`, `status` và subscribe `led/cmd` theo cùng `DEVICE_ID`. Firmware dùng `WiFiClientSecure` với CA của broker khi ghép kết nối. [Mẫu cấu hình ESP32](../firmware/include/secrets.example.h)
+- **Giả lập trên Cloud:** dành một mã thiết bị thử, ví dụ `sc-test`, và chạy `npm run sim -- --from-env --allow-remote --device sc-test --count 3`. Để xem các bản tin này trên web, chạy backend với `MODE=sim` và `DEVICE_ID=sc-test`.
 
 ---
 
@@ -108,7 +127,7 @@ Chạy bằng `node:test`, không cần mạng, tài khoản hay Java. Gồm:
 | `config`, `plugins`, `history`, `http` | Cấu hình (kể cả quy tắc siết MQTT, Firebase), nạp plugin, gom lịch sử theo giờ/ngày, REST |
 | `firestore-config`, `firestore-reading-store`, `firestore-plugin`, `firestore-history` | Ghi và đọc Firestore bằng Firestore giả trong bộ nhớ (`test/helpers/memory-firestore.js`): mã chống trùng, giao dịch cộng dồn theo giờ, thử lại, cache, plugin tự tắt khi chưa cấu hình |
 | `mqtt.integration`, `e2e` | Broker + backend thật trên cổng ngẫu nhiên: publish → WebSocket nhận |
-| `sim-device` | Kịch bản giả lập |
+| `sim-device`, `sim-mqtt` | Kịch bản giả lập, đọc cấu hình MQTT và gửi bản tin vào broker thử có xác thực |
 | `frontend-core`, `frontend-connection`, `frontend-instrument` | Phần thuần của giao diện: định dạng số, router, 5 trạng thái kết nối, gauge, màu LED, sparkline |
 | `frontend-device` | Trang Thiết bị & WiFi, Telegram: hàng cảm biến, hàng LED, câu trả lời mẫu của bot |
 | `led`, `frontend-led` | Lệnh đèn LED: kiểm tra bảng màu / Kiểm tra đèn, mã lỗi 409 · 422 · 503, web → broker → ESP32; bản nháp, khoảng ngưỡng, trùng màu |
