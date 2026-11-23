@@ -2,7 +2,7 @@
 
 Đồ án môn Vật lý cho CNTT: thiết bị IoT đặt trong phòng, đo độ ẩm, nhiệt độ, chất lượng không khí và báo về website, Telegram. Phần cứng gồm ESP32, DHT22, MQ-135 và thanh LED WS2812; dữ liệu đi qua MQTT (HiveMQ), được lưu trên Firestore.
 
-**Hiện trạng:** website chạy trọn bộ ở chế độ giả lập (không cần phần cứng, broker hay Firebase). Firmware ESP32 chưa có.
+**Hiện trạng:** website chạy trọn bộ ở chế độ giả lập (không cần phần cứng, broker hay Firebase). Firmware ESP32 đã có mô-đun ước lượng CO₂ và kiểm thử giả lập.
 
 ## Bắt đầu nhanh
 
@@ -32,7 +32,7 @@ PowerShell chặn `npm.ps1` thì dùng `npm.cmd` thay `npm`. Hướng dẫn đ�
 | [`server/`](server/README.md) | **Backend duy nhất**: MQTT → WebSocket, REST, plugin Firestore và Telegram, giả lập ESP32, kiểm thử | Làm backend, plugin, chạy thử |
 | [`frontend/`](frontend/) | Giao diện web (HTML/CSS/JS thuần, không bước build), `server/` phục vụ tĩnh | Làm giao diện |
 | [`contract/`](contract/README.md) | **Hợp đồng dữ liệu**: topic MQTT, JSON, REST, WebSocket, ngưỡng, lược đồ Firestore | Viết firmware hoặc đổi định dạng dữ liệu |
-| [`firmware/`](firmware/README.md) | Mã ESP32 (PlatformIO). Chưa có mã nguồn | Làm firmware |
+| [`firmware/`](firmware/README.md) | Mã ESP32 (PlatformIO) và bộ kiểm thử MQ-135 | Làm firmware |
 | [`design/`](design/) | Thiết kế Figma "Room Instrument": kế hoạch, quyết định, bàn giao, token CSS | Hỏi "vì sao giao diện thế này" |
 | [`Docs/`](Docs/) | Thuyết minh (LaTeX và PDF), wireframe, prototype cũ, tài liệu của giảng viên | Viết báo cáo |
 | [`tools/`](tools/) | Kiểm tra giao diện bằng Chrome, kiểm tra báo cáo, xuất wireframe, biên dịch báo cáo | Kiểm thử và build |
