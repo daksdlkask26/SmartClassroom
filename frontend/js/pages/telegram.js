@@ -1,6 +1,8 @@
 // Telegram (DK-12 / MB-12, HANDOFF §3.6). Trang hướng dẫn: 3 bước liên kết, quy tắc cảnh báo, lệnh hỏi nhanh.
 // KHÔNG có trạng thái "đã liên kết" và không cho biết cảnh báo đã gửi hay chưa: backend không theo dõi việc này.
-// Phần động duy nhất: vạch "hiện tại" trên thang độ ẩm và câu trả lời mẫu, dựng từ số liệu mới nhất (ghi "MINH HỌA").
+// Phần động: tên bot + nút mở bot (từ tin hello → telegram.username; null = bot chưa bật, nút bị khoá),
+// vạch "hiện tại" trên thang độ ẩm và câu trả lời mẫu, dựng từ số liệu mới nhất (ghi "MINH HỌA").
+// Câu trả lời mẫu trùng nguyên văn câu bot thật gửi (server/src/services/telegram/messages.js).
 // Ngưỡng 30 / 85 % và thời gian nghỉ 30 phút lấy từ contract/system.json → telegram.
 import { formatNumber, NO_VALUE } from '../core/format.js';
 import { botReplies, scalePercent } from '../core/device-view.js';
@@ -17,25 +19,37 @@ function limits(s) {
   return { low: tg.humidityLow ?? 30, high: tg.humidityHigh ?? 85, m: tg.cooldownMin ?? 30 };
 }
 
+/** Tên bot công khai; chỉ nhận đúng dạng tên Telegram để không ghép chuỗi lạ vào liên kết. null = chưa có / bot tắt. */
+export function botUsername(s) {
+  const u = s.telegram?.username;
+  return typeof u === 'string' && /^[A-Za-z0-9_]{5,32}$/.test(u) ? u : null;
+}
+
 /** Chuỗi có bản dài (desktop) và bản ngắn (MB-12). */
 function longShort(long, short) {
   return `<span class="is-long">${esc(long)}</span><span class="is-short">${esc(short)}</span>`;
 }
 
-function steps(t) {
-  const bot = t('tg.bot');
+function steps(t, s) {
+  const username = botUsername(s);
+  // telegram === null: chưa nhận hello → giữ chỗ, chưa báo "bot chưa bật"
+  const off = s.telegram != null && !username;
+  const bot = username ? `@${username}` : t('tg.bot');
+  const open = username
+    ? `<a class="ri-btn ri-tgstep__btn" href="https://t.me/${username}" target="_blank" rel="noopener noreferrer">${esc(t('tg.open'))}</a>`
+    : `<button class="ri-btn ri-tgstep__btn" type="button" disabled>${esc(t('tg.open'))}</button>`;
   return `
     <section class="ri-panel ri-tg__link" aria-labelledby="tg-link">
       <div class="ri-panel__head">
         <h2 class="ri-panel__title" id="tg-link">${esc(t('tg.link'))}</h2>
-        <span class="ri-panel__meta">${esc(t('tg.link.meta'))}</span>
+        <span class="ri-panel__meta">${esc(t(off ? 'tg.link.metaOff' : 'tg.link.meta'))}</span>
       </div>
       <ol class="ri-tg__steps">
         <li class="ri-tgstep">
           <h3 class="ri-tgstep__title"><span class="ri-tgstep__num" aria-hidden="true">1</span>${esc(t('tg.step1.title'))}</h3>
-          <p class="ri-tgstep__text">${esc(t('tg.step1.text', { bot }))}</p>
+          <p class="ri-tgstep__text" data-bot-text>${esc(off ? t('tg.step1.textOff') : t('tg.step1.text', { bot }))}</p>
           <code class="ri-tgstep__code">${esc(bot)}</code>
-          <a class="ri-btn ri-tgstep__btn" href="https://t.me/" target="_blank" rel="noopener noreferrer">${esc(t('tg.open'))}</a>
+          ${open}
         </li>
         <li class="ri-tgstep">
           <h3 class="ri-tgstep__title"><span class="ri-tgstep__num" aria-hidden="true">2</span>${esc(t('tg.step2.title'))}</h3>
@@ -48,7 +62,7 @@ function steps(t) {
           <p class="ri-tgstep__reply">${esc(t('tg.step3.reply'))}</p>
         </li>
       </ol>
-      <p class="ri-tg__note">${longShort(t('tg.noStatus'), t('tg.noStatusShort'))}</p>
+      <p class="ri-tg__note">${longShort(t('tg.noStatus'), t('tg.noStatusShort'))} ${esc(t('tg.stop'))}</p>
     </section>`;
 }
 
@@ -126,7 +140,7 @@ function template(t, s) {
     subtitleShort: t('page.telegram.subtitleShort'),
   }) + `
     <div class="ri-tg">
-      ${steps(t)}
+      ${steps(t, s)}
       ${rules(t, s)}
       ${commands(t)}
     </div>`;
@@ -161,6 +175,8 @@ export default {
     offs = [
       // Ngưỡng nằm trong khung tĩnh → dựng lại khi config (đến qua "hello") về sau
       store.subscribe((s) => s.config, () => { el.innerHTML = template(t, store.get()); renderAll(); }, { immediate: false }),
+      // Tên bot cũng nằm trong khung tĩnh (bước 1)
+      store.subscribe((s) => s.telegram, () => { el.innerHTML = template(t, store.get()); renderAll(); }, { immediate: false }),
       store.subscribe((s) => s.latest, renderAll),
       store.subscribe((s) => s.status, renderAll, { immediate: false }),
       store.subscribe((s) => s.device, renderAll, { immediate: false }),

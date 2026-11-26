@@ -84,6 +84,47 @@ function mqttConfig(env) {
   return Object.freeze({ url, username, password });
 }
 
+// Token do @BotFather cấp: <id bot>:<chuỗi bí mật>. Tên bot Telegram luôn kết thúc bằng "bot".
+const TELEGRAM_TOKEN = /^\d{5,}:[A-Za-z0-9_-]{30,}$/;
+const TELEGRAM_USERNAME = /^[A-Za-z][A-Za-z0-9_]{1,28}bot$/i;
+const TELEGRAM_CHAT_ID = /^-?\d{1,20}$/;
+
+/**
+ * Cấu hình bot Telegram (ID 6, 7). Không có token → null: plugin telegram tự tắt, backend vẫn chạy.
+ * Chat ID giữ dạng chuỗi (có thể dài hơn số an toàn của JS ở nhóm/kênh).
+ */
+function telegramConfig(env) {
+  const token = str(env, 'TELEGRAM_BOT_TOKEN', undefined);
+  // Đặt nhầm tên biến thì bot lặng lẽ tắt: báo rõ thay vì để người chạy tưởng bot hỏng
+  if (!token && str(env, 'TELEGRAM_TOKEN', undefined)) {
+    throw new Error('server/.env có TELEGRAM_TOKEN: đổi tên thành TELEGRAM_BOT_TOKEN (và thêm TELEGRAM_BOT_USERNAME)');
+  }
+  if (!token) return null;
+  if (!TELEGRAM_TOKEN.test(token)) {
+    throw new Error('TELEGRAM_BOT_TOKEN không đúng dạng <số>:<chuỗi> do @BotFather cấp');
+  }
+  const username = str(env, 'TELEGRAM_BOT_USERNAME', '').replace(/^@/, '');
+  if (!username) throw new Error('Có TELEGRAM_BOT_TOKEN thì cần TELEGRAM_BOT_USERNAME (tên bot, không có @)');
+  if (!TELEGRAM_USERNAME.test(username)) {
+    throw new Error(`TELEGRAM_BOT_USERNAME="${username}" không hợp lệ (5–32 ký tự chữ, số, _, kết thúc bằng "bot")`);
+  }
+  const allowedChatIds = str(env, 'TELEGRAM_ALLOWED_CHAT_IDS', '')
+    .split(',').map((s) => s.trim()).filter(Boolean);
+  for (const id of allowedChatIds) {
+    if (!TELEGRAM_CHAT_ID.test(id)) throw new Error(`TELEGRAM_ALLOWED_CHAT_IDS có "${id}" không phải chat ID (số nguyên)`);
+  }
+  return Object.freeze({ token, username, allowedChatIds: Object.freeze([...new Set(allowedChatIds)]) });
+}
+
+/**
+ * Phần công khai của bot cho trình duyệt (tin `hello`, `/api/state`): chỉ tên bot, KHÔNG BAO GIỜ có token.
+ * username = null khi chưa cấu hình hoặc plugin telegram bị tắt bằng PLUGINS_DISABLED.
+ */
+export function publicTelegram(cfg) {
+  const on = cfg.telegram && !cfg.pluginsDisabled.includes('telegram');
+  return { username: on ? cfg.telegram.username : null };
+}
+
 function port(env, key, fallback) {
   const n = Number(str(env, key, String(fallback)));
   if (!Number.isInteger(n) || n < 0 || n > 65535) throw new Error(`${key} phải là số cổng 0–65535`);
@@ -115,6 +156,8 @@ export function loadConfig({ env = process.env, contract = readContract() } = {}
     mqtt: mqttConfig(env),
     // null = chưa cấu hình Firestore: plugin firestore tự tắt, giả lập vẫn chạy bình thường
     firebase: readFirebaseConfig(env, { baseDir: SERVER_ROOT }),
+    // null = chưa có TELEGRAM_BOT_TOKEN: plugin telegram tự tắt
+    telegram: telegramConfig(env),
     historyProvider: str(env, 'HISTORY_PROVIDER', 'memory'),
     historySeedHours: intInRange(env, 'HISTORY_SEED_HOURS', 0, 0, 24 * 7),
     authEnabled: bool(env, 'AUTH_ENABLED', false),
@@ -137,6 +180,9 @@ export function describeConfig(cfg) {
     deviceId: cfg.deviceId,
     mqtt: { url: cfg.mqtt.url, username: cfg.mqtt.username ?? null, password: cfg.mqtt.password ? '***' : null },
     firebase: cfg.firebase ? { projectId: cfg.firebase.projectId, emulator: cfg.firebase.emulatorHost } : null,
+    telegram: cfg.telegram
+      ? { username: cfg.telegram.username, token: '***', allowedChatIds: cfg.telegram.allowedChatIds.length || 'tất cả' }
+      : null,
     historyProvider: cfg.historyProvider,
     historySeedHours: cfg.historySeedHours,
     authEnabled: cfg.authEnabled,

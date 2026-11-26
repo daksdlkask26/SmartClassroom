@@ -84,10 +84,13 @@ Mọi biến đều có mặc định, xem chú thích trong [`.env.example`](.e
 | `FIREBASE_PROJECT_ID` | trống | Bật plugin ghi Firestore (ID 4) và provider lịch sử Firestore (ID 5). Trống = plugin tự tắt |
 | `GOOGLE_APPLICATION_CREDENTIALS` | `./firebase/serviceAccountKey.json` | Khóa service account, đường dẫn tương đối tính từ `server/`. **Không commit** |
 | `FIRESTORE_EMULATOR_HOST` | trống | `127.0.0.1:8085` khi thử với Emulator (kèm `FIREBASE_PROJECT_ID=demo-smartclassroom`) |
+| `TELEGRAM_BOT_TOKEN` | trống | Token bot do @BotFather cấp: bật plugin Telegram (ID 6, 7). Trống = plugin tự tắt. **Không commit** |
+| `TELEGRAM_BOT_USERNAME` | trống | Tên bot, không có `@` (bắt buộc khi có token). Công khai: trang Telegram của website hiện tên này và nút mở bot |
+| `TELEGRAM_ALLOWED_CHAT_IDS` | trống | Chat ID được dùng bot, cách nhau bằng dấu phẩy. Trống = ai tìm thấy bot cũng dùng được |
 | `HISTORY_SEED_HOURS` | `0` | Chỉ với `sim` + `memory`: gieo sẵn N giờ dữ liệu giả |
 | `AUTH_ENABLED` | `false` | Đăng nhập (ID 8). `false` = không chặn |
 | `PLUGINS_DISABLED` | trống | Tắt plugin theo tên file, ví dụ `firestore,telegram` |
-| `DATA_DIR` | `data` | Thư mục dữ liệu lúc chạy, tính từ `server/` (đã ignore). Hiện chỉ có `led-<MODE>-<DEVICE_ID>.json`: bảng màu LED gửi gần nhất, để khởi động lại backend vẫn hiện đúng bảng ESP32 đang dùng |
+| `DATA_DIR` | `data` | Thư mục dữ liệu lúc chạy, tính từ `server/` (đã ignore). Gồm `led-<MODE>-<DEVICE_ID>.json` (bảng màu LED gửi gần nhất, để khởi động lại backend vẫn hiện đúng bảng ESP32 đang dùng) và `telegram-<MODE>-<DEVICE_ID>.json` (người nhận cảnh báo, giờ cảnh báo gần nhất; có chat ID nên **không commit**) |
 | `LOG_LEVEL` | `info` | `error` · `warn` · `info` · `debug` |
 
 ### HiveMQ Cloud
@@ -111,6 +114,25 @@ HiveMQ cũng có MQTT qua WebSocket ở cổng `8884` cho Web Client trong **Tro
 - **ESP32:** sao chép mẫu thành `firmware/include/secrets.h` rồi điền hostname, cổng `8883` và tài khoản thiết bị. Tài khoản cần quyền publish `telemetry`, `status` và subscribe `led/cmd` theo cùng `DEVICE_ID`. Firmware dùng `WiFiClientSecure` với CA của broker khi ghép kết nối. [Mẫu cấu hình ESP32](../firmware/include/secrets.example.h)
 - **Giả lập trên Cloud:** dành một mã thiết bị thử, ví dụ `sc-test`, và chạy `npm run sim -- --from-env --allow-remote --device sc-test --count 3`. Để xem các bản tin này trên web, chạy backend với `MODE=sim` và `DEVICE_ID=sc-test`.
 
+### Bot Telegram (ID 6, 7)
+
+1. Trong Telegram, nhắn [@BotFather](https://t.me/BotFather) lệnh `/newbot`, đặt tên hiển thị và tên bot (phải kết thúc bằng `bot`). BotFather trả về token. Nên tạo **hai bot**: một cho giả lập, một cho thiết bị thật. [Hướng dẫn tạo bot](https://core.telegram.org/bots/features#creating-a-new-bot)
+2. Điền `server/.env`:
+
+   ```dotenv
+   TELEGRAM_BOT_TOKEN=123456789:AA...      # token từ BotFather, không commit
+   TELEGRAM_BOT_USERNAME=SmartClassroom16Bot
+   TELEGRAM_ALLOWED_CHAT_IDS=              # để trống lúc đầu
+   ```
+
+3. Chạy backend, mở chat riêng với bot, gửi `/start`. Muốn giới hạn người dùng: điền chat ID của từng người vào `TELEGRAM_ALLOWED_CHAT_IDS` rồi chạy lại backend. Người chưa được phép gửi `/start` sẽ nhận lại chat ID của chính họ; log backend cũng in chat ID của người mới đăng ký.
+
+- Lệnh: `/start` đăng ký nhận cảnh báo · `/stop` huỷ · `/doam` độ ẩm mới nhất · `/trangthai` thiết bị và môi trường. Bot chỉ trả lời trong chat riêng.
+- Cảnh báo khi độ ẩm < 30 % hoặc > 85 %, nghỉ 30 phút **cho từng người** giữa hai lần (số lấy từ `contract/system.json` → `telegram`). Quy tắc đầy đủ: [`contract/README.md`](../contract/README.md) mục 8.3.
+- Khi `MODE=sim`, mọi tin bot gửi có nhãn `[GIẢ LẬP]`.
+- Bot nhận lệnh bằng long polling, nên **chỉ một máy** được chạy mỗi bot. Máy thứ hai chạy cùng token sẽ thấy lỗi 409 trong log; đặt `PLUGINS_DISABLED=telegram` trên máy đó.
+- Telegram lỗi, mất mạng hay token sai chỉ ghi log; backend vẫn chạy và tự nối lại khi có mạng.
+
 ---
 
 ## 3. Kiểm thử
@@ -133,6 +155,9 @@ Chạy bằng `node:test`, không cần mạng, tài khoản hay Java. Gồm:
 | `led`, `frontend-led` | Lệnh đèn LED: kiểm tra bảng màu / Kiểm tra đèn, mã lỗi 409 · 422 · 503, web → broker → ESP32; bản nháp, khoảng ngưỡng, trùng màu |
 | `led-store` | Lưu bảng màu gửi gần nhất ra `DATA_DIR`, đọc lại khi khởi động lại backend; file hỏng thì bỏ qua |
 | `frontend-theme` | Chủ đề Theo hệ điều hành / Sáng · Body / Tối · Lid; script đầu `<head>` khớp `theme.js` |
+| `telegram-config`, `telegram-client`, `telegram-store` | Cấu hình bot (token không lộ ra log hay trình duyệt), gọi API Telegram (thử lại, 429, 409, 401, 403, timeout, huỷ), lưu người nhận ra file |
+| `telegram-commands`, `telegram-messages` | Lệnh `/start` `/stop` `/doam` `/trangthai`, allowlist, chat nhóm, lệnh cũ; nội dung tin (dữ liệu cũ, ngoại tuyến, cảm biến lỗi) và **khớp nguyên văn câu mẫu trên website** |
+| `telegram-alert`, `telegram-plugin` | Ngưỡng 29,9 / 30 / 85 / 85,1, cooldown, khởi động lại, một người gửi lỗi; plugin khởi động nền, polling, dừng sạch. Dùng Telegram giả (`test/helpers/fake-telegram.js`), không gửi tin thật |
 
 ### Kiểm thử tích hợp với Firestore Emulator
 
@@ -172,8 +197,9 @@ server/
     ws/server.js           /ws: hello (toàn bộ trạng thái) → reading · device · led
     http/                  app.js · routes/{health,session,state,history,led}.js · middleware/auth.js
     providers/history/     index.js (chọn theo HISTORY_PROVIDER) · memory.js · firestore.js
-    plugins/               index.js (tự nạp) · firestore.js · _example.js (mẫu, không được nạp)
+    plugins/               index.js (tự nạp) · firestore.js · telegram.js · _example.js (mẫu, không được nạp)
     services/firestore/    config.js · client.js (kết nối dùng chung) · reading-store.js (ghi, đọc): KHÔNG nằm trong plugins/ vì loader chỉ nạp file .js trực tiếp ở đó
+    services/telegram/     client.js (Bot API) · poller.js (long polling) · commands.js · messages.js · alerts.js (luật cảnh báo) · store.js (người nhận)
   test/                    *.test.js chạy bằng npm test · integration/ cần Emulator · helpers/
 frontend/                  HTML/CSS/JS thuần, không bước build; server phục vụ tĩnh
   js/pages/<trang>.js      mỗi trang xuất { mount(el, ctx), unmount() }; khai báo trong js/routes.js
@@ -230,8 +256,8 @@ Phần ghi Firestore (ID 4) và đọc lịch sử (ID 5) đã có khung chạy 
 
 ### Thành (ID 1, 6, 7, 10)
 
-1. **Telegram:** tạo `src/plugins/telegram.js`, nghe `bus.on('reading')`, cảnh báo khi `humidity < config.contract.telegram.humidityLow` (30) hoặc `> humidityHigh` (85), nghỉ `cooldownMin` (30) phút giữa hai lần. Lệnh `/doam`, `/trangthai` đọc `state.latest()` và `state.device()`. Token bot đặt trong `.env`.
-2. **Thử cảnh báo:** `npm run dev`, bấm `h` (88 %) hoặc `l` (24 %). Khi giả lập, chỉ gửi cho người đang thử.
+1. **Telegram:** bot đã chạy được (`src/plugins/telegram.js` + `src/services/telegram/`), cài đặt ở mục 2 "Bot Telegram".
+2. **Thử với bot giả lập** (`npm run dev`): gửi `/start`, `/doam`, `/trangthai`. Bấm `h` (88 %) → nhận **đúng một** cảnh báo, để chạy thêm vài phút không bị báo trùng. Bấm `n` rồi `l` (24 %) trong 30 phút → **không** có cảnh báo mới (đang nghỉ). `e` (DHT22 lỗi), `p` (dữ liệu cũ sau 90 giây), `o` (rớt mạng) để xem câu trả lời tương ứng. Tắt rồi bật lại backend: vẫn còn đăng ký, không bị gửi lại cảnh báo ngay.
 3. **Firmware DHT22 (ID 1):** gửi `telemetry` mỗi `intervalS` (30) giây; `status` retained + LWT `{ "v": 1, "online": false }` (`contract/README.md` mục 2.2). Muốn thử firmware với backend trên máy: `npm run broker` + `npm start`, cho ESP32 trỏ `MQTT_URL` về IP máy tính, cổng 1883.
 
 ### Uy (ID 3, 8)
@@ -254,6 +280,10 @@ Phần ghi Firestore (ID 4) và đọc lịch sử (ID 5) đã có khung chạy 
 | `Không tìm thấy file khóa …serviceAccountKey.json` | Tải khóa về `server/firebase/` hoặc sửa `GOOGLE_APPLICATION_CREDENTIALS` |
 | `Project demo-* cần FIRESTORE_EMULATOR_HOST` | Project `demo-*` chỉ dùng với Emulator; đặt thêm `FIRESTORE_EMULATOR_HOST=127.0.0.1:8085` |
 | Dải "24 GIỜ QUA" toàn "—" khi chạy `npm start` | `memory` không gieo sẵn khi `HISTORY_SEED_HOURS=0`; đợi dữ liệu hoặc đặt `24` |
+| Log "plugin telegram: Tắt: chưa đặt TELEGRAM_BOT_TOKEN" | Bình thường khi chưa cấu hình bot; trang Telegram trên web khoá nút "Mở Telegram" |
+| `Telegram báo xung đột (409)` | Máy khác đang chạy cùng bot, hoặc bot đang đặt webhook. Chỉ một máy bật bot (`PLUGINS_DISABLED=telegram` ở máy khác) |
+| `Telegram từ chối token (401)` | Token sai hoặc đã bị thu hồi: lấy token mới từ @BotFather (`/token`) |
+| Bot không trả lời ai | Xem log có 401 / 409 không; kiểm tra `TELEGRAM_ALLOWED_CHAT_IDS` có chat ID của bạn chưa |
 | PowerShell chặn `npm.ps1` | Dùng `npm.cmd` thay `npm` |
 
 ---

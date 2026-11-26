@@ -34,6 +34,7 @@
       },
       "test": null,
       "sentAt": "2026-11-17T07:12:00.000Z"
-    }
+    },
+    "telegram": { "username": "SmartClassroom16Bot" }
   }
 }

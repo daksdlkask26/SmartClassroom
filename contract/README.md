@@ -1,6 +1,6 @@
 # Hợp đồng dữ liệu — Smart Classroom · Nhóm 16
 
-**Phiên bản 0.2.0 · bản đề xuất · 22/11/2026** — chờ Thành và Tuấn xác nhận.
+**Phiên bản 0.3.0 · bản đề xuất · 26/11/2026** — chờ Thành và Tuấn xác nhận.
 
 Tài liệu này quy định dữ liệu đi giữa **ESP32 ↔ MQTT ↔ Backend ↔ Trình duyệt**. Đây là chỗ duy nhất cả ba người cùng phụ thuộc, nên:
 
@@ -167,7 +167,7 @@ Phong bì chung: `{ "type": "...", "at": "<ISO>", "data": { ... } }`. Trình duy
 
 | `type` | Khi nào | `data` | Mẫu |
 |---|---|---|---|
-| `hello` | Ngay khi kết nối | `serverTime`, `mode` (`"sim"`/`"live"`), `config` (= `system.json`), `latest` (Reading hoặc `null`), `device`, `led` | [`ws.hello.json`](examples/ws.hello.json) (trường `config` viết tắt) |
+| `hello` | Ngay khi kết nối | `serverTime`, `mode` (`"sim"`/`"live"`), `config` (= `system.json`), `latest` (Reading hoặc `null`), `device`, `led`, `telegram` (`{ username }`: tên bot công khai, không có `@`; `null` khi bot chưa bật. **Không bao giờ có token**) | [`ws.hello.json`](examples/ws.hello.json) (trường `config` viết tắt) |
 | `reading` | Mỗi bản tin hợp lệ | Reading = telemetry đã kiểm tra, cộng `receivedAt`, `levelsSource`; giữ `bootId` nếu có; bỏ `v`, `uptimeS` | [`ws.reading.json`](examples/ws.reading.json) |
 | `device` | Trạng thái thiết bị đổi | `online`, `reason` (`"status"`: thiết bị tự báo · `"telemetry"`: suy ra từ bản tin vừa nhận · `"lwt"`: broker báo rớt mạng · `"timeout"`: quá `offlineAfterS` không có bản tin · `"unknown"`: chưa có thông tin), `lastSeenAt`, `fw`, `ssid`, `rssi`, `intervalS`, `ledMode` | trong `ws.hello.json` |
 | `led` | Sau khi publish `led/cmd` thành công | `mode`, `palette`, `test` (`{on,color}` hoặc `null`), `sentAt` | trong `ws.hello.json` |
@@ -245,6 +245,22 @@ Gói miễn phí giới hạn lượt đọc và ghi mỗi ngày (kiểm tra con
 
 ---
 
+### 8.3 Bot Telegram (chức năng 6, 7)
+
+Plugin `server/src/plugins/telegram.js`, nhận lệnh bằng long polling (không cần domain HTTPS cho webhook).
+
+| Mục | Quy tắc |
+|---|---|
+| Lệnh | `/start` đăng ký nhận cảnh báo · `/stop` huỷ đăng ký · `/doam` độ ẩm mới nhất · `/trangthai` thiết bị và môi trường. Nhận cả dạng `/doam@TenBot`. Chỉ trả lời trong chat riêng |
+| Cảnh báo | Khi `humidity < telegram.humidityLow` hoặc `> telegram.humidityHigh` (đúng bằng ngưỡng thì không báo). `humidity = null` thì bỏ qua |
+| Nghỉ giữa hai lần | `telegram.cooldownMin` phút, **tính riêng từng người nhận**, từ lần gửi **thành công** gần nhất. Trong thời gian nghỉ không gửi gì cho người đó, kể cả khi độ ẩm về bình thường rồi vượt lại hoặc chuyển từ thấp sang cao. Lưu qua lần khởi động lại |
+| Dữ liệu cũ | Theo đúng quy tắc của thanh trạng thái (mục 5): quá `timing.staleAfterS` hoặc `device.online = false` thì bot vẫn trả giá trị cuối nhưng ghi rõ "Dữ liệu cũ" |
+| Giả lập | `MODE=sim`: mọi tin bot gửi bắt đầu bằng `[GIẢ LẬP]`. Nên dùng bot riêng cho giả lập |
+| Người được dùng | `TELEGRAM_ALLOWED_CHAT_IDS` trong `server/.env`; để trống thì ai cũng dùng được. Người chưa được phép nhận lại chat ID của chính họ |
+| Lưu trữ | `server/data/telegram-<MODE>-<DEVICE_ID>.json` (người nhận, giờ cảnh báo gần nhất, offset tin đã xử lý). Có chat ID nên **không commit** |
+
+Câu trả lời `/doam`, `/trangthai` lúc bình thường trùng nguyên văn câu mẫu trên trang Telegram của website (`frontend/strings/vi.json` → `tg.reply.*`).
+
 ## 9. Quy trình thay đổi
 
 1. Mở PR chỉ sửa `contract/` (và code liên quan nếu cần), ghi rõ lý do.
@@ -264,6 +280,7 @@ Gói miễn phí giới hạn lượt đọc và ghi mỗi ngày (kiểm tra con
 | C5 | `metrics.*.valid` (khoảng hợp lệ) | Như `system.json` | Thành, Tuấn |
 | C6 | Firmware gửi thêm `bootId` (0.2.0)? | Được: một chuỗi ngẫu nhiên tạo mỗi lần khởi động | Thành |
 | C7 | Lược đồ Firestore mục 8.1: một document cho mỗi bản tin | Như trên | Tuấn |
+| C8 | Bot Telegram mục 8.3: cooldown riêng từng người, không gửi trong thời gian nghỉ kể cả khi độ ẩm đổi chiều; có thêm `/stop` | Như trên | Thành |
 
 ## 11. Lịch sử
 
@@ -272,3 +289,4 @@ Gói miễn phí giới hạn lượt đọc và ghi mỗi ngày (kiểm tra con
 | 0.1.0 | 17/11/2026 | Bản đề xuất đầu tiên (Uy) |
 | 0.1.1 | 17/11/2026 | Thêm giá trị `reason: "telemetry"` cho tin `device` (chỉ thêm, không ảnh hưởng firmware) |
 | 0.2.0 | 22/11/2026 | Thêm `bootId` tùy chọn vào `telemetry` và Reading; thêm mục 8.1 (lược đồ Firestore) và 8.2 (hạn mức). Chỉ thêm, bản tin cũ không có `bootId` vẫn hợp lệ |
+| 0.3.0 | 26/11/2026 | Thêm `telegram: { username }` vào tin `hello` và `/api/state`; thêm mục 8.3 (bot Telegram). Chỉ thêm, không ảnh hưởng firmware |

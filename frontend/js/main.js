@@ -64,7 +64,7 @@ async function boot() {
       switch (msg.type) {
         case 'hello':
           syncServerTime(d.serverTime);
-          store.set({ config: d.config, mode: d.mode, latest: d.latest, device: d.device, led: d.led });
+          store.set({ config: d.config, mode: d.mode, latest: d.latest, device: d.device, led: d.led, telegram: d.telegram ?? null });
           break;
         case 'reading':
           store.set((s) => ({ latest: d, beat: s.beat + 1 }));

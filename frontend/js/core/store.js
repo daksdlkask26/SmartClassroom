@@ -9,6 +9,7 @@
  * @property {object|null} device     DeviceState
  * @property {object|null} led        LedState
  * @property {object|null} session    { authEnabled, user }
+ * @property {{ username: string|null }|null} telegram  bot Telegram công khai (tin hello); null = chưa nhận hello
  * @property {{ ws: 'connecting'|'open'|'closed', retryAt: number|null }} conn
  * @property {number} beat            tăng 1 mỗi bản tin reading (chấm nhịp)
  */
@@ -51,6 +52,7 @@ export const initialState = Object.freeze({
   device: null,
   led: null,
   session: null,
+  telegram: null,
   conn: { ws: 'connecting', retryAt: null },
   beat: 0,
 });
