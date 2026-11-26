@@ -85,7 +85,8 @@ test('mở WebSocket nhận ngay tin hello đủ trường theo contract', async
   const b = await browser();
   const hello = await b.next('hello');
   assert.ok(hello.at);
-  assert.deepEqual(Object.keys(hello.data).sort(), ['config', 'device', 'latest', 'led', 'mode', 'serverTime']);
+  assert.deepEqual(Object.keys(hello.data).sort(), ['config', 'device', 'latest', 'led', 'mode', 'serverTime', 'telegram']);
+  assert.deepEqual(hello.data.telegram, { username: null }); // chưa cấu hình bot
   assert.equal(hello.data.mode, 'sim');
   assert.equal(hello.data.config.contractVersion, readContract().contractVersion);
 });

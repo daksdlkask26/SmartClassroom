@@ -50,10 +50,10 @@ test('nạp plugin hợp lệ, bỏ qua plugin lỗi / bị tắt / bắt đầu
   assert.equal(globalThis.__goodClosed, true);
 });
 
-test('thư mục plugin thật: _example.js không bị nạp, plugin firestore được nạp nhưng tự tắt khi chưa cấu hình', async () => {
+test('thư mục plugin thật: _example.js không bị nạp, plugin firestore và telegram được nạp nhưng tự tắt khi chưa cấu hình', async () => {
   const log = { error() {}, warn() {}, info() {}, debug() {}, child() { return log; } };
   const bus = createBus(log);
   const plugins = await loadPlugins({ bus, state: createState({ bus }), config: loadConfig({ env: {}, contract: readContract() }), log });
-  assert.deepEqual(plugins.names, ['firestore']);
+  assert.deepEqual(plugins.names, ['firestore', 'telegram']);
   await plugins.closeAll();
 });

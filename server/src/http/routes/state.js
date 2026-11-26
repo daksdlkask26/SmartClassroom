@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { publicTelegram } from '../../config.js';
 
 /**
  * GET /api/config  → contract/system.json
@@ -10,7 +11,10 @@ export function stateRoutes({ config, state }) {
   router.get('/config', (_req, res) => res.json(config.contract));
 
   router.get('/state', (_req, res) => {
-    res.json({ serverTime: new Date().toISOString(), mode: config.mode, config: config.contract, ...state.snapshot() });
+    res.json({
+      serverTime: new Date().toISOString(), mode: config.mode, config: config.contract, ...state.snapshot(),
+      telegram: publicTelegram(config),
+    });
   });
 
   return router;

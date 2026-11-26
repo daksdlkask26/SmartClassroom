@@ -1,6 +1,7 @@
 // WebSocket /ws: đẩy dữ liệu thời gian thực cho trình duyệt (contract/README.md mục 5).
 // Chỉ một chiều server → client. Lệnh từ trình duyệt đi qua REST.
 import { WebSocketServer } from 'ws';
+import { publicTelegram } from '../config.js';
 
 const HEARTBEAT_MS = 30_000;
 
@@ -56,6 +57,7 @@ export function createWsServer({ server, state, bus, config, log, authorize = ()
       mode: config.mode,
       config: config.contract,
       ...state.snapshot(),
+      telegram: publicTelegram(config), // chỉ tên bot, không bao giờ có token
     }));
     log.debug(`Trình duyệt kết nối (${req.socket.remoteAddress}), đang có ${wss.clients.size}`);
   });
